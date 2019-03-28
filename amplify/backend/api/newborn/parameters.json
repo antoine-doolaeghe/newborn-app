@@ -1,0 +1,4 @@
+{
+    "AppSyncApiName": "newborn",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST"
+}

@@ -1,0 +1,1 @@
+export const DEV_URL = `https://pnk98uo8jf.execute-api.eu-west-2.amazonaws.com/prod/`;

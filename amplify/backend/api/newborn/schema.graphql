@@ -1,0 +1,36 @@
+type User @model {
+	id: String!
+	profileImage: String
+	userName: String
+	newborns: [Newborn] @connection(name: "NewbornOwner")
+}
+
+type Newborn @model {
+	id: String!
+	bio: String
+  name: String!
+	owner: User @connection(name: "NewbornOwner")
+  generations: [Generation] @connection(name: "NewbornGeneration")
+	hexColor: String
+}
+
+type Generation @model {
+	id: String!
+	cellInfos: [Float],
+	cellPositions: [[Float]]
+	newborn: Newborn @connection(name: "NewbornGeneration")
+	episodes: [Episode] @connection(name: "GenerationEpisode")
+}
+
+type Episode @model {
+	id: String!
+	generation: Generation @connection(name: "GenerationEpisode")
+	steps: [Summary] @connection(name: "EpisodeSummary")
+}
+
+type Summary @model {
+	meanReward: Float
+	standardReward: Float
+	step: Int
+	episode: Episode @connection(name: "EpisodeSummary")
+}
