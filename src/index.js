@@ -2,7 +2,7 @@ import React from 'react';
 import registerServiceWorker from './registerServiceWorker';
 
 import { Route, Switch } from 'react-router';
-import store, { history } from './store/store';
+import configureStore, { history } from './store/store';
 import { ConnectedRouter } from 'connected-react-router';
 import { Provider } from 'react-redux';
 import { render } from 'react-dom';
@@ -18,6 +18,9 @@ import Live from './components/live/live';
 import MyBorn from './components/myBorn/myBorn';
 import NewBornRecord from './components/newbornRecord/newbornRecord';
 import MuiTheme from './utils/jss/MuiTheme';
+
+const store = configureStore(/* provide initial state if any */)
+
 
 // configure the amplify local config
 Amplify.configure(aws_config);
