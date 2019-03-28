@@ -11,6 +11,7 @@ type Newborn @model {
   name: String!
 	owner: User @connection(name: "NewbornOwner")
   generations: [Generation] @connection(name: "NewbornGeneration")
+	predictions: [Prediction] @connection(name: "NewbornPrediction")
 	hexColor: String
 }
 
@@ -33,4 +34,9 @@ type Summary @model {
 	standardReward: Float
 	step: Int
 	episode: Episode @connection(name: "EpisodeSummary")
+}
+
+type Prediction @model {
+	meanReward: Float
+	newborn: Newborn @connection(name: "NewbornPrediction")
 }
