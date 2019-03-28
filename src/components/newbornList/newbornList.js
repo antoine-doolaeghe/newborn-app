@@ -35,7 +35,7 @@ class List extends Component {
 
   renderGridList = () => {
     const { listStart, listEnd } = this.state;
-    return this.renderCells().length > 0 ? <Grid>{this.renderCells().slice(listStart, listEnd)}</Grid> : <img src="./images/no-patients.svg" alt="no newborn" />;
+    return <Grid>{this.renderCells().length > 0 ? this.renderCells().slice(listStart, listEnd) : <img src="./images/no-patients.svg" alt="no newborn" />}</Grid>;
   };
 
   handleChangePage = (event, page) => {

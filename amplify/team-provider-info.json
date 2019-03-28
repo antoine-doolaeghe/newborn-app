@@ -9,6 +9,11 @@
             "UnauthRoleName": "newborn-app-20190328160507-unauthRole",
             "StackName": "newborn-app-20190328160507",
             "StackId": "arn:aws:cloudformation:eu-west-1:121745008486:stack/newborn-app-20190328160507/41f4ec50-5173-11e9-b919-069f6d7e1780"
+        },
+        "categories": {
+            "auth": {
+                "cognito5a0d69cb": {}
+            }
         }
     }
 }
