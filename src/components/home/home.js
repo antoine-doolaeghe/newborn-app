@@ -3,7 +3,7 @@ import { withAuthenticator } from 'aws-amplify-react';
 import withMenuDrawer from '../../containers/menuDrawer/withMenuDrawer';
 import withHeader from '../header/withHeader';
 
-import NewBornList from '../newBornList/newBornList';
+import NewBornList from '../newbornList/newbornList';
 
 class Home extends Component {
   render() {

@@ -16,7 +16,7 @@ import Academy from './components/academy/academy';
 import Home from './components/home/home';
 import Live from './components/live/live';
 import MyBorn from './components/myBorn/myBorn';
-import NewBornRecord from './components/newBornRecord/newBornRecord';
+import NewBornRecord from './components/newbornRecord/newbornRecord';
 import MuiTheme from './utils/jss/MuiTheme';
 
 // configure the amplify local config
