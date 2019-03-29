@@ -5,28 +5,34 @@ type User @model {
 	newborns: [Newborn] @connection(name: "NewbornOwner")
 }
 
+type Generation @model {
+	id: String!
+	newborns: [Newborn] @connection(name: "GenerationNewborn")
+}
+
 type Newborn @model {
 	id: String!
 	bio: String
   name: String!
 	bornPlace: String
 	owner: User @connection(name: "NewbornOwner")
-  generations: [Generation] @connection(name: "NewbornGeneration")
+	generation: Generation @connection(name: "GenerationNewborn")
+  models: [Model] @connection(name: "NewbornModel")
 	predictions: [Prediction] @connection(name: "NewbornPrediction")
 	hexColor: String
 }
 
-type Generation @model {
+type Model @model {
 	id: String!
 	cellInfos: [Float],
 	cellPositions: [[Float]]
-	newborn: Newborn @connection(name: "NewbornGeneration")
-	episodes: [Episode] @connection(name: "GenerationEpisode")
+	newborn: Newborn @connection(name: "NewbornModel")
+	episodes: [Episode] @connection(name: "ModelEpisode")
 }
 
 type Episode @model {
 	id: String!
-	generation: Generation @connection(name: "GenerationEpisode")
+	model: Model @connection(name: "ModelEpisode")
 	steps: [Summary] @connection(name: "EpisodeSummary")
 }
 

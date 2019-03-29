@@ -30,11 +30,11 @@ class List extends Component {
 
   componentDidUpdate() {
     if(this.state.selectedNewborns.length > 1) {
-      console.log("HERE")
+      console.log("It should update now");
     }
   }
 
-  renderNewbornList = () => {
+  renderNewbornGeneration = () => {
     const hasNewborns = this.renderCells().length > 0;
     return <Grid columnNumber={this.renderCells().length}>{hasNewborns ? this.renderCells() : <img src="./images/no-borns.svg" alt="no borns" />}</Grid>;
   };
@@ -85,7 +85,7 @@ class List extends Component {
           </FlexContainer>
         ) : (
           <>
-            <GridContainer>{this.renderNewbornList()}</GridContainer>
+            <GridContainer>{this.renderNewbornGeneration()}</GridContainer>
           </>
         )}
       </React.Fragment>
