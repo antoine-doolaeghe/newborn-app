@@ -12,56 +12,59 @@ import NewBornCard from '../../containers/newbornCard/newbornCard';
 import newBornListJss from './newbornList_jss';
 import withWidth from '@material-ui/core/withWidth';
 
-import TablePagination from '@material-ui/core/TablePagination';
+import MockList from './mockList';
 
 class List extends Component {
-  constructor(props) {
-    super(props);
-    const startLength = 5;
-    this.state = {
-      listEnd: startLength,
-      listNb: startLength,
-      listStart: 0,
-      rowsPerPage: 6,
-      page: 1,
-    };
-  }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectedNewborns: [],
+    }
+  }
   componentDidMount() {
     this.props.fetchNewborns().catch(error => {
       console.log(error.name); // TO-DO error handling
     });
   }
 
-  renderGridList = () => {
-    const { listStart, listEnd } = this.state;
-    return <Grid>{this.renderCells().length > 0 ? this.renderCells().slice(listStart, listEnd) : <img src="./images/no-patients.svg" alt="no newborn" />}</Grid>;
+  renderNewbornList = () => {
+    const hasNewborns = this.renderCells().length > 0;
+    return <Grid columnNumber={this.renderCells().length}>{hasNewborns ? this.renderCells() : <img src="./images/no-borns.svg" alt="no borns" />}</Grid>;
   };
 
-  handleChangePage = (event, page) => {
-    const { listNb } = this.state;
+  handleNewbornSelect = (event) => {
+    const newbornKey = event.target.dataset.newbornId;
     this.setState({
-      page,
-      listStart: listNb * page,
-      listEnd: listNb * (page + 1),
-    });
-  };
+      selectedNewborns: [...this.state.selectedNewborns, newbornKey]
+    })
+  }
 
   renderCells() {
     const newbornCardList = [];
     const { newbornList } = this.props;
+    console.log(this.state.selectedNewborns)
     newbornList.forEach((newborn, newbornKey) => {
-      const newBornName = newborn.name || '';
+      const newbornName = newborn.name || '';
       const newbornId = newborn.id || '';
-      newbornCardList.push(<NewBornCard newbornId={newbornId} newBornName={newBornName} key={newbornKey} />);
+      const newbornPlace = newborn.bornPlace || 'unknown region';
+      const isSelected = this.state.selectedNewborns.includes(newbornId);
+      const newbornSummaries = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [
+          {
+            data: [Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random()],
+          },
+        ],
+      };
+      newbornCardList.push(<NewBornCard handleNewbornSelect={this.handleNewbornSelect} isSelected={isSelected} newbornId={newbornId} newbornSummaries={newbornSummaries} newbornName={newbornName} newbornPlace={newbornPlace} key={newbornKey} />);
     });
 
     return newbornCardList;
   }
 
   render() {
-    const { classes, newbornListLoading } = this.props;
-    const { page, rowsPerPage } = this.state;
+    const { newbornListLoading } = this.props;
 
     return (
       <React.Fragment>
@@ -70,23 +73,10 @@ class List extends Component {
             <CircularProgress variant="indeterminate" />
           </FlexContainer>
         ) : (
-          <GridContainer>{this.renderGridList()}</GridContainer>
+          <>
+            <GridContainer>{this.renderNewbornList()}</GridContainer>
+          </>
         )}
-        <TablePagination
-          rowsPerPageOptions={[]}
-          component="div"
-          className={classes.listPagination}
-          count={this.renderCells().length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          backIconButtonProps={{
-            'aria-label': 'Previous Page',
-          }}
-          nextIconButtonProps={{
-            'aria-label': 'Next Page',
-          }}
-          onChangePage={this.handleChangePage}
-        />
       </React.Fragment>
     );
   }
@@ -97,8 +87,8 @@ List.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  newbornList: state.newBornReducer.newbornList,
-  newbornListLoading: state.newBornReducer.newbornListLoading,
+  newbornList: MockList,//state.newBornReducer.newbornList,
+  newbornListLoading: false,//state.newBornReducer.newbornListLoading,
   currentUser: state.userReducer.currentUser,
 });
 

@@ -9,6 +9,7 @@ type Newborn @model {
 	id: String!
 	bio: String
   name: String!
+	bornPlace: String
 	owner: User @connection(name: "NewbornOwner")
   generations: [Generation] @connection(name: "NewbornGeneration")
 	predictions: [Prediction] @connection(name: "NewbornPrediction")
