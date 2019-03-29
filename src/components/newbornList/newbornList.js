@@ -33,17 +33,22 @@ class List extends Component {
     return <Grid columnNumber={this.renderCells().length}>{hasNewborns ? this.renderCells() : <img src="./images/no-borns.svg" alt="no borns" />}</Grid>;
   };
 
-  handleNewbornSelect = (event) => {
-    const newbornKey = event.target.dataset.newbornId;
-    this.setState({
-      selectedNewborns: [...this.state.selectedNewborns, newbornKey]
-    })
+  handleNewbornSelect = (newbornKey) => {
+    const { selectedNewborns } = this.state;
+    if(selectedNewborns.includes(newbornKey)) {
+      this.setState({
+        selectedNewborns: selectedNewborns.filter(newborn => newborn != newbornKey)
+      })
+    } else if(selectedNewborns.length < 2) {
+      this.setState({
+        selectedNewborns: [...selectedNewborns, newbornKey]
+      })
+    }
   }
 
   renderCells() {
     const newbornCardList = [];
     const { newbornList } = this.props;
-    console.log(this.state.selectedNewborns)
     newbornList.forEach((newborn, newbornKey) => {
       const newbornName = newborn.name || '';
       const newbornId = newborn.id || '';
@@ -57,7 +62,7 @@ class List extends Component {
           },
         ],
       };
-      newbornCardList.push(<NewBornCard handleNewbornSelect={this.handleNewbornSelect} isSelected={isSelected} newbornId={newbornId} newbornSummaries={newbornSummaries} newbornName={newbornName} newbornPlace={newbornPlace} key={newbornKey} />);
+      newbornCardList.push(<NewBornCard handleNewbornSelect={(newbornId) => { this.handleNewbornSelect(newbornId)}} isSelected={isSelected} newbornId={newbornId} newbornSummaries={newbornSummaries} newbornName={newbornName} newbornPlace={newbornPlace} key={newbornKey} />);
     });
 
     return newbornCardList;
