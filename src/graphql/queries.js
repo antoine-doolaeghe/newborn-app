@@ -11,6 +11,7 @@ export const getUser = `query GetUser($id: ID!) {
         id
         bio
         name
+        bornPlace
         hexColor
       }
       nextToken
@@ -36,11 +37,44 @@ export const listUsers = `query ListUsers(
   }
 }
 `;
+export const getGeneration = `query GetGeneration($id: ID!) {
+  getGeneration(id: $id) {
+    id
+    newborns {
+      items {
+        id
+        bio
+        name
+        bornPlace
+        hexColor
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const listGenerations = `query ListGenerations(
+  $filter: ModelGenerationFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listGenerations(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      newborns {
+        nextToken
+      }
+    }
+    nextToken
+  }
+}
+`;
 export const getNewborn = `query GetNewborn($id: ID!) {
   getNewborn(id: $id) {
     id
     bio
     name
+    bornPlace
     owner {
       id
       profileImage
@@ -49,11 +83,23 @@ export const getNewborn = `query GetNewborn($id: ID!) {
         nextToken
       }
     }
-    generations {
+    generation {
+      id
+      newborns {
+        nextToken
+      }
+    }
+    models {
       items {
         id
         cellInfos
         cellPositions
+      }
+      nextToken
+    }
+    predictions {
+      items {
+        meanReward
       }
       nextToken
     }
@@ -71,12 +117,19 @@ export const listNewborns = `query ListNewborns(
       id
       bio
       name
+      bornPlace
       owner {
         id
         profileImage
         userName
       }
-      generations {
+      generation {
+        id
+      }
+      models {
+        nextToken
+      }
+      predictions {
         nextToken
       }
       hexColor
@@ -85,8 +138,8 @@ export const listNewborns = `query ListNewborns(
   }
 }
 `;
-export const getGeneration = `query GetGeneration($id: ID!) {
-  getGeneration(id: $id) {
+export const getModel = `query GetModel($id: ID!) {
+  getModel(id: $id) {
     id
     cellInfos
     cellPositions
@@ -94,12 +147,19 @@ export const getGeneration = `query GetGeneration($id: ID!) {
       id
       bio
       name
+      bornPlace
       owner {
         id
         profileImage
         userName
       }
-      generations {
+      generation {
+        id
+      }
+      models {
+        nextToken
+      }
+      predictions {
         nextToken
       }
       hexColor
@@ -113,12 +173,12 @@ export const getGeneration = `query GetGeneration($id: ID!) {
   }
 }
 `;
-export const listGenerations = `query ListGenerations(
-  $filter: ModelGenerationFilterInput
+export const listModels = `query ListModels(
+  $filter: ModelModelFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listGenerations(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
       cellInfos
@@ -127,6 +187,7 @@ export const listGenerations = `query ListGenerations(
         id
         bio
         name
+        bornPlace
         hexColor
       }
       episodes {
@@ -140,7 +201,7 @@ export const listGenerations = `query ListGenerations(
 export const getEpisode = `query GetEpisode($id: ID!) {
   getEpisode(id: $id) {
     id
-    generation {
+    model {
       id
       cellInfos
       cellPositions
@@ -148,6 +209,7 @@ export const getEpisode = `query GetEpisode($id: ID!) {
         id
         bio
         name
+        bornPlace
         hexColor
       }
       episodes {
@@ -173,7 +235,7 @@ export const listEpisodes = `query ListEpisodes(
   listEpisodes(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      generation {
+      model {
         id
         cellInfos
         cellPositions
@@ -193,7 +255,7 @@ export const getSummary = `query GetSummary($id: ID!) {
     step
     episode {
       id
-      generation {
+      model {
         id
         cellInfos
         cellPositions
@@ -217,6 +279,53 @@ export const listSummarys = `query ListSummarys(
       step
       episode {
         id
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const getPrediction = `query GetPrediction($id: ID!) {
+  getPrediction(id: $id) {
+    meanReward
+    newborn {
+      id
+      bio
+      name
+      bornPlace
+      owner {
+        id
+        profileImage
+        userName
+      }
+      generation {
+        id
+      }
+      models {
+        nextToken
+      }
+      predictions {
+        nextToken
+      }
+      hexColor
+    }
+  }
+}
+`;
+export const listPredictions = `query ListPredictions(
+  $filter: ModelPredictionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPredictions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      meanReward
+      newborn {
+        id
+        bio
+        name
+        bornPlace
+        hexColor
       }
     }
     nextToken

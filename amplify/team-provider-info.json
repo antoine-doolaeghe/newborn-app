@@ -1,18 +1,18 @@
 {
     "dev": {
         "awscloudformation": {
-            "AuthRoleName": "newborn-app-20190328160507-authRole",
-            "UnauthRoleArn": "arn:aws:iam::121745008486:role/newborn-app-20190328160507-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::121745008486:role/newborn-app-20190328160507-authRole",
+            "AuthRoleName": "newborn-app-20190329175820-authRole",
+            "UnauthRoleArn": "arn:aws:iam::121745008486:role/newborn-app-20190329175820-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::121745008486:role/newborn-app-20190329175820-authRole",
             "Region": "eu-west-1",
-            "DeploymentBucketName": "newborn-app-20190328160507-deployment",
-            "UnauthRoleName": "newborn-app-20190328160507-unauthRole",
-            "StackName": "newborn-app-20190328160507",
-            "StackId": "arn:aws:cloudformation:eu-west-1:121745008486:stack/newborn-app-20190328160507/41f4ec50-5173-11e9-b919-069f6d7e1780"
+            "DeploymentBucketName": "newborn-app-20190329175820-deployment",
+            "UnauthRoleName": "newborn-app-20190329175820-unauthRole",
+            "StackName": "newborn-app-20190329175820",
+            "StackId": "arn:aws:cloudformation:eu-west-1:121745008486:stack/newborn-app-20190329175820/db6c11d0-5243-11e9-ad53-06b1980d26e6"
         },
         "categories": {
             "auth": {
-                "cognito5a0d69cb": {}
+                "cognito198ea653": {}
             }
         }
     }
