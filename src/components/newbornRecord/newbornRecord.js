@@ -1,19 +1,19 @@
 import * as actions from '../../store/actions';
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
 import { withAuthenticator } from 'aws-amplify-react';
-import withMenuDrawer from '../../containers/menuDrawer/withMenuDrawer';
-import withHeader from '../header/withHeader';
 import { withRouter } from 'react-router-dom';
 
 import { FlexContainer } from '../../theme/grid.style';
+import withMenuDrawer from '../../containers/menuDrawer/withMenuDrawer';
+import withHeader from '../header/withHeader';
 import NewbornRecordGraph from '../../containers/newbornRecordGraph/newbornRecordGraph';
 import NewbornRecordHeader from '../../containers/newbornRecordHeader/newbornRecordHeader';
 import NewBornRecord3dModel from '../../containers/newbornRecord3dModel/newbornRecord3dModel';
 import NewBornRecordPrediction from '../../containers/newbornPrediction/newbornPrediction';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 class NewBornRecord extends Component {
   componentWillMount() {

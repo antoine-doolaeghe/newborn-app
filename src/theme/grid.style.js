@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { media } from './media.style';
 
 export const GridContainer = styled.div`
   display: flex;
@@ -15,6 +14,11 @@ export const Grid = styled.div`
   grid-column-gap: 0px;
   grid-row-gap: 0px;
 `;
+
+export const Container = styled.div`
+  height: ${props => props.height || null};
+  width: ${props => props.width || null};
+`
 
 export const FlexContainer = styled.div`
   align-content: center;

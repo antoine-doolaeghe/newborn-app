@@ -1,9 +1,10 @@
 import React from 'react';
+import { NewbornPredictionContainer } from './newbornPrediction.style';
 
 function NewbornPrediction() {
   return (
-    <div>
-    </div>
+    <NewbornPredictionContainer>
+    </NewbornPredictionContainer>
   );
 }
 

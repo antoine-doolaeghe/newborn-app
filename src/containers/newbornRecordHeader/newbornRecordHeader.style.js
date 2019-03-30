@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.section`
-  border-left: 5px solid red;
   font-size: 20px;
   padding: 20px;
   flex: 2;
