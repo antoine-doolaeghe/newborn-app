@@ -64,6 +64,7 @@ class List extends Component {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
           {
+            backgroundColor: 'black',
             data: [Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random()],
           },
         ],
