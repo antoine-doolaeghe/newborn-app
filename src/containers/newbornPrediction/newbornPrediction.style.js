@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export const NewbornPredictionContainer = styled.div`
-  height: 300px;
-  min-width: 306px;
-  width: 306px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex: 2;
+  width: 100%;
 `

@@ -35,8 +35,7 @@ class List extends Component {
   }
 
   renderNewbornGeneration = () => {
-    const hasNewborns = this.renderCells().length > 0;
-    return <Grid columnNumber={this.renderCells().length}>{hasNewborns ? this.renderCells() : <img src="./images/no-borns.svg" alt="no borns" />}</Grid>;
+    return (<><Grid columnNumber={this.renderCells().length}>{this.renderCells()}</Grid><Grid columnNumber={this.renderCells().length}>{this.renderCells()}</Grid></>);
   };
 
   handleNewbornSelect = (newbornKey) => {
@@ -76,8 +75,8 @@ class List extends Component {
   }
 
   render() {
-    const { newbornListLoading } = this.props;
-
+    const { newbornListLoading, newbornList } = this.props;
+    const hasNewborns = newbornList.length > 0;
     return (
       <React.Fragment>
         {newbornListLoading ? (
@@ -86,7 +85,7 @@ class List extends Component {
           </FlexContainer>
         ) : (
           <>
-            <GridContainer>{this.renderNewbornGeneration()}</GridContainer>
+              <GridContainer>{hasNewborns ? this.renderNewbornGeneration() : <img src="./images/no-borns.svg" alt="no borns" />}</GridContainer>
           </>
         )}
       </React.Fragment>

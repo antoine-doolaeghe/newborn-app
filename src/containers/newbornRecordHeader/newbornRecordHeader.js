@@ -1,15 +1,20 @@
 import React from 'react';
 import { HeaderContainer, HeaderName, HeaderInfo, HeaderInfoWrap, HeaderBornPlace, HeaderInfoContainer, HeaderValueContainer, HeaderValue, HeaderPercentage,
   HeaderInfoTitle, HeaderInfoContent } from './newbornRecordHeader.style';
+import { FlexContainer } from '../../theme/grid.style';
 
 function NewbornRecordHeader() {
   return (
     <HeaderContainer>
-      <HeaderName>Header name</HeaderName>
-      <HeaderBornPlace>Born place</HeaderBornPlace>
+      <FlexContainer flex={1} direction='column' margin='0px 20px'>
+        <HeaderName>Header name</HeaderName>
+        <HeaderBornPlace>Born place</HeaderBornPlace>
+      </FlexContainer>
       <HeaderValueContainer>
-        <HeaderValue>189</HeaderValue>
-        <HeaderPercentage>18%</HeaderPercentage>
+        <FlexContainer align='baseline'>
+          <HeaderValue>189</HeaderValue>
+          <HeaderPercentage>18%</HeaderPercentage>
+        </FlexContainer>
       </HeaderValueContainer>
       <HeaderInfoContainer>
         <HeaderInfoWrap>

@@ -35,12 +35,14 @@ class NewBornRecord extends Component {
     return (
       <React.Fragment>
         <FlexContainer>
-          <NewbornRecordHeader />
-          <NewbornRecordGraph newbornInfoLoading={newbornInfoLoading} newbornGenerations={this.returnNewbornGenerations()}/>
-        </FlexContainer>
-        <FlexContainer>
-          <NewBornRecord3dModel />
-          <NewBornRecordPrediction />
+          <FlexContainer direction={'column'} flex={'2'}>
+            <NewbornRecordHeader />
+            <NewBornRecord3dModel />
+          </FlexContainer>
+          <FlexContainer direction={'column'} flex={'1'}>
+            <NewbornRecordGraph newbornInfoLoading={newbornInfoLoading} newbornGenerations={this.returnNewbornGenerations()} />
+            <NewBornRecordPrediction newbornInfoLoading={newbornInfoLoading} />
+          </FlexContainer>
         </FlexContainer>
       </React.Fragment>
     );

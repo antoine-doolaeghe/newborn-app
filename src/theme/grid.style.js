@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const GridContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  height: 100%;
+  justify-content: center;
   flex-direction: column;
   overflow: scroll;
 `;
@@ -13,6 +14,7 @@ export const Grid = styled.div`
   grid-template-rows: 280px;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+  overflow-x: scroll;
 `;
 
 export const Container = styled.div`
@@ -24,8 +26,12 @@ export const FlexContainer = styled.div`
   align-content: center;
   align-items: center;
   display: flex;
-  flex: 1;
+  margin: ${props => props.margin || null};
+  flex-direction: ${props => props.direction || null};
+  flex: ${props => props.flex || null};
+  height: ${props => props.height || '100%'};
   justify-content: center;
+  align-items: ${props => props.align || null};
 `;
 
 export const MainContainer = styled.div`

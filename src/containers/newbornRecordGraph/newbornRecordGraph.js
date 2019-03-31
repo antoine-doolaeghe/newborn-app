@@ -29,11 +29,12 @@ const NewbornRecordGraph = props => {
 
   return (
     <NewBornRecordGraphContainer>
-      {props.newbornInfoLoading ? 
+      {true ? //props.newbornInfoLoading ? 
         <CircularProgress /> 
         :
         <Line
           options={lineChartOptions}
+          height={280}
           data={{
             datasets,
             labels,
