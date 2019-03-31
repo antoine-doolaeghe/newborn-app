@@ -1,19 +1,19 @@
 import * as actions from '../../store/actions';
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import CircularProgress from '@material-ui/core/CircularProgress';
-
+import { connect } from 'react-redux';
 import { withAuthenticator } from 'aws-amplify-react';
-import withMenuDrawer from '../../containers/menuDrawer/withMenuDrawer';
-import withHeader from '../header/withHeader';
 import { withRouter } from 'react-router-dom';
 
 import { FlexContainer } from '../../theme/grid.style';
-import NewBornRecordGraph from '../../containers/newbornRecordGraph/newbornRecordGraph';
-import NewBornRecordHeader from '../../containers/newbornRecordHeader/newbornRecordHeader';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import withMenuDrawer from '../../containers/menuDrawer/withMenuDrawer';
+import withHeader from '../header/withHeader';
+import NewbornRecordGraph from '../../containers/newbornRecordGraph/newbornRecordGraph';
+import NewbornRecordHeader from '../../containers/newbornRecordHeader/newbornRecordHeader';
+import NewBornRecord3dModel from '../../containers/newbornRecord3dModel/newbornRecord3dModel';
+import NewBornRecordPrediction from '../../containers/newbornPrediction/newbornPrediction';
 
 class NewBornRecord extends Component {
   componentWillMount() {
@@ -30,16 +30,21 @@ class NewBornRecord extends Component {
     return items;
   };
 
-  renderNewBornRecordGraph = () =>
-    !this.returnNewbornGenerations() ? <img src="../images/empty-chart.svg" alt="empty-chart" /> : <NewBornRecordGraph newbornGenerations={this.returnNewbornGenerations()} />;
-
   render() {
     const { newbornInfoLoading } = this.props;
     return (
-      <FlexContainer>
-        <NewBornRecordHeader />
-        {newbornInfoLoading ? <CircularProgress /> : this.renderNewBornRecordGraph()}
-      </FlexContainer>
+      <React.Fragment>
+        <FlexContainer>
+          <FlexContainer direction={'column'} flex={'2'}>
+            <NewbornRecordHeader />
+            <NewBornRecord3dModel />
+          </FlexContainer>
+          <FlexContainer direction={'column'} flex={'1'}>
+            <NewbornRecordGraph newbornInfoLoading={newbornInfoLoading} newbornGenerations={this.returnNewbornGenerations()} />
+            <NewBornRecordPrediction newbornInfoLoading={newbornInfoLoading} />
+          </FlexContainer>
+        </FlexContainer>
+      </React.Fragment>
     );
   }
 }
