@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { NewBornRecordGraphContainer } from './newbornRecordGraph.style';
+import lineChartOptions from './lineChartOptions';
+
 
 import { Line } from 'react-chartjs-2';
 
-const NewBornRecordGraph = props => {
+const NewbornRecordGraph = props => {
   const { newbornGenerations } = props;
 
   const datasets = [];
@@ -24,17 +28,24 @@ const NewBornRecordGraph = props => {
   });
 
   return (
-    <Line
-      data={{
-        datasets,
-        labels,
-      }}
-    />
+    <NewBornRecordGraphContainer>
+      {true ? //props.newbornInfoLoading ? 
+        <CircularProgress /> 
+        :
+        <Line
+          options={lineChartOptions}
+          height={280}
+          data={{
+            datasets,
+            labels,
+          }}/>
+        }
+    </NewBornRecordGraphContainer>
   );
 };
 
-NewBornRecordGraph.propTypes = {
+NewbornRecordGraph.propTypes = {
   newbornGenerations: PropTypes.array.isRequired,
 };
 
-export default NewBornRecordGraph;
+export default NewbornRecordGraph;

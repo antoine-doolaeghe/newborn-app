@@ -82,7 +82,7 @@ class MenuDrawer extends React.Component {
             button
             key={item.name}
             onClick={() => {
-              this.handleListItemClick(item.path);
+              MenuDrawer.handleListItemClick(item.path);
             }}
           >
             <ListItemIcon>{item.icon}</ListItemIcon>

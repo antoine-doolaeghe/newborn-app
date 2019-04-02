@@ -6,7 +6,7 @@ export default function withHeader(WrapperHeaderComp) {
   return class withHeader extends Component {
     render() {
       return (
-        <div style={{ flex: 2, display: 'flex', flexDirection: 'column' }}>
+        <div style={{  overflow: 'hidden', width: '100%' }}>
           <Header />
           <WrapperHeaderComp />
         </div>
