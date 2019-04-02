@@ -1,6 +1,7 @@
 {
   "name": "newborn-app",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "buildNo": "newborn-0.1.1",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
