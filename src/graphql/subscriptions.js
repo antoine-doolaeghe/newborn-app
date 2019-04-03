@@ -8,11 +8,14 @@ export const onCreateUser = `subscription OnCreateUser {
     userName
     newborns {
       items {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       nextToken
     }
@@ -26,11 +29,14 @@ export const onUpdateUser = `subscription OnUpdateUser {
     userName
     newborns {
       items {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       nextToken
     }
@@ -44,11 +50,14 @@ export const onDeleteUser = `subscription OnDeleteUser {
     userName
     newborns {
       items {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       nextToken
     }
@@ -60,11 +69,14 @@ export const onCreateGeneration = `subscription OnCreateGeneration {
     id
     newborns {
       items {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       nextToken
     }
@@ -76,11 +88,14 @@ export const onUpdateGeneration = `subscription OnUpdateGeneration {
     id
     newborns {
       items {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       nextToken
     }
@@ -92,11 +107,14 @@ export const onDeleteGeneration = `subscription OnDeleteGeneration {
     id
     newborns {
       items {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       nextToken
     }
@@ -105,24 +123,17 @@ export const onDeleteGeneration = `subscription OnDeleteGeneration {
 `;
 export const onCreateNewborn = `subscription OnCreateNewborn {
   onCreateNewborn {
-    id
     bio
-    name
     bornPlace
-    owner {
-      id
-      profileImage
-      userName
-      newborns {
-        nextToken
-      }
-    }
+    childs
     generation {
       id
       newborns {
         nextToken
       }
     }
+    hexColor
+    id
     models {
       items {
         id
@@ -131,36 +142,39 @@ export const onCreateNewborn = `subscription OnCreateNewborn {
       }
       nextToken
     }
+    name
+    owner {
+      id
+      profileImage
+      userName
+      newborns {
+        nextToken
+      }
+    }
+    parents
+    partners
     predictions {
       items {
         meanReward
       }
       nextToken
     }
-    hexColor
   }
 }
 `;
 export const onUpdateNewborn = `subscription OnUpdateNewborn {
   onUpdateNewborn {
-    id
     bio
-    name
     bornPlace
-    owner {
-      id
-      profileImage
-      userName
-      newborns {
-        nextToken
-      }
-    }
+    childs
     generation {
       id
       newborns {
         nextToken
       }
     }
+    hexColor
+    id
     models {
       items {
         id
@@ -169,36 +183,39 @@ export const onUpdateNewborn = `subscription OnUpdateNewborn {
       }
       nextToken
     }
+    name
+    owner {
+      id
+      profileImage
+      userName
+      newborns {
+        nextToken
+      }
+    }
+    parents
+    partners
     predictions {
       items {
         meanReward
       }
       nextToken
     }
-    hexColor
   }
 }
 `;
 export const onDeleteNewborn = `subscription OnDeleteNewborn {
   onDeleteNewborn {
-    id
     bio
-    name
     bornPlace
-    owner {
-      id
-      profileImage
-      userName
-      newborns {
-        nextToken
-      }
-    }
+    childs
     generation {
       id
       newborns {
         nextToken
       }
     }
+    hexColor
+    id
     models {
       items {
         id
@@ -207,13 +224,23 @@ export const onDeleteNewborn = `subscription OnDeleteNewborn {
       }
       nextToken
     }
+    name
+    owner {
+      id
+      profileImage
+      userName
+      newborns {
+        nextToken
+      }
+    }
+    parents
+    partners
     predictions {
       items {
         meanReward
       }
       nextToken
     }
-    hexColor
   }
 }
 `;
@@ -223,25 +250,28 @@ export const onCreateModel = `subscription OnCreateModel {
     cellInfos
     cellPositions
     newborn {
-      id
       bio
-      name
       bornPlace
+      childs
+      generation {
+        id
+      }
+      hexColor
+      id
+      models {
+        nextToken
+      }
+      name
       owner {
         id
         profileImage
         userName
       }
-      generation {
-        id
-      }
-      models {
-        nextToken
-      }
+      parents
+      partners
       predictions {
         nextToken
       }
-      hexColor
     }
     episodes {
       items {
@@ -258,25 +288,28 @@ export const onUpdateModel = `subscription OnUpdateModel {
     cellInfos
     cellPositions
     newborn {
-      id
       bio
-      name
       bornPlace
+      childs
+      generation {
+        id
+      }
+      hexColor
+      id
+      models {
+        nextToken
+      }
+      name
       owner {
         id
         profileImage
         userName
       }
-      generation {
-        id
-      }
-      models {
-        nextToken
-      }
+      parents
+      partners
       predictions {
         nextToken
       }
-      hexColor
     }
     episodes {
       items {
@@ -293,25 +326,28 @@ export const onDeleteModel = `subscription OnDeleteModel {
     cellInfos
     cellPositions
     newborn {
-      id
       bio
-      name
       bornPlace
+      childs
+      generation {
+        id
+      }
+      hexColor
+      id
+      models {
+        nextToken
+      }
+      name
       owner {
         id
         profileImage
         userName
       }
-      generation {
-        id
-      }
-      models {
-        nextToken
-      }
+      parents
+      partners
       predictions {
         nextToken
       }
-      hexColor
     }
     episodes {
       items {
@@ -330,11 +366,14 @@ export const onCreateEpisode = `subscription OnCreateEpisode {
       cellInfos
       cellPositions
       newborn {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       episodes {
         nextToken
@@ -359,11 +398,14 @@ export const onUpdateEpisode = `subscription OnUpdateEpisode {
       cellInfos
       cellPositions
       newborn {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       episodes {
         nextToken
@@ -388,11 +430,14 @@ export const onDeleteEpisode = `subscription OnDeleteEpisode {
       cellInfos
       cellPositions
       newborn {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       episodes {
         nextToken
@@ -470,25 +515,28 @@ export const onCreatePrediction = `subscription OnCreatePrediction {
   onCreatePrediction {
     meanReward
     newborn {
-      id
       bio
-      name
       bornPlace
+      childs
+      generation {
+        id
+      }
+      hexColor
+      id
+      models {
+        nextToken
+      }
+      name
       owner {
         id
         profileImage
         userName
       }
-      generation {
-        id
-      }
-      models {
-        nextToken
-      }
+      parents
+      partners
       predictions {
         nextToken
       }
-      hexColor
     }
   }
 }
@@ -497,25 +545,28 @@ export const onUpdatePrediction = `subscription OnUpdatePrediction {
   onUpdatePrediction {
     meanReward
     newborn {
-      id
       bio
-      name
       bornPlace
+      childs
+      generation {
+        id
+      }
+      hexColor
+      id
+      models {
+        nextToken
+      }
+      name
       owner {
         id
         profileImage
         userName
       }
-      generation {
-        id
-      }
-      models {
-        nextToken
-      }
+      parents
+      partners
       predictions {
         nextToken
       }
-      hexColor
     }
   }
 }
@@ -524,25 +575,28 @@ export const onDeletePrediction = `subscription OnDeletePrediction {
   onDeletePrediction {
     meanReward
     newborn {
-      id
       bio
-      name
       bornPlace
+      childs
+      generation {
+        id
+      }
+      hexColor
+      id
+      models {
+        nextToken
+      }
+      name
       owner {
         id
         profileImage
         userName
       }
-      generation {
-        id
-      }
-      models {
-        nextToken
-      }
+      parents
+      partners
       predictions {
         nextToken
       }
-      hexColor
     }
   }
 }
