@@ -37,7 +37,10 @@ function NewBornCard(props) {
         height={192}
       />
       {props.isHovered && (
-        <NewbornCardBuyButton data-testid="newbornBuyButton" />
+        <NewbornCardBuyButton
+          onClick={props.onBuyClick}
+          data-testid="newbornBuyButton"
+        />
       )}
     </NewbornCard>
   );
