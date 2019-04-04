@@ -42,6 +42,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "canvas": "^2.4.1",
     "react-testing-library": "^6.0.4"
   }
 }
