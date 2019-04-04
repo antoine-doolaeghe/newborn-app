@@ -1,6 +1,6 @@
 import * as actions from "../../store/actions";
 
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import compose from "recompose/compose";
 import connect from "react-redux/es/connect/connect";
 import PropTypes from "prop-types";
@@ -66,6 +66,10 @@ class List extends Component {
     const newbornCardList = [];
     const { newbornList } = this.props;
     const { selectedNewborns, hoveredNewborn } = this.state;
+    const currentUser =
+      this.props.currentUser && this.props.currentUser.attributes
+        ? this.props.currentUser.attributes.sub
+        : null;
     newbornList.forEach((newborn, newbornKey) => {
       const newbornName = newborn.name || "";
       const newbornId = newborn.id || "";
@@ -112,6 +116,9 @@ class List extends Component {
           newbornSummaries={newbornSummaries}
           newbornName={newbornName}
           newbornPlace={newbornPlace}
+          onBuyClick={() =>
+            this.props.addNewbornToCurrentUser(newbornId, currentUser)
+          }
           key={newbornKey}
         />
       );
@@ -123,6 +130,7 @@ class List extends Component {
   render() {
     const { newbornListLoading, newbornList } = this.props;
     const hasNewborns = newbornList.length > 0;
+
     return (
       <React.Fragment>
         {newbornListLoading ? (
@@ -130,7 +138,7 @@ class List extends Component {
             <CircularProgress variant="indeterminate" />
           </FlexContainer>
         ) : (
-          <>
+          <Fragment>
             <GridContainer>
               {hasNewborns ? (
                 this.renderNewbornGeneration()
@@ -138,7 +146,7 @@ class List extends Component {
                 <img src="./images/no-borns.svg" alt="no borns" />
               )}
             </GridContainer>
-          </>
+          </Fragment>
         )}
       </React.Fragment>
     );
