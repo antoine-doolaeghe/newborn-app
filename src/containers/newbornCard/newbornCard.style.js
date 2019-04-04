@@ -14,7 +14,10 @@ export const NewbornCard = styled.div`
 `;
 
 export const NewbornCardBuyButton = styled.button`
+  bottom: 10px;
+  border-radius: 5px;
+  height: 20px;
   position: absolute;
-  height: 50px;
+  right: 10px;
   width: 50px;
 `;

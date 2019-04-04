@@ -40,16 +40,36 @@ describe("<NewbornCard />", () => {
     expect(getByText("newbornPlace")).toBeTruthy();
   });
 
-  it("should be own by the user click on the buy button", () => {
+  it("should call handleNewbornSelect if the user mouse select a newborn card", () => {
+    const handleNewbornSelect = jest.fn();
+    const { getByTestId } = renderWithRouter(
+      <NewbornCard
+        newbornPlace="newbornPlace"
+        newbornName="newbornName"
+        newbornSummaries={{}}
+        handleNewbornSelect={handleNewbornSelect}
+      />
+    );
+
+    fireEvent.click(getByTestId("newbornCard"));
+
+    expect(handleNewbornSelect).toHaveBeenCalledTimes(1);
+  });
+
+  it("should call handleNewbornHover if the user mouse hover a newborn card", () => {
+    const handleNewbornHover = jest.fn();
     const { getByTestId } = renderWithRouter(
       <NewbornCard
         newbornPlace="newbornPlace"
         newbornName="newbornName"
         newbornSummaries={{}}
         handleNewbornSelect={jest.fn()}
+        handleNewbornHover={handleNewbornHover}
       />
     );
 
-    expect(getByTestId("newbornBuyButton")).toBeTruthy();
+    fireEvent.mouseEnter(getByTestId("newbornCard"));
+
+    expect(handleNewbornHover).toHaveBeenCalledTimes(1);
   });
 });

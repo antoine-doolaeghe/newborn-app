@@ -14,7 +14,11 @@ function NewBornCard(props) {
       onClick={() => {
         props.handleNewbornSelect(props.newbornId);
       }}
+      onMouseEnter={() => {
+        props.handleNewbornHover(props.newbornId);
+      }}
       isSelected={props.isSelected}
+      data-testid="newbornCard"
     >
       <BrowserRouter>
         <Link to={`./newborn-record/${props.newbornId}`}>
@@ -32,7 +36,9 @@ function NewBornCard(props) {
         data-newborn-id={newbornId}
         height={192}
       />
-      <NewbornCardBuyButton data-testid="newbornBuyButton" />
+      {props.isHovered && (
+        <NewbornCardBuyButton data-testid="newbornBuyButton" />
+      )}
     </NewbornCard>
   );
 }

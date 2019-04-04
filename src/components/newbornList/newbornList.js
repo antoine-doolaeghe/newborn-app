@@ -1,26 +1,25 @@
-import * as actions from '../../store/actions';
+import * as actions from "../../store/actions";
 
-import React, { Component } from 'react';
-import compose from 'recompose/compose';
-import connect from 'react-redux/es/connect/connect';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import React, { Component } from "react";
+import compose from "recompose/compose";
+import connect from "react-redux/es/connect/connect";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
 
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { Grid, GridContainer, FlexContainer } from '../../theme/grid.style';
-import NewBornCard from '../../containers/newbornCard/newbornCard';
-import newBornListJss from './newbornList_jss';
-import withWidth from '@material-ui/core/withWidth';
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { Grid, GridContainer, FlexContainer } from "../../theme/grid.style";
+import NewBornCard from "../../containers/newbornCard/newbornCard";
+import newBornListJss from "./newbornList_jss";
+import withWidth from "@material-ui/core/withWidth";
 
-import MockList from './mockList';
+import MockList from "./mockList";
 
 class List extends Component {
-
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      selectedNewborns: [],
-    }
+      selectedNewborns: []
+    };
   }
   componentDidMount() {
     this.props.fetchNewborns().catch(error => {
@@ -29,46 +28,93 @@ class List extends Component {
   }
 
   componentDidUpdate() {
-    if(this.state.selectedNewborns.length > 1) {
-      console.log("It should update now");
-    }
+    // if (this.state.selectedNewborns.length > 1) {
+    //   console.log("It should update now");
+    // }
   }
 
   renderNewbornGeneration = () => {
-    return (<><Grid columnNumber={this.renderCells().length}>{this.renderCells()}</Grid><Grid columnNumber={this.renderCells().length}>{this.renderCells()}</Grid></>);
+    return (
+      <React.Fragment>
+        <Grid columnNumber={this.renderCells().length}>
+          {this.renderCells()}
+        </Grid>
+      </React.Fragment>
+    );
   };
 
-  handleNewbornSelect = (newbornKey) => {
+  handleNewbornSelect = newbornKey => {
     const { selectedNewborns } = this.state;
-    if(selectedNewborns.includes(newbornKey)) {
+    if (selectedNewborns.includes(newbornKey)) {
       this.setState({
-        selectedNewborns: selectedNewborns.filter(newborn => newborn != newbornKey)
-      })
-    } else if(selectedNewborns.length < 2) {
+        selectedNewborns: selectedNewborns.filter(
+          newborn => newborn !== newbornKey
+        )
+      });
+    } else if (selectedNewborns.length < 2) {
       this.setState({
         selectedNewborns: [...selectedNewborns, newbornKey]
-      })
+      });
     }
-  }
+  };
+
+  handleNewbornHover = newbornKey => {
+    this.setState({ hoveredNewborn: newbornKey });
+  };
 
   renderCells() {
     const newbornCardList = [];
     const { newbornList } = this.props;
+    const { selectedNewborns, hoveredNewborn } = this.state;
     newbornList.forEach((newborn, newbornKey) => {
-      const newbornName = newborn.name || '';
-      const newbornId = newborn.id || '';
-      const newbornPlace = newborn.bornPlace || 'unknown region';
-      const isSelected = this.state.selectedNewborns.includes(newbornId);
+      const newbornName = newborn.name || "";
+      const newbornId = newborn.id || "";
+      const newbornPlace = newborn.bornPlace || "unknown region";
+      const isSelected = selectedNewborns.includes(newbornId);
+      const isHovered = hoveredNewborn === newbornId;
+
       const newbornSummaries = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July"
+        ],
         datasets: [
           {
-            backgroundColor: 'black',
-            data: [Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random()],
-          },
-        ],
+            backgroundColor: "black",
+            data: [
+              Math.random(),
+              Math.random(),
+              Math.random(),
+              Math.random(),
+              Math.random(),
+              Math.random(),
+              Math.random()
+            ]
+          }
+        ]
       };
-      newbornCardList.push(<NewBornCard handleNewbornSelect={(newbornId) => { this.handleNewbornSelect(newbornId)}} isSelected={isSelected} newbornId={newbornId} newbornSummaries={newbornSummaries} newbornName={newbornName} newbornPlace={newbornPlace} key={newbornKey} />);
+      newbornCardList.push(
+        <NewBornCard
+          handleNewbornSelect={newbornId => {
+            this.handleNewbornSelect(newbornId);
+          }}
+          handleNewbornHover={newbornId => {
+            this.handleNewbornHover(newbornId);
+          }}
+          isSelected={isSelected}
+          isHovered={isHovered}
+          newbornId={newbornId}
+          newbornSummaries={newbornSummaries}
+          newbornName={newbornName}
+          newbornPlace={newbornPlace}
+          key={newbornKey}
+        />
+      );
     });
 
     return newbornCardList;
@@ -85,7 +131,13 @@ class List extends Component {
           </FlexContainer>
         ) : (
           <>
-              <GridContainer>{hasNewborns ? this.renderNewbornGeneration() : <img src="./images/no-borns.svg" alt="no borns" />}</GridContainer>
+            <GridContainer>
+              {hasNewborns ? (
+                this.renderNewbornGeneration()
+              ) : (
+                <img src="./images/no-borns.svg" alt="no borns" />
+              )}
+            </GridContainer>
           </>
         )}
       </React.Fragment>
@@ -94,22 +146,22 @@ class List extends Component {
 }
 
 List.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  newbornList: MockList,//state.newBornReducer.newbornList,
-  newbornListLoading: false,//state.newBornReducer.newbornListLoading,
-  currentUser: state.userReducer.currentUser,
+  newbornList: MockList, //state.newBornReducer.newbornList,
+  newbornListLoading: false, //state.newBornReducer.newbornListLoading,
+  currentUser: state.userReducer.currentUser
 });
 
 export default compose(
   withStyles(newBornListJss, {
-    name: 'List',
+    name: "List"
   }),
   withWidth(),
   connect(
     mapStateToProps,
-    actions,
-  ),
+    actions
+  )
 )(List);
