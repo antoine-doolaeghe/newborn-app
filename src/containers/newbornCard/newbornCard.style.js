@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const NewbornCard = styled.div`
   border: 2px solid black;
@@ -7,8 +7,14 @@ export const NewbornCard = styled.div`
   position: relative;
   width: 220px;
   place-self: center;
-  background-color: ${props => props.isSelected ? 'lightgrey' : null}
+  background-color: ${props => (props.isSelected ? "lightgrey" : null)};
   &:hover {
-    background-color: lightgrey
+    background-color: lightgrey;
   }
+`;
+
+export const NewbornCardBuyButton = styled.button`
+  position: absolute;
+  height: 50px;
+  width: 50px;
 `;

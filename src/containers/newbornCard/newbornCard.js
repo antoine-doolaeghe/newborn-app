@@ -1,6 +1,6 @@
 import React from "react";
-import { withRouter, BrowserRouter } from "react-router-dom";
-import { NewbornCard } from "./newbornCard.style";
+import { BrowserRouter } from "react-router-dom";
+import { NewbornCard, NewbornCardBuyButton } from "./newbornCard.style";
 import CardHeader from "@material-ui/core/CardHeader";
 import Avatar from "@material-ui/core/Avatar";
 import { Line } from "react-chartjs-2";
@@ -22,6 +22,7 @@ function NewBornCard(props) {
             avatar={<Avatar aria-label="Recipe" />}
             title={newbornName}
             subheader={newbornPlace}
+            data-testid="newbornHeader"
           />
         </Link>
       </BrowserRouter>
@@ -31,6 +32,7 @@ function NewBornCard(props) {
         data-newborn-id={newbornId}
         height={192}
       />
+      <NewbornCardBuyButton data-testid="newbornBuyButton" />
     </NewbornCard>
   );
 }
