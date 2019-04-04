@@ -31,6 +31,9 @@ export const FETCH_NEWBORN_EPISODE_SUCCESS = "fetch_newborn_episode_success";
 export const FETCH_NEWBORN_EPISODE_FAILURE = "fetch_newborn_episode_failure";
 export const RESET_NEWBORN_EPISODE = "reset_newborn_episode";
 
+export const CREATE_USER_REQUEST = "create_user_request";
+export const CREATE_USER_SUCCESS = "create_user_success";
+export const CREATE_USER_FAILURE = "create_user_failure";
 export const FETCH_LOGGED_IN_USER_FAILURE = "fetch_logged_in_user_failure";
 export const FETCH_LOGGED_IN_USER_SUCCESS = "fetch_logged_in_user_success";
 export const FETCH_SINGLE_USER_FAILURE = "fetch_single_user_failure";

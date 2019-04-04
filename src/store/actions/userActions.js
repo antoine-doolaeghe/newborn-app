@@ -1,4 +1,7 @@
 import {
+  CREATE_USER_REQUEST,
+  CREATE_USER_SUCCESS,
+  CREATE_USER_FAILURE,
   FETCH_LOGGED_IN_USER_FAILURE,
   FETCH_LOGGED_IN_USER_SUCCESS,
   ADD_NEWBORN_TO_USER_REQUEST,
@@ -10,6 +13,24 @@ import * as mutation from "../../graphql/mutations";
 import { API, graphqlOperation } from "aws-amplify";
 
 import { Auth } from "aws-amplify";
+
+export const createUser = (userId, userName) => async dispatch => {
+  dispatch({ type: CREATE_USER_REQUEST });
+  try {
+    const newBornGenerationListResponse = await API.graphql(
+      graphqlOperation(mutation.createUser, {
+        input: { id: userId }
+      })
+    );
+    dispatch({
+      type: CREATE_USER_SUCCESS,
+      payload: newBornGenerationListResponse.data
+    });
+  } catch (error) {
+    dispatch({ type: CREATE_USER_FAILURE });
+    throw new Error("Could not add the newborn to the current user");
+  }
+};
 
 export const fetchSingleUser = () => async dispatch => {
   Auth.currentAuthenticatedUser({
