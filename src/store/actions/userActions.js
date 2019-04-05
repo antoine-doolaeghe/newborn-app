@@ -41,8 +41,7 @@ export const addNewbornToCurrentUser = (
       })
     );
     dispatch({
-      type: ADD_NEWBORN_TO_USER_SUCCESS,
-      payload: newBornGenerationListResponse.data
+      type: ADD_NEWBORN_TO_USER_SUCCESS
     });
   } catch (error) {
     dispatch({ type: ADD_NEWBORN_TO_USER_FAILURE });

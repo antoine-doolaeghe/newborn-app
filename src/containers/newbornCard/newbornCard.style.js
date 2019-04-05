@@ -7,7 +7,12 @@ export const NewbornCard = styled.div`
   position: relative;
   width: 220px;
   place-self: center;
-  background-color: ${props => (props.isSelected ? "lightgrey" : null)};
+  background-color: ${props =>
+    props.isCurrentUserOwnership
+      ? "red"
+      : props.isSelected
+      ? "lightgrey"
+      : null};
   &:hover {
     background-color: lightgrey;
   }

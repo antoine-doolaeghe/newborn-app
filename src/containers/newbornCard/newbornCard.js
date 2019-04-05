@@ -18,6 +18,7 @@ function NewBornCard(props) {
         props.handleNewbornHover(props.newbornId);
       }}
       isSelected={props.isSelected}
+      isCurrentUserOwnership={props.isCurrentUserOwnership}
       data-testid="newbornCard"
     >
       <BrowserRouter>

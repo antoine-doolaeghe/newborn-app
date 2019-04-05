@@ -66,7 +66,7 @@ class List extends Component {
     const newbornCardList = [];
     const { newbornList } = this.props;
     const { selectedNewborns, hoveredNewborn } = this.state;
-    const currentUser =
+    const currentUserId =
       this.props.currentUser && this.props.currentUser.attributes
         ? this.props.currentUser.attributes.sub
         : null;
@@ -76,7 +76,8 @@ class List extends Component {
       const newbornPlace = newborn.bornPlace || "unknown region";
       const isSelected = selectedNewborns.includes(newbornId);
       const isHovered = hoveredNewborn === newbornId;
-
+      const isCurrentUserOwnership =
+        newborn.owner && newborn.owner.id && newborn.owner.id === currentUserId;
       const newbornSummaries = {
         labels: [
           "January",
@@ -102,6 +103,7 @@ class List extends Component {
           }
         ]
       };
+      console.log(isCurrentUserOwnership);
       newbornCardList.push(
         <NewBornCard
           handleNewbornSelect={newbornId => {
@@ -112,12 +114,13 @@ class List extends Component {
           }}
           isSelected={isSelected}
           isHovered={isHovered}
+          isCurrentUserOwnership={isCurrentUserOwnership}
           newbornId={newbornId}
           newbornSummaries={newbornSummaries}
           newbornName={newbornName}
           newbornPlace={newbornPlace}
           onBuyClick={() =>
-            this.props.addNewbornToCurrentUser(newbornId, currentUser)
+            this.props.addNewbornToCurrentUser(newbornId, currentUserId)
           }
           key={newbornKey}
         />
@@ -130,7 +133,6 @@ class List extends Component {
   render() {
     const { newbornListLoading, newbornList } = this.props;
     const hasNewborns = newbornList.length > 0;
-
     return (
       <React.Fragment>
         {newbornListLoading ? (
