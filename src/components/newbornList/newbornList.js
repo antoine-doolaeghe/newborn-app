@@ -158,8 +158,8 @@ List.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  newbornList: MockList, //state.newBornReducer.newbornList,
-  newbornListLoading: false, //state.newBornReducer.newbornListLoading,
+  newbornList: state.newBornReducer.newbornList,
+  newbornListLoading: state.newBornReducer.newbornListLoading,
   currentUser: state.userReducer.currentUser
 });
 
