@@ -1,4 +1,5 @@
 import React from "react";
+import "jest-dom/extend-expect";
 import { fireEvent, cleanup, render } from "react-testing-library";
 import { Router } from "react-router-dom";
 import NewbornCard from "../newbornCard";
@@ -71,5 +72,12 @@ describe("<NewbornCard />", () => {
     fireEvent.mouseEnter(getByTestId("newbornCard"));
 
     expect(handleNewbornHover).toHaveBeenCalledTimes(1);
+  });
+
+  it("should be highlighted if the card is owned by the current user", () => {
+    const { getByTestId } = renderWithRouter(
+      <NewbornCard newbornSummaries={{}} isCurrentUserOwnership={true} />
+    );
+    expect(getByTestId("newbornCard")).toHaveStyle(`background-color: red`);
   });
 });
