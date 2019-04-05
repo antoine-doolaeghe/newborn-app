@@ -76,7 +76,7 @@ describe("<NewbornCard />", () => {
 
   it("should be highlighted if the card is owned by the current user", () => {
     const { getByTestId } = renderWithRouter(
-      <NewbornCard newbornSummaries={{}} isCurrentUserOwnership={true} />
+      <NewbornCard newbornSummaries={{}} isNewbornOwnedByCurrentUser={true} />
     );
     expect(getByTestId("newbornCard")).toHaveStyle(`background-color: red`);
   });

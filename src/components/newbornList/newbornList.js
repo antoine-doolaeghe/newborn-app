@@ -76,7 +76,7 @@ class List extends Component {
       const newbornPlace = newborn.bornPlace || "unknown region";
       const isSelected = selectedNewborns.includes(newbornId);
       const isHovered = hoveredNewborn === newbornId;
-      const isCurrentUserOwnership =
+      const isNewbornOwnedByCurrentUser =
         newborn.owner && newborn.owner.id && newborn.owner.id === currentUserId;
       const newbornSummaries = {
         labels: [
@@ -103,7 +103,7 @@ class List extends Component {
           }
         ]
       };
-      console.log(isCurrentUserOwnership);
+
       newbornCardList.push(
         <NewBornCard
           handleNewbornSelect={newbornId => {
@@ -114,13 +114,16 @@ class List extends Component {
           }}
           isSelected={isSelected}
           isHovered={isHovered}
-          isCurrentUserOwnership={isCurrentUserOwnership}
+          isNewbornOwnedByCurrentUser={isNewbornOwnedByCurrentUser}
           newbornId={newbornId}
           newbornSummaries={newbornSummaries}
           newbornName={newbornName}
           newbornPlace={newbornPlace}
           onBuyClick={() =>
-            this.props.addNewbornToCurrentUser(newbornId, currentUserId)
+            this.props.updateNewbornOwnership(
+              newbornId,
+              !isNewbornOwnedByCurrentUser ? currentUserId : null
+            )
           }
           key={newbornKey}
         />
@@ -160,9 +163,10 @@ List.propTypes = {
 };
 
 const mapStateToProps = state => ({
+  currentUser: state.userReducer.currentUser,
   newbornList: state.newBornReducer.newbornList,
   newbornListLoading: state.newBornReducer.newbornListLoading,
-  currentUser: state.userReducer.currentUser
+  isAddNewbornToUserLoading: state.newBornReducer.isAddNewbornToUserLoading
 });
 
 export default compose(

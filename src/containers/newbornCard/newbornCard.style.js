@@ -8,7 +8,7 @@ export const NewbornCard = styled.div`
   width: 220px;
   place-self: center;
   background-color: ${props =>
-    props.isCurrentUserOwnership
+    props.isNewbornOwnedByCurrentUser
       ? "red"
       : props.isSelected
       ? "lightgrey"

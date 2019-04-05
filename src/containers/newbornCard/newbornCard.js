@@ -8,7 +8,14 @@ import { Link } from "react-router-dom";
 import lineChartOptions from "./lineChartOptions";
 
 function NewBornCard(props) {
-  const { newbornId, newbornName, newbornPlace, newbornSummaries } = props;
+  const {
+    newbornId,
+    newbornName,
+    newbornPlace,
+    newbornSummaries,
+    isNewbornOwnedByCurrentUser
+  } = props;
+
   return (
     <NewbornCard
       onClick={() => {
@@ -18,7 +25,7 @@ function NewBornCard(props) {
         props.handleNewbornHover(props.newbornId);
       }}
       isSelected={props.isSelected}
-      isCurrentUserOwnership={props.isCurrentUserOwnership}
+      isNewbornOwnedByCurrentUser={isNewbornOwnedByCurrentUser}
       data-testid="newbornCard"
     >
       <BrowserRouter>
