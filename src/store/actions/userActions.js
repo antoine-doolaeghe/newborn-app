@@ -3,9 +3,6 @@ import {
   FETCH_LOGGED_IN_USER_SUCCESS
 } from "./helpers/types";
 
-import * as mutation from "../../graphql/mutations";
-import { API, graphqlOperation } from "aws-amplify";
-
 import { Auth } from "aws-amplify";
 
 export const fetchSingleUser = () => async dispatch => {

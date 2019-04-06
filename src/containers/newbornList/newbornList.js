@@ -2,17 +2,15 @@ import * as actions from "../../store/actions";
 
 import React, { Component, Fragment } from "react";
 import compose from "recompose/compose";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Grid, GridContainer, FlexContainer } from "../../theme/grid.style";
-import NewBornCard from "../../containers/newbornCard/newbornCard";
+import NewBornCard from "../../components/newbornCard/newbornCard";
 import newBornListJss from "./newbornList_jss";
 import withWidth from "@material-ui/core/withWidth";
-
-import MockList from "./mockList";
 
 class List extends Component {
   constructor(props) {
@@ -140,7 +138,10 @@ class List extends Component {
       <React.Fragment>
         {newbornListLoading ? (
           <FlexContainer>
-            <CircularProgress variant="indeterminate" />
+            <CircularProgress
+              variant="indeterminate"
+              data-testid="newbornListLoading"
+            />
           </FlexContainer>
         ) : (
           <Fragment>

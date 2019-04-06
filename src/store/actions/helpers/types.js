@@ -2,6 +2,10 @@ export const FETCH_NEWBORNS_REQUEST = "fetch_newborns_request";
 export const FETCH_NEWBORNS_SUCCESS = "fetch_newborns_success";
 export const FETCH_NEWBORNS_FAILURE = "fetch_newborns_failure";
 
+export const FETCH_USER_NEWBORNS_REQUEST = "fetch_user_newborns_request";
+export const FETCH_USER_NEWBORNS_SUCCESS = "fetch_user_newborns_success";
+export const FETCH_USER_NEWBORNS_FAILURE = "fetch_user_newborns_failure";
+
 export const FETCH_NEWBORN_REQUEST = "fetch_newborn_request";
 export const FETCH_NEWBORN_SUCCESS = "fetch_newborn_success";
 export const FETCH_NEWBORN_FAILURE = "fetch_newborn_failure";

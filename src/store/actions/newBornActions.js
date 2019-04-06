@@ -5,6 +5,9 @@ import {
   FETCH_NEWBORNS_REQUEST,
   FETCH_NEWBORNS_FAILURE,
   FETCH_NEWBORNS_SUCCESS,
+  FETCH_USER_NEWBORNS_REQUEST,
+  FETCH_USER_NEWBORNS_FAILURE,
+  FETCH_USER_NEWBORNS_SUCCESS,
   FETCH_NEWBORN_REQUEST,
   FETCH_NEWBORN_FAILURE,
   FETCH_NEWBORN_SUCCESS,
@@ -41,6 +44,22 @@ export const fetchNewborns = () => async dispatch => {
     });
   } catch (error) {
     dispatch({ type: FETCH_NEWBORNS_FAILURE });
+    throw new Error("Could not load the newborn list");
+  }
+};
+
+export const fetchCurrentUserNewborns = () => async dispatch => {
+  dispatch({ type: FETCH_USER_NEWBORNS_REQUEST });
+  try {
+    const newBornListresponse = await API.graphql(
+      graphqlOperation(queries.listNewborns, { limit: 100 })
+    );
+    dispatch({
+      type: FETCH_USER_NEWBORNS_SUCCESS,
+      payload: newBornListresponse.data.listNewborns.items
+    });
+  } catch (error) {
+    dispatch({ type: FETCH_USER_NEWBORNS_FAILURE });
     throw new Error("Could not load the newborn list");
   }
 };
