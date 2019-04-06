@@ -1,26 +1,25 @@
-import React from 'react';
-import registerServiceWorker from './registerServiceWorker';
+import React from "react";
+import registerServiceWorker from "./registerServiceWorker";
 
-import { Route, Switch } from 'react-router';
-import configureStore, { history } from './store/store';
-import { ConnectedRouter } from 'connected-react-router';
-import { Provider } from 'react-redux';
-import { render } from 'react-dom';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { Route, Switch } from "react-router";
+import configureStore, { history } from "./store/store";
+import { ConnectedRouter } from "connected-react-router";
+import { Provider } from "react-redux";
+import { render } from "react-dom";
+import { MuiThemeProvider } from "@material-ui/core/styles";
 
-import Amplify from 'aws-amplify';
-import aws_config from './aws-exports';
+import Amplify from "aws-amplify";
+import aws_config from "./aws-exports";
 
 // Route imports
-import Academy from './components/academy/academy';
-import Home from './components/home/home';
-import Live from './components/live/live';
-import MyBorn from './components/myBorn/myBorn';
-import NewBornRecord from './components/newbornRecord/newbornRecord';
-import MuiTheme from './utils/jss/MuiTheme';
+import Academy from "./containers/academy/academy";
+import Home from "./containers/home/home";
+import Live from "./containers/live/live";
+import MyBorn from "./containers/myBorn/myBorn";
+import NewBornRecord from "./containers/newbornRecord/newbornRecord";
+import MuiTheme from "./utils/jss/MuiTheme";
 
-const store = configureStore(/* provide initial state if any */)
-
+const store = configureStore(/* provide initial state if any */);
 
 // configure the amplify local config
 Amplify.configure(aws_config);
@@ -42,6 +41,6 @@ render(
       </MuiThemeProvider>
     </ConnectedRouter>
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById("root")
 );
 registerServiceWorker();
