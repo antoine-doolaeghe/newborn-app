@@ -7,6 +7,7 @@ import {
 
 const initialState = {
   currentUser: null,
+  currentUserId: null,
   currentUserNewbornList: [],
   currentUserNewbornListLoading: true
 };
@@ -16,7 +17,8 @@ export default (state = initialState, action) => {
     case FETCH_LOGGED_IN_USER_SUCCESS:
       return {
         ...state,
-        currentUser: action.payload
+        currentUser: action.payload,
+        currentUserId: action.payload.attributes.sub
       };
 
     case FETCH_LOGGED_IN_USER_FAILURE:

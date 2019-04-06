@@ -15,15 +15,18 @@ import withWidth from "@material-ui/core/withWidth";
 class List extends Component {
   constructor(props) {
     super(props);
+    const { currentUser } = this.props;
     this.state = {
-      selectedNewborns: []
+      selectedNewborns: [],
+      currentUserId:
+        currentUser && currentUser.attributes
+          ? currentUser.attributes.sub
+          : null
     };
   }
 
   componentDidMount() {
-    this.props.fetchNewborns().catch(error => {
-      console.log(error.name); // TO-DO error handling
-    });
+    this.props.fetchNewborns();
   }
 
   renderNewbornGeneration = () => {
@@ -36,86 +39,56 @@ class List extends Component {
     );
   };
 
-  handleNewbornSelect = newbornKey => {
+  handleNewbornSelect = event => {
+    const newbornId = event.target.closest("section").dataset.newbornid;
     const { selectedNewborns } = this.state;
-    if (selectedNewborns.includes(newbornKey)) {
+    if (selectedNewborns.includes(newbornId)) {
       this.setState({
         selectedNewborns: selectedNewborns.filter(
-          newborn => newborn !== newbornKey
+          newborn => newborn !== newbornId
         )
       });
     } else if (selectedNewborns.length < 2) {
       this.setState({
-        selectedNewborns: [...selectedNewborns, newbornKey]
+        selectedNewborns: [...selectedNewborns, newbornId]
       });
     }
   };
 
-  handleNewbornHover = newbornKey => {
-    this.setState({ hoveredNewborn: newbornKey });
+  handleNewbornHover = event => {
+    const newbornId = event.target.closest("section").dataset.newbornid;
+    this.setState({
+      hoveredNewborn: newbornId
+    });
   };
 
   renderCells() {
     const newbornCardList = [];
-    const { newbornList } = this.props;
+    const { newbornList, currentUserId } = this.props;
     const { selectedNewborns, hoveredNewborn } = this.state;
-    const currentUserId =
-      this.props.currentUser && this.props.currentUser.attributes
-        ? this.props.currentUser.attributes.sub
-        : null;
     newbornList.forEach((newborn, newbornKey) => {
-      const newbornName = newborn.name || "";
-      const newbornId = newborn.id || "";
-      const newbornPlace = newborn.bornPlace || "unknown region";
-      const isSelected = selectedNewborns.includes(newbornId);
-      const isHovered = hoveredNewborn === newbornId;
-      const isNewbornOwnedByCurrentUser =
-        newborn.owner && newborn.owner.id && newborn.owner.id === currentUserId;
-      const newbornSummaries = {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July"
-        ],
-        datasets: [
-          {
-            backgroundColor: "black",
-            data: [
-              Math.random(),
-              Math.random(),
-              Math.random(),
-              Math.random(),
-              Math.random(),
-              Math.random(),
-              Math.random()
-            ]
-          }
-        ]
+      const newbornInfo = {
+        name: newborn.name || "",
+        id: newborn.id || "",
+        bornPlace: newborn.bornPlace || "unknown region",
+        isSelected: selectedNewborns.includes(newborn.id),
+        isHovered: hoveredNewborn === newborn.id,
+        isOwnedByCurrentUser:
+          newborn.owner &&
+          newborn.owner.id &&
+          newborn.owner.id === currentUserId,
+        summaries: {}
       };
 
       newbornCardList.push(
         <NewBornCard
-          handleNewbornSelect={newbornId => {
-            this.handleNewbornSelect(newbornId);
-          }}
-          handleNewbornHover={newbornId => {
-            this.handleNewbornHover(newbornId);
-          }}
-          isSelected={isSelected}
-          isHovered={isHovered}
-          isNewbornOwnedByCurrentUser={isNewbornOwnedByCurrentUser}
-          newbornId={newbornId}
-          newbornSummaries={newbornSummaries}
-          newbornName={newbornName}
-          newbornPlace={newbornPlace}
+          handleNewbornSelect={this.handleNewbornSelect}
+          handleNewbornHover={this.handleNewbornHover}
+          newbornInfo={newbornInfo}
           onBuyClick={() =>
             this.props.updateNewbornOwnership(
-              newbornId,
-              !isNewbornOwnedByCurrentUser ? currentUserId : null
+              newbornInfo.id,
+              !newbornInfo.isOwnedByCurrentUser ? newbornInfo.id : null
             )
           }
           key={newbornKey}
@@ -160,6 +133,7 @@ List.propTypes = {
 
 const mapStateToProps = state => ({
   currentUser: state.userReducer.currentUser,
+  currentUserId: state.userReducer.currentUserId,
   newbornList: state.newBornReducer.newbornList,
   newbornListLoading: state.newBornReducer.newbornListLoading,
   isAddNewbornToUserLoading: state.newBornReducer.isAddNewbornToUserLoading

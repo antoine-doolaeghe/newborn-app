@@ -21,126 +21,61 @@ class MyBorn extends Component {
     };
   }
 
-  componentWillMount() {
-    if (this.props.currentUser) {
-      this.props
-        .fetchCurrentUserNewborns(this.props.currentUser.attributes.sub)
-        .catch(error => {
-          console.log(error.name);
-        });
+  componentDidMount() {
+    const { currentUser, fetchCurrentUserNewborns } = this.props;
+    if (currentUser) {
+      fetchCurrentUserNewborns(currentUser.attributes.sub);
     }
   }
 
   componentDidUpdate() {
+    const {
+      currentUser,
+      currentUserNewbornList,
+      currentUserNewbornListLoading,
+      fetchCurrentUserNewborns
+    } = this.props;
     if (
-      this.props.currentUser &&
-      this.props.currentUserNewbornList.length === 0 &&
-      this.props.currentUserNewbornListLoading
+      currentUser &&
+      currentUserNewbornList.length === 0 &&
+      currentUserNewbornListLoading
     ) {
-      this.props
-        .fetchCurrentUserNewborns(this.props.currentUser.attributes.sub)
-        .catch(error => {
-          console.log(error.name);
-        });
+      fetchCurrentUserNewborns(currentUser.attributes.sub);
     }
   }
 
-  renderNewbornGeneration = () => {
-    return (
-      <React.Fragment>
-        <Grid columnNumber={3} rowNumber={2}>
-          {this.renderCells()}
-        </Grid>
-      </React.Fragment>
-    );
-  };
-
-  handleNewbornSelect = newbornKey => {
-    const { selectedNewborns } = this.state;
-    if (selectedNewborns.includes(newbornKey)) {
-      this.setState({
-        selectedNewborns: selectedNewborns.filter(
-          newborn => newborn !== newbornKey
-        )
-      });
-    } else if (selectedNewborns.length < 2) {
-      this.setState({
-        selectedNewborns: [...selectedNewborns, newbornKey]
-      });
-    }
-  };
-
-  handleOnBuyClick = newbornId =>
+  handleOnBuyClick = event => {
+    const { currentUser, fetchCurrentUserNewborns } = this.props;
+    const newbornId = event.target.closest("section").dataset.newbornid;
     this.props
       .updateNewbornOwnership(newbornId, null)
-      .then(
-        this.props.fetchCurrentUserNewborns(
-          this.props.currentUser.attributes.sub
-        )
-      );
+      .then(fetchCurrentUserNewborns(currentUser.attributes.sub));
+  };
 
-  handleNewbornHover = newbornKey => {
-    this.setState({ hoveredNewborn: newbornKey });
+  handleNewbornHover = event => {
+    const newbornId = event.target.closest("section").dataset.newbornid;
+    this.setState({ hoveredNewborn: newbornId });
   };
 
   renderCells() {
     const newbornCardList = [];
     const { currentUserNewbornList } = this.props;
-    const { selectedNewborns, hoveredNewborn } = this.state;
-    const currentUserId =
-      this.props.currentUser && this.props.currentUser.attributes
-        ? this.props.currentUser.attributes.sub
-        : null;
+    const { hoveredNewborn } = this.state;
     currentUserNewbornList.forEach((newborn, newbornKey) => {
-      const newbornName = newborn.name || "";
-      const newbornId = newborn.id || "";
-      const newbornPlace = newborn.bornPlace || "unknown region";
-      const isSelected = selectedNewborns.includes(newbornId);
-      const isHovered = hoveredNewborn === newbornId;
-      const isNewbornOwnedByCurrentUser =
-        newborn.owner && newborn.owner.id && newborn.owner.id === currentUserId;
-      const newbornSummaries = {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July"
-        ],
-        datasets: [
-          {
-            backgroundColor: "black",
-            data: [
-              Math.random(),
-              Math.random(),
-              Math.random(),
-              Math.random(),
-              Math.random(),
-              Math.random(),
-              Math.random()
-            ]
-          }
-        ]
+      const newbornInfo = {
+        name: newborn.name || "",
+        id: newborn.id || "",
+        bornPlace: newborn.bornPlace || "unknown region",
+        isHovered: hoveredNewborn === newborn.id,
+        isOwnedByCurrentUser: true,
+        summaries: {}
       };
 
       newbornCardList.push(
         <NewBornCard
-          handleNewbornSelect={newbornId => {
-            this.handleNewbornSelect(newbornId);
-          }}
-          handleNewbornHover={newbornId => {
-            this.handleNewbornHover(newbornId);
-          }}
-          isSelected={isSelected}
-          isHovered={isHovered}
-          isNewbornOwnedByCurrentUser={true}
-          newbornId={newbornId}
-          newbornSummaries={newbornSummaries}
-          newbornName={newbornName}
-          newbornPlace={newbornPlace}
-          onBuyClick={() => this.handleOnBuyClick(newbornId)}
+          handleNewbornHover={this.handleNewbornHover}
+          onBuyClick={this.handleOnBuyClick}
+          newbornInfo={newbornInfo}
           key={newbornKey}
         />
       );
@@ -169,7 +104,9 @@ class MyBorn extends Component {
           <Fragment>
             <GridContainer>
               {hasNewborns ? (
-                this.renderNewbornGeneration()
+                <Grid columnNumber={3} rowNumber={2}>
+                  {this.renderCells()}
+                </Grid>
               ) : (
                 <img src="./images/no-borns.svg" alt="no borns" />
               )}

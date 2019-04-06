@@ -9,44 +9,36 @@ import lineChartOptions from "./lineChartOptions";
 
 function NewBornCard(props) {
   const {
-    newbornId,
-    newbornName,
-    newbornPlace,
-    newbornSummaries,
-    isNewbornOwnedByCurrentUser
+    newbornInfo,
+    handleNewbornHover,
+    handleNewbornSelect,
+    onBuyClick
   } = props;
-
   return (
     <NewbornCard
-      onClick={() => {
-        props.handleNewbornSelect(props.newbornId);
-      }}
-      onMouseEnter={() => {
-        props.handleNewbornHover(props.newbornId);
-      }}
-      isSelected={props.isSelected}
-      isNewbornOwnedByCurrentUser={isNewbornOwnedByCurrentUser}
+      onClick={handleNewbornSelect}
+      onMouseEnter={handleNewbornHover}
+      isSelected={newbornInfo.isSelected}
+      data-newbornid={newbornInfo.id}
+      isNewbornOwnedByCurrentUser={newbornInfo.isOwnedByCurrentUser}
       data-testid="newbornCard"
     >
-      <BrowserRouter>
-        <Link to={`./newborn-record/${props.newbornId}`}>
-          <CardHeader
-            avatar={<Avatar aria-label="Recipe" />}
-            title={newbornName}
-            subheader={newbornPlace}
-            data-testid="newbornHeader"
-          />
-        </Link>
-      </BrowserRouter>
+      <Link to={`./newborn-record/${newbornInfo.id}`}>
+        <CardHeader
+          avatar={<Avatar aria-label="Recipe" />}
+          title={newbornInfo.name}
+          subheader={newbornInfo.bornPlace}
+          data-testid="newbornHeader"
+        />
+      </Link>
       <Line
         options={lineChartOptions}
-        data={newbornSummaries}
-        data-newborn-id={newbornId}
+        data={newbornInfo.summaries}
         height={192}
       />
-      {props.isHovered && (
+      {newbornInfo.isHovered && (
         <NewbornCardBuyButton
-          onClick={props.onBuyClick}
+          onClick={onBuyClick}
           data-testid="newbornOwnershipButton"
         />
       )}

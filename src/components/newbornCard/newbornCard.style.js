@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NewbornCard = styled.div`
+export const NewbornCard = styled.section`
   border: 2px solid black;
   border-radius: 5px;
   height: 220px;
