@@ -8,7 +8,7 @@ import {
 const initialState = {
   currentUser: null,
   currentUserNewbornList: [],
-  currentUserNewbornListLoading: false
+  currentUserNewbornListLoading: true
 };
 
 export default (state = initialState, action) => {
@@ -28,7 +28,7 @@ export default (state = initialState, action) => {
     case FETCH_USER_NEWBORNS_REQUEST:
       return {
         ...state,
-        currentUserNewbornList: true
+        currentUserNewbornListLoading: true
       };
     case FETCH_USER_NEWBORNS_SUCCESS:
       return {

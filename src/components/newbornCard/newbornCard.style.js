@@ -7,15 +7,16 @@ export const NewbornCard = styled.div`
   position: relative;
   width: 220px;
   place-self: center;
+  &:hover {
+    background-color: ${props =>
+      props.isNewbornOwnedByCurrentUser ? "red" : "lightgrey"};
+  }
   background-color: ${props =>
     props.isNewbornOwnedByCurrentUser
       ? "red"
       : props.isSelected
       ? "lightgrey"
       : null};
-  &:hover {
-    background-color: lightgrey;
-  }
 `;
 
 export const NewbornCardBuyButton = styled.button`

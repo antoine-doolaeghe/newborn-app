@@ -29,7 +29,7 @@ class List extends Component {
   renderNewbornGeneration = () => {
     return (
       <React.Fragment>
-        <Grid columnNumber={this.renderCells().length}>
+        <Grid columnNumber={this.renderCells().length} rowNumber={1}>
           {this.renderCells()}
         </Grid>
       </React.Fragment>
@@ -140,7 +140,7 @@ class List extends Component {
           </FlexContainer>
         ) : (
           <Fragment>
-            <GridContainer>
+            <GridContainer align="left">
               {hasNewborns ? (
                 this.renderNewbornGeneration()
               ) : (

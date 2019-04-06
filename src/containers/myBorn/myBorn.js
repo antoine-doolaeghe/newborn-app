@@ -20,16 +20,27 @@ class MyBorn extends Component {
       selectedNewborns: []
     };
   }
-  componentDidUpdate() {
-    if (
-      this.props.currentUser &&
-      this.props.currentUserNewbornList.length === 0
-    ) {
-      console.log(this.props.currentUser);
+
+  componentWillMount() {
+    if (this.props.currentUser) {
       this.props
         .fetchCurrentUserNewborns(this.props.currentUser.attributes.sub)
         .catch(error => {
-          console.log(error.name); // TO-DO error handling
+          console.log(error.name);
+        });
+    }
+  }
+
+  componentDidUpdate() {
+    if (
+      this.props.currentUser &&
+      this.props.currentUserNewbornList.length === 0 &&
+      this.props.currentUserNewbornListLoading
+    ) {
+      this.props
+        .fetchCurrentUserNewborns(this.props.currentUser.attributes.sub)
+        .catch(error => {
+          console.log(error.name);
         });
     }
   }
@@ -37,7 +48,7 @@ class MyBorn extends Component {
   renderNewbornGeneration = () => {
     return (
       <React.Fragment>
-        <Grid columnNumber={this.renderCells().length}>
+        <Grid columnNumber={3} rowNumber={2}>
           {this.renderCells()}
         </Grid>
       </React.Fragment>
@@ -58,6 +69,15 @@ class MyBorn extends Component {
       });
     }
   };
+
+  handleOnBuyClick = newbornId =>
+    this.props
+      .updateNewbornOwnership(newbornId, null)
+      .then(
+        this.props.fetchCurrentUserNewborns(
+          this.props.currentUser.attributes.sub
+        )
+      );
 
   handleNewbornHover = newbornKey => {
     this.setState({ hoveredNewborn: newbornKey });
@@ -115,17 +135,12 @@ class MyBorn extends Component {
           }}
           isSelected={isSelected}
           isHovered={isHovered}
-          isNewbornOwnedByCurrentUser={isNewbornOwnedByCurrentUser}
+          isNewbornOwnedByCurrentUser={true}
           newbornId={newbornId}
           newbornSummaries={newbornSummaries}
           newbornName={newbornName}
           newbornPlace={newbornPlace}
-          onBuyClick={() =>
-            this.props.updateNewbornOwnership(
-              newbornId,
-              !isNewbornOwnedByCurrentUser ? currentUserId : null
-            )
-          }
+          onBuyClick={() => this.handleOnBuyClick(newbornId)}
           key={newbornKey}
         />
       );
@@ -140,6 +155,7 @@ class MyBorn extends Component {
       currentUserNewbornList
     } = this.props;
     const hasNewborns = currentUserNewbornList.length > 0;
+
     return (
       <React.Fragment>
         {currentUserNewbornListLoading ? (
