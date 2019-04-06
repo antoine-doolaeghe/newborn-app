@@ -6,8 +6,6 @@ import {
   ADD_NEWBORN_TO_USER_SUCCESS,
   FETCH_NEWBORNS_REQUEST,
   FETCH_NEWBORNS_SUCCESS,
-  FETCH_USER_NEWBORNS_REQUEST,
-  FETCH_USER_NEWBORNS_SUCCESS,
   FETCH_NEWBORN_REQUEST,
   FETCH_NEWBORN_SUCCESS,
   RESET_NEWBORN,
@@ -23,7 +21,6 @@ import {
 
 const initialState = {
   newbornList: [],
-  currentUserNewbornList: [],
   newbornInfo: null,
   newbornInfoLoading: false,
   newbornGenerationList: [],
@@ -32,7 +29,6 @@ const initialState = {
   newbornEpisode: null,
   newbornEpisodeList: [],
   newbornListLoading: false,
-  currentUserNewbornListLoadin: false,
   newbornEpisodeListLoading: false,
   newbornLoading: false,
   newbornEpisodeLoading: false,
@@ -71,17 +67,6 @@ export default (state = initialState, action) => {
         ...state,
         newbornList: action.payload,
         newbornListLoading: false
-      };
-    case FETCH_USER_NEWBORNS_REQUEST:
-      return {
-        ...state,
-        currentUserNewbornList: true
-      };
-    case FETCH_USER_NEWBORNS_SUCCESS:
-      return {
-        ...state,
-        currentUserNewbornList: action.payload,
-        currentUserNewbornListLoadin: false
       };
     case FETCH_NEWBORN_REQUEST:
       return {

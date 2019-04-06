@@ -1,9 +1,13 @@
 import {
   FETCH_LOGGED_IN_USER_FAILURE,
-  FETCH_LOGGED_IN_USER_SUCCESS
+  FETCH_LOGGED_IN_USER_SUCCESS,
+  FETCH_USER_NEWBORNS_REQUEST,
+  FETCH_USER_NEWBORNS_FAILURE,
+  FETCH_USER_NEWBORNS_SUCCESS
 } from "./helpers/types";
 
-import { Auth } from "aws-amplify";
+import * as queries from "../../graphql/queries";
+import { Auth, API, graphqlOperation } from "aws-amplify";
 
 export const fetchSingleUser = () => async dispatch => {
   Auth.currentAuthenticatedUser({
@@ -21,4 +25,20 @@ export const fetchSingleUser = () => async dispatch => {
         payload: err
       })
     );
+};
+
+export const fetchCurrentUserNewborns = userId => async dispatch => {
+  dispatch({ type: FETCH_USER_NEWBORNS_REQUEST });
+  try {
+    const newBornListresponse = await API.graphql(
+      graphqlOperation(queries.getUser, { id: userId })
+    );
+    dispatch({
+      type: FETCH_USER_NEWBORNS_SUCCESS,
+      payload: newBornListresponse.data.getUser.newborns.items
+    });
+  } catch (error) {
+    dispatch({ type: FETCH_USER_NEWBORNS_FAILURE });
+    throw new Error("Could not load the current user borns");
+  }
 };

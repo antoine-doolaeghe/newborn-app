@@ -19,16 +19,11 @@ class List extends Component {
       selectedNewborns: []
     };
   }
+
   componentDidMount() {
     this.props.fetchNewborns().catch(error => {
       console.log(error.name); // TO-DO error handling
     });
-  }
-
-  componentDidUpdate() {
-    // if (this.state.selectedNewborns.length > 1) {
-    //   console.log("It should update now");
-    // }
   }
 
   renderNewbornGeneration = () => {

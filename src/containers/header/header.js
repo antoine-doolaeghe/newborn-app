@@ -1,22 +1,22 @@
-import * as actions from '../../store/actions';
+import * as actions from "../../store/actions";
 
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import AppBar from '@material-ui/core/AppBar';
-import connect from 'react-redux/es/connect/connect';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import PropTypes from 'prop-types';
-import React from 'react';
-import Toolbar from '@material-ui/core/Toolbar';
-import styles from './header_jss';
-import { withStyles } from '@material-ui/core/styles';
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import AppBar from "@material-ui/core/AppBar";
+import connect from "react-redux/es/connect/connect";
+import IconButton from "@material-ui/core/IconButton";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import PropTypes from "prop-types";
+import React from "react";
+import Toolbar from "@material-ui/core/Toolbar";
+import styles from "./header_jss";
+import { withStyles } from "@material-ui/core/styles";
 
-import { Auth } from 'aws-amplify';
+import { Auth } from "aws-amplify";
 
 class Header extends React.Component {
   state = {
-    anchorEl: null,
+    anchorEl: null
   };
 
   componentDidMount() {
@@ -51,8 +51,8 @@ class Header extends React.Component {
     const renderMenu = (
       <Menu
         anchorEl={anchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
@@ -65,7 +65,12 @@ class Header extends React.Component {
       <div className={classes.root}>
         <AppBar position="relative" className={classes.appBar}>
           <Toolbar style={{ marginLeft: localStorage.openDrawer ? 241 : 74 }}>
-            <IconButton className={classes.menuIcon} aria-haspopup="true" onClick={this.handleMenu} color="primary">
+            <IconButton
+              className={classes.menuIcon}
+              aria-haspopup="true"
+              onClick={this.handleMenu}
+              color="primary"
+            >
               <AccountCircle />
             </IconButton>
           </Toolbar>
@@ -77,14 +82,14 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  currentUser: state.userReducer.currentUser,
+  currentUser: state.userReducer.currentUser
 });
 
 export default connect(
   mapStateToProps,
-  actions,
+  actions
 )(withStyles(styles)(Header));
