@@ -1,49 +1,52 @@
 type User @model {
-	id: String!
-	profileImage: String
-	userName: String
-	newborns: [Newborn] @connection(name: "NewbornOwner")
+  id: String!
+  profileImage: String
+  userName: String
+  newborns: [Newborn] @connection(name: "NewbornOwner")
 }
 
 type Generation @model {
-	id: String!
-	newborns: [Newborn] @connection(name: "GenerationNewborn")
+  id: String!
+  newborns: [Newborn] @connection(name: "GenerationNewborn")
 }
 
 type Newborn @model {
-	id: String!
-	bio: String
-  name: String!
-	bornPlace: String
-	owner: User @connection(name: "NewbornOwner")
-	generation: Generation @connection(name: "GenerationNewborn")
+  bio: String
+  bornPlace: String
+  childs: [String]
+  generation: Generation @connection(name: "GenerationNewborn")
+  hexColor: String
+  id: String!
   models: [Model] @connection(name: "NewbornModel")
-	predictions: [Prediction] @connection(name: "NewbornPrediction")
-	hexColor: String
+  name: String!
+  owner: User @connection(name: "NewbornOwner")
+  parents: [String]
+  partners: [String]
+  predictions: [Prediction] @connection(name: "NewbornPrediction")
 }
 
 type Model @model {
-	id: String!
-	cellInfos: [Float],
-	cellPositions: [[Float]]
-	newborn: Newborn @connection(name: "NewbornModel")
-	episodes: [Episode] @connection(name: "ModelEpisode")
+  id: String!
+  cellInfos: [Float]
+  cellPositions: [[Float]]
+  newborn: Newborn @connection(name: "NewbornModel")
+  episodes: [Episode] @connection(name: "ModelEpisode")
 }
 
 type Episode @model {
-	id: String!
-	model: Model @connection(name: "ModelEpisode")
-	steps: [Summary] @connection(name: "EpisodeSummary")
+  id: String!
+  model: Model @connection(name: "ModelEpisode")
+  steps: [Summary] @connection(name: "EpisodeSummary")
 }
 
 type Summary @model {
-	meanReward: Float
-	standardReward: Float
-	step: Int
-	episode: Episode @connection(name: "EpisodeSummary")
+  meanReward: Float
+  standardReward: Float
+  step: Int
+  episode: Episode @connection(name: "EpisodeSummary")
 }
 
 type Prediction @model {
-	meanReward: Float
-	newborn: Newborn @connection(name: "NewbornPrediction")
+  meanReward: Float
+  newborn: Newborn @connection(name: "NewbornPrediction")
 }

@@ -1,15 +1,15 @@
 /* eslint-disable react/forbid-prop-types */
-import * as actions from '../../store/actions';
+import * as actions from "../../store/actions";
 
-import React, { Component } from 'react';
-import { withAuthenticator } from 'aws-amplify-react';
-import withMenuDrawer from '../../containers/menuDrawer/withMenuDrawer';
-import withHeader from '../header/withHeader';
+import React, { Component } from "react";
+import { withAuthenticator } from "aws-amplify-react";
+import withMenuDrawer from "../../components/menuDrawer/withMenuDrawer";
+import withHeader from "../header/withHeader";
 
-import LiveJss from './live_jss';
-import PropTypes from 'prop-types';
-import connect from 'react-redux/es/connect/connect';
-import { withStyles } from '@material-ui/core/styles';
+import LiveJss from "./live_jss";
+import PropTypes from "prop-types";
+import connect from "react-redux/es/connect/connect";
+import { withStyles } from "@material-ui/core/styles";
 
 class Live extends Component {
   componentDidMount() {
@@ -27,7 +27,7 @@ class Live extends Component {
 
 Live.propTypes = {
   classes: PropTypes.object.isRequired,
-  fetchNewborns: PropTypes.func.isRequired,
+  fetchNewborns: PropTypes.func.isRequired
 };
 
 const mapStateToProps = () => {};
@@ -37,9 +37,9 @@ export default withAuthenticator(
     withHeader(
       connect(
         mapStateToProps,
-        actions,
-      )(withStyles(LiveJss)(Live)),
+        actions
+      )(withStyles(LiveJss)(Live))
     ),
-    4,
-  ),
+    4
+  )
 );

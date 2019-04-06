@@ -8,11 +8,14 @@ export const getUser = `query GetUser($id: ID!) {
     userName
     newborns {
       items {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       nextToken
     }
@@ -42,11 +45,14 @@ export const getGeneration = `query GetGeneration($id: ID!) {
     id
     newborns {
       items {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       nextToken
     }
@@ -71,24 +77,17 @@ export const listGenerations = `query ListGenerations(
 `;
 export const getNewborn = `query GetNewborn($id: ID!) {
   getNewborn(id: $id) {
-    id
     bio
-    name
     bornPlace
-    owner {
-      id
-      profileImage
-      userName
-      newborns {
-        nextToken
-      }
-    }
+    childs
     generation {
       id
       newborns {
         nextToken
       }
     }
+    hexColor
+    id
     models {
       items {
         id
@@ -97,13 +96,23 @@ export const getNewborn = `query GetNewborn($id: ID!) {
       }
       nextToken
     }
+    name
+    owner {
+      id
+      profileImage
+      userName
+      newborns {
+        nextToken
+      }
+    }
+    parents
+    partners
     predictions {
       items {
         meanReward
       }
       nextToken
     }
-    hexColor
   }
 }
 `;
@@ -114,25 +123,28 @@ export const listNewborns = `query ListNewborns(
 ) {
   listNewborns(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
-      id
       bio
-      name
       bornPlace
+      childs
+      generation {
+        id
+      }
+      hexColor
+      id
+      models {
+        nextToken
+      }
+      name
       owner {
         id
         profileImage
         userName
       }
-      generation {
-        id
-      }
-      models {
-        nextToken
-      }
+      parents
+      partners
       predictions {
         nextToken
       }
-      hexColor
     }
     nextToken
   }
@@ -144,25 +156,28 @@ export const getModel = `query GetModel($id: ID!) {
     cellInfos
     cellPositions
     newborn {
-      id
       bio
-      name
       bornPlace
+      childs
+      generation {
+        id
+      }
+      hexColor
+      id
+      models {
+        nextToken
+      }
+      name
       owner {
         id
         profileImage
         userName
       }
-      generation {
-        id
-      }
-      models {
-        nextToken
-      }
+      parents
+      partners
       predictions {
         nextToken
       }
-      hexColor
     }
     episodes {
       items {
@@ -184,11 +199,14 @@ export const listModels = `query ListModels(
       cellInfos
       cellPositions
       newborn {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       episodes {
         nextToken
@@ -206,11 +224,14 @@ export const getEpisode = `query GetEpisode($id: ID!) {
       cellInfos
       cellPositions
       newborn {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       episodes {
         nextToken
@@ -289,25 +310,28 @@ export const getPrediction = `query GetPrediction($id: ID!) {
   getPrediction(id: $id) {
     meanReward
     newborn {
-      id
       bio
-      name
       bornPlace
+      childs
+      generation {
+        id
+      }
+      hexColor
+      id
+      models {
+        nextToken
+      }
+      name
       owner {
         id
         profileImage
         userName
       }
-      generation {
-        id
-      }
-      models {
-        nextToken
-      }
+      parents
+      partners
       predictions {
         nextToken
       }
-      hexColor
     }
   }
 }
@@ -321,11 +345,14 @@ export const listPredictions = `query ListPredictions(
     items {
       meanReward
       newborn {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
     }
     nextToken
