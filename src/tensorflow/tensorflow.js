@@ -1,44 +1,28 @@
-async function getData() {
-  const carsDataReq = await fetch('https://storage.googleapis.com/tfjs-tutorials/carsData.json');
+async function getData(newbornDa) {
+  const carsDataReq = await fetch(
+    "https://storage.googleapis.com/tfjs-tutorials/carsData.json"
+  );
   const carsData = await carsDataReq.json();
   const cleaned = carsData
     .map(car => ({
       mpg: car.Miles_per_Gallon,
-      horsepower: car.Horsepower,
+      horsepower: car.Horsepower
     }))
     .filter(car => car.mpg != null && car.horsepower != null);
 
   return cleaned;
 }
 
-async function run() {
+export const run = async data => {
   // Load and plot the original input data that we are going to train on.
-  const data = await getData();
-  const values = data.map(d => ({
-    x: d.horsepower,
-    y: d.mpg,
-  }));
-
-  tfvis.render.scatterplot(
-    { name: 'Horsepower v MPG' },
-    { values },
-    {
-      xLabel: 'Horsepower',
-      yLabel: 'MPG',
-      height: 300,
-    },
-  );
-
-  // More code will be added below
-  // Convert the data to a form we can use for training.
   const tensorData = convertToTensor(data);
   const { inputs, labels } = tensorData;
 
   // Train the model
   await trainModel(model, inputs, labels);
-  console.log('Done Training');
+  console.log("Done Training");
   testModel(model, data, tensorData);
-}
+};
 
 function createModel() {
   // Create a sequential model
@@ -80,8 +64,12 @@ function convertToTensor(data) {
     const labelMax = labelTensor.max();
     const labelMin = labelTensor.min();
 
-    const normalizedInputs = inputTensor.sub(inputMin).div(inputMax.sub(inputMin));
-    const normalizedLabels = labelTensor.sub(labelMin).div(labelMax.sub(labelMin));
+    const normalizedInputs = inputTensor
+      .sub(inputMin)
+      .div(inputMax.sub(inputMin));
+    const normalizedLabels = labelTensor
+      .sub(labelMin)
+      .div(labelMax.sub(labelMin));
 
     return {
       inputs: normalizedInputs,
@@ -90,7 +78,7 @@ function convertToTensor(data) {
       inputMax,
       inputMin,
       labelMax,
-      labelMin,
+      labelMin
     };
   });
 }
@@ -100,7 +88,7 @@ async function trainModel(model, inputs, labels) {
   model.compile({
     optimizer: tf.train.adam(),
     loss: tf.losses.meanSquaredError,
-    metrics: ['mse'],
+    metrics: ["mse"]
   });
 
   const batchSize = 28;
@@ -110,7 +98,11 @@ async function trainModel(model, inputs, labels) {
     batchSize,
     epochs,
     shuffle: true,
-    callbacks: tfvis.show.fitCallbacks({ name: 'Training Performance' }, ['loss', 'mse'], { height: 200, callbacks: ['onEpochEnd'] }),
+    callbacks: tfvis.show.fitCallbacks(
+      { name: "Training Performance" },
+      ["loss", "mse"],
+      { height: 200, callbacks: ["onEpochEnd"] }
+    )
   });
 }
 
@@ -132,26 +124,32 @@ function testModel(model, inputData, normalizationData) {
     return [unNormXs.dataSync(), unNormPreds.dataSync()];
   });
 
-  const predictedPoints = Array.from(xs).map((val, i) => ({ x: val, y: preds[i] }));
+  const predictedPoints = Array.from(xs).map((val, i) => ({
+    x: val,
+    y: preds[i]
+  }));
 
   const originalPoints = inputData.map(d => ({
     x: d.horsepower,
-    y: d.mpg,
+    y: d.mpg
   }));
 
   tfvis.render.scatterplot(
-    { name: 'Model Predictions vs Original Data' },
-    { values: [originalPoints, predictedPoints], series: ['original', 'predicted'] },
+    { name: "Model Predictions vs Original Data" },
     {
-      xLabel: 'Horsepower',
-      yLabel: 'MPG',
-      height: 300,
+      values: [originalPoints, predictedPoints],
+      series: ["original", "predicted"]
     },
+    {
+      xLabel: "Horsepower",
+      yLabel: "MPG",
+      height: 300
+    }
   );
 }
 
 // // Create the model
-// const model = createModel();
+const model = createModel();
 // tfvis.show.modelSummary({ name: 'Model Summary' }, model);
 
-// document.addEventListener('DOMContentLoaded', run);
+document.addEventListener("DOMContentLoaded", run);
