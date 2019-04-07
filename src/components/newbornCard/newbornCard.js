@@ -14,6 +14,7 @@ function NewBornCard(props) {
     handleNewbornSelect,
     onBuyClick
   } = props;
+
   return (
     <NewbornCard
       onClick={handleNewbornSelect}
@@ -32,7 +33,7 @@ function NewBornCard(props) {
         />
       </Link>
       <Line
-        options={lineChartOptions}
+        options={lineChartOptions(newbornInfo.summaries.min)}
         data={newbornInfo.summaries}
         height={192}
       />

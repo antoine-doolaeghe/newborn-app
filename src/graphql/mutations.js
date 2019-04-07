@@ -162,7 +162,7 @@ export const createNewborn = `mutation CreateNewborn($input: CreateNewbornInput!
   }
 }
 `;
-export const updateNewborn = `mutation UpdateNewborn($input: UpdateNewbornInput!) {
+export const updateNewborn = `mutation UpdateNewborn($input: UpdateNewbornInput!, $stepLimit: Int) {
   updateNewborn(input: $input) {
     bio
     bornPlace
@@ -180,6 +180,17 @@ export const updateNewborn = `mutation UpdateNewborn($input: UpdateNewbornInput!
         id
         cellInfos
         cellPositions
+        episodes {
+          items {
+            steps(limit: $stepLimit) {
+              items {
+                meanReward
+                standardReward
+                step
+              }
+            }
+          }
+        }
       }
       nextToken
     }

@@ -16,6 +16,25 @@ export const getUser = `query GetUser($id: ID!) {
         name
         parents
         partners
+        models {
+          items {
+            id
+            cellInfos
+            cellPositions
+            episodes {
+              items {
+                steps(limit: 20) {
+                  items {
+                    meanReward
+                    standardReward
+                    step
+                  }
+                }
+              }
+            }
+          }
+          nextToken
+        }
       }
       nextToken
     }
@@ -93,6 +112,17 @@ export const getNewborn = `query GetNewborn($id: ID!) {
         id
         cellInfos
         cellPositions
+        episodes {
+          items {
+            steps {
+              items {
+                meanReward
+                standardReward
+                step
+              }
+            }
+          }
+        }
       }
       nextToken
     }
@@ -119,6 +149,7 @@ export const getNewborn = `query GetNewborn($id: ID!) {
 export const listNewborns = `query ListNewborns(
   $filter: ModelNewbornFilterInput
   $limit: Int
+  $stepLimit: Int
   $nextToken: String
 ) {
   listNewborns(filter: $filter, limit: $limit, nextToken: $nextToken) {
@@ -132,7 +163,22 @@ export const listNewborns = `query ListNewborns(
       hexColor
       id
       models {
-        nextToken
+        items {
+          id
+          cellInfos
+          cellPositions
+          episodes {
+            items {
+              steps(limit: $stepLimit) {
+                items {
+                  meanReward
+                  standardReward
+                  step
+                }
+              }
+            }
+          }
+        }
       }
       name
       owner {

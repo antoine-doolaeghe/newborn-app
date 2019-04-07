@@ -5,6 +5,7 @@ import compose from "recompose/compose";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import { returnNewbornChartData } from "../../utils/helpers/newbornChartHelpers";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Grid, GridContainer, FlexContainer } from "../../theme/grid.style";
@@ -15,18 +16,15 @@ import withWidth from "@material-ui/core/withWidth";
 class List extends Component {
   constructor(props) {
     super(props);
-    const { currentUser } = this.props;
     this.state = {
       selectedNewborns: [],
-      currentUserId:
-        currentUser && currentUser.attributes
-          ? currentUser.attributes.sub
-          : null
+      newbornSummaryStepLimit: 100
     };
   }
 
   componentDidMount() {
-    this.props.fetchNewborns();
+    const { newbornSummaryStepLimit } = this.state;
+    this.props.fetchNewborns(newbornSummaryStepLimit);
   }
 
   renderNewbornGeneration = () => {
@@ -65,7 +63,11 @@ class List extends Component {
   renderCells() {
     const newbornCardList = [];
     const { newbornList, currentUserId } = this.props;
-    const { selectedNewborns, hoveredNewborn } = this.state;
+    const {
+      selectedNewborns,
+      hoveredNewborn,
+      newbornSummaryStepLimit
+    } = this.state;
     newbornList.forEach((newborn, newbornKey) => {
       const newbornInfo = {
         name: newborn.name || "",
@@ -77,7 +79,7 @@ class List extends Component {
           newborn.owner &&
           newborn.owner.id &&
           newborn.owner.id === currentUserId,
-        summaries: {}
+        summaries: returnNewbornChartData(newborn)
       };
 
       newbornCardList.push(
@@ -88,7 +90,8 @@ class List extends Component {
           onBuyClick={() =>
             this.props.updateNewbornOwnership(
               newbornInfo.id,
-              !newbornInfo.isOwnedByCurrentUser ? newbornInfo.id : null
+              !newbornInfo.isOwnedByCurrentUser ? currentUserId : null,
+              newbornSummaryStepLimit
             )
           }
           key={newbornKey}
