@@ -14,8 +14,8 @@ export const returnNewbornChartData = newbornData => {
   } else {
     return newbornSummarySteps;
   }
-  let data = [];
-  let labels = [];
+  const data = [];
+  const labels = [];
   newbornSummarySteps.sort((a, b) => a.step - b.step);
   newbornSummarySteps.forEach(item => {
     data.push(item.meanReward);
@@ -23,13 +23,13 @@ export const returnNewbornChartData = newbornData => {
   });
   const min = Math.min(...data);
   return {
-    labels: labels,
+    labels,
     datasets: [
       {
-        data: data,
+        data,
         backgroundColor: ["white"]
       }
     ],
-    min: min
+    min
   };
 };

@@ -1,11 +1,10 @@
-import * as actions from "../../store/actions";
-
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { withAuthenticator } from "aws-amplify-react";
 import { withRouter } from "react-router-dom";
+import * as actions from "../../store/actions";
 
 import { FlexContainer } from "../../theme/grid.style";
 import withMenuDrawer from "../../components/menuDrawer/withMenuDrawer";
@@ -14,6 +13,8 @@ import NewbornRecordGraph from "../../components/newbornRecordGraph/newbornRecor
 import NewbornRecordHeader from "../../components/newbornRecordHeader/newbornRecordHeader";
 import NewBornRecord3dModel from "../../components/newbornRecord3dModel/newbornRecord3dModel";
 import NewBornRecordPrediction from "../../components/newbornPrediction/newbornPrediction";
+import { returnNewbornPredictionData } from "../../utils/helpers/newbornPredictionHelpers";
+import runPredction from "../../tensorflow/tensorflow";
 
 class NewBornRecord extends Component {
   componentWillMount() {
@@ -32,20 +33,25 @@ class NewBornRecord extends Component {
   };
 
   render() {
-    const { newbornInfoLoading } = this.props;
+    const { newbornInfoLoading, newbornInfo } = this.props;
     return (
       <React.Fragment>
         <FlexContainer>
-          <FlexContainer direction={"column"} flex={"2"}>
+          <FlexContainer direction="column" flex="2">
             <NewbornRecordHeader />
             <NewBornRecord3dModel />
           </FlexContainer>
-          <FlexContainer direction={"column"} flex={"1"}>
+          <FlexContainer direction="column" flex="1">
             <NewbornRecordGraph
               newbornInfoLoading={newbornInfoLoading}
               newbornGenerations={this.returnNewbornGenerations()}
             />
-            <NewBornRecordPrediction newbornInfoLoading={newbornInfoLoading} />
+            <NewBornRecordPrediction
+              newbornInfoLoading={newbornInfoLoading}
+              onPredictionClick={() => {
+                runPredction(returnNewbornPredictionData(newbornInfo));
+              }}
+            />
           </FlexContainer>
         </FlexContainer>
       </React.Fragment>

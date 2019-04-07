@@ -1,30 +1,6 @@
-async function getData(newbornDa) {
-  const carsDataReq = await fetch(
-    "https://storage.googleapis.com/tfjs-tutorials/carsData.json"
-  );
-  const carsData = await carsDataReq.json();
-  const cleaned = carsData
-    .map(car => ({
-      mpg: car.Miles_per_Gallon,
-      horsepower: car.Horsepower
-    }))
-    .filter(car => car.mpg != null && car.horsepower != null);
+import * as tf from "@tensorflow/tfjs";
 
-  return cleaned;
-}
-
-export const run = async data => {
-  // Load and plot the original input data that we are going to train on.
-  const tensorData = convertToTensor(data);
-  const { inputs, labels } = tensorData;
-
-  // Train the model
-  await trainModel(model, inputs, labels);
-  console.log("Done Training");
-  testModel(model, data, tensorData);
-};
-
-function createModel() {
+export const createModel = () => {
   // Create a sequential model
   const model = tf.sequential();
 
@@ -35,7 +11,7 @@ function createModel() {
   model.add(tf.layers.dense({ units: 1, useBias: true }));
 
   return model;
-}
+};
 
 /**
  * Convert the input data to a tensors that we can use for machine
@@ -43,7 +19,7 @@ function createModel() {
  * the data and _normalizing_ the data
  * MPG on the y-axis.
  */
-function convertToTensor(data) {
+export const convertToTensor = data => {
   // Wrapping these calculations in a tidy will dispose any
   // intermediate tensors.
 
@@ -52,8 +28,8 @@ function convertToTensor(data) {
     tf.util.shuffle(data);
 
     // Step 2. Convert data to Tensor
-    const inputs = data.map(d => d.horsepower);
-    const labels = data.map(d => d.mpg);
+    const inputs = data.map(d => d.meanReward);
+    const labels = data.map(d => d.step);
 
     const inputTensor = tf.tensor2d(inputs, [inputs.length, 1]);
     const labelTensor = tf.tensor2d(labels, [labels.length, 1]);
@@ -81,9 +57,9 @@ function convertToTensor(data) {
       labelMin
     };
   });
-}
+};
 
-async function trainModel(model, inputs, labels) {
+export const trainModel = async (model, inputs, labels) => {
   // Prepare the model for training.
   model.compile({
     optimizer: tf.train.adam(),
@@ -97,16 +73,11 @@ async function trainModel(model, inputs, labels) {
   return await model.fit(inputs, labels, {
     batchSize,
     epochs,
-    shuffle: true,
-    callbacks: tfvis.show.fitCallbacks(
-      { name: "Training Performance" },
-      ["loss", "mse"],
-      { height: 200, callbacks: ["onEpochEnd"] }
-    )
+    shuffle: true
   });
-}
+};
 
-function testModel(model, inputData, normalizationData) {
+export const testModel = (model, inputData, normalizationData) => {
   const { inputMax, inputMin, labelMin, labelMax } = normalizationData;
 
   // Generate predictions for a uniform range of numbers between 0 and 1;
@@ -124,32 +95,32 @@ function testModel(model, inputData, normalizationData) {
     return [unNormXs.dataSync(), unNormPreds.dataSync()];
   });
 
-  const predictedPoints = Array.from(xs).map((val, i) => ({
-    x: val,
-    y: preds[i]
-  }));
+  console.log(xs, preds);
 
-  const originalPoints = inputData.map(d => ({
-    x: d.horsepower,
-    y: d.mpg
-  }));
+  // const predictedPoints = Array.from(xs).map((val, i) => ({
+  //   x: val,
+  //   y: preds[i]
+  // }));
 
-  tfvis.render.scatterplot(
-    { name: "Model Predictions vs Original Data" },
-    {
-      values: [originalPoints, predictedPoints],
-      series: ["original", "predicted"]
-    },
-    {
-      xLabel: "Horsepower",
-      yLabel: "MPG",
-      height: 300
-    }
-  );
-}
+  // const originalPoints = inputData.map(d => ({
+  //   x: d.horsepower,
+  //   y: d.mpg
+  // }));
+};
+
+export default async data => {
+  const tensorData = convertToTensor(data);
+  const { inputs, labels } = tensorData;
+  // create tensorflow model
+  const model = createModel();
+  // Train the model
+  await trainModel(model, inputs, labels);
+  console.log("Done Training");
+  testModel(model, data, tensorData);
+};
 
 // // Create the model
-const model = createModel();
+// const model = createModel();
 // tfvis.show.modelSummary({ name: 'Model Summary' }, model);
 
-document.addEventListener("DOMContentLoaded", run);
+// document.addEventListener("DOMContentLoaded", run);
