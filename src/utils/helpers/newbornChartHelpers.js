@@ -1,4 +1,4 @@
-export const returnNewbornChartData = newbornData => {
+export const returnNewbornChartData = (newbornData, predictionData) => {
   let newbornSummarySteps = {};
   if (
     newbornData &&
@@ -22,14 +22,28 @@ export const returnNewbornChartData = newbornData => {
     labels.push(item.step);
   });
   const min = Math.min(...data);
-  return {
+
+  const datasets = {
     labels,
-    datasets: [
-      {
-        data,
-        backgroundColor: ["white"]
-      }
-    ],
+    datasets: [],
     min
   };
+
+  if (predictionData) {
+    datasets.datasets.push({
+      label: "predicationData",
+      color: "red",
+      backgroundColor: ["red"],
+      data: predictionData
+    });
+  }
+
+  datasets.datasets.push({
+    data,
+    backgroundColor: ["white"],
+    label: "date"
+  });
+  console.log(datasets);
+
+  return datasets;
 };

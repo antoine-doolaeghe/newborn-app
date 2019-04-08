@@ -50,3 +50,4 @@ export const SERVICE_ERROR = "service_error";
 
 export const NEWBORN_PREDICTION_REQUEST = "newborn_prediction_request";
 export const NEWBORN_PREDICTION_SUCCESS = "newborn_prediction_success";
+export const NEWBORN_PREDICTION_FAILURE = "newborn_prediction_failure";

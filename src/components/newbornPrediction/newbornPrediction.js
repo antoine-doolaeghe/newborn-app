@@ -5,13 +5,17 @@ import { NewbornPredictionContainer } from "./newbornPrediction.style";
 function NewbornPrediction(props) {
   return (
     <NewbornPredictionContainer>
-      <button
-        onClick={() => {
-          props.onPredictionClick();
-        }}
-      >
-        heloo
-      </button>
+      {props.newbornPredictionLoading ? (
+        <CircularProgress />
+      ) : (
+        <button
+          onClick={() => {
+            props.onPredictionClick();
+          }}
+        >
+          heloo
+        </button>
+      )}
     </NewbornPredictionContainer>
   );
 }

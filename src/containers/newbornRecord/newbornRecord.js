@@ -14,7 +14,7 @@ import NewbornRecordHeader from "../../components/newbornRecordHeader/newbornRec
 import NewBornRecord3dModel from "../../components/newbornRecord3dModel/newbornRecord3dModel";
 import NewBornRecordPrediction from "../../components/newbornPrediction/newbornPrediction";
 import { returnNewbornPredictionData } from "../../utils/helpers/newbornPredictionHelpers";
-import runPrediction from "../../tensorflow/tensorflow";
+
 import { returnNewbornChartData } from "../../utils/helpers/newbornChartHelpers";
 
 class NewBornRecord extends Component {
@@ -26,7 +26,13 @@ class NewBornRecord extends Component {
   }
 
   render() {
-    const { newbornInfoLoading, newbornInfo } = this.props;
+    const {
+      newbornInfoLoading,
+      newbornPredictionLoading,
+      newbornPrediction,
+      newbornInfo
+    } = this.props;
+    console.log(newbornPrediction);
     return (
       <React.Fragment>
         <FlexContainer>
@@ -37,12 +43,17 @@ class NewBornRecord extends Component {
           <FlexContainer direction="column" flex="1">
             <NewbornRecordGraph
               newbornInfoLoading={newbornInfoLoading}
-              newbornInfo={returnNewbornChartData(this.props.newbornInfo)}
+              newbornInfo={returnNewbornChartData(
+                newbornInfo,
+                newbornPrediction
+              )}
             />
             <NewBornRecordPrediction
-              newbornInfoLoading={newbornInfoLoading}
+              newbornPredictionLoading={newbornPredictionLoading}
               onPredictionClick={() => {
-                runPrediction(returnNewbornPredictionData(newbornInfo));
+                this.props.runPrediction(
+                  returnNewbornPredictionData(newbornInfo)
+                );
               }}
             />
           </FlexContainer>
@@ -60,7 +71,9 @@ NewBornRecord.propTypes = {
 
 const mapStateToProps = state => ({
   newbornInfo: state.newBornReducer.newbornInfo,
-  newbornInfoLoading: state.newBornReducer.newbornInfoLoading
+  newbornInfoLoading: state.newBornReducer.newbornInfoLoading,
+  newbornPrediction: state.predictionReducer.newbornPrediction,
+  newbornPredictionLoading: state.predictionReducer.newbornPredictionLoading
 });
 
 export default withAuthenticator(

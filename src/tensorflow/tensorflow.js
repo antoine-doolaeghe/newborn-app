@@ -95,7 +95,7 @@ export const testModel = (model, inputData, normalizationData) => {
     return [unNormXs.dataSync(), unNormPreds.dataSync()];
   });
 
-  inputData.push(xs);
+  return xs;
 };
 
 export default async data => {
@@ -106,5 +106,5 @@ export default async data => {
   // Train the model
   await trainModel(model, inputs, labels);
 
-  testModel(model, data, tensorData);
+  return testModel(model, data, tensorData);
 };
