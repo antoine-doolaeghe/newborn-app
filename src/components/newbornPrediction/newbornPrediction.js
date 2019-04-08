@@ -5,7 +5,7 @@ import { NewbornPredictionContainer } from "./newbornPrediction.style";
 function NewbornPrediction(props) {
   const { newbornPredictionLoading, onPredictionClick } = props;
   return (
-    <NewbornPredictionContainer>
+    <NewbornPredictionContainer data-testid="newbornRecordPrediction">
       {newbornPredictionLoading ? (
         <CircularProgress />
       ) : (

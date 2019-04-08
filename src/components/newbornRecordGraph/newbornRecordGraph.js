@@ -9,7 +9,7 @@ const NewbornRecordGraph = props => {
   const { newbornInfo } = props;
 
   return (
-    <NewBornRecordGraphContainer>
+    <NewBornRecordGraphContainer data-testid="newbornRecordGraph">
       {props.newbornInfoLoading ? (
         <CircularProgress />
       ) : (

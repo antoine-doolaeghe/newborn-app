@@ -49,18 +49,20 @@ class NewBornRecord extends Component {
       <React.Fragment>
         <FlexContainer>
           <FlexContainer direction="column" flex="2">
-            <NewbornRecordHeader />
-            <NewBornRecord3dModel />
+            <NewbornRecordHeader data-testid="newbornRecordHeader" />
+            <NewBornRecord3dModel data-testid="newbornRecord3dModel" />
           </FlexContainer>
           <FlexContainer direction="column" flex="1">
             <NewbornRecordGraph
               newbornInfoLoading={newbornInfoLoading}
+              data-testid="newbornRecordGraph"
               newbornInfo={returnNewbornChartData(
                 newbornInfo,
                 newbornPrediction
               )}
             />
             <NewBornRecordPrediction
+              data-testid="newBornRecordPrediction"
               newbornPredictionLoading={newbornPredictionLoading}
               onPredictionClick={this.startPredictionTraining}
             />
