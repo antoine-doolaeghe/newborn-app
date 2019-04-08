@@ -31,8 +31,7 @@ export const returnNewbornChartData = (newbornData, predictionData) => {
 
   if (predictionData) {
     datasets.datasets.push({
-      label: "predicationData",
-      color: "red",
+      label: "prediction data",
       backgroundColor: ["red"],
       data: predictionData
     });
@@ -41,9 +40,8 @@ export const returnNewbornChartData = (newbornData, predictionData) => {
   datasets.datasets.push({
     data,
     backgroundColor: ["white"],
-    label: "date"
+    label: "summary data"
   });
-  console.log(datasets);
 
   return datasets;
 };

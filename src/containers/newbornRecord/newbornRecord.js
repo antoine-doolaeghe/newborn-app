@@ -19,11 +19,23 @@ import { returnNewbornChartData } from "../../utils/helpers/newbornChartHelpers"
 
 class NewBornRecord extends Component {
   componentWillMount() {
-    const { newbornInfo, fetchNewborn, match } = this.props;
+    const {
+      newbornInfo,
+      fetchNewborn,
+      match,
+      resetNewbornPrediction
+    } = this.props;
+    resetNewbornPrediction();
     if (!newbornInfo || newbornInfo.id !== match.params.id) {
       fetchNewborn(match.params.id, 100);
     }
   }
+
+  startPredictionTraining = () => {
+    const { newbornInfo, startPredictionTraining } = this.props;
+    const predictionData = returnNewbornPredictionData(newbornInfo);
+    startPredictionTraining(predictionData);
+  };
 
   render() {
     const {
@@ -32,7 +44,7 @@ class NewBornRecord extends Component {
       newbornPrediction,
       newbornInfo
     } = this.props;
-    console.log(newbornPrediction);
+
     return (
       <React.Fragment>
         <FlexContainer>
@@ -50,11 +62,7 @@ class NewBornRecord extends Component {
             />
             <NewBornRecordPrediction
               newbornPredictionLoading={newbornPredictionLoading}
-              onPredictionClick={() => {
-                this.props.runPrediction(
-                  returnNewbornPredictionData(newbornInfo)
-                );
-              }}
+              onPredictionClick={this.startPredictionTraining}
             />
           </FlexContainer>
         </FlexContainer>

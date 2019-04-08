@@ -3,18 +3,13 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { NewbornPredictionContainer } from "./newbornPrediction.style";
 
 function NewbornPrediction(props) {
+  const { newbornPredictionLoading, onPredictionClick } = props;
   return (
     <NewbornPredictionContainer>
-      {props.newbornPredictionLoading ? (
+      {newbornPredictionLoading ? (
         <CircularProgress />
       ) : (
-        <button
-          onClick={() => {
-            props.onPredictionClick();
-          }}
-        >
-          heloo
-        </button>
+        <button onClick={onPredictionClick}>heloo</button>
       )}
     </NewbornPredictionContainer>
   );
