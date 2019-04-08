@@ -1,13 +1,16 @@
-import React from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { NewbornPredictionContainer } from './newbornPrediction.style';
+import React from "react";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { NewbornPredictionContainer } from "./newbornPrediction.style";
 
-function NewbornPrediction() {
+function NewbornPrediction(props) {
+  const { newbornPredictionLoading, onPredictionClick } = props;
   return (
-    <NewbornPredictionContainer>
-      {true && //props.newbornInfoLoading ? 
+    <NewbornPredictionContainer data-testid="newbornRecordPrediction">
+      {newbornPredictionLoading ? (
         <CircularProgress />
-      }
+      ) : (
+        <button onClick={onPredictionClick}>heloo</button>
+      )}
     </NewbornPredictionContainer>
   );
 }

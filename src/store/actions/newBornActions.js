@@ -1,3 +1,4 @@
+import { API, graphqlOperation } from "aws-amplify";
 import {
   ADD_NEWBORN_TO_USER_REQUEST,
   ADD_NEWBORN_TO_USER_FAILURE,
@@ -27,13 +28,15 @@ import {
 
 import * as queries from "../../graphql/queries";
 import * as mutation from "../../graphql/mutations";
-import { API, graphqlOperation } from "aws-amplify";
 
-export const fetchNewborns = () => async dispatch => {
+export const fetchNewborns = newbornSummaryStepLimit => async dispatch => {
   dispatch({ type: FETCH_NEWBORNS_REQUEST });
   try {
     const newBornListresponse = await API.graphql(
-      graphqlOperation(queries.listNewborns, { limit: 100 })
+      graphqlOperation(queries.listNewborns, {
+        limit: 100,
+        stepLimit: newbornSummaryStepLimit
+      })
     );
     dispatch({
       type: FETCH_NEWBORNS_SUCCESS,
@@ -45,11 +48,17 @@ export const fetchNewborns = () => async dispatch => {
   }
 };
 
-export const fetchNewborn = newbornId => async dispatch => {
+export const fetchNewborn = (
+  newbornId,
+  newbornSummaryStepLimit
+) => async dispatch => {
   dispatch({ type: FETCH_NEWBORN_REQUEST });
   try {
     const newBornResponse = await API.graphql(
-      graphqlOperation(queries.getNewborn, { id: newbornId })
+      graphqlOperation(queries.getNewborn, {
+        id: newbornId,
+        stepLimit: newbornSummaryStepLimit
+      })
     );
     dispatch({
       type: FETCH_NEWBORN_SUCCESS,
@@ -137,13 +146,15 @@ export const fetchNewbornEpisode = episodeId => async dispatch => {
 
 export const updateNewbornOwnership = (
   newbornId,
-  currentUserId
+  currentUserId,
+  newbornSummaryStepLimit
 ) => async dispatch => {
   dispatch({ type: ADD_NEWBORN_TO_USER_REQUEST });
   try {
     const updateNewbornOwnershipResponse = await API.graphql(
       graphqlOperation(mutation.updateNewborn, {
-        input: { id: newbornId, newbornOwnerId: currentUserId }
+        input: { id: newbornId, newbornOwnerId: currentUserId },
+        stepLimit: newbornSummaryStepLimit
       })
     );
     dispatch({

@@ -1,6 +1,6 @@
 import React from "react";
 import "jest-dom/extend-expect";
-import { fireEvent, cleanup } from "react-testing-library";
+import { cleanup } from "react-testing-library";
 import NewbornList from "../newbornList";
 import { renderWithReduxAndRouter } from "../../../utils/tests/integrations";
 

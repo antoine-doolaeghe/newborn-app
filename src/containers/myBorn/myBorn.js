@@ -4,6 +4,7 @@ import React, { Component, Fragment } from "react";
 import { withAuthenticator } from "aws-amplify-react";
 import withMenuDrawer from "../../components/menuDrawer/withMenuDrawer";
 import withHeader from "../header/withHeader";
+import { returnNewbornChartData } from "../../utils/helpers/newbornChartHelpers";
 
 import MyBornJss from "./myBorn_jss";
 import PropTypes from "prop-types";
@@ -68,7 +69,7 @@ class MyBorn extends Component {
         bornPlace: newborn.bornPlace || "unknown region",
         isHovered: hoveredNewborn === newborn.id,
         isOwnedByCurrentUser: true,
-        summaries: {}
+        summaries: returnNewbornChartData(newborn)
       };
 
       newbornCardList.push(

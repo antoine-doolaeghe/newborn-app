@@ -1,18 +1,17 @@
-import * as actions from "../../store/actions";
-
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import AppBar from "@material-ui/core/AppBar";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import PropTypes from "prop-types";
 import React from "react";
 import Toolbar from "@material-ui/core/Toolbar";
-import styles from "./header_jss";
 import { withStyles } from "@material-ui/core/styles";
 
 import { Auth } from "aws-amplify";
+import styles from "./header_jss";
+import * as actions from "../../store/actions";
 
 class Header extends React.Component {
   state = {

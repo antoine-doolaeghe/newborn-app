@@ -1,10 +1,9 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
-import { NewbornCard, NewbornCardBuyButton } from "./newbornCard.style";
 import CardHeader from "@material-ui/core/CardHeader";
 import Avatar from "@material-ui/core/Avatar";
 import { Line } from "react-chartjs-2";
 import { Link } from "react-router-dom";
+import { NewbornCard, NewbornCardBuyButton } from "./newbornCard.style";
 import lineChartOptions from "./lineChartOptions";
 
 function NewBornCard(props) {
@@ -14,6 +13,7 @@ function NewBornCard(props) {
     handleNewbornSelect,
     onBuyClick
   } = props;
+
   return (
     <NewbornCard
       onClick={handleNewbornSelect}
@@ -32,7 +32,7 @@ function NewBornCard(props) {
         />
       </Link>
       <Line
-        options={lineChartOptions}
+        options={lineChartOptions(newbornInfo.min)}
         data={newbornInfo.summaries}
         height={192}
       />
