@@ -94,7 +94,7 @@ export const listGenerations = `query ListGenerations(
   }
 }
 `;
-export const getNewborn = `query GetNewborn($id: ID!) {
+export const getNewborn = `query GetNewborn($id: ID!, $stepLimit: Int) {
   getNewborn(id: $id) {
     bio
     bornPlace
@@ -114,7 +114,7 @@ export const getNewborn = `query GetNewborn($id: ID!) {
         cellPositions
         episodes {
           items {
-            steps {
+            steps(limit: $stepLimit) {
               items {
                 meanReward
                 standardReward

@@ -11,7 +11,6 @@ import { Grid, GridContainer, FlexContainer } from "../../theme/grid.style";
 import NewBornCard from "../../components/newbornCard/newbornCard";
 import newBornListJss from "./newbornList_jss";
 import * as actions from "../../store/actions";
-import runPrediction from "../../tensorflow/tensorflow";
 
 class List extends Component {
   constructor(props) {

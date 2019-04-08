@@ -7,7 +7,7 @@ export default minValue => {
     scales: {
       xAxes: [
         {
-          display: false // this will remove all the x-axis grid lines
+          display: false
         }
       ],
       yAxes: [
@@ -18,7 +18,7 @@ export default minValue => {
             suggestedMax: 10,
             beginAtZero: false
           },
-          display: false // this will remove all the x-axis grid lines
+          display: false
         }
       ]
     }

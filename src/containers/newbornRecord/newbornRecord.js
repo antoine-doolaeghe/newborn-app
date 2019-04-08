@@ -14,23 +14,16 @@ import NewbornRecordHeader from "../../components/newbornRecordHeader/newbornRec
 import NewBornRecord3dModel from "../../components/newbornRecord3dModel/newbornRecord3dModel";
 import NewBornRecordPrediction from "../../components/newbornPrediction/newbornPrediction";
 import { returnNewbornPredictionData } from "../../utils/helpers/newbornPredictionHelpers";
-import runPredction from "../../tensorflow/tensorflow";
+import runPrediction from "../../tensorflow/tensorflow";
+import { returnNewbornChartData } from "../../utils/helpers/newbornChartHelpers";
 
 class NewBornRecord extends Component {
   componentWillMount() {
     const { newbornInfo, fetchNewborn, match } = this.props;
     if (!newbornInfo || newbornInfo.id !== match.params.id) {
-      fetchNewborn(match.params.id);
+      fetchNewborn(match.params.id, 100);
     }
   }
-
-  returnNewbornInfos = () =>
-    this.props.newbornInfo ? this.props.newbornInfo : {};
-
-  returnNewbornGenerations = () => {
-    const { items } = this.returnNewbornInfos().generations || { items: [] };
-    return items;
-  };
 
   render() {
     const { newbornInfoLoading, newbornInfo } = this.props;
@@ -44,12 +37,12 @@ class NewBornRecord extends Component {
           <FlexContainer direction="column" flex="1">
             <NewbornRecordGraph
               newbornInfoLoading={newbornInfoLoading}
-              newbornGenerations={this.returnNewbornGenerations()}
+              newbornInfo={returnNewbornChartData(this.props.newbornInfo)}
             />
             <NewBornRecordPrediction
               newbornInfoLoading={newbornInfoLoading}
               onPredictionClick={() => {
-                runPredction(returnNewbornPredictionData(newbornInfo));
+                runPrediction(returnNewbornPredictionData(newbornInfo));
               }}
             />
           </FlexContainer>

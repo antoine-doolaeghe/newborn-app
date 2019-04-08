@@ -47,3 +47,6 @@ export const FETCH_USER_NEWBORNS_REQUEST = "fetch_user_newborns_request";
 export const FETCH_USER_NEWBORNS_SUCCESS = "fetch_user_newborns_success";
 export const FETCH_USER_NEWBORNS_FAILURE = "fetch_user_newborns_failure";
 export const SERVICE_ERROR = "service_error";
+
+export const NEWBORN_PREDICTION_REQUEST = "newborn_prediction_request";
+export const NEWBORN_PREDICTION_SUCCESS = "newborn_prediction_success";

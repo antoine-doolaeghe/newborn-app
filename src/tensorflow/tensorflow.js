@@ -68,7 +68,7 @@ export const trainModel = async (model, inputs, labels) => {
   });
 
   const batchSize = 28;
-  const epochs = 50;
+  const epochs = 130;
 
   return await model.fit(inputs, labels, {
     batchSize,
@@ -95,17 +95,7 @@ export const testModel = (model, inputData, normalizationData) => {
     return [unNormXs.dataSync(), unNormPreds.dataSync()];
   });
 
-  console.log(xs, preds);
-
-  // const predictedPoints = Array.from(xs).map((val, i) => ({
-  //   x: val,
-  //   y: preds[i]
-  // }));
-
-  // const originalPoints = inputData.map(d => ({
-  //   x: d.horsepower,
-  //   y: d.mpg
-  // }));
+  inputData.push(xs);
 };
 
 export default async data => {
@@ -115,12 +105,6 @@ export default async data => {
   const model = createModel();
   // Train the model
   await trainModel(model, inputs, labels);
-  console.log("Done Training");
+
   testModel(model, data, tensorData);
 };
-
-// // Create the model
-// const model = createModel();
-// tfvis.show.modelSummary({ name: 'Model Summary' }, model);
-
-// document.addEventListener("DOMContentLoaded", run);
