@@ -1,17 +1,17 @@
-import * as actions from "../../store/actions";
-
 import React, { Component, Fragment } from "react";
 import { withAuthenticator } from "aws-amplify-react";
+import PropTypes from "prop-types";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import connect from "react-redux/es/connect/connect";
+import { withStyles } from "@material-ui/core/styles";
+import * as actions from "../../store/actions";
+
 import withMenuDrawer from "../../components/menuDrawer/withMenuDrawer";
 import withHeader from "../header/withHeader";
 import { returnNewbornChartData } from "../../utils/helpers/newbornChartHelpers";
 
 import MyBornJss from "./myBorn_jss";
-import PropTypes from "prop-types";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { Grid, GridContainer, FlexContainer } from "../../theme/grid.style";
-import connect from "react-redux/es/connect/connect";
-import { withStyles } from "@material-ui/core/styles";
 import NewBornCard from "../../components/newbornCard/newbornCard";
 
 class MyBorn extends Component {
@@ -48,9 +48,12 @@ class MyBorn extends Component {
   handleOnBuyClick = event => {
     const { currentUser, fetchCurrentUserNewborns } = this.props;
     const newbornId = event.target.closest("section").dataset.newbornid;
-    this.props
-      .updateNewbornOwnership(newbornId, null)
-      .then(fetchCurrentUserNewborns(currentUser.attributes.sub));
+    fetch(`http://localhost:5000/run?newborn_id=${newbornId}`).then(res =>
+      console.log(res.json())
+    );
+    // this.props
+    //   .updateNewbornOwnership(newbornId, null)
+    //   .then(fetchCurrentUserNewborns(currentUser.attributes.sub));
   };
 
   handleNewbornHover = event => {
