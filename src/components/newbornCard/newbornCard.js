@@ -23,14 +23,13 @@ function NewBornCard(props) {
       isNewbornOwnedByCurrentUser={newbornInfo.isOwnedByCurrentUser}
       data-testid="newbornCard"
     >
-      <Link to={`./newborn-record/${newbornInfo.id}`}>
-        <CardHeader
-          avatar={<Avatar aria-label="Recipe" />}
-          title={newbornInfo.name}
-          subheader={newbornInfo.bornPlace}
-          data-testid="newbornHeader"
-        />
-      </Link>
+      <CardHeader
+        avatar={<Avatar aria-label="Recipe" />}
+        title={newbornInfo.name}
+        subheader={newbornInfo.bornPlace}
+        data-testid="newbornHeader"
+      />
+
       <Line
         options={lineChartOptions(newbornInfo.min)}
         data={newbornInfo.summaries}
