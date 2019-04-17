@@ -48,12 +48,9 @@ class MyBorn extends Component {
   handleOnBuyClick = event => {
     const { currentUser, fetchCurrentUserNewborns } = this.props;
     const newbornId = event.target.closest("section").dataset.newbornid;
-    fetch(`http://localhost:5000/run?newborn_id=${newbornId}`).then(res =>
-      console.log(res.json())
-    );
-    // this.props
-    //   .updateNewbornOwnership(newbornId, null)
-    //   .then(fetchCurrentUserNewborns(currentUser.attributes.sub));
+    this.props
+      .updateNewbornOwnership(newbornId, null)
+      .then(fetchCurrentUserNewborns(currentUser.attributes.sub));
   };
 
   handleNewbornHover = event => {
