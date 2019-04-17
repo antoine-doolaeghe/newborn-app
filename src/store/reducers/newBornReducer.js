@@ -9,9 +9,6 @@ import {
   FETCH_NEWBORN_REQUEST,
   FETCH_NEWBORN_SUCCESS,
   RESET_NEWBORN,
-  FETCH_NEWBORN_GENERATION_REQUEST,
-  FETCH_NEWBORN_GENERATION_SUCCESS,
-  RESET_NEWBORN_GENERATION,
   FETCH_NEWBORN_EPISODES_SUCCESS,
   FETCH_NEWBORN_EPISODES_REQUEST,
   FETCH_NEWBORN_EPISODE_SUCCESS,
@@ -23,9 +20,6 @@ const initialState = {
   newbornList: [],
   newbornInfo: null,
   newbornInfoLoading: false,
-  newbornGenerationList: [],
-  newbornGenerationLoading: false,
-  newbornGeneration: null,
   newbornEpisode: null,
   newbornEpisodeList: [],
   newbornListLoading: false,
@@ -84,23 +78,6 @@ export default (state = initialState, action) => {
         ...state,
         newbornInfo: initialState.newbornInfo,
         newbornInfoLoading: false
-      };
-    case FETCH_NEWBORN_GENERATION_REQUEST:
-      return {
-        ...state,
-        newbornGenerationLoading: true
-      };
-    case FETCH_NEWBORN_GENERATION_SUCCESS:
-      return {
-        ...state,
-        newbornGeneration: action.payload,
-        newbornGenerationLoading: false
-      };
-    case RESET_NEWBORN_GENERATION:
-      return {
-        ...state,
-        newbornGeneration: null,
-        newbornGenerationLoading: false
       };
     case FETCH_NEWBORN_EPISODES_SUCCESS:
       return {

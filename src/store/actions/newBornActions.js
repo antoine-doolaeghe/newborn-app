@@ -10,13 +10,6 @@ import {
   FETCH_NEWBORN_FAILURE,
   FETCH_NEWBORN_SUCCESS,
   RESET_NEWBORN,
-  FETCH_NEWBORN_GENERATIONS_REQUEST,
-  FETCH_NEWBORN_GENERATIONS_FAILURE,
-  FETCH_NEWBORN_GENERATIONS_SUCCESS,
-  FETCH_NEWBORN_GENERATION_REQUEST,
-  FETCH_NEWBORN_GENERATION_FAILURE,
-  FETCH_NEWBORN_GENERATION_SUCCESS,
-  RESET_NEWBORN_GENERATION,
   FETCH_NEWBORN_EPISODES_REQUEST,
   FETCH_NEWBORN_EPISODES_FAILURE,
   FETCH_NEWBORN_EPISODES_SUCCESS,
@@ -72,44 +65,6 @@ export const fetchNewborn = (
 
 export const resetNewborn = () => dispatch => {
   dispatch({ type: RESET_NEWBORN });
-};
-
-export const fetchNewbornGenerations = () => async dispatch => {
-  dispatch({ type: FETCH_NEWBORN_GENERATIONS_REQUEST });
-  try {
-    const newBornGenerationListResponse = await API.graphql(
-      graphqlOperation(queries.listGenerations, {
-        filter: { id: { eq: "helo" } }
-      })
-    );
-    dispatch({
-      type: FETCH_NEWBORN_GENERATIONS_SUCCESS,
-      payload: newBornGenerationListResponse.data
-    });
-  } catch (error) {
-    dispatch({ type: FETCH_NEWBORN_GENERATIONS_FAILURE });
-    throw new Error("Could not request the born episodes");
-  }
-};
-
-export const fetchNewbornGeneration = generationId => async dispatch => {
-  dispatch({ type: FETCH_NEWBORN_GENERATION_REQUEST });
-  try {
-    const newBornGenerationResponse = await API.graphql(
-      graphqlOperation(queries.getGeneration, { id: generationId })
-    );
-    dispatch({
-      type: FETCH_NEWBORN_GENERATION_SUCCESS,
-      payload: newBornGenerationResponse.data.getGeneration
-    });
-  } catch (error) {
-    dispatch({ type: FETCH_NEWBORN_GENERATION_FAILURE });
-    throw new Error("Could not request the born generation");
-  }
-};
-
-export const resetGeneration = () => dispatch => {
-  dispatch({ type: RESET_NEWBORN_GENERATION });
 };
 
 export const fetchNewbornEpisodes = () => async dispatch => {

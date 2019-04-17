@@ -72,6 +72,24 @@ export const getGeneration = `query GetGeneration($id: ID!) {
         name
         parents
         partners
+        models {
+        items {
+          id
+          cellInfos
+          cellPositions
+          episodes {
+            items {
+              steps(limit: $stepLimit) {
+                items {
+                  meanReward
+                  standardReward
+                  step
+                }
+              }
+            }
+          }
+        }
+      }
       }
       nextToken
     }
@@ -162,24 +180,6 @@ export const listNewborns = `query ListNewborns(
       }
       hexColor
       id
-      models {
-        items {
-          id
-          cellInfos
-          cellPositions
-          episodes {
-            items {
-              steps(limit: $stepLimit) {
-                items {
-                  meanReward
-                  standardReward
-                  step
-                }
-              }
-            }
-          }
-        }
-      }
       name
       owner {
         id

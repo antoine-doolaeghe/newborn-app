@@ -27,10 +27,12 @@ class List extends Component {
   }
 
   renderNewbornGeneration = () => {
+    const newbornCardList = this.returnNewbornCardList();
+
     return (
       <React.Fragment>
-        <Grid columnNumber={this.renderCells().length} rowNumber={1}>
-          {this.renderCells()}
+        <Grid columnNumber={newbornCardList.length} rowNumber={1}>
+          {newbornCardList}
         </Grid>
       </React.Fragment>
     );
@@ -59,7 +61,30 @@ class List extends Component {
     });
   };
 
-  renderCells() {
+  renderEmptyBornsIllustration = () => (
+    <img src="./images/no-borns.svg" alt="no borns" />
+  );
+
+  returnNewbornInfo = (
+    newborn,
+    selectedNewborns,
+    hoveredNewborn,
+    currentUserId
+  ) => {
+    const newbornInfo = {
+      name: newborn.name || "",
+      id: newborn.id || "",
+      bornPlace: newborn.bornPlace || "unknown region",
+      isSelected: selectedNewborns.includes(newborn.id),
+      isHovered: hoveredNewborn === newborn.id,
+      isOwnedByCurrentUser:
+        newborn.owner && newborn.owner.id && newborn.owner.id === currentUserId,
+      summaries: returnNewbornChartData(newborn)
+    };
+    return newbornInfo;
+  };
+
+  returnNewbornCardList() {
     const newbornCardList = [];
     const { newbornList, currentUserId } = this.props;
     const {
@@ -68,18 +93,12 @@ class List extends Component {
       newbornSummaryStepLimit
     } = this.state;
     newbornList.forEach((newborn, newbornKey) => {
-      const newbornInfo = {
-        name: newborn.name || "",
-        id: newborn.id || "",
-        bornPlace: newborn.bornPlace || "unknown region",
-        isSelected: selectedNewborns.includes(newborn.id),
-        isHovered: hoveredNewborn === newborn.id,
-        isOwnedByCurrentUser:
-          newborn.owner &&
-          newborn.owner.id &&
-          newborn.owner.id === currentUserId,
-        summaries: returnNewbornChartData(newborn)
-      };
+      const newbornInfo = this.returnNewbornInfo(
+        newborn,
+        selectedNewborns,
+        hoveredNewborn,
+        currentUserId
+      );
 
       newbornCardList.push(
         <NewBornCard
@@ -116,11 +135,9 @@ class List extends Component {
         ) : (
           <Fragment>
             <GridContainer align="left">
-              {hasNewborns ? (
-                this.renderNewbornGeneration()
-              ) : (
-                <img src="./images/no-borns.svg" alt="no borns" />
-              )}
+              {hasNewborns
+                ? this.renderNewbornGeneration()
+                : this.renderEmptyBornsIllustration()}
             </GridContainer>
           </Fragment>
         )}
