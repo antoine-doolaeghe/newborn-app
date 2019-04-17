@@ -3,9 +3,9 @@ import {
   FETCH_GENERATIONS_REQUEST,
   FETCH_GENERATIONS_FAILURE,
   FETCH_GENERATIONS_SUCCESS,
-  FETCH_GENERATION_REQUEST,
-  FETCH_GENERATION_FAILURE,
-  FETCH_GENERATION_SUCCESS
+  FETCH_PARENT_GENERATION_REQUEST,
+  FETCH_PARENT_GENERATION_FAILURE,
+  FETCH_PARENT_GENERATION_SUCCESS
 } from "./helpers/types";
 
 import * as queries from "../../graphql/queries";
@@ -22,24 +22,28 @@ export const fetchGenerations = () => async dispatch => {
     });
   } catch (error) {
     dispatch({ type: FETCH_GENERATIONS_SUCCESS });
-    throw new Error("Could not load the generation list");
+    throw new Error(
+      "Oops, there has been an issue when loading the list of newborn generation"
+    );
   }
 };
 
-export const fetchGeneration = generationID => async dispatch => {
-  dispatch({ type: FETCH_GENERATION_REQUEST });
+export const fetchParentGeneration = generationID => async dispatch => {
+  dispatch({ type: FETCH_PARENT_GENERATION_REQUEST });
   try {
-    const newBornResponse = await API.graphql(
-      graphqlOperation(queries.getNewborn, {
+    const parentGenerationResponse = await API.graphql(
+      graphqlOperation(queries.getGeneration, {
         id: generationID
       })
     );
     dispatch({
-      type: FETCH_GENERATION_SUCCESS,
-      payload: newBornResponse.data.getNewborn
+      type: FETCH_PARENT_GENERATION_SUCCESS,
+      payload: parentGenerationResponse.data.getGeneration
     });
   } catch (error) {
-    dispatch({ type: FETCH_GENERATION_FAILURE });
-    throw new Error("Could not request the generation");
+    dispatch({ type: FETCH_PARENT_GENERATION_FAILURE });
+    throw new Error(
+      "Oops, there has been an issue when loading parent generation"
+    );
   }
 };

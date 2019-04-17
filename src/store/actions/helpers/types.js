@@ -2,9 +2,12 @@ export const FETCH_GENERATIONS_REQUEST = "fetch_generations_request";
 export const FETCH_GENERATIONS_SUCCESS = "fetch_generations_success";
 export const FETCH_GENERATIONS_FAILURE = "fetch_generations_failure";
 
-export const FETCH_GENERATION_REQUEST = "fetch_generation_request";
-export const FETCH_GENERATION_SUCCESS = "fetch_generation_success";
-export const FETCH_GENERATION_FAILURE = "fetch_generation_failure";
+export const FETCH_PARENT_GENERATION_REQUEST =
+  "fetch_parent_generation_request";
+export const FETCH_PARENT_GENERATION_SUCCESS =
+  "fetch_parent_generation_success";
+export const FETCH_PARENT_GENERATION_FAILURE =
+  "fetch_parent_generation_failure";
 
 export const FETCH_NEWBORNS_REQUEST = "fetch_newborns_request";
 export const FETCH_NEWBORNS_SUCCESS = "fetch_newborns_success";

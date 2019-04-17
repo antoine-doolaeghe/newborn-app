@@ -3,15 +3,15 @@
 import {
   FETCH_GENERATIONS_REQUEST,
   FETCH_GENERATIONS_SUCCESS,
-  FETCH_GENERATION_REQUEST,
-  FETCH_GENERATION_SUCCESS
+  FETCH_PARENT_GENERATION_REQUEST,
+  FETCH_PARENT_GENERATION_SUCCESS
 } from "../actions/helpers/types";
 
 const initialState = {
   generationList: [],
   generationListLoading: false,
-  currentGeneration: {},
-  currentGenerationLoading: false
+  parentGeneration: {},
+  parentGenerationLoading: false
 };
 
 export default (state = initialState, action) => {
@@ -28,17 +28,17 @@ export default (state = initialState, action) => {
         isAddNewbornToUserLoading: true
       };
 
-    case FETCH_GENERATION_REQUEST:
+    case FETCH_PARENT_GENERATION_REQUEST:
       return {
         ...state,
-        currentGenerationLoading: true
+        parentGenerationLoading: true
       };
 
-    case FETCH_GENERATION_SUCCESS:
+    case FETCH_PARENT_GENERATION_SUCCESS:
       return {
         ...state,
-        currentGenerationLoading: false,
-        currentGeneration: action.payload
+        parentGenerationLoading: false,
+        parentGeneration: action.payload
       };
 
     default:

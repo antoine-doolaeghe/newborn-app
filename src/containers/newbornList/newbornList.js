@@ -8,6 +8,7 @@ import withWidth from "@material-ui/core/withWidth";
 import { returnNewbornChartData } from "../../utils/helpers/newbornChartHelpers";
 
 import { Grid, GridContainer, FlexContainer } from "../../theme/grid.style";
+import { ErrorDialog } from "../../theme/error.style";
 import NewBornCard from "../../components/newbornCard/newbornCard";
 import newBornListJss from "./newbornList_jss";
 import * as actions from "../../store/actions";
@@ -17,13 +18,27 @@ class List extends Component {
     super(props);
     this.state = {
       selectedNewborns: [],
-      newbornSummaryStepLimit: 100
+      isErrorOpen: false,
+      errorMessage: ""
     };
   }
 
   componentDidMount() {
-    const { newbornSummaryStepLimit } = this.state;
-    this.props.fetchNewborns(newbornSummaryStepLimit);
+    const { fetchGenerations } = this.props;
+    fetchGenerations().catch(error => {
+      const isErrorOpen = true;
+      this.setState({ isErrorOpen, errorMessage: error.message });
+    });
+  }
+
+  componentDidUpdate(nextProps) {
+    const { generationList, fetchParentGeneration } = this.props;
+    if (
+      generationList !== nextProps.generationList &&
+      nextProps.generationList.length > 0
+    ) {
+      fetchParentGeneration(nextProps.generationList.id);
+    }
   }
 
   renderNewbornGeneration = () => {
@@ -121,11 +136,16 @@ class List extends Component {
   }
 
   render() {
-    const { newbornListLoading, newbornList } = this.props;
-    const hasNewborns = newbornList.length > 0;
+    const {
+      parentGenerationLoading,
+      generationListLoading,
+      generationList
+    } = this.props;
+    const { isErrorOpen, errorMessage } = this.state;
+    const hasNewborns = generationList.length > 0;
     return (
       <React.Fragment>
-        {newbornListLoading ? (
+        {generationListLoading || parentGenerationLoading ? (
           <FlexContainer>
             <CircularProgress
               variant="indeterminate"
@@ -141,20 +161,29 @@ class List extends Component {
             </GridContainer>
           </Fragment>
         )}
+        <ErrorDialog open={isErrorOpen} message={errorMessage} />
       </React.Fragment>
     );
   }
 }
 
 List.propTypes = {
-  classes: PropTypes.object.isRequired
+  generationListLoading: PropTypes.bool.isRequired,
+  fetchGenerations: PropTypes.func.isRequired,
+  fetchParentGeneration: PropTypes.func.isRequired,
+  generationList: PropTypes.array.isRequired,
+  updateNewbornOwnership: PropTypes.func.isRequired,
+  parentGenerationLoading: PropTypes.func.isRequired,
+  parentGeneration: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   currentUser: state.userReducer.currentUser,
   currentUserId: state.userReducer.currentUserId,
-  newbornList: state.newBornReducer.newbornList,
-  newbornListLoading: state.newBornReducer.newbornListLoading,
+  generationList: state.generationReducer.generationList,
+  generationListLoading: state.generationReducer.generationListLoading,
+  parentGeneration: state.generationReducer.parentGeneration,
+  parentGenerationLoading: state.generationReducer.parentGenerationLoading,
   isAddNewbornToUserLoading: state.newBornReducer.isAddNewbornToUserLoading
 });
 
