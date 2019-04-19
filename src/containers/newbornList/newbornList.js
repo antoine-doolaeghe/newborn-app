@@ -19,7 +19,8 @@ class List extends Component {
     this.state = {
       selectedNewborns: [],
       isErrorOpen: false,
-      errorMessage: ""
+      errorMessage: "",
+      parentGenerationIndex: 0
     };
   }
 
@@ -31,13 +32,16 @@ class List extends Component {
     });
   }
 
-  componentDidUpdate(nextProps) {
+  componentDidUpdate(prevProps) {
+    // if selected newborn length is 2
     const { generationList, fetchParentGeneration } = this.props;
     if (
-      generationList !== nextProps.generationList &&
-      nextProps.generationList.length > 0
+      generationList !== prevProps.generationList &&
+      generationList.length > 0
     ) {
-      fetchParentGeneration(nextProps.generationList.id);
+      fetchParentGeneration(
+        generationList[this.state.parentGenerationIndex].id
+      );
     }
   }
 
@@ -101,13 +105,13 @@ class List extends Component {
 
   returnNewbornCardList() {
     const newbornCardList = [];
-    const { newbornList, currentUserId } = this.props;
+    const { parentGeneration, currentUserId } = this.props;
     const {
       selectedNewborns,
       hoveredNewborn,
       newbornSummaryStepLimit
     } = this.state;
-    newbornList.forEach((newborn, newbornKey) => {
+    parentGeneration.newborns.items.forEach((newborn, newbornKey) => {
       const newbornInfo = this.returnNewbornInfo(
         newborn,
         selectedNewborns,
@@ -139,10 +143,13 @@ class List extends Component {
     const {
       parentGenerationLoading,
       generationListLoading,
-      generationList
+      parentGeneration
     } = this.props;
     const { isErrorOpen, errorMessage } = this.state;
-    const hasNewborns = generationList.length > 0;
+    const hasNewborns =
+      parentGeneration.newborns && parentGeneration.newborns.items
+        ? parentGeneration.newborns.items.length > 0
+        : false;
     return (
       <React.Fragment>
         {generationListLoading || parentGenerationLoading ? (

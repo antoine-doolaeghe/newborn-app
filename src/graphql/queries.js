@@ -79,7 +79,7 @@ export const getGeneration = `query GetGeneration($id: ID!) {
           cellPositions
           episodes {
             items {
-              steps(limit: $stepLimit) {
+              steps {
                 items {
                   meanReward
                   standardReward

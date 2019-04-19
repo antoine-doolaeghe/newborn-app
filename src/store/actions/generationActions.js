@@ -17,11 +17,11 @@ export const fetchGenerations = () => async dispatch => {
       graphqlOperation(queries.listGenerations)
     );
     dispatch({
-      type: FETCH_GENERATIONS_FAILURE,
+      type: FETCH_GENERATIONS_SUCCESS,
       payload: generationListresponse.data.listGenerations.items
     });
   } catch (error) {
-    dispatch({ type: FETCH_GENERATIONS_SUCCESS });
+    dispatch({ type: FETCH_GENERATIONS_FAILURE });
     throw new Error(
       "Oops, there has been an issue when loading the list of newborn generation"
     );

@@ -23,9 +23,11 @@ export default (state = initialState, action) => {
       };
 
     case FETCH_GENERATIONS_SUCCESS:
+      console.log(action.payload);
       return {
         ...state,
-        isAddNewbornToUserLoading: true
+        generationListLoading: false,
+        generationList: action.payload
       };
 
     case FETCH_PARENT_GENERATION_REQUEST:
