@@ -4,7 +4,7 @@ export const GridContainer = styled.div`
   align-items: ${props => props.align || "center"};
   display: flex;
   height: 100%;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   overflow: scroll;
 `;
@@ -12,7 +12,6 @@ export const GridContainer = styled.div`
 export const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(${props => props.columnNumber || 0}, 280px);
-  grid-template-rows: 280px;
   grid-column-gap: 0px;
   grid-template-rows: repeat(${props => props.rowNumber || 0}, 280px);
   overflow-x: scroll;

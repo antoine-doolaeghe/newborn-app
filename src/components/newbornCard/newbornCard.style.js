@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const NewbornCard = styled.section`
-  border: 2px solid black;
+  border: ${props =>
+    !props.isPlaceholderCard ? "2px solid black" : "2px dashed black"};
   border-radius: 5px;
   height: 220px;
   position: relative;
