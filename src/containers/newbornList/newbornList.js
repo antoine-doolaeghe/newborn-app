@@ -2,8 +2,8 @@ import React, { Component, Fragment } from "react";
 import compose from "recompose/compose";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { returnInstructionTitle, isTooltipOpen } from "./newbornList_helpers";
 import { returnNewbornChartData } from "../../utils/helpers/newbornChartHelpers";
 
 import { Grid, GridContainer, FlexContainer } from "../../theme/grid.style";
@@ -18,8 +18,7 @@ class List extends Component {
       errorMessage: "",
       isErrorOpen: false,
       parentGenerationIndex: 0,
-      selectedNewborns: [],
-      intructionTitle: "Please select a newborn to filter"
+      selectedNewborns: []
     };
   }
 
@@ -31,8 +30,7 @@ class List extends Component {
     });
   }
 
-  componentDidUpdate(prevProps) {
-    // if selected newborn length is 2
+  componentDidUpdate(prevProps, prevState) {
     const { generationList, fetchParentGeneration } = this.props;
     if (
       generationList !== prevProps.generationList &&
@@ -106,14 +104,9 @@ class List extends Component {
 
   returnPlaceholderCardList = () => {
     const placeholderCardList = [];
-    const { intructionTitle } = this.state;
     for (let i = 0; i < 4; i += 1) {
       placeholderCardList.push(
-        <NewBornCard
-          isPlaceholderCard
-          newbornInfo={{}}
-          intructionTitle={intructionTitle}
-        />
+        <NewBornCard isPlaceholderCard newbornInfo={{}} tooltipOpen={false} />
       );
     }
     return placeholderCardList;
@@ -125,15 +118,19 @@ class List extends Component {
     const {
       hoveredNewborn,
       newbornSummaryStepLimit,
-      selectedNewborns,
-      intructionTitle
+      selectedNewborns
     } = this.state;
     parentGeneration.newborns.items.forEach((newborn, newbornKey) => {
+      const instructionTitle = returnInstructionTitle(selectedNewborns);
       const newbornInfo = this.returnNewbornInfo(
         newborn,
         selectedNewborns,
         hoveredNewborn,
         currentUserId
+      );
+      const tooltipOpen = isTooltipOpen(
+        selectedNewborns,
+        newbornInfo.isHovered
       );
 
       newbornCardList.push(
@@ -149,7 +146,8 @@ class List extends Component {
               newbornSummaryStepLimit
             )
           }
-          intructionTitle={intructionTitle}
+          instructionTitle={instructionTitle}
+          tooltipOpen={tooltipOpen}
           key={newbornKey}
         />
       );

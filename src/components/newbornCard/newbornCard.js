@@ -12,14 +12,15 @@ function NewBornCard(props) {
   const {
     handleNewbornHover,
     handleNewbornSelect,
-    intructionTitle,
+    instructionTitle,
     isPlaceholderCard,
     newbornInfo,
-    onBuyClick
+    onBuyClick,
+    tooltipOpen
   } = props;
 
   return (
-    <Tooltip title={intructionTitle}>
+    <Tooltip title={instructionTitle} open={tooltipOpen}>
       <NewbornCard
         onClick={handleNewbornSelect}
         onMouseEnter={handleNewbornHover}
@@ -59,10 +60,11 @@ function NewBornCard(props) {
 NewBornCard.propTypes = {
   handleNewbornHover: PropTypes.bool.isRequired,
   handleNewbornSelect: PropTypes.func.isRequired,
-  intructionTitle: PropTypes.string.isRequired,
+  instructionTitle: PropTypes.string.isRequired,
   isPlaceholderCard: PropTypes.bool.isRequired,
   newbornInfo: PropTypes.object.isRequired,
-  onBuyClick: PropTypes.func.isRequired
+  onBuyClick: PropTypes.func.isRequired,
+  tooltipOpen: PropTypes.bool.isRequired
 };
 
 export default NewBornCard;
