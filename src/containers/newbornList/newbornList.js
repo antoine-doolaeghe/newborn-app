@@ -4,23 +4,22 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import withWidth from "@material-ui/core/withWidth";
 import { returnNewbornChartData } from "../../utils/helpers/newbornChartHelpers";
 
 import { Grid, GridContainer, FlexContainer } from "../../theme/grid.style";
 import { ErrorDialog } from "../../theme/error.style";
 import NewBornCard from "../../components/newbornCard/newbornCard";
-import newBornListJss from "./newbornList_jss";
 import * as actions from "../../store/actions";
 
 class List extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedNewborns: [],
-      isErrorOpen: false,
       errorMessage: "",
-      parentGenerationIndex: 0
+      isErrorOpen: false,
+      parentGenerationIndex: 0,
+      selectedNewborns: [],
+      intructionTitle: "Please select a newborn to filter"
     };
   }
 
@@ -47,11 +46,13 @@ class List extends Component {
 
   renderNewbornGeneration = () => {
     const newbornCardList = this.returnNewbornCardList();
+    const placeholderCardList = this.returnPlaceholderCardList();
 
     return (
       <React.Fragment>
-        <Grid columnNumber={newbornCardList.length} rowNumber={1}>
+        <Grid columnNumber={newbornCardList.length} rowNumber={2}>
           {newbornCardList}
+          {placeholderCardList}
         </Grid>
       </React.Fragment>
     );
@@ -103,13 +104,29 @@ class List extends Component {
     return newbornInfo;
   };
 
-  returnNewbornCardList() {
+  returnPlaceholderCardList = () => {
+    const placeholderCardList = [];
+    const { intructionTitle } = this.state;
+    for (let i = 0; i < 4; i += 1) {
+      placeholderCardList.push(
+        <NewBornCard
+          isPlaceholderCard
+          newbornInfo={{}}
+          intructionTitle={intructionTitle}
+        />
+      );
+    }
+    return placeholderCardList;
+  };
+
+  returnNewbornCardList = () => {
     const newbornCardList = [];
     const { parentGeneration, currentUserId } = this.props;
     const {
-      selectedNewborns,
       hoveredNewborn,
-      newbornSummaryStepLimit
+      newbornSummaryStepLimit,
+      selectedNewborns,
+      intructionTitle
     } = this.state;
     parentGeneration.newborns.items.forEach((newborn, newbornKey) => {
       const newbornInfo = this.returnNewbornInfo(
@@ -121,6 +138,7 @@ class List extends Component {
 
       newbornCardList.push(
         <NewBornCard
+          isPlaceholderCard={false}
           handleNewbornSelect={this.handleNewbornSelect}
           handleNewbornHover={this.handleNewbornHover}
           newbornInfo={newbornInfo}
@@ -131,13 +149,14 @@ class List extends Component {
               newbornSummaryStepLimit
             )
           }
+          intructionTitle={intructionTitle}
           key={newbornKey}
         />
       );
     });
 
     return newbornCardList;
-  }
+  };
 
   render() {
     const {
@@ -150,6 +169,7 @@ class List extends Component {
       parentGeneration.newborns && parentGeneration.newborns.items
         ? parentGeneration.newborns.items.length > 0
         : false;
+
     return (
       <React.Fragment>
         {generationListLoading || parentGenerationLoading ? (
@@ -195,10 +215,6 @@ const mapStateToProps = state => ({
 });
 
 export default compose(
-  withStyles(newBornListJss, {
-    name: "List"
-  }),
-  withWidth(),
   connect(
     mapStateToProps,
     actions

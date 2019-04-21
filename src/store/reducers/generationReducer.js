@@ -23,7 +23,6 @@ export default (state = initialState, action) => {
       };
 
     case FETCH_GENERATIONS_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         generationListLoading: false,
