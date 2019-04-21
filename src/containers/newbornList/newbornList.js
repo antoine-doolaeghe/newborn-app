@@ -3,8 +3,11 @@ import compose from "recompose/compose";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { returnInstructionTitle, isTooltipOpen } from "./newbornList_helpers";
-import { returnNewbornChartData } from "../../utils/helpers/newbornChartHelpers";
+import {
+  returnInstructionTitle,
+  isTooltipOpen,
+  returnNewbornInfo
+} from "./newbornList_helpers";
 
 import { Grid, GridContainer, FlexContainer } from "../../theme/grid.style";
 import { ErrorDialog } from "../../theme/error.style";
@@ -30,7 +33,7 @@ class List extends Component {
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     const { generationList, fetchParentGeneration } = this.props;
     if (
       generationList !== prevProps.generationList &&
@@ -48,8 +51,10 @@ class List extends Component {
 
     return (
       <React.Fragment>
-        <Grid columnNumber={newbornCardList.length} rowNumber={2}>
+        <Grid columnNumber={newbornCardList.length} rowNumber={1}>
           {newbornCardList}
+        </Grid>
+        <Grid columnNumber={4} rowNumber={1}>
           {placeholderCardList}
         </Grid>
       </React.Fragment>
@@ -83,25 +88,6 @@ class List extends Component {
     <img src="./images/no-borns.svg" alt="no borns" />
   );
 
-  returnNewbornInfo = (
-    newborn,
-    selectedNewborns,
-    hoveredNewborn,
-    currentUserId
-  ) => {
-    const newbornInfo = {
-      name: newborn.name || "",
-      id: newborn.id || "",
-      bornPlace: newborn.bornPlace || "unknown region",
-      isSelected: selectedNewborns.includes(newborn.id),
-      isHovered: hoveredNewborn === newborn.id,
-      isOwnedByCurrentUser:
-        newborn.owner && newborn.owner.id && newborn.owner.id === currentUserId,
-      summaries: returnNewbornChartData(newborn)
-    };
-    return newbornInfo;
-  };
-
   returnPlaceholderCardList = () => {
     const placeholderCardList = [];
     for (let i = 0; i < 4; i += 1) {
@@ -122,7 +108,7 @@ class List extends Component {
     } = this.state;
     parentGeneration.newborns.items.forEach((newborn, newbornKey) => {
       const instructionTitle = returnInstructionTitle(selectedNewborns);
-      const newbornInfo = this.returnNewbornInfo(
+      const newbornInfo = returnNewbornInfo(
         newborn,
         selectedNewborns,
         hoveredNewborn,
@@ -167,7 +153,7 @@ class List extends Component {
       parentGeneration.newborns && parentGeneration.newborns.items
         ? parentGeneration.newborns.items.length > 0
         : false;
-
+    console.log(this.props.isAddNewbornToUserLoading);
     return (
       <React.Fragment>
         {generationListLoading || parentGenerationLoading ? (

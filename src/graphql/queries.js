@@ -72,24 +72,27 @@ export const getGeneration = `query GetGeneration($id: ID!) {
         name
         parents
         partners
-        models {
-        items {
+        owner {
           id
-          cellInfos
-          cellPositions
-          episodes {
-            items {
-              steps {
-                items {
-                  meanReward
-                  standardReward
-                  step
+        }
+        models {
+          items {
+            id
+            cellInfos
+            cellPositions
+            episodes {
+              items {
+                steps {
+                  items {
+                    meanReward
+                    standardReward
+                    step
+                  }
                 }
               }
             }
           }
         }
-      }
       }
       nextToken
     }

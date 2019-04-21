@@ -1,3 +1,4 @@
+import { Auth, API, graphqlOperation } from "aws-amplify";
 import {
   FETCH_LOGGED_IN_USER_FAILURE,
   FETCH_LOGGED_IN_USER_SUCCESS,
@@ -7,7 +8,6 @@ import {
 } from "./helpers/types";
 
 import * as queries from "../../graphql/queries";
-import { Auth, API, graphqlOperation } from "aws-amplify";
 
 export const fetchSingleUser = () => async dispatch => {
   Auth.currentAuthenticatedUser({

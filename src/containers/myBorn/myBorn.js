@@ -78,6 +78,7 @@ class MyBorn extends Component {
           onBuyClick={this.handleOnBuyClick}
           newbornInfo={newbornInfo}
           key={newbornKey}
+          tooltipOpen={false}
         />
       );
     });

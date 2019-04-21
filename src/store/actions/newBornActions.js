@@ -1,8 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
 import {
-  ADD_NEWBORN_TO_USER_REQUEST,
-  ADD_NEWBORN_TO_USER_FAILURE,
-  ADD_NEWBORN_TO_USER_SUCCESS,
   FETCH_NEWBORNS_REQUEST,
   FETCH_NEWBORNS_FAILURE,
   FETCH_NEWBORNS_SUCCESS,
@@ -20,7 +17,6 @@ import {
 } from "./helpers/types";
 
 import * as queries from "../../graphql/queries";
-import * as mutation from "../../graphql/mutations";
 
 export const fetchNewborns = newbornSummaryStepLimit => async dispatch => {
   dispatch({ type: FETCH_NEWBORNS_REQUEST });
@@ -96,29 +92,6 @@ export const fetchNewbornEpisode = episodeId => async dispatch => {
   } catch (error) {
     dispatch({ type: FETCH_NEWBORN_EPISODE_FAILURE });
     throw new Error("Could not request the born episodes");
-  }
-};
-
-export const updateNewbornOwnership = (
-  newbornId,
-  currentUserId,
-  newbornSummaryStepLimit
-) => async dispatch => {
-  dispatch({ type: ADD_NEWBORN_TO_USER_REQUEST });
-  try {
-    const updateNewbornOwnershipResponse = await API.graphql(
-      graphqlOperation(mutation.updateNewborn, {
-        input: { id: newbornId, newbornOwnerId: currentUserId },
-        stepLimit: newbornSummaryStepLimit
-      })
-    );
-    dispatch({
-      type: ADD_NEWBORN_TO_USER_SUCCESS,
-      payload: updateNewbornOwnershipResponse.data.updateNewborn
-    });
-  } catch (error) {
-    dispatch({ type: ADD_NEWBORN_TO_USER_FAILURE });
-    throw new Error("Could not add the newborn to the current user");
   }
 };
 

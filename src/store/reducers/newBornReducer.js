@@ -1,9 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable complexity */
 import {
-  ADD_NEWBORN_TO_USER_REQUEST,
-  ADD_NEWBORN_TO_USER_FAILURE,
-  ADD_NEWBORN_TO_USER_SUCCESS,
   FETCH_NEWBORNS_REQUEST,
   FETCH_NEWBORNS_SUCCESS,
   FETCH_NEWBORN_REQUEST,
@@ -31,26 +28,6 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ADD_NEWBORN_TO_USER_REQUEST:
-      return {
-        ...state,
-        isAddNewbornToUserLoading: true
-      };
-
-    case ADD_NEWBORN_TO_USER_SUCCESS:
-      return {
-        ...state,
-        newbornList: state.newbornList.map(newborn =>
-          newborn.id === action.payload.id ? action.payload : newborn
-        ),
-        isAddNewbornToUserLoading: false
-      };
-
-    case ADD_NEWBORN_TO_USER_FAILURE:
-      return {
-        ...state,
-        isAddingNewbornToUser: false
-      };
     case FETCH_NEWBORNS_REQUEST:
       return {
         ...state,
