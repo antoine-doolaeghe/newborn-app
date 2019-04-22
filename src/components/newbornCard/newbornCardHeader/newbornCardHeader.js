@@ -13,7 +13,7 @@ function NewBornCardHeader(props) {
         <Title>{props.title}</Title>
         <SubTitle>{props.subTitle}</SubTitle>
       </div>
-      <Info>+5%</Info>
+      <Info>+ 5%</Info>
     </NewbornCardHeaderContainer>
   );
 }

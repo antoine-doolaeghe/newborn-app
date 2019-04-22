@@ -153,7 +153,6 @@ class List extends Component {
       parentGeneration.newborns && parentGeneration.newborns.items
         ? parentGeneration.newborns.items.length > 0
         : false;
-    console.log(this.props.isAddNewbornToUserLoading);
     return (
       <React.Fragment>
         {generationListLoading || parentGenerationLoading ? (
