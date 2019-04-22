@@ -1,10 +1,9 @@
 import React from "react";
-import CardHeader from "@material-ui/core/CardHeader";
-import Avatar from "@material-ui/core/Avatar";
 import PropTypes from "prop-types";
 import { Line } from "react-chartjs-2";
 import { Link } from "react-router-dom";
 import Tooltip from "@material-ui/core/Tooltip";
+import NewBornCardHeader from "./newbornCardHeader/newbornCardHeader";
 import { NewbornCard, NewbornCardBuyButton } from "./newbornCard.style";
 import lineChartOptions from "./lineChartOptions";
 
@@ -32,10 +31,9 @@ function NewBornCard(props) {
       >
         {!isPlaceholderCard && (
           <React.Fragment>
-            <CardHeader
-              avatar={<Avatar aria-label="Recipe" />}
+            <NewBornCardHeader
               title={newbornInfo.name}
-              subheader={newbornInfo.bornPlace}
+              subTitle="1y/2m/12d"
               data-testid="newbornHeader"
             />
 
