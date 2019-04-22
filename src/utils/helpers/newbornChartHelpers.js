@@ -16,11 +16,13 @@ export const returnNewbornChartData = (newbornData, predictionData) => {
   }
   const data = [];
   const labels = [];
+
   newbornSummarySteps.sort((a, b) => a.step - b.step);
   newbornSummarySteps.forEach(item => {
-    data.push(item.meanReward);
+    data.push(item.standardReward);
     labels.push(item.step);
   });
+
   const min = Math.min(...data);
 
   const datasets = {

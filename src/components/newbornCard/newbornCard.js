@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Line } from "react-chartjs-2";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 import { Link } from "react-router-dom";
 import Tooltip from "@material-ui/core/Tooltip";
 import NewBornCardHeader from "./newbornCardHeader/newbornCardHeader";
@@ -37,10 +38,16 @@ function NewBornCard(props) {
               data-testid="newbornHeader"
             />
 
-            <Line
-              options={lineChartOptions(newbornInfo.min)}
-              data={newbornInfo.summaries}
-              height={192}
+            <HighchartsReact
+              highcharts={Highcharts}
+              options={lineChartOptions(
+                newbornInfo.summaries,
+                newbornInfo.isOwnedByCurrentUser
+                  ? "red"
+                  : newbornInfo.isSelected
+                  ? "green"
+                  : "grey"
+              )}
             />
             {newbornInfo.isHovered && (
               <NewbornCardBuyButton

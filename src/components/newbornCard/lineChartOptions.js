@@ -1,8 +1,29 @@
-export default minValue => {
+export default (data, lineColor) => {
   return {
+    chart: {
+      height: 150,
+      type: "line"
+    },
+    title: {
+      text: ""
+    },
     legend: {
-      display: false,
-      spanGaps: false
+      enabled: false
+    },
+    plotOptions: {
+      series: {
+        color: lineColor
+      }
+    },
+    series: data.datasets,
+    credits: {
+      enabled: false
+    },
+    yAxis: {
+      visible: false
+    },
+    xAxis: {
+      visible: false
     },
     scales: {
       xAxes: [
