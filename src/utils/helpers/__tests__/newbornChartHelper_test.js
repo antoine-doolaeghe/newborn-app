@@ -10,7 +10,7 @@ const MOCK_NEWBORN_SUMMARY_DATA = {
               steps: {
                 items: [
                   {
-                    meanReward: 1,
+                    standardReward: 1,
                     step: 1
                   }
                 ]
@@ -32,11 +32,10 @@ describe("returnNewbornChartData", () => {
       datasets: [
         {
           data: [1],
-          backgroundColor: ["white"],
+          backgroundColor: ["black"],
           label: "summary data"
         }
-      ],
-      min: 1
+      ]
     };
 
     expect(returnNewbornChartData(MOCK_NEWBORN_SUMMARY_DATA)).toEqual(
@@ -55,11 +54,10 @@ describe("returnNewbornChartData", () => {
         },
         {
           data: [1],
-          backgroundColor: ["white"],
+          backgroundColor: ["black"],
           label: "summary data"
         }
-      ],
-      min: 1
+      ]
     };
     expect(
       returnNewbornChartData(MOCK_NEWBORN_SUMMARY_DATA, MOCK_PREDICTION_DATA)

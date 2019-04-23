@@ -1,18 +1,31 @@
 export default (data, lineColor) => {
   return {
     chart: {
+      backgroundColor: "transparent",
       height: 150,
-      type: "line"
+      width: 246,
+      type: "areaspline",
+      margin: 0,
+      padding: 0,
+      spacing: 0
     },
     title: {
       text: ""
     },
     legend: {
-      enabled: false
+      enabled: false,
+      spanGaps: false
     },
     plotOptions: {
       series: {
-        color: lineColor
+        color: lineColor,
+        pointPlacement: "between",
+        borderWidth: 0
+      },
+      areaspline: {
+        marker: {
+          enabled: false
+        }
       }
     },
     series: data.datasets,
@@ -20,28 +33,15 @@ export default (data, lineColor) => {
       enabled: false
     },
     yAxis: {
+      offset: 0,
+      minorGridLineWidth: 0,
       visible: false
     },
     xAxis: {
-      visible: false
-    },
-    scales: {
-      xAxes: [
-        {
-          display: false
-        }
-      ],
-      yAxes: [
-        {
-          ticks: {
-            min: 0,
-            suggestedMin: 0,
-            suggestedMax: 10,
-            beginAtZero: false
-          },
-          display: false
-        }
-      ]
+      offset: 0,
+      minorGridLineWidth: 0,
+      visible: false,
+      categories: data.labels
     }
   };
 };

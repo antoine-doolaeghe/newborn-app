@@ -34,3 +34,8 @@ export const NewbornCardBuyButton = styled.button`
     cursor: pointer;
   }
 `;
+
+export const NewbornCardChartWrapper = styled.div`
+  position: absolute;
+  left: -13px;
+`;

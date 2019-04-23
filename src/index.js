@@ -1,5 +1,4 @@
 import React from "react";
-import registerServiceWorker from "./registerServiceWorker";
 
 import { Route, Switch } from "react-router";
 import configureStore, { history } from "./store/store";
@@ -9,11 +8,12 @@ import { render } from "react-dom";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 
 import Amplify from "aws-amplify";
+import registerServiceWorker from "./registerServiceWorker";
 import aws_config from "./aws-exports";
 
 // Route imports
 import Academy from "./containers/academy/academy";
-import Home from "./containers/home/home";
+import NewbornList from "./containers/newbornList/newbornList";
 import Live from "./containers/live/live";
 import MyBorn from "./containers/myBorn/myBorn";
 import NewBornRecord from "./containers/newbornRecord/newbornRecord";
@@ -32,7 +32,7 @@ render(
     <ConnectedRouter history={history}>
       <MuiThemeProvider theme={MuiTheme}>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={NewbornList} />
           <Route exact path="/newborn-record/:id" component={NewBornRecord} />
           <Route exact path="/my-born" component={MyBorn} />
           <Route exact path="/academy" component={Academy} />
