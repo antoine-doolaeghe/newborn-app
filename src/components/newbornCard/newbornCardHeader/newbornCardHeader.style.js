@@ -7,6 +7,7 @@ export const NewbornCardHeaderContainer = styled.section`
   padding: 7px 0px;
   margin: 0px 7px;
   text-transform: capitalize;
+  z-index: 90;
   &:hover {
     text-decoration: underline;
     cursor: pointer;

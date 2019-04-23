@@ -5,6 +5,7 @@ export const returnTooltipTitle = selectedNewborns => {
     return "Select a partner card to filter the childs";
   if (selectedNewborns.length === 2)
     return "Select a partner card to filter the childs";
+  return "";
 };
 
 export const isTooltipOpen = (selectedNewborns, isHovered) => {

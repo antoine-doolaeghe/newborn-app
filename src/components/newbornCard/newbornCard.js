@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { Link } from "react-router-dom";
 import Tooltip from "@material-ui/core/Tooltip";
 import NewBornCardHeader from "./newbornCardHeader/newbornCardHeader";
 import {
@@ -22,10 +21,9 @@ function NewBornCard(props) {
     handleNewbornBuy,
     tooltipOpen
   } = props;
-
+  console.log(props.history);
   const hasSummaries =
     newbornInfo.summaries && newbornInfo.summaries.length !== 0;
-
   return (
     <Tooltip title={tooltipTitle} open={tooltipOpen}>
       <NewbornCard
@@ -42,9 +40,9 @@ function NewBornCard(props) {
             <NewBornCardHeader
               title={newbornInfo.name}
               subTitle="1y/2m/12d"
+              newbornId={newbornInfo.id}
               data-testid="newbornHeader"
             />
-
             {hasSummaries ? (
               <NewbornCardChartWrapper data-testid="newbornCardGraph">
                 <HighchartsReact
@@ -58,7 +56,6 @@ function NewBornCard(props) {
             ) : (
               <div data-testid="newbornCardEmptyGraph">No training record</div>
             )}
-
             {newbornInfo.isHovered && (
               <NewbornCardBuyButton
                 onClick={handleNewbornBuy}
@@ -74,6 +71,7 @@ function NewBornCard(props) {
 }
 
 NewBornCard.propTypes = {
+  history: PropTypes.object,
   handleNewbornHover: PropTypes.func,
   handleNewbornSelect: PropTypes.func,
   tooltipTitle: PropTypes.string.isRequired,
