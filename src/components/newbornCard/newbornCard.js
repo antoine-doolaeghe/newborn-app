@@ -1,25 +1,33 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Line } from "react-chartjs-2";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 import { Link } from "react-router-dom";
 import Tooltip from "@material-ui/core/Tooltip";
 import NewBornCardHeader from "./newbornCardHeader/newbornCardHeader";
-import { NewbornCard, NewbornCardBuyButton } from "./newbornCard.style";
+import {
+  NewbornCard,
+  NewbornCardBuyButton,
+  NewbornCardChartWrapper
+} from "./newbornCard.style";
 import lineChartOptions from "./lineChartOptions";
 
 function NewBornCard(props) {
   const {
     handleNewbornHover,
     handleNewbornSelect,
-    instructionTitle,
+    tooltipTitle,
     isPlaceholderCard,
     newbornInfo,
-    onBuyClick,
+    handleNewbornBuy,
     tooltipOpen
   } = props;
 
+  const hasSummaries =
+    newbornInfo.summaries && newbornInfo.summaries.length !== 0;
+
   return (
-    <Tooltip title={instructionTitle} open={tooltipOpen}>
+    <Tooltip title={tooltipTitle} open={tooltipOpen}>
       <NewbornCard
         onClick={handleNewbornSelect}
         onMouseEnter={handleNewbornHover}
@@ -37,14 +45,24 @@ function NewBornCard(props) {
               data-testid="newbornHeader"
             />
 
-            <Line
-              options={lineChartOptions(newbornInfo.min)}
-              data={newbornInfo.summaries}
-              height={192}
-            />
+            {hasSummaries ? (
+              <NewbornCardChartWrapper data-testid="newbornCardGraph">
+                <HighchartsReact
+                  highcharts={Highcharts}
+                  options={lineChartOptions(
+                    newbornInfo.summaries,
+                    newbornInfo.color
+                  )}
+                />
+              </NewbornCardChartWrapper>
+            ) : (
+              <div data-testid="newbornCardEmptyGraph">No training record</div>
+            )}
+
             {newbornInfo.isHovered && (
               <NewbornCardBuyButton
-                onClick={onBuyClick}
+                onClick={handleNewbornBuy}
+                data-newborninfo={JSON.stringify(newbornInfo)}
                 data-testid="newbornOwnershipButton"
               />
             )}
@@ -56,12 +74,12 @@ function NewBornCard(props) {
 }
 
 NewBornCard.propTypes = {
-  handleNewbornHover: PropTypes.bool.isRequired,
-  handleNewbornSelect: PropTypes.func.isRequired,
-  instructionTitle: PropTypes.string.isRequired,
+  handleNewbornHover: PropTypes.func,
+  handleNewbornSelect: PropTypes.func,
+  tooltipTitle: PropTypes.string.isRequired,
   isPlaceholderCard: PropTypes.bool.isRequired,
   newbornInfo: PropTypes.object.isRequired,
-  onBuyClick: PropTypes.func.isRequired,
+  handleNewbornBuy: PropTypes.func,
   tooltipOpen: PropTypes.bool.isRequired
 };
 

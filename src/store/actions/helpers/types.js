@@ -1,3 +1,7 @@
+export const FETCH_CHILD_REQUEST = "fetch_child_request";
+export const FETCH_CHILD_SUCCESS = "fetch_child_success";
+export const FETCH_CHILD_FAILURE = "fetch_child_failure";
+
 export const FETCH_GENERATIONS_REQUEST = "fetch_generations_request";
 export const FETCH_GENERATIONS_SUCCESS = "fetch_generations_success";
 export const FETCH_GENERATIONS_FAILURE = "fetch_generations_failure";

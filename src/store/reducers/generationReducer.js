@@ -7,15 +7,19 @@ import {
   FETCH_GENERATIONS_REQUEST,
   FETCH_GENERATIONS_SUCCESS,
   FETCH_PARENT_GENERATION_REQUEST,
-  FETCH_PARENT_GENERATION_SUCCESS
+  FETCH_PARENT_GENERATION_SUCCESS,
+  FETCH_CHILD_GENERATION_REQUEST,
+  FETCH_CHILD_GENERATION_SUCCESS
 } from "../actions/helpers/types";
 
 const initialState = {
+  childGeneration: [],
+  childGenerationLoading: false,
   generationList: [],
   generationListLoading: false,
+  isAddNewbornToUserLoading: false,
   parentGeneration: {},
-  parentGenerationLoading: false,
-  isAddNewbornToUserLoading: false
+  parentGenerationLoading: false
 };
 
 export default (state = initialState, action) => {

@@ -3,25 +3,15 @@ import { withAuthenticator } from "aws-amplify-react";
 import PropTypes from "prop-types";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import connect from "react-redux/es/connect/connect";
-import { withStyles } from "@material-ui/core/styles";
 import * as actions from "../../store/actions";
-
+import { returnNewbornInfo } from "../../utils/helpers/newbornGlobalHelpers";
 import withMenuDrawer from "../../components/menuDrawer/withMenuDrawer";
 import withHeader from "../header/withHeader";
-import { returnNewbornChartData } from "../../utils/helpers/newbornChartHelpers";
 
-import MyBornJss from "./myBorn_jss";
 import { Grid, GridContainer, FlexContainer } from "../../theme/grid.style";
 import NewBornCard from "../../components/newbornCard/newbornCard";
 
 class MyBorn extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedNewborns: []
-    };
-  }
-
   componentDidMount() {
     const { currentUser, fetchCurrentUserNewborns } = this.props;
     if (currentUser) {
@@ -45,12 +35,16 @@ class MyBorn extends Component {
     }
   }
 
-  handleOnBuyClick = event => {
-    const { currentUser, fetchCurrentUserNewborns } = this.props;
+  handleNewbornBuy = event => {
+    const {
+      currentUser,
+      fetchCurrentUserNewborns,
+      updateNewbornOwnership
+    } = this.props;
     const newbornId = event.target.closest("section").dataset.newbornid;
-    this.props
-      .updateNewbornOwnership(newbornId, null)
-      .then(fetchCurrentUserNewborns(currentUser.attributes.sub));
+    updateNewbornOwnership(newbornId, null).then(
+      fetchCurrentUserNewborns(currentUser.attributes.sub)
+    );
   };
 
   handleNewbornHover = event => {
@@ -60,22 +54,20 @@ class MyBorn extends Component {
 
   renderCells() {
     const newbornCardList = [];
-    const { currentUserNewbornList } = this.props;
+    const { currentUserNewbornList, currentUserId } = this.props;
     const { hoveredNewborn } = this.state;
     currentUserNewbornList.forEach((newborn, newbornKey) => {
-      const newbornInfo = {
-        name: newborn.name || "",
-        id: newborn.id || "",
-        bornPlace: newborn.bornPlace || "unknown region",
-        isHovered: hoveredNewborn === newborn.id,
-        isOwnedByCurrentUser: true,
-        summaries: returnNewbornChartData(newborn)
-      };
+      const newbornInfo = returnNewbornInfo(
+        newborn,
+        [],
+        hoveredNewborn,
+        currentUserId
+      );
 
       newbornCardList.push(
         <NewBornCard
           handleNewbornHover={this.handleNewbornHover}
-          onBuyClick={this.handleOnBuyClick}
+          handleNewbornBuy={this.handleNewbornBuy}
           newbornInfo={newbornInfo}
           key={newbornKey}
           tooltipOpen={false}
@@ -121,11 +113,17 @@ class MyBorn extends Component {
 }
 
 MyBorn.propTypes = {
-  classes: PropTypes.object.isRequired
+  currentUser: PropTypes.object.isRequired,
+  currentUserId: PropTypes.string.isRequired,
+  currentUserNewbornList: PropTypes.array.isRequired,
+  currentUserNewbornListLoading: PropTypes.bool.isRequired,
+  updateNewbornOwnership: PropTypes.func.isRequired,
+  fetchCurrentUserNewborns: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   currentUser: state.userReducer.currentUser,
+  currentUserId: state.userReducer.currentUserId,
   currentUserNewbornList: state.userReducer.currentUserNewbornList,
   currentUserNewbornListLoading: state.userReducer.currentUserNewbornListLoading
 });
@@ -136,7 +134,7 @@ export default withAuthenticator(
       connect(
         mapStateToProps,
         actions
-      )(withStyles(MyBornJss)(MyBorn))
+      )(MyBorn)
     ),
     2
   )

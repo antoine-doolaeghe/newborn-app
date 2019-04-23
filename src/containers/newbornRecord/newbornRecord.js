@@ -74,9 +74,14 @@ class NewBornRecord extends Component {
 }
 
 NewBornRecord.propTypes = {
-  classes: PropTypes.object.isRequired,
+  fetchNewborn: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
-  newbornInfoLoading: PropTypes.bool.isRequired
+  newbornInfo: PropTypes.object.isRequired,
+  newbornInfoLoading: PropTypes.bool.isRequired,
+  newbornPrediction: PropTypes.array,
+  newbornPredictionLoading: PropTypes.bool.isRequired,
+  resetNewbornPrediction: PropTypes.func.isRequired,
+  startPredictionTraining: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

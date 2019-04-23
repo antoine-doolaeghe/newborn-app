@@ -50,4 +50,26 @@ describe("<NewbornCard />", () => {
     );
     expect(getByTestId("newbornCard")).toHaveStyle(`border: 2px solid red`);
   });
+
+  it("should display a highchart graph if the newborn has summuraries defined", () => {
+    const { getByTestId } = renderWithReduxAndRouter(
+      <NewbornCard newbornInfo={{ summaries: [{}] }} />
+    );
+    expect(getByTestId("newbornCardGraph")).toBeTruthy();
+  });
+
+  it("should display a highchart graph of 150px height", () => {
+    const { getByTestId } = renderWithReduxAndRouter(
+      <NewbornCard newbornInfo={{ summaries: [{}] }} />
+    );
+  });
+
+  it("should display an empty graph element if the newborn has no summuraries defined", () => {
+    const { getByTestId, getByText } = renderWithReduxAndRouter(
+      <NewbornCard newbornInfo={{ summaries: [] }} />
+    );
+
+    expect(getByTestId("newbornCardEmptyGraph")).toBeTruthy();
+    expect(getByText("No training record")).toBeTruthy();
+  });
 });

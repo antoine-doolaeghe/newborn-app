@@ -1,18 +1,17 @@
 import React, { Component, Fragment } from "react";
-import compose from "recompose/compose";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import {
-  returnInstructionTitle,
-  isTooltipOpen,
-  returnNewbornInfo
-} from "./newbornList_helpers";
+import { withAuthenticator } from "aws-amplify-react";
+import { returnTooltipTitle, isTooltipOpen } from "./newbornList_helpers";
+import { returnNewbornInfo } from "../../utils/helpers/newbornGlobalHelpers";
 
 import { Grid, GridContainer, FlexContainer } from "../../theme/grid.style";
 import { ErrorDialog } from "../../theme/error.style";
 import NewBornCard from "../../components/newbornCard/newbornCard";
 import * as actions from "../../store/actions";
+import withMenuDrawer from "../../components/menuDrawer/withMenuDrawer";
+import withHeader from "../header/withHeader";
 
 class List extends Component {
   constructor(props) {
@@ -28,19 +27,32 @@ class List extends Component {
   componentDidMount() {
     const { fetchGenerations } = this.props;
     fetchGenerations().catch(error => {
-      const isErrorOpen = true;
-      this.setState({ isErrorOpen, errorMessage: error.message });
+      this.handleErrorMessage(error);
     });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     const { generationList, fetchParentGeneration } = this.props;
+    const { parentGenerationIndex, selectedNewborns } = this.state;
     if (
       generationList !== prevProps.generationList &&
       generationList.length > 0
     ) {
-      fetchParentGeneration(
-        generationList[this.state.parentGenerationIndex].id
+      fetchParentGeneration(generationList[parentGenerationIndex].id).catch(
+        error => {
+          this.handleErrorMessage(error);
+        }
+      );
+    }
+
+    if (
+      selectedNewborns !== prevState.selectedNewborns &&
+      selectedNewborns.length > 2
+    ) {
+      fetchParentGeneration(generationList[parentGenerationIndex].id).catch(
+        error => {
+          this.handleErrorMessage(error);
+        }
       );
     }
   }
@@ -84,6 +96,24 @@ class List extends Component {
     });
   };
 
+  handleErrorMessage = error => {
+    const isErrorOpen = true;
+    this.setState({ isErrorOpen, errorMessage: error.message });
+  };
+
+  handleNewbornBuy = event => {
+    const newbornInfo = JSON.parse(
+      event.target.closest("button").dataset.newborninfo
+    );
+    const { updateNewbornOwnership, currentUserId } = this.props;
+    event.stopPropagation();
+    updateNewbornOwnership(
+      newbornInfo.id,
+      !newbornInfo.isOwnedByCurrentUser ? currentUserId : null,
+      this.state.newbornSummaryStepLimit
+    );
+  };
+
   renderEmptyBornsIllustration = () => (
     <img src="./images/no-borns.svg" alt="no borns" />
   );
@@ -101,19 +131,16 @@ class List extends Component {
   returnNewbornCardList = () => {
     const newbornCardList = [];
     const { parentGeneration, currentUserId } = this.props;
-    const {
-      hoveredNewborn,
-      newbornSummaryStepLimit,
-      selectedNewborns
-    } = this.state;
+    const { hoveredNewborn, selectedNewborns } = this.state;
     parentGeneration.newborns.items.forEach((newborn, newbornKey) => {
-      const instructionTitle = returnInstructionTitle(selectedNewborns);
+      const tooltipTitle = returnTooltipTitle(selectedNewborns);
       const newbornInfo = returnNewbornInfo(
         newborn,
         selectedNewborns,
         hoveredNewborn,
         currentUserId
       );
+
       const tooltipOpen = isTooltipOpen(
         selectedNewborns,
         newbornInfo.isHovered
@@ -124,15 +151,9 @@ class List extends Component {
           isPlaceholderCard={false}
           handleNewbornSelect={this.handleNewbornSelect}
           handleNewbornHover={this.handleNewbornHover}
+          handleNewbornBuy={this.handleNewbornBuy}
           newbornInfo={newbornInfo}
-          onBuyClick={() =>
-            this.props.updateNewbornOwnership(
-              newbornInfo.id,
-              !newbornInfo.isOwnedByCurrentUser ? currentUserId : null,
-              newbornSummaryStepLimit
-            )
-          }
-          instructionTitle={instructionTitle}
+          tooltipTitle={tooltipTitle}
           tooltipOpen={tooltipOpen}
           key={newbornKey}
         />
@@ -150,11 +171,11 @@ class List extends Component {
     } = this.props;
     const { isErrorOpen, errorMessage } = this.state;
     const hasNewborns =
-      parentGeneration.newborns && parentGeneration.newborns.items
-        ? parentGeneration.newborns.items.length > 0
-        : false;
+      parentGeneration.newborns &&
+      parentGeneration.newborns.items &&
+      parentGeneration.newborns.items.length > 0;
     return (
-      <React.Fragment>
+      <Fragment>
         {generationListLoading || parentGenerationLoading ? (
           <FlexContainer>
             <CircularProgress
@@ -172,19 +193,20 @@ class List extends Component {
           </Fragment>
         )}
         <ErrorDialog open={isErrorOpen} message={errorMessage} />
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
 
 List.propTypes = {
-  generationListLoading: PropTypes.bool.isRequired,
+  currentUserId: PropTypes.string.isRequired,
   fetchGenerations: PropTypes.func.isRequired,
   fetchParentGeneration: PropTypes.func.isRequired,
   generationList: PropTypes.array.isRequired,
-  updateNewbornOwnership: PropTypes.func.isRequired,
+  generationListLoading: PropTypes.bool.isRequired,
+  parentGeneration: PropTypes.object.isRequired,
   parentGenerationLoading: PropTypes.func.isRequired,
-  parentGeneration: PropTypes.object.isRequired
+  updateNewbornOwnership: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -197,9 +219,14 @@ const mapStateToProps = state => ({
   isAddNewbornToUserLoading: state.newBornReducer.isAddNewbornToUserLoading
 });
 
-export default compose(
-  connect(
-    mapStateToProps,
-    actions
+export default withAuthenticator(
+  withMenuDrawer(
+    withHeader(
+      connect(
+        mapStateToProps,
+        actions
+      )(List),
+      0
+    )
   )
-)(List);
+);

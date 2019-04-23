@@ -16,17 +16,19 @@ export const returnNewbornChartData = (newbornData, predictionData) => {
   }
   const data = [];
   const labels = [];
+
   newbornSummarySteps.sort((a, b) => a.step - b.step);
   newbornSummarySteps.forEach(item => {
-    data.push(item.meanReward);
-    labels.push(item.step);
+    if (item.standardReward) {
+      const roundedValue = item.standardReward.toFixed(2);
+      data.push(parseFloat(roundedValue));
+      labels.push(item.step);
+    }
   });
-  const min = Math.min(...data);
 
   const datasets = {
     labels,
-    datasets: [],
-    min
+    datasets: []
   };
 
   if (predictionData) {
@@ -39,7 +41,7 @@ export const returnNewbornChartData = (newbornData, predictionData) => {
 
   datasets.datasets.push({
     data,
-    backgroundColor: ["white"],
+    backgroundColor: ["black"],
     label: "summary data"
   });
 
