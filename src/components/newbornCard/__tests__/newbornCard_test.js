@@ -52,10 +52,9 @@ describe("<NewbornCard />", () => {
   });
 
   it("should display a highchart graph if the newborn has summuraries defined", () => {
-    const { getByTestId, debug } = renderWithReduxAndRouter(
+    const { getByTestId } = renderWithReduxAndRouter(
       <NewbornCard newbornInfo={{ summaries: [{}] }} />
     );
-    debug();
     expect(getByTestId("newbornCardGraph")).toBeTruthy();
   });
 

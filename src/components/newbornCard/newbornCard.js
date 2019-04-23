@@ -62,6 +62,7 @@ function NewBornCard(props) {
             {newbornInfo.isHovered && (
               <NewbornCardBuyButton
                 onClick={handleNewbornBuy}
+                data-newborninfo={JSON.stringify(newbornInfo)}
                 data-testid="newbornOwnershipButton"
               />
             )}
@@ -73,12 +74,12 @@ function NewBornCard(props) {
 }
 
 NewBornCard.propTypes = {
-  handleNewbornHover: PropTypes.bool.isRequired,
-  handleNewbornSelect: PropTypes.func.isRequired,
+  handleNewbornHover: PropTypes.func,
+  handleNewbornSelect: PropTypes.func,
   tooltipTitle: PropTypes.string.isRequired,
   isPlaceholderCard: PropTypes.bool.isRequired,
   newbornInfo: PropTypes.object.isRequired,
-  handleNewbornBuy: PropTypes.func.isRequired,
+  handleNewbornBuy: PropTypes.func,
   tooltipOpen: PropTypes.bool.isRequired
 };
 

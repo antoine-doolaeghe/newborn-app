@@ -101,6 +101,19 @@ class List extends Component {
     this.setState({ isErrorOpen, errorMessage: error.message });
   };
 
+  handleNewbornBuy = event => {
+    const newbornInfo = JSON.parse(
+      event.target.closest("button").dataset.newborninfo
+    );
+    const { updateNewbornOwnership, currentUserId } = this.props;
+    event.stopPropagation();
+    updateNewbornOwnership(
+      newbornInfo.id,
+      !newbornInfo.isOwnedByCurrentUser ? currentUserId : null,
+      this.state.newbornSummaryStepLimit
+    );
+  };
+
   renderEmptyBornsIllustration = () => (
     <img src="./images/no-borns.svg" alt="no borns" />
   );
@@ -118,11 +131,7 @@ class List extends Component {
   returnNewbornCardList = () => {
     const newbornCardList = [];
     const { parentGeneration, currentUserId } = this.props;
-    const {
-      hoveredNewborn,
-      newbornSummaryStepLimit,
-      selectedNewborns
-    } = this.state;
+    const { hoveredNewborn, selectedNewborns } = this.state;
     parentGeneration.newborns.items.forEach((newborn, newbornKey) => {
       const tooltipTitle = returnTooltipTitle(selectedNewborns);
       const newbornInfo = returnNewbornInfo(
@@ -131,6 +140,7 @@ class List extends Component {
         hoveredNewborn,
         currentUserId
       );
+
       const tooltipOpen = isTooltipOpen(
         selectedNewborns,
         newbornInfo.isHovered
@@ -141,14 +151,8 @@ class List extends Component {
           isPlaceholderCard={false}
           handleNewbornSelect={this.handleNewbornSelect}
           handleNewbornHover={this.handleNewbornHover}
+          handleNewbornBuy={this.handleNewbornBuy}
           newbornInfo={newbornInfo}
-          handleNewbornBuy={() =>
-            this.props.updateNewbornOwnership(
-              newbornInfo.id,
-              !newbornInfo.isOwnedByCurrentUser ? currentUserId : null,
-              newbornSummaryStepLimit
-            )
-          }
           tooltipTitle={tooltipTitle}
           tooltipOpen={tooltipOpen}
           key={newbornKey}
