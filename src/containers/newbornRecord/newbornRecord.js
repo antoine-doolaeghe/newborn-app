@@ -8,7 +8,6 @@ import * as actions from "../../store/actions";
 
 import { FlexContainer } from "../../theme/grid.style";
 import { ErrorDialog } from "../../theme/error.style";
-import withMenuDrawer from "../../components/menuDrawer/withMenuDrawer";
 import withHeader from "../header/withHeader";
 import NewbornRecordGraph from "../../components/newbornRecordGraph/newbornRecordGraph";
 import NewbornRecordHeader from "../../components/newbornRecordHeader/newbornRecordHeader";
@@ -52,11 +51,21 @@ const NewBornRecord = props => {
   return (
     <React.Fragment>
       <FlexContainer>
-        <FlexContainer direction="column" flex="2">
+        <FlexContainer
+          direction="column"
+          width="500px"
+          max-width="500px"
+          margin="10px"
+        >
           <NewbornRecordHeader data-testid="newbornRecordHeader" />
           <NewBornRecord3dModel data-testid="newbornRecord3dModel" />
         </FlexContainer>
-        <FlexContainer direction="column" flex="1">
+        <FlexContainer
+          direction="column"
+          width="500px"
+          max-width="500px"
+          margin="10px"
+        >
           <NewbornRecordGraph
             newbornInfoLoading={newbornInfoLoading}
             data-testid="newbornRecordGraph"
@@ -92,15 +101,12 @@ const mapStateToProps = state => ({
 });
 
 export default withAuthenticator(
-  withMenuDrawer(
-    withHeader(
-      withRouter(
-        connect(
-          mapStateToProps,
-          actions
-        )(NewBornRecord)
-      )
-    ),
-    1
+  withHeader(
+    withRouter(
+      connect(
+        mapStateToProps,
+        actions
+      )(NewBornRecord)
+    )
   )
 );

@@ -7,6 +7,7 @@ export const HeaderContainer = styled.section`
   margin-top: 8px;
   display: flex;
   flex-direction: column;
+  max-width: 500px;
 `;
 
 export const HeaderValueContainer = styled.section`
@@ -20,9 +21,7 @@ export const HeaderValueContainer = styled.section`
 `;
 
 export const HeaderName = styled.h1`
-  width: 100%;
   margin: 0px;
-  flex: 1;
   font-size: 18px;
   text-transform: uppercase;
 `;
@@ -39,9 +38,10 @@ export const HeaderPercentage = styled.p`
 `;
 
 export const HeaderInfoContainer = styled.section`
-  border: 1px solid black;
+  border: 2px solid black;
+  border-radius: 5px;
   margin: 0px 10px 10px 10px;
-  padding: 10px 0px;
+  padding: 8px 0px 0px 0px;
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -53,14 +53,14 @@ export const HeaderInfoIcon = styled.div`
   width: 30px;
   height: 30px;
   position: absolute;
-  background: black;
+  background: grey;
   right: 0px;
-  top: 0px;
+  bottom: 0px;
 `;
 
 export const HeaderInfo = styled.section`
   font-size: 20px;
-  border-top: 1px dotted;
+  border-top: 1px dotted grey;
   margin-left: 10px;
 `;
 

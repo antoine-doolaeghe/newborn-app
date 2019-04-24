@@ -12,13 +12,17 @@ import {
   HeaderInfoContent
 } from "./newbornRecordHeader.style";
 import { Info } from "../../theme/info.style";
+import { Button } from "../../theme/button.style";
 import { FlexContainer } from "../../theme/grid.style";
 
 function NewbornRecordHeader() {
   return (
     <HeaderContainer data-testid="newbornRecordHeader">
       <FlexContainer flex={0.5} direction="column" margin="8px 10px">
-        <HeaderName>Header name</HeaderName>
+        <FlexContainer width="100%" justify="space-between">
+          <HeaderName>Header name</HeaderName>
+          <Button>Add to Watchlist</Button>
+        </FlexContainer>
       </FlexContainer>
       <HeaderValueContainer>
         <FlexContainer align="center">
