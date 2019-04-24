@@ -36,7 +36,7 @@ render(
         <MuiThemeProvider theme={MuiTheme}>
           <Switch>
             <Route exact path="/" component={NewbornList} />
-            <Route path="/newborn-record/:id" component={NewBornRecord} />
+            <Route exact path="/newborn-record" component={NewBornRecord} />
             <Route path="/my-born" component={MyBorn} />
             <Route path="/academy" component={Academy} />
             <Route path="/live" component={Live} />

@@ -3,10 +3,9 @@ import { createMemoryHistory } from "history";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import React from "react";
-import reducer from "../../store/reducers/rootReducer";
-import configureStore from "../../store/store";
 import { render } from "react-testing-library";
 import { Router } from "react-router-dom";
+import configureStore from "../../store/store";
 
 function renderWithReduxAndRouter(
   ui,

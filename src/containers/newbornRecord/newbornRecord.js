@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import * as actions from "../../store/actions";
 
 import { FlexContainer } from "../../theme/grid.style";
+import { ErrorDialog } from "../../theme/error.style";
 import withMenuDrawer from "../../components/menuDrawer/withMenuDrawer";
 import withHeader from "../header/withHeader";
 import NewbornRecordGraph from "../../components/newbornRecordGraph/newbornRecordGraph";
@@ -17,65 +18,64 @@ import { returnNewbornPredictionData } from "../../utils/helpers/newbornPredicti
 
 import { returnNewbornChartData } from "../../utils/helpers/newbornChartHelpers";
 
-class NewBornRecord extends Component {
-  componentWillMount() {
-    const {
-      newbornInfo,
-      fetchNewborn,
-      match,
-      resetNewbornPrediction
-    } = this.props;
-    resetNewbornPrediction();
-    if (!newbornInfo || newbornInfo.id !== match.params.id) {
-      fetchNewborn(match.params.id, 100);
-    }
-  }
+const NewBornRecord = props => {
+  const {
+    newbornInfoLoading,
+    newbornPredictionLoading,
+    newbornPrediction,
+    newbornInfo
+  } = props;
 
-  startPredictionTraining = () => {
-    const { newbornInfo, startPredictionTraining } = this.props;
+  const [error, setError] = useState("");
+  const [isErrorOpen, setIsErrorOpen] = useState(false);
+
+  useEffect(() => {
+    const { newbornInfo, fetchNewborn, resetNewbornPrediction } = props;
+    const newbornId = new URLSearchParams(props.location.search).get(
+      "newborn_id"
+    );
+    resetNewbornPrediction();
+    if (!newbornInfo && newbornId) {
+      fetchNewborn(newbornId, 100).catch(err => {
+        setError(err.message);
+        setIsErrorOpen(true);
+      });
+    }
+  }, []);
+
+  const startPredictionTraining = () => {
+    const { newbornInfo, startPredictionTraining } = props;
     const predictionData = returnNewbornPredictionData(newbornInfo);
     startPredictionTraining(predictionData);
   };
 
-  render() {
-    const {
-      newbornInfoLoading,
-      newbornPredictionLoading,
-      newbornPrediction,
-      newbornInfo
-    } = this.props;
-
-    return (
-      <React.Fragment>
-        <FlexContainer>
-          <FlexContainer direction="column" flex="2">
-            <NewbornRecordHeader data-testid="newbornRecordHeader" />
-            <NewBornRecord3dModel data-testid="newbornRecord3dModel" />
-          </FlexContainer>
-          <FlexContainer direction="column" flex="1">
-            <NewbornRecordGraph
-              newbornInfoLoading={newbornInfoLoading}
-              data-testid="newbornRecordGraph"
-              newbornInfo={returnNewbornChartData(
-                newbornInfo,
-                newbornPrediction
-              )}
-            />
-            <NewBornRecordPrediction
-              data-testid="newBornRecordPrediction"
-              newbornPredictionLoading={newbornPredictionLoading}
-              onPredictionClick={this.startPredictionTraining}
-            />
-          </FlexContainer>
+  return (
+    <React.Fragment>
+      <FlexContainer>
+        <FlexContainer direction="column" flex="2">
+          <NewbornRecordHeader data-testid="newbornRecordHeader" />
+          <NewBornRecord3dModel data-testid="newbornRecord3dModel" />
         </FlexContainer>
-      </React.Fragment>
-    );
-  }
-}
+        <FlexContainer direction="column" flex="1">
+          <NewbornRecordGraph
+            newbornInfoLoading={newbornInfoLoading}
+            data-testid="newbornRecordGraph"
+            newbornInfo={returnNewbornChartData(newbornInfo, newbornPrediction)}
+          />
+          <NewBornRecordPrediction
+            data-testid="newBornRecordPrediction"
+            newbornPredictionLoading={newbornPredictionLoading}
+            onPredictionClick={startPredictionTraining}
+          />
+        </FlexContainer>
+      </FlexContainer>
+      <ErrorDialog open={isErrorOpen} message={error} />
+    </React.Fragment>
+  );
+};
 
 NewBornRecord.propTypes = {
   fetchNewborn: PropTypes.func.isRequired,
-  match: PropTypes.object.isRequired,
   newbornInfo: PropTypes.object.isRequired,
   newbornInfoLoading: PropTypes.bool.isRequired,
   newbornPrediction: PropTypes.array,

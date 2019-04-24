@@ -26,14 +26,3 @@ export const SubTitle = styled.h5`
   color: #555;
   text-transform: uppercase;
 `;
-
-export const Info = styled.div`
-  background-color: lightgreen;
-  border-radius: 2px;
-  border: 1px dotted green;
-  font-size: 15px;
-  font-weight: 400;
-  height: 100%;
-  margin: 5px;
-  padding: 2px 7px;
-`;

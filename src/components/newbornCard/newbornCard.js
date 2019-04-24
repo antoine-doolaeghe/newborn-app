@@ -21,7 +21,7 @@ function NewBornCard(props) {
     handleNewbornBuy,
     tooltipOpen
   } = props;
-  console.log(props.history);
+
   const hasSummaries =
     newbornInfo.summaries && newbornInfo.summaries.length !== 0;
   return (
