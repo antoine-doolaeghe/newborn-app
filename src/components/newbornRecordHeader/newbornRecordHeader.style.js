@@ -38,7 +38,6 @@ export const HeaderPercentage = styled.p`
 `;
 
 export const HeaderInfoContainer = styled.section`
-  border: 2px solid black;
   border-radius: 5px;
   margin: 0px 10px 10px 10px;
   padding: 8px 0px 0px 0px;
