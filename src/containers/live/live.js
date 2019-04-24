@@ -1,15 +1,14 @@
 /* eslint-disable react/forbid-prop-types */
-import * as actions from "../../store/actions";
 
 import React, { Component } from "react";
 import { withAuthenticator } from "aws-amplify-react";
-import withMenuDrawer from "../../components/menuDrawer/withMenuDrawer";
-import withHeader from "../header/withHeader";
 
-import LiveJss from "./live_jss";
 import PropTypes from "prop-types";
 import connect from "react-redux/es/connect/connect";
 import { withStyles } from "@material-ui/core/styles";
+import LiveJss from "./live_jss";
+import withHeader from "../header/withHeader";
+import * as actions from "../../store/actions";
 
 class Live extends Component {
   componentDidMount() {
@@ -33,13 +32,10 @@ Live.propTypes = {
 const mapStateToProps = () => {};
 
 export default withAuthenticator(
-  withMenuDrawer(
-    withHeader(
-      connect(
-        mapStateToProps,
-        actions
-      )(withStyles(LiveJss)(Live))
-    ),
-    4
+  withHeader(
+    connect(
+      mapStateToProps,
+      actions
+    )(withStyles(LiveJss)(Live))
   )
 );

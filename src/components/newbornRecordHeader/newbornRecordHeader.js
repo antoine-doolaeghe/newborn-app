@@ -4,38 +4,44 @@ import {
   HeaderName,
   HeaderInfo,
   HeaderInfoWrap,
-  HeaderBornPlace,
   HeaderInfoContainer,
+  HeaderInfoIcon,
   HeaderValueContainer,
   HeaderValue,
-  HeaderPercentage,
   HeaderInfoTitle,
   HeaderInfoContent
 } from "./newbornRecordHeader.style";
+import { Info } from "../../theme/info.style";
+import { Button } from "../../theme/button.style";
 import { FlexContainer } from "../../theme/grid.style";
 
 function NewbornRecordHeader() {
   return (
     <HeaderContainer data-testid="newbornRecordHeader">
-      <FlexContainer flex={1} direction="column" margin="0px 20px">
-        <HeaderName>Header name</HeaderName>
-        <HeaderBornPlace>Born place</HeaderBornPlace>
+      <FlexContainer flex={0.5} direction="column" margin="8px 10px">
+        <FlexContainer width="100%" justify="space-between">
+          <HeaderName>Header name</HeaderName>
+          <Button>Add to Watchlist</Button>
+        </FlexContainer>
       </FlexContainer>
       <HeaderValueContainer>
-        <FlexContainer align="baseline">
-          <HeaderValue>189</HeaderValue>
-          <HeaderPercentage>18%</HeaderPercentage>
+        <FlexContainer align="center">
+          <HeaderValue>189,45</HeaderValue>
+          <Info>18%</Info>
         </FlexContainer>
       </HeaderValueContainer>
       <HeaderInfoContainer>
+        <HeaderInfoIcon />
         <HeaderInfoWrap>
           <HeaderInfo>
-            <HeaderInfoTitle>hello 1</HeaderInfoTitle>
-            <HeaderInfoContent>hello 1</HeaderInfoContent>
+            <HeaderInfoTitle>Born place</HeaderInfoTitle>
+            <HeaderInfoContent>San Morino</HeaderInfoContent>
           </HeaderInfo>
+        </HeaderInfoWrap>
+        <HeaderInfoWrap>
           <HeaderInfo>
-            <HeaderInfoTitle>hello 1</HeaderInfoTitle>
-            <HeaderInfoContent>hello 1</HeaderInfoContent>
+            <HeaderInfoTitle>Language</HeaderInfoTitle>
+            <HeaderInfoContent>Engligh</HeaderInfoContent>
           </HeaderInfo>
         </HeaderInfoWrap>
         <HeaderInfoWrap>
@@ -43,19 +49,26 @@ function NewbornRecordHeader() {
             <HeaderInfoTitle>hello 1</HeaderInfoTitle>
             <HeaderInfoContent>hello 1</HeaderInfoContent>
           </HeaderInfo>
+        </HeaderInfoWrap>
+      </HeaderInfoContainer>
+      <HeaderInfoContainer>
+        <HeaderInfoIcon />
+        <HeaderInfoWrap>
           <HeaderInfo>
-            <HeaderInfoTitle>hello 1</HeaderInfoTitle>
-            <HeaderInfoContent>hello 1</HeaderInfoContent>
+            <HeaderInfoTitle>Environment Statistics</HeaderInfoTitle>
+            <HeaderInfoContent>10.3</HeaderInfoContent>
           </HeaderInfo>
         </HeaderInfoWrap>
         <HeaderInfoWrap>
           <HeaderInfo>
-            <HeaderInfoTitle>hello 1</HeaderInfoTitle>
-            <HeaderInfoContent>hello 1</HeaderInfoContent>
+            <HeaderInfoTitle>Policy Statistics</HeaderInfoTitle>
+            <HeaderInfoContent>13.2</HeaderInfoContent>
           </HeaderInfo>
+        </HeaderInfoWrap>
+        <HeaderInfoWrap>
           <HeaderInfo>
-            <HeaderInfoTitle>hello 1</HeaderInfoTitle>
-            <HeaderInfoContent>hello 1</HeaderInfoContent>
+            <HeaderInfoTitle>Learning Loss</HeaderInfoTitle>
+            <HeaderInfoContent>34</HeaderInfoContent>
           </HeaderInfo>
         </HeaderInfoWrap>
       </HeaderInfoContainer>

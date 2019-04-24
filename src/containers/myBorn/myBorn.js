@@ -5,7 +5,6 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import connect from "react-redux/es/connect/connect";
 import * as actions from "../../store/actions";
 import { returnNewbornInfo } from "../../utils/helpers/newbornGlobalHelpers";
-import withMenuDrawer from "../../components/menuDrawer/withMenuDrawer";
 import withHeader from "../header/withHeader";
 
 import { Grid, GridContainer, FlexContainer } from "../../theme/grid.style";
@@ -129,13 +128,10 @@ const mapStateToProps = state => ({
 });
 
 export default withAuthenticator(
-  withMenuDrawer(
-    withHeader(
-      connect(
-        mapStateToProps,
-        actions
-      )(MyBorn)
-    ),
-    2
+  withHeader(
+    connect(
+      mapStateToProps,
+      actions
+    )(MyBorn)
   )
 );

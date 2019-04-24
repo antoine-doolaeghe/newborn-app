@@ -1,94 +1,86 @@
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import AppBar from "@material-ui/core/AppBar";
 import { connect } from "react-redux";
-import IconButton from "@material-ui/core/IconButton";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import PropTypes from "prop-types";
-import React from "react";
-import Toolbar from "@material-ui/core/Toolbar";
-import { withStyles } from "@material-ui/core/styles";
-
+import React, { useState, useEffect } from "react";
 import { Auth } from "aws-amplify";
-import styles from "./header_jss";
+import { withRouter } from "react-router";
+import {
+  HeaderContainer,
+  HeaderMenuIcon,
+  HeaderProfileIcon,
+  HeaderMenu,
+  MenuItem
+} from "./header.style";
 import * as actions from "../../store/actions";
 
-class Header extends React.Component {
-  state = {
-    anchorEl: null
-  };
+const Header = props => {
+  const [menuNavOpen, setMenuNavOpen] = useState(false);
+  const [menuProfileOpen, setProfileNavOpen] = useState(false);
 
-  componentDidMount() {
-    const { fetchSingleUser } = this.props;
+  useEffect(() => {
+    const { fetchSingleUser } = props;
     fetchSingleUser();
-  }
+  }, []);
 
-  handleProfileMenuOpen = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-
-  handleMenu = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-
-  handleMenuClose = () => {
-    this.setState({ anchorEl: null });
-  };
-
-  handleLogout = () =>
+  const handleLogout = () => {
     Auth.signOut()
       .then(data => console.log(data))
       .catch(err => console.log(err));
+  };
 
-  render() {
-    const { anchorEl } = this.state;
-    const { classes } = this.props;
-    const isMenuOpen = Boolean(anchorEl);
-    const { currentUser } = this.props;
-    const { username } = currentUser || {};
+  const { currentUser } = props;
+  const { username } = currentUser || {};
 
-    const renderMenu = (
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
-        open={isMenuOpen}
-        onClose={this.handleMenuClose}
-      >
-        <MenuItem onClick={this.handleLogout}>{username}</MenuItem>
-        <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
-      </Menu>
-    );
+  const renderNavigationMenu = (
+    <HeaderMenu
+      open={menuNavOpen}
+      onClose={() => {
+        setMenuNavOpen(!menuNavOpen);
+      }}
+    >
+      <MenuItem onClick={handleLogout}>{username}</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+    </HeaderMenu>
+  );
 
-    return (
-      <div className={classes.root}>
-        <AppBar position="relative" className={classes.appBar}>
-          <Toolbar style={{ marginLeft: localStorage.openDrawer ? 241 : 74 }}>
-            <IconButton
-              className={classes.menuIcon}
-              aria-haspopup="true"
-              onClick={this.handleMenu}
-              color="primary"
-            >
-              <AccountCircle />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        {renderMenu}
-      </div>
-    );
-  }
-}
+  const renderProfileMenu = (
+    <HeaderMenu
+      open={menuProfileOpen}
+      onClose={() => {
+        setProfileNavOpen(!menuProfileOpen);
+      }}
+    >
+      <MenuItem onClick={handleLogout}>{username}</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+    </HeaderMenu>
+  );
 
-Header.propTypes = {
-  classes: PropTypes.object.isRequired
+  return (
+    <HeaderContainer>
+      <HeaderMenuIcon
+        open={menuNavOpen}
+        onClick={() => {
+          setMenuNavOpen(!menuNavOpen);
+        }}
+      />
+      <HeaderProfileIcon
+        open={menuProfileOpen}
+        onClick={() => {
+          setProfileNavOpen(!menuProfileOpen);
+        }}
+      />
+      {renderProfileMenu}
+      {renderNavigationMenu}
+    </HeaderContainer>
+  );
 };
 
 const mapStateToProps = state => ({
   currentUser: state.userReducer.currentUser
 });
 
-export default connect(
-  mapStateToProps,
-  actions
-)(withStyles(styles)(Header));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    actions
+  )(Header)
+);

@@ -24,14 +24,17 @@ export const Container = styled.div`
 
 export const FlexContainer = styled.div`
   align-content: center;
+  align-items: ${props => props.align || null};
   align-items: center;
+  border: ${props => props.border || null};
   display: flex;
-  margin: ${props => props.margin || null};
   flex-direction: ${props => props.direction || null};
   flex: ${props => props.flex || null};
   height: ${props => props.height || "100%"};
-  justify-content: center;
-  align-items: ${props => props.align || null};
+  justify-content: ${props => props.justify || "center"};
+  margin: ${props => props.margin || null};
+  max-width: ${props => props.maxWidth || null};
+  width: ${props => props.width || null};
 `;
 
 export const MainContainer = styled.div`

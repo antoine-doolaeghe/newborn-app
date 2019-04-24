@@ -7,6 +7,7 @@ export const NewbornCardHeaderContainer = styled.section`
   padding: 7px 0px;
   margin: 0px 7px;
   text-transform: capitalize;
+  z-index: 90;
   &:hover {
     text-decoration: underline;
     cursor: pointer;
@@ -24,15 +25,4 @@ export const SubTitle = styled.h5`
   margin: 5px;
   color: #555;
   text-transform: uppercase;
-`;
-
-export const Info = styled.div`
-  background-color: lightgreen;
-  border-radius: 2px;
-  border: 1px dotted green;
-  font-size: 15px;
-  font-weight: 400;
-  height: 100%;
-  margin: 5px;
-  padding: 2px 7px;
 `;

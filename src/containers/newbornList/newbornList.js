@@ -10,7 +10,6 @@ import { Grid, GridContainer, FlexContainer } from "../../theme/grid.style";
 import { ErrorDialog } from "../../theme/error.style";
 import NewBornCard from "../../components/newbornCard/newbornCard";
 import * as actions from "../../store/actions";
-import withMenuDrawer from "../../components/menuDrawer/withMenuDrawer";
 import withHeader from "../header/withHeader";
 
 class List extends Component {
@@ -220,13 +219,11 @@ const mapStateToProps = state => ({
 });
 
 export default withAuthenticator(
-  withMenuDrawer(
-    withHeader(
-      connect(
-        mapStateToProps,
-        actions
-      )(List),
-      0
-    )
+  withHeader(
+    connect(
+      mapStateToProps,
+      actions
+    )(List),
+    0
   )
 );
