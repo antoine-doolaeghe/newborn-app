@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { Line } from "react-chartjs-2";
 import { NewBornRecordGraphContainer } from "./newbornRecordGraph.style";
 import lineChartOptions from "./lineChartOptions";
 
@@ -10,15 +9,13 @@ const NewbornRecordGraph = props => {
 
   return (
     <NewBornRecordGraphContainer data-testid="newbornRecordGraph">
-      {props.newbornInfoLoading ? (
-        <CircularProgress />
-      ) : (
-        <Line
-          options={lineChartOptions(newbornInfo.min)}
-          data={newbornInfo}
-          height={192}
-        />
-      )}
+      {props.newbornInfoLoading && <CircularProgress />
+      // <Line
+      //   options={lineChartOptions(newbornInfo.min)}
+      //   data={newbornInfo}
+      //   height={192}
+      // />
+      }
     </NewBornRecordGraphContainer>
   );
 };
