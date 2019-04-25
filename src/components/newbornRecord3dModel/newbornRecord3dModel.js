@@ -18,7 +18,7 @@ class NewBornRecord3dModel extends Component {
     this.mount.appendChild(this.renderer.domElement);
     // ADD CUBE
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: "#433F81" });
+    const material = new THREE.MeshBasicMaterial({ color: "#0062ff" });
     this.cube = new THREE.Mesh(geometry, material);
     this.scene.add(this.cube);
     this.start();
