@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { withAuthenticator } from "aws-amplify-react";
 import { returnTooltipTitle, isTooltipOpen } from "./newbornList_helpers";
-import { returnNewbornInfo } from "../../utils/helpers/newbornGlobalHelpers";
+import { returnNewbornCardInfo } from "../../utils/helpers/newbornGlobalHelpers";
 
 import { Grid, GridContainer, FlexContainer } from "../../theme/grid.style";
 import { ErrorDialog } from "../../theme/error.style";
@@ -133,7 +133,7 @@ class List extends Component {
     const { hoveredNewborn, selectedNewborns } = this.state;
     parentGeneration.newborns.items.forEach((newborn, newbornKey) => {
       const tooltipTitle = returnTooltipTitle(selectedNewborns);
-      const newbornInfo = returnNewbornInfo(
+      const newbornInfo = returnNewbornCardInfo(
         newborn,
         selectedNewborns,
         hoveredNewborn,

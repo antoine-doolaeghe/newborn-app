@@ -8,13 +8,15 @@ import * as actions from "../../store/actions";
 
 import { FlexContainer } from "../../theme/grid.style";
 import { ErrorDialog } from "../../theme/error.style";
+
 import withHeader from "../header/withHeader";
 import NewbornRecordGraph from "../../components/newbornRecordGraph/newbornRecordGraph";
 import NewbornRecordHeader from "../../components/newbornRecordHeader/newbornRecordHeader";
 import NewBornRecord3dModel from "../../components/newbornRecord3dModel/newbornRecord3dModel";
 import NewBornRecordPrediction from "../../components/newbornPrediction/newbornPrediction";
-import { returnNewbornPredictionData } from "../../utils/helpers/newbornPredictionHelpers";
 
+import { returnNewbornRecordInfo } from "../../utils/helpers/newbornGlobalHelpers";
+import { returnNewbornPredictionData } from "../../utils/helpers/newbornPredictionHelpers";
 import { returnNewbornChartData } from "../../utils/helpers/newbornChartHelpers";
 
 const NewBornRecord = props => {
@@ -33,6 +35,7 @@ const NewBornRecord = props => {
     const newbornId = new URLSearchParams(props.location.search).get(
       "newborn_id"
     );
+    console.log(newbornId);
     resetNewbornPrediction();
     if (!newbornInfo && newbornId) {
       fetchNewborn(newbornId, 100).catch(err => {
@@ -47,6 +50,10 @@ const NewBornRecord = props => {
     const predictionData = returnNewbornPredictionData(newbornInfo);
     startPredictionTraining(predictionData);
   };
+
+  const newbornGraphInfo = props.newbornInfo
+    ? returnNewbornRecordInfo(props.newbornInfo)
+    : null;
 
   return (
     <React.Fragment>
@@ -69,7 +76,7 @@ const NewBornRecord = props => {
           <NewbornRecordGraph
             newbornInfoLoading={newbornInfoLoading}
             data-testid="newbornRecordGraph"
-            newbornInfo={returnNewbornChartData(newbornInfo, newbornPrediction)}
+            newbornInfo={newbornGraphInfo}
           />
           <NewBornRecordPrediction
             data-testid="newBornRecordPrediction"

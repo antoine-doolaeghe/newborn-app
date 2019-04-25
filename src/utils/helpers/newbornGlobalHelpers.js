@@ -1,6 +1,6 @@
 import { returnNewbornChartData } from "./newbornChartHelpers";
 
-export const returnNewbornInfo = (
+export const returnNewbornCardInfo = (
   newborn,
   selectedNewborns,
   hoveredNewborn,
@@ -17,6 +17,16 @@ export const returnNewbornInfo = (
     isHovered: hoveredNewborn === newborn.id,
     isOwnedByCurrentUser,
     color: isOwnedByCurrentUser ? "red" : isSelected ? "green" : "black",
+    summaries: returnNewbornChartData(newborn)
+  };
+  return newbornInfo;
+};
+
+export const returnNewbornRecordInfo = newborn => {
+  const newbornInfo = {
+    name: newborn.name || "",
+    id: newborn.id || "",
+    bornPlace: newborn.bornPlace || "unknown region",
     summaries: returnNewbornChartData(newborn)
   };
   return newbornInfo;
