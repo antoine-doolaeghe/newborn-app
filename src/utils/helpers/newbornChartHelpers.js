@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export const returnNewbornChartData = (newbornData, predictionData) => {
   let newbornSummarySteps = {};
   if (
@@ -21,7 +23,18 @@ export const returnNewbornChartData = (newbornData, predictionData) => {
   newbornSummarySteps.forEach(item => {
     if (item.standardReward) {
       const roundedValue = item.standardReward.toFixed(2);
-      data.push(parseFloat(roundedValue));
+      const val = [];
+      val.push(
+        Date.UTC(
+          dayjs(item.created).year(),
+          dayjs(item.created).month(),
+          dayjs(item.created).day(),
+          dayjs(item.created).hour(),
+          dayjs(item.created).minute()
+        )
+      );
+      val.push(parseFloat([roundedValue]));
+      data.push(val);
       labels.push(item.step);
     }
   });

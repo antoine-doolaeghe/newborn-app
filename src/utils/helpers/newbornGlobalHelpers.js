@@ -27,7 +27,8 @@ export const returnNewbornRecordInfo = newborn => {
     name: newborn.name || "",
     id: newborn.id || "",
     bornPlace: newborn.bornPlace || "unknown region",
-    summaries: returnNewbornChartData(newborn)
+    summaries: returnNewbornChartData(newborn),
+    color: "black"
   };
   return newbornInfo;
 };

@@ -84,6 +84,7 @@ export const getGeneration = `query GetGeneration($id: ID!) {
               items {
                 steps {
                   items {
+                    created
                     meanReward
                     standardReward
                     step
@@ -137,6 +138,7 @@ export const getNewborn = `query GetNewborn($id: ID!, $stepLimit: Int) {
           items {
             steps(limit: $stepLimit) {
               items {
+                created
                 meanReward
                 standardReward
                 step
