@@ -3,22 +3,21 @@ import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { NewBornRecordGraphContainer } from "./newbornRecordGraph.style";
+import { NewbornRecordGraphContainer } from "./newbornRecordGraph.style";
 import lineChartOptions from "./lineChartOptions";
 
 const NewbornRecordGraph = props => {
   const { newbornInfo } = props;
-  console.log(newbornInfo);
-  const hasSummaries =
+  const hasSummaryData =
     newbornInfo &&
     newbornInfo.summaries &&
     newbornInfo.summaries.datasets &&
     newbornInfo.summaries.datasets.length !== 0;
   return (
-    <NewBornRecordGraphContainer data-testid="newbornRecordGraph">
+    <NewbornRecordGraphContainer data-testid="newbornRecordGraph">
       {props.newbornInfoLoading ? (
         <CircularProgress />
-      ) : hasSummaries ? (
+      ) : hasSummaryData ? (
         <HighchartsReact
           highcharts={Highcharts}
           options={lineChartOptions(newbornInfo.summaries, newbornInfo.color)}
@@ -26,12 +25,13 @@ const NewbornRecordGraph = props => {
       ) : (
         <div data-testid="newbornCardEmptyGraph">No training record</div>
       )}
-    </NewBornRecordGraphContainer>
+    </NewbornRecordGraphContainer>
   );
 };
 
 NewbornRecordGraph.propTypes = {
-  newbornGenerations: PropTypes.array.isRequired
+  newbornInfo: PropTypes.object.isRequired,
+  newbornInfoLoading: PropTypes.bool.isRequired
 };
 
 export default NewbornRecordGraph;

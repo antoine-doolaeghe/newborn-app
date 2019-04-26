@@ -11,9 +11,9 @@ import {
   HeaderInfoTitle,
   HeaderInfoContent
 } from "./newbornRecordHeader.style";
-import { Info } from "../../theme/info.style";
-import { Button } from "../../theme/button.style";
-import { FlexContainer } from "../../theme/grid.style";
+import { Info } from "../../theme/chips/info.style";
+import { Button } from "../../theme/buttons/button.style";
+import { FlexContainer } from "../../theme/layout/grid.style";
 
 function NewbornRecordHeader() {
   return (

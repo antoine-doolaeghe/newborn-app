@@ -1,10 +1,19 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const NewBornRecordGraphContainer = styled.div`
+export const NewbornRecordGraphContainer = styled.section`
   align-items: center;
   display: flex;
-  justify-content: center;
   flex: 1.5;
-  border: solid 1px;
+  justify-content: center;
+  flex-direction: column;
   width: 100%;
-`
+`;
+
+export const NewbornRecordGraph = styled.div`
+  align-items: center;
+  display: flex;
+  flex: 1.5;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+`;

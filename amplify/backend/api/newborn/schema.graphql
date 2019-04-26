@@ -35,6 +35,7 @@ type Model @model {
 
 type Episode @model {
   id: String!
+  created: String!
   model: Model @connection(name: "ModelEpisode")
   steps: [Summary] @connection(name: "EpisodeSummary")
 }
@@ -43,6 +44,7 @@ type Summary @model {
   meanReward: Float
   standardReward: Float
   step: Int
+  created: String!
   episode: Episode @connection(name: "EpisodeSummary")
 }
 

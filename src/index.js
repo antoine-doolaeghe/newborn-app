@@ -37,7 +37,7 @@ render(
           <Switch>
             <Route exact path="/" component={NewbornList} />
             <Route exact path="/newborn-record" component={NewBornRecord} />
-            <Route path="/my-born" component={MyBorn} />
+            <Route exact path="/my-born" component={MyBorn} />
             <Route path="/academy" component={Academy} />
             <Route path="/live" component={Live} />
           </Switch>

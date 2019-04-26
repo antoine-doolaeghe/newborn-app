@@ -6,8 +6,8 @@ import { withAuthenticator } from "aws-amplify-react";
 import { withRouter } from "react-router-dom";
 import * as actions from "../../store/actions";
 
-import { FlexContainer } from "../../theme/grid.style";
-import { ErrorDialog } from "../../theme/error.style";
+import { FlexContainer } from "../../theme/layout/grid.style";
+import { ErrorDialog } from "../../theme/snackbars/error.style";
 
 import withHeader from "../header/withHeader";
 import NewbornRecordGraph from "../../components/newbornRecordGraph/newbornRecordGraph";
@@ -29,13 +29,14 @@ const NewBornRecord = props => {
 
   const [error, setError] = useState("");
   const [isErrorOpen, setIsErrorOpen] = useState(false);
-
   useEffect(() => {
-    const { newbornInfo, fetchNewborn, resetNewbornPrediction } = props;
-    const newbornId = new URLSearchParams(props.location.search).get(
-      "newborn_id"
-    );
-    console.log(newbornId);
+    const {
+      newbornInfo,
+      fetchNewborn,
+      resetNewbornPrediction,
+      location
+    } = props;
+    const newbornId = new URLSearchParams(location.search).get("newborn_id");
     resetNewbornPrediction();
     if (!newbornInfo && newbornId) {
       fetchNewborn(newbornId, 100).catch(err => {
@@ -43,7 +44,7 @@ const NewBornRecord = props => {
         setIsErrorOpen(true);
       });
     }
-  }, []);
+  }, [props.location]);
 
   const startPredictionTraining = () => {
     const { newbornInfo, startPredictionTraining } = props;
@@ -95,6 +96,7 @@ NewBornRecord.propTypes = {
   newbornInfo: PropTypes.object.isRequired,
   newbornInfoLoading: PropTypes.bool.isRequired,
   newbornPrediction: PropTypes.array,
+  // location: PropTypes.object.isRequired,
   newbornPredictionLoading: PropTypes.bool.isRequired,
   resetNewbornPrediction: PropTypes.func.isRequired,
   startPredictionTraining: PropTypes.func.isRequired

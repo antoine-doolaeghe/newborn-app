@@ -6,8 +6,11 @@ import connect from "react-redux/es/connect/connect";
 import * as actions from "../../store/actions";
 import { returnNewbornCardInfo } from "../../utils/helpers/newbornGlobalHelpers";
 import withHeader from "../header/withHeader";
-
-import { Grid, GridContainer, FlexContainer } from "../../theme/grid.style";
+import {
+  Grid,
+  GridContainer,
+  FlexContainer
+} from "../../theme/layout/grid.style";
 import NewBornCard from "../../components/newbornCard/newbornCard";
 
 class MyBorn extends Component {

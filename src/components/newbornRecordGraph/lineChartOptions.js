@@ -2,8 +2,8 @@ export default (data, lineColor) => {
   return {
     chart: {
       backgroundColor: "transparent",
-      height: 150,
-      width: 246,
+      height: 350,
+      width: 500,
       type: "areaspline",
       margin: 0,
       padding: 0,
@@ -33,14 +33,18 @@ export default (data, lineColor) => {
       enabled: false
     },
     yAxis: {
-      offset: 0,
-      minorGridLineWidth: 0,
-      visible: false
+      // offset: 0,
+      labels: {
+        enabled: true
+      },
+      minorGridLineWidth: 0
     },
     xAxis: {
-      offset: 0,
+      // offset: 0,
       minorGridLineWidth: 0,
-      visible: false,
+      labels: {
+        enabled: true
+      },
       categories: data.labels
     }
   };
