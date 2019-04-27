@@ -5,7 +5,7 @@ import {
   Title,
   SubTitle
 } from "./newbornCardHeader.style";
-import { Info } from "../../../theme/chips/info.style";
+import { InfoChip } from "../../../theme/chips/info.style";
 
 function NewBornCardHeader(props) {
   return (
@@ -24,7 +24,7 @@ function NewBornCardHeader(props) {
         <Title>{props.title}</Title>
         <SubTitle>{props.subTitle}</SubTitle>
       </div>
-      <Info>+ 5%</Info>
+      <InfoChip>+ 5%</InfoChip>
     </NewbornCardHeaderContainer>
   );
 }
