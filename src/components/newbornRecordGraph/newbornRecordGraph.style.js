@@ -3,9 +3,8 @@ import styled from "styled-components";
 export const NewbornRecordGraphContainer = styled.section`
   align-items: center;
   position: relative;
-  padding-top: 35px
   display: flex;
-  flex: 1.5;
+  height: 440px;
   justify-content: center;
   flex-direction: column;
   width: 100%;

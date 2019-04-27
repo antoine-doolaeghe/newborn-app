@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Info = styled.div`
+export const InfoChip = styled.div`
   background-color: lightgreen;
   border-radius: 2px;
   border: 1px dotted green;

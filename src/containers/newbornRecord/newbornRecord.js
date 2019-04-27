@@ -95,7 +95,7 @@ NewBornRecord.propTypes = {
   fetchNewborn: PropTypes.func.isRequired,
   newbornInfo: PropTypes.object.isRequired,
   newbornInfoLoading: PropTypes.bool.isRequired,
-  newbornPrediction: PropTypes.array,
+  newbornPrediction: PropTypes.object,
   location: PropTypes.object.isRequired,
   newbornPredictionLoading: PropTypes.bool.isRequired,
   resetNewbornPrediction: PropTypes.func.isRequired,
