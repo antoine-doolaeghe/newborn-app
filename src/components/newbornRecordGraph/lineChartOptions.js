@@ -2,7 +2,7 @@ export default (data, lineColor, range) => {
   return {
     chart: {
       backgroundColor: "transparent",
-      height: 350,
+      height: 300,
       width: 500,
       type: "areaspline",
       spacing: 0
@@ -25,7 +25,7 @@ export default (data, lineColor, range) => {
         year: "%b"
       },
       title: {
-        text: "Date"
+        text: ""
       },
       range,
       lineColor: "black",

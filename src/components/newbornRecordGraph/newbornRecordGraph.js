@@ -3,7 +3,11 @@ import React, { useState, useEffect } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { NewbornRecordGraphContainer } from "./newbornRecordGraph.style";
+import {
+  NewbornRecordGraphContainer,
+  GraphRangeContainer,
+  GraphRangeButton
+} from "./newbornRecordGraph.style";
 import lineChartOptions from "./lineChartOptions";
 
 const NewbornRecordGraph = props => {
@@ -16,29 +20,50 @@ const NewbornRecordGraph = props => {
     newbornInfo.summaries.datasets.length !== 0;
   return (
     <NewbornRecordGraphContainer data-testid="newbornRecordGraph">
-      <div>
-        <button
+      <GraphRangeContainer>
+        <GraphRangeButton
           onClick={() => {
             setRange(360000);
           }}
         >
-          1day
-        </button>
-        <button
+          1h
+        </GraphRangeButton>
+        <GraphRangeButton
           onClick={() => {
             setRange(660000);
           }}
         >
-          1day
-        </button>
-        <button
+          12h
+        </GraphRangeButton>
+        <GraphRangeButton
           onClick={() => {
             setRange(86400000);
           }}
         >
-          1day
-        </button>
-      </div>
+          1d
+        </GraphRangeButton>
+        <GraphRangeButton
+          onClick={() => {
+            setRange(86400000);
+          }}
+        >
+          2d
+        </GraphRangeButton>
+        <GraphRangeButton
+          onClick={() => {
+            setRange(86400000);
+          }}
+        >
+          1w
+        </GraphRangeButton>
+        <GraphRangeButton
+          onClick={() => {
+            setRange(86400000);
+          }}
+        >
+          All
+        </GraphRangeButton>
+      </GraphRangeContainer>
       {props.newbornInfoLoading ? (
         <CircularProgress />
       ) : hasSummaryData ? (
