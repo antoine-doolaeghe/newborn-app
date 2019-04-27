@@ -21,7 +21,7 @@ function NewbornRecordHeader() {
       <FlexContainer flex={0.5} direction="column" margin="8px 10px">
         <FlexContainer width="100%" justify="space-between">
           <HeaderName>Header name</HeaderName>
-          <Button>Add to Watchlist</Button>
+          <Button>Buy now</Button>
         </FlexContainer>
       </FlexContainer>
       <HeaderValueContainer>

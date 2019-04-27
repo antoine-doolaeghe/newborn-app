@@ -1,9 +1,9 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const NewbornPredictionContainer = styled.div`
-  align-items: center;
   display: flex;
-  justify-content: center;
+  position: relative;
+  flex-direction: column;
   flex: 2;
   width: 100%;
-`
+`;

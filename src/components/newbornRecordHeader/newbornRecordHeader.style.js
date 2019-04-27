@@ -45,7 +45,7 @@ export const HeaderInfoContainer = styled.section`
   display: flex;
   flex-wrap: wrap;
   font-size: 20px;
-  flex: 1;
+  flex: ${props => props.flex || 1};
 `;
 
 export const HeaderInfoIcon = styled.div`

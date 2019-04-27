@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const NewbornRecordGraphContainer = styled.section`
   align-items: center;
   position: relative;
-  padding-top: 35px
   display: flex;
   flex: 1.5;
   justify-content: center;
