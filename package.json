@@ -11,6 +11,7 @@
     "aws-amplify": "^1.1.22",
     "aws-amplify-react": "^2.3.2",
     "connected-react-router": "^6.3.2",
+    "dayjs": "^1.8.13",
     "eslint": "5.12.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.1.0",

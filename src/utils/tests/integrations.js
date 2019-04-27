@@ -4,7 +4,7 @@ import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import React from "react";
 import { render } from "react-testing-library";
-import { Router } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import configureStore from "../../store/store";
 
 function renderWithReduxAndRouter(
@@ -19,7 +19,7 @@ function renderWithReduxAndRouter(
   return {
     ...render(
       <Provider store={store}>
-        <Router history={history}>{ui}</Router>
+        <BrowserRouter history={history}>{ui}</BrowserRouter>
       </Provider>
     ),
     store

@@ -4,10 +4,13 @@ import PropTypes from "prop-types";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import connect from "react-redux/es/connect/connect";
 import * as actions from "../../store/actions";
-import { returnNewbornInfo } from "../../utils/helpers/newbornGlobalHelpers";
+import { returnNewbornCardInfo } from "../../utils/helpers/newbornGlobalHelpers";
 import withHeader from "../header/withHeader";
-
-import { Grid, GridContainer, FlexContainer } from "../../theme/grid.style";
+import {
+  Grid,
+  GridContainer,
+  FlexContainer
+} from "../../theme/layout/grid.style";
 import NewBornCard from "../../components/newbornCard/newbornCard";
 
 class MyBorn extends Component {
@@ -56,7 +59,7 @@ class MyBorn extends Component {
     const { currentUserNewbornList, currentUserId } = this.props;
     const { hoveredNewborn } = this.state;
     currentUserNewbornList.forEach((newborn, newbornKey) => {
-      const newbornInfo = returnNewbornInfo(
+      const newbornInfo = returnNewbornCardInfo(
         newborn,
         [],
         hoveredNewborn,

@@ -2,12 +2,17 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { withRouter } from "react-router";
 import { withAuthenticator } from "aws-amplify-react";
 import { returnTooltipTitle, isTooltipOpen } from "./newbornList_helpers";
-import { returnNewbornInfo } from "../../utils/helpers/newbornGlobalHelpers";
+import { returnNewbornCardInfo } from "../../utils/helpers/newbornGlobalHelpers";
 
-import { Grid, GridContainer, FlexContainer } from "../../theme/grid.style";
-import { ErrorDialog } from "../../theme/error.style";
+import {
+  Grid,
+  GridContainer,
+  FlexContainer
+} from "../../theme/layout/grid.style";
+import { ErrorDialog } from "../../theme/snackbars/error.style";
 import NewBornCard from "../../components/newbornCard/newbornCard";
 import * as actions from "../../store/actions";
 import withHeader from "../header/withHeader";
@@ -133,7 +138,7 @@ class List extends Component {
     const { hoveredNewborn, selectedNewborns } = this.state;
     parentGeneration.newborns.items.forEach((newborn, newbornKey) => {
       const tooltipTitle = returnTooltipTitle(selectedNewborns);
-      const newbornInfo = returnNewbornInfo(
+      const newbornInfo = returnNewbornCardInfo(
         newborn,
         selectedNewborns,
         hoveredNewborn,
@@ -218,12 +223,10 @@ const mapStateToProps = state => ({
   isAddNewbornToUserLoading: state.newBornReducer.isAddNewbornToUserLoading
 });
 
-export default withAuthenticator(
-  withHeader(
-    connect(
-      mapStateToProps,
-      actions
-    )(List),
-    0
-  )
+export default withHeader(
+  connect(
+    mapStateToProps,
+    actions
+  )(withRouter(List)),
+  0
 );

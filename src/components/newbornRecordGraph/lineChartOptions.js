@@ -1,26 +1,55 @@
-export default minValue => {
+export default (data, lineColor, range) => {
   return {
+    chart: {
+      backgroundColor: "transparent",
+      height: 300,
+      width: 500,
+      type: "areaspline",
+      spacing: 0
+    },
+    credits: {
+      enabled: false
+    },
+    title: {
+      text: ""
+    },
     legend: {
-      display: false,
+      enabled: false,
       spanGaps: false
     },
-    scales: {
-      xAxes: [
-        {
-          display: false // this will remove all the x-axis grid lines
-        }
-      ],
-      yAxes: [
-        {
-          ticks: {
-            min: 0,
-            suggestedMin: 0,
-            suggestedMax: 10,
-            beginAtZero: false
-          },
-          display: false // this will remove all the x-axis grid lines
-        }
-      ]
-    }
+    xAxis: {
+      type: "datetime",
+      dateTimeLabelFormats: {
+        // don't display the dummy year
+        month: "%e. %b",
+        year: "%b"
+      },
+      title: {
+        text: ""
+      },
+      range,
+      lineColor: "black",
+      lineWidth: 2,
+      opposite: true
+    },
+    yAxis: {
+      title: {
+        text: ""
+      },
+      opposite: true
+    },
+    plotOptions: {
+      series: {
+        color: lineColor,
+        pointPlacement: "between",
+        borderWidth: 0
+      },
+      areaspline: {
+        // marker: {
+        //   enabled: false
+        // }
+      }
+    },
+    series: data.datasets
   };
 };

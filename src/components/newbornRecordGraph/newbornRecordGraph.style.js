@@ -1,10 +1,34 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const NewBornRecordGraphContainer = styled.div`
+export const NewbornRecordGraphContainer = styled.section`
+  align-items: center;
+  position: relative;
+  padding-top: 35px
+  display: flex;
+  flex: 1.5;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+`;
+
+export const GraphRangeContainer = styled.section`
+  height: 30px;
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  top: 20px;
+`;
+
+export const GraphRangeButton = styled.button`
+  height: 30px;
+`;
+
+export const NewbornRecordGraph = styled.div`
   align-items: center;
   display: flex;
-  justify-content: center;
   flex: 1.5;
-  border: solid 1px;
+  justify-content: center;
+  flex-direction: column;
   width: 100%;
-`
+`;

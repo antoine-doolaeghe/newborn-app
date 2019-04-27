@@ -5,14 +5,20 @@ import {
   Title,
   SubTitle
 } from "./newbornCardHeader.style";
-import { Info } from "../../../theme/info.style";
+import { Info } from "../../../theme/chips/info.style";
 
 function NewBornCardHeader(props) {
   return (
     <NewbornCardHeaderContainer
-      onClick={() =>
-        props.history.push(`./newborn-record?newborn_id=${props.newbornId}`)
-      }
+      onClick={() => {
+        props.history.push({
+          pathname: `/newborn-record`,
+          search: `?id=${props.newbornId}`,
+          state: {
+            id: props.newbornId
+          }
+        });
+      }}
     >
       <div>
         <Title>{props.title}</Title>

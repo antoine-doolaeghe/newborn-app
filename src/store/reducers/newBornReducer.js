@@ -16,8 +16,8 @@ import {
 const initialState = {
   newbornList: [],
   newbornInfo: null,
-  newbornInfoLoading: false,
-  newbornEpisode: null,
+  newbornInfoLoading: true,
+  newbornEpisode: {},
   newbornEpisodeList: [],
   newbornListLoading: false,
   newbornEpisodeListLoading: false,
