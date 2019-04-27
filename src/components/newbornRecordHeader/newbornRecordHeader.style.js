@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const HeaderContainer = styled.section`
   font-size: 20px;
-  flex: 1.5;
+  height: 400px;
   width: 100%;
   margin-top: 8px;
   display: flex;

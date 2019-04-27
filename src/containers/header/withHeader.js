@@ -6,7 +6,7 @@ export default function withHeader(WrapperHeaderComp) {
   class withHeader extends Component {
     render() {
       return (
-        <div style={{ overflow: "hidden", width: "100%" }}>
+        <div style={{ width: "100%" }}>
           <Header />
           <WrapperHeaderComp />
         </div>

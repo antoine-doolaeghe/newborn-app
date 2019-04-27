@@ -4,7 +4,7 @@ export const NewbornRecordGraphContainer = styled.section`
   align-items: center;
   position: relative;
   display: flex;
-  flex: 1.5;
+  height: 440px;
   justify-content: center;
   flex-direction: column;
   width: 100%;
