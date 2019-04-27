@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { withRouter } from "react-router";
 import { withAuthenticator } from "aws-amplify-react";
 import { returnTooltipTitle, isTooltipOpen } from "./newbornList_helpers";
 import { returnNewbornCardInfo } from "../../utils/helpers/newbornGlobalHelpers";
@@ -167,7 +168,6 @@ class List extends Component {
   };
 
   render() {
-    console.log(this.context.router);
     const {
       parentGenerationLoading,
       generationListLoading,
@@ -223,12 +223,10 @@ const mapStateToProps = state => ({
   isAddNewbornToUserLoading: state.newBornReducer.isAddNewbornToUserLoading
 });
 
-export default withAuthenticator(
-  withHeader(
-    connect(
-      mapStateToProps,
-      actions
-    )(List),
-    0
-  )
+export default withHeader(
+  connect(
+    mapStateToProps,
+    actions
+  )(withRouter(List)),
+  0
 );

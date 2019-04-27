@@ -1,7 +1,6 @@
 import React from "react";
 
-import { Route, Switch } from "react-router";
-import { BrowserRouter } from "react-router-dom";
+import { Switch, Route } from "react-router";
 
 import { ConnectedRouter } from "connected-react-router";
 import { Provider } from "react-redux";
@@ -31,19 +30,18 @@ localStorage.openDrawer = openDrawer;
 
 render(
   <Provider store={store}>
-    <BrowserRouter>
-      <ConnectedRouter history={history}>
-        <MuiThemeProvider theme={MuiTheme}>
-          <Switch>
-            <Route exact path="/" component={NewbornList} />
-            <Route exact path="/newborn-record" component={NewBornRecord} />
-            <Route exact path="/my-born" component={MyBorn} />
-            <Route path="/academy" component={Academy} />
-            <Route path="/live" component={Live} />
-          </Switch>
-        </MuiThemeProvider>
-      </ConnectedRouter>
-    </BrowserRouter>
+    <ConnectedRouter history={history}>
+      <Switch>
+        <Route exact path="/" component={NewbornList} />
+        <Route
+          path="/newborn-record"
+          component={props => <NewBornRecord {...props} />}
+        />
+        <Route path="/my-born" component={MyBorn} />
+        <Route path="/academy" component={Academy} />
+        <Route path="/live" component={Live} />
+      </Switch>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById("root")
 );

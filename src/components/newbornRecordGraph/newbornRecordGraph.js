@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -8,6 +8,7 @@ import lineChartOptions from "./lineChartOptions";
 
 const NewbornRecordGraph = props => {
   const { newbornInfo } = props;
+  const [range, setRange] = useState(86400000);
   const hasSummaryData =
     newbornInfo &&
     newbornInfo.summaries &&
@@ -15,12 +16,39 @@ const NewbornRecordGraph = props => {
     newbornInfo.summaries.datasets.length !== 0;
   return (
     <NewbornRecordGraphContainer data-testid="newbornRecordGraph">
+      <div>
+        <button
+          onClick={() => {
+            setRange(360000);
+          }}
+        >
+          1day
+        </button>
+        <button
+          onClick={() => {
+            setRange(660000);
+          }}
+        >
+          1day
+        </button>
+        <button
+          onClick={() => {
+            setRange(86400000);
+          }}
+        >
+          1day
+        </button>
+      </div>
       {props.newbornInfoLoading ? (
         <CircularProgress />
       ) : hasSummaryData ? (
         <HighchartsReact
           highcharts={Highcharts}
-          options={lineChartOptions(newbornInfo.summaries, newbornInfo.color)}
+          options={lineChartOptions(
+            newbornInfo.summaries,
+            newbornInfo.color,
+            range
+          )}
         />
       ) : (
         <div data-testid="newbornCardEmptyGraph">No training record</div>

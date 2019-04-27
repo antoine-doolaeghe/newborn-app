@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
+import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import { withAuthenticator } from "aws-amplify-react";
-import { withRouter } from "react-router-dom";
 import * as actions from "../../store/actions";
 
 import { FlexContainer } from "../../theme/layout/grid.style";
@@ -36,7 +36,7 @@ const NewBornRecord = props => {
       resetNewbornPrediction,
       location
     } = props;
-    const newbornId = new URLSearchParams(location.search).get("newborn_id");
+    const newbornId = location.state.id;
     resetNewbornPrediction();
     if (!newbornInfo && newbornId) {
       fetchNewborn(newbornId, 100).catch(err => {
@@ -96,7 +96,7 @@ NewBornRecord.propTypes = {
   newbornInfo: PropTypes.object.isRequired,
   newbornInfoLoading: PropTypes.bool.isRequired,
   newbornPrediction: PropTypes.array,
-  // location: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
   newbornPredictionLoading: PropTypes.bool.isRequired,
   resetNewbornPrediction: PropTypes.func.isRequired,
   startPredictionTraining: PropTypes.func.isRequired
@@ -111,11 +111,9 @@ const mapStateToProps = state => ({
 
 export default withAuthenticator(
   withHeader(
-    withRouter(
-      connect(
-        mapStateToProps,
-        actions
-      )(NewBornRecord)
-    )
+    connect(
+      mapStateToProps,
+      actions
+    )(withRouter(NewBornRecord))
   )
 );

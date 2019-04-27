@@ -10,12 +10,15 @@ import { Info } from "../../../theme/chips/info.style";
 function NewBornCardHeader(props) {
   return (
     <NewbornCardHeaderContainer
-      onClick={() =>
+      onClick={() => {
         props.history.push({
-          pathname: `./newborn-record`,
-          search: `?newborn_id=${props.newbornId}`
-        })
-      }
+          pathname: `/newborn-record`,
+          search: `?id=${props.newbornId}`,
+          state: {
+            id: props.newbornId
+          }
+        });
+      }}
     >
       <div>
         <Title>{props.title}</Title>

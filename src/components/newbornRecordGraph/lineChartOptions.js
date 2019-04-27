@@ -1,5 +1,4 @@
-export default (data, lineColor) => {
-  console.log(data.datasets);
+export default (data, lineColor, range) => {
   return {
     chart: {
       backgroundColor: "transparent",
@@ -28,6 +27,7 @@ export default (data, lineColor) => {
       title: {
         text: "Date"
       },
+      range,
       lineColor: "black",
       lineWidth: 2,
       opposite: true
@@ -36,7 +36,6 @@ export default (data, lineColor) => {
       title: {
         text: ""
       },
-      min: 0,
       opposite: true
     },
     plotOptions: {
