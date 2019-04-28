@@ -16,6 +16,7 @@ import {
 const initialState = {
   newbornList: [],
   newbornInfo: null,
+  newbornModelInfo: null,
   newbornInfoLoading: true,
   newbornEpisode: {},
   newbornEpisodeList: [],
@@ -48,6 +49,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         newbornInfo: action.payload,
+        newbornModelInfo: action.payload.models.items[0],
         newbornInfoLoading: false
       };
     case RESET_NEWBORN:

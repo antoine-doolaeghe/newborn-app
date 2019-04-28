@@ -83,7 +83,6 @@ const NewbornRecordGraph = props => {
 };
 
 NewbornRecordGraph.propTypes = {
-  newbornInfo: PropTypes.object.isRequired,
   newbornInfoLoading: PropTypes.bool.isRequired
 };
 

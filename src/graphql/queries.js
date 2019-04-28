@@ -132,7 +132,6 @@ export const getNewborn = `query GetNewborn($id: ID!, $stepLimit: Int) {
     models {
       items {
         id
-        cellInfos
         cellPositions
         episodes {
           items {

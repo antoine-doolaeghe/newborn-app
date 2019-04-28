@@ -1,18 +1,14 @@
 import dayjs from "dayjs";
 
-export const returnNewbornChartData = (newbornData, predictionData) => {
+export const returnNewbornChartData = (newbornModelData, predictionData) => {
   let newbornSummarySteps = {};
   if (
-    newbornData &&
-    newbornData.models &&
-    newbornData.models.items &&
-    newbornData.models.items.length > 0 &&
-    newbornData.models.items[0].episodes &&
-    newbornData.models.items[0].episodes.items.length > 0 &&
-    newbornData.models.items[0].episodes.items[0].steps
+    newbornModelData &&
+    newbornModelData.episodes &&
+    newbornModelData.episodes.items.length > 0 &&
+    newbornModelData.episodes.items[0].steps
   ) {
-    newbornSummarySteps =
-      newbornData.models.items[0].episodes.items[0].steps.items;
+    newbornSummarySteps = newbornModelData.episodes.items[0].steps.items;
   } else {
     return newbornSummarySteps;
   }

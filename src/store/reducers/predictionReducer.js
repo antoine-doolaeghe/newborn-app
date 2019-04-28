@@ -7,7 +7,7 @@ import {
 } from "../actions/helpers/types";
 
 const initialState = {
-  newbornPrediction: [],
+  newbornPrediction: {},
   newbornPredictionLoading: false
 };
 
@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
     case RESET_NEWBORN_PREDICTION:
       return {
         ...state,
-        newbornPrediction: []
+        newbornPrediction: {}
       };
     default:
       return state;
