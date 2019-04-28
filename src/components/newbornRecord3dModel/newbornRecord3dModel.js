@@ -11,8 +11,7 @@ class NewBornRecord3dModel extends Component {
       // ADD SCENE
       this.scene = new THREE.Scene();
       // ADD CAMERA
-      this.camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
-
+      this.camera = new THREE.PerspectiveCamera(15, width / height, 1, 10000);
       this.controls = new OrbitControls(this.camera);
       // ADD RENDERER
       this.renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -22,18 +21,19 @@ class NewBornRecord3dModel extends Component {
       // ADD CUBE
       this.props.newbornModelInfo.cellPositions.forEach(position => {
         const geometry = new THREE.SphereGeometry(1, 32, 32);
-        const material = new THREE.MeshBasicMaterial({
-          color: "#433F81"
+        const material = new THREE.MeshPhongMaterial({
+          color: "red"
         });
         const child = new THREE.Mesh(geometry, material);
+        child.position.set(position[0], position[1], position[2]);
+        this.controls.target = child.position;
         this.scene.add(child);
-        child.position.set(position[0] * 2, position[1] * 2, position[2] * 2);
       });
-      this.camera.position.set(
-        this.props.newbornModelInfo.cellPositions[0][0],
-        this.props.newbornModelInfo.cellPositions[0][1],
-        this.props.newbornModelInfo.cellPositions[0][2]
-      );
+      this.controls.autoRotate = true;
+      this.controls.update();
+      const light = new THREE.AmbientLight(0xffffff, 5.0);
+      this.scene.add(light);
+      this.scene.background = new THREE.Color(0xaaaaaa);
       this.start();
     }
   }
@@ -56,6 +56,7 @@ class NewBornRecord3dModel extends Component {
   animate = () => {
     // this.cube.rotation.x += 0.01;
     // this.cube.rotation.y += 0.01;
+    // this.controls.update();
     this.renderScene();
     this.frameId = window.requestAnimationFrame(this.animate);
   };
