@@ -39,8 +39,7 @@ const NewBornRecord = props => {
     } = props;
     const newbornId = location.state.id;
     resetNewbornPrediction();
-    if (!newbornInfo && newbornId) {
-      console.log("Here");
+    if (!newbornInfo || (newbornInfo && newbornInfo.id !== newbornId)) {
       fetchNewborn(newbornId, 100).catch(err => {
         setError(err.message);
         setIsErrorOpen(true);

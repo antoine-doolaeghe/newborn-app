@@ -65,9 +65,10 @@ class NewBornRecord3dModel extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this.stop();
-    this.mount.removeChild(this.renderer.domElement);
+  componentWillReceiveProps() {
+    if (this.renderer) {
+      this.mount.removeChild(this.renderer.domElement);
+    }
   }
 
   start = () => {
