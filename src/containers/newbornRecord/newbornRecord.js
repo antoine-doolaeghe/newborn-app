@@ -17,16 +17,9 @@ import NewBornRecordPrediction from "../../components/newbornPrediction/newbornP
 
 import { returnNewbornRecordInfo } from "../../utils/helpers/newbornGlobalHelpers";
 import { returnNewbornPredictionData } from "../../utils/helpers/newbornPredictionHelpers";
-import { returnNewbornChartData } from "../../utils/helpers/newbornChartHelpers";
 
 const NewBornRecord = props => {
-  const {
-    newbornInfoLoading,
-    newbornPredictionLoading,
-    newbornPrediction,
-    newbornModelInfo,
-    newbornInfo
-  } = props;
+  const { newbornInfoLoading, newbornPredictionLoading, newbornInfo } = props;
 
   const [error, setError] = useState("");
   const [isErrorOpen, setIsErrorOpen] = useState(false);

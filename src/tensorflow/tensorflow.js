@@ -83,7 +83,7 @@ export const testModel = (model, inputData, normalizationData) => {
   // Generate predictions for a uniform range of numbers between 0 and 1;
   // We un-normalize the data by doing the inverse of the min-max scaling
   // that we did earlier.
-  const [xs, preds] = tf.tidy(() => {
+  const [xs] = tf.tidy(() => {
     const xs = tf.linspace(0, 1, 100);
     const preds = model.predict(xs.reshape([100, 1]));
 

@@ -1,6 +1,6 @@
-import { applyMiddleware, compose, createStore } from "redux";
 import { createMemoryHistory } from "history";
-import thunk from "redux-thunk";
+import { Switch, Route } from "react-router";
+import { ConnectedRouter } from "connected-react-router";
 import { Provider } from "react-redux";
 import React from "react";
 import { render } from "react-testing-library";
@@ -19,7 +19,11 @@ function renderWithReduxAndRouter(
   return {
     ...render(
       <Provider store={store}>
-        <BrowserRouter history={history}>{ui}</BrowserRouter>
+        <ConnectedRouter history={history}>
+          <Switch>
+            <BrowserRouter history={history}>{ui}</BrowserRouter>
+          </Switch>
+        </ConnectedRouter>
       </Provider>
     ),
     store

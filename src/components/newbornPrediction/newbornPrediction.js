@@ -12,7 +12,7 @@ import { Button } from "../../theme/buttons/button.style";
 import { Input } from "../../theme/inputs/input.style";
 
 function NewbornPrediction(props) {
-  const { newbornPredictionLoading, onPredictionClick } = props;
+  const { newbornPredictionLoading } = props;
   return (
     <NewbornPredictionContainer data-testid="newbornRecordPrediction">
       {newbornPredictionLoading ? (
