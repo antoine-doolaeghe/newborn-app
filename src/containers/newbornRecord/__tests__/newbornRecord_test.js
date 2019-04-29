@@ -7,7 +7,6 @@ import { renderWithReduxAndRouter } from "../../../utils/tests/integrations";
 describe("<NewbornRecord />", () => {
   afterEach(cleanup);
   it("should display the record child element", () => {
-    window.HTMLCanvasElement.prototype.getContext = () => {};
     // window.HTMLCanvasElement.prototype.getContext = () => {};
     // const { getByTestId } = renderWithReduxAndRouter(<NewbornCard />);
     expect(true).toBeTruthy();

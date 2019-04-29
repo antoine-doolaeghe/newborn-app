@@ -13,8 +13,6 @@ class NewBornRecord3dModel extends Component {
       // ADD CAMERA
       this.camera = new THREE.PerspectiveCamera(15, width / height, 1, 10000);
       this.controls = new OrbitControls(this.camera);
-      // ADD RENDERER
-
       // ADD CUBE
       const geometry = new THREE.SphereGeometry(1, 32, 32);
       const material = new THREE.MeshPhongMaterial({

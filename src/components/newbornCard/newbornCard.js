@@ -5,13 +5,13 @@ import HighchartsReact from "highcharts-react-official";
 import Tooltip from "@material-ui/core/Tooltip";
 import NewBornCardHeader from "./newbornCardHeader/newbornCardHeader";
 import {
-  NewbornCard,
+  NewbornCardWrapper,
   NewbornCardBuyButton,
   NewbornCardChartWrapper
 } from "./newbornCard.style";
 import lineChartOptions from "./lineChartOptions";
 
-function NewBornCard(props) {
+function NewbornCard(props) {
   const {
     handleNewbornHover,
     handleNewbornSelect,
@@ -26,7 +26,7 @@ function NewBornCard(props) {
     newbornInfo.summaries && newbornInfo.summaries.length !== 0;
   return (
     <Tooltip title={tooltipTitle} open={tooltipOpen}>
-      <NewbornCard
+      <NewbornCardWrapper
         onClick={handleNewbornSelect}
         onMouseEnter={handleNewbornHover}
         isSelected={newbornInfo.isSelected}
@@ -65,12 +65,12 @@ function NewBornCard(props) {
             )}
           </React.Fragment>
         )}
-      </NewbornCard>
+      </NewbornCardWrapper>
     </Tooltip>
   );
 }
 
-NewBornCard.propTypes = {
+NewbornCard.propTypes = {
   history: PropTypes.object,
   handleNewbornHover: PropTypes.func,
   handleNewbornSelect: PropTypes.func,
@@ -81,4 +81,4 @@ NewBornCard.propTypes = {
   tooltipOpen: PropTypes.bool.isRequired
 };
 
-export default NewBornCard;
+export default NewbornCard;

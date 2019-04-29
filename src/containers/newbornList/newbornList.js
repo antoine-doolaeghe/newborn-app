@@ -208,7 +208,7 @@ List.propTypes = {
   generationList: PropTypes.array.isRequired,
   generationListLoading: PropTypes.bool.isRequired,
   parentGeneration: PropTypes.object.isRequired,
-  parentGenerationLoading: PropTypes.func.isRequired,
+  parentGenerationLoading: PropTypes.bool.isRequired,
   updateNewbornOwnership: PropTypes.func.isRequired
 };
 

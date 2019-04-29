@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NewbornCard = styled.section`
+export const NewbornCardWrapper = styled.section`
   border: ${props =>
     props.isPlaceholderCard
       ? "2px dashed black"

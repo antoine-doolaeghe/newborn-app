@@ -4,29 +4,16 @@ import { cleanup } from "react-testing-library";
 import NewbornList from "../newbornList";
 import { renderWithReduxAndRouter } from "../../../utils/tests/integrations";
 
-jest.mock("aws-amplify-react", () => {
-  return {
-    withAuthenticator: component => {
-      return component;
-    }
-  };
-});
-
 describe("<NewbornList />", () => {
   afterEach(cleanup);
   it("should display the correct newborn card name", () => {
-    const initialState = {
-      newbornList: [
-        {
-          id: "test"
+    const { getByTestId } = renderWithReduxAndRouter(<NewbornList />, {
+      initialState: {
+        userReducer: {
+          currentUserId: "1234"
         }
-      ],
-      newbornListLoading: false
-    };
-    const { getByTestId } = renderWithReduxAndRouter(
-      <NewbornList />,
-      initialState
-    );
+      }
+    });
     expect(getByTestId("newbornListLoading")).toBeTruthy();
   });
 });

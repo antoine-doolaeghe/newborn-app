@@ -9,7 +9,7 @@ describe("<NewbornRecordGraph />", () => {
   it("should display the record child element", () => {
     window.HTMLCanvasElement.prototype.getContext = () => {};
     const { getByTestId } = renderWithReduxAndRouter(
-      <NewbornRecordGraph newbornInfo={{}} />
+      <NewbornRecordGraph newbornInfoLoading={false} newbornInfo={{}} />
     );
     expect(getByTestId("newbornRecordGraph")).toBeTruthy();
   });
