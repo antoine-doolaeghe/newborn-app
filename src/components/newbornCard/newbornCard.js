@@ -5,13 +5,14 @@ import HighchartsReact from "highcharts-react-official";
 import Tooltip from "@material-ui/core/Tooltip";
 import NewBornCardHeader from "./newbornCardHeader/newbornCardHeader";
 import {
-  NewbornCard,
-  NewbornCardBuyButton,
+  NewbornCardWrapper,
+  NewbornCardBuyWrapper,
   NewbornCardChartWrapper
 } from "./newbornCard.style";
+import { BuyButton } from "../../theme/buttons/button.style";
 import lineChartOptions from "./lineChartOptions";
 
-function NewBornCard(props) {
+function NewbornCard(props) {
   const {
     handleNewbornHover,
     handleNewbornSelect,
@@ -26,13 +27,15 @@ function NewBornCard(props) {
     newbornInfo.summaries && newbornInfo.summaries.length !== 0;
   return (
     <Tooltip title={tooltipTitle} open={tooltipOpen}>
-      <NewbornCard
+      <NewbornCardWrapper
         onClick={handleNewbornSelect}
         onMouseEnter={handleNewbornHover}
         isSelected={newbornInfo.isSelected}
         data-newbornid={newbornInfo.id}
         isNewbornOwnedByCurrentUser={newbornInfo.isOwnedByCurrentUser}
-        data-testid="newbornCard"
+        data-testid={
+          !isPlaceholderCard ? "newbornCard" : "newbornCardPlaceholder"
+        }
         isPlaceholderCard={isPlaceholderCard}
       >
         {!isPlaceholderCard && (
@@ -57,20 +60,23 @@ function NewBornCard(props) {
               <div data-testid="newbornCardEmptyGraph">No training record</div>
             )}
             {newbornInfo.isHovered && (
-              <NewbornCardBuyButton
-                onClick={handleNewbornBuy}
-                data-newborninfo={JSON.stringify(newbornInfo)}
-                data-testid="newbornOwnershipButton"
-              />
+              <NewbornCardBuyWrapper>
+                <BuyButton
+                  color="primary"
+                  onClick={handleNewbornBuy}
+                  data-newborninfo={JSON.stringify(newbornInfo)}
+                  data-testid="newbornOwnershipButton"
+                />
+              </NewbornCardBuyWrapper>
             )}
           </React.Fragment>
         )}
-      </NewbornCard>
+      </NewbornCardWrapper>
     </Tooltip>
   );
 }
 
-NewBornCard.propTypes = {
+NewbornCard.propTypes = {
   history: PropTypes.object,
   handleNewbornHover: PropTypes.func,
   handleNewbornSelect: PropTypes.func,
@@ -81,4 +87,4 @@ NewBornCard.propTypes = {
   tooltipOpen: PropTypes.bool.isRequired
 };
 
-export default NewBornCard;
+export default NewbornCard;

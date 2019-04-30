@@ -5,7 +5,6 @@ import { Switch, Route } from "react-router";
 import { ConnectedRouter } from "connected-react-router";
 import { Provider } from "react-redux";
 import { render } from "react-dom";
-import { MuiThemeProvider } from "@material-ui/core/styles";
 
 import Amplify from "aws-amplify";
 import configureStore, { history } from "./store/store";
@@ -18,7 +17,6 @@ import NewbornList from "./containers/newbornList/newbornList";
 import Live from "./containers/live/live";
 import MyBorn from "./containers/myBorn/myBorn";
 import NewBornRecord from "./containers/newbornRecord/newbornRecord";
-import MuiTheme from "./utils/jss/MuiTheme";
 
 const store = configureStore(/* provide initial state if any */);
 

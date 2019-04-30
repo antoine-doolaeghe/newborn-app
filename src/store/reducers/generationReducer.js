@@ -7,9 +7,7 @@ import {
   FETCH_GENERATIONS_REQUEST,
   FETCH_GENERATIONS_SUCCESS,
   FETCH_PARENT_GENERATION_REQUEST,
-  FETCH_PARENT_GENERATION_SUCCESS,
-  FETCH_CHILD_GENERATION_REQUEST,
-  FETCH_CHILD_GENERATION_SUCCESS
+  FETCH_PARENT_GENERATION_SUCCESS
 } from "../actions/helpers/types";
 
 const initialState = {
@@ -19,6 +17,7 @@ const initialState = {
   generationListLoading: false,
   isAddNewbornToUserLoading: false,
   parentGeneration: {},
+  parentGenerationNewborns: [],
   parentGenerationLoading: false
 };
 
@@ -71,7 +70,10 @@ export default (state = initialState, action) => {
       return {
         ...state,
         parentGenerationLoading: false,
-        parentGeneration: action.payload
+        parentGeneration: action.payload,
+        parentGenerationNewborns: action.payload.newborns
+          ? action.payload.newborns.items
+          : initialState.parentGenerationNewborns
       };
 
     default:

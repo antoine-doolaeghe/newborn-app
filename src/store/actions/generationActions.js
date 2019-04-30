@@ -6,9 +6,6 @@ import {
   FETCH_GENERATIONS_REQUEST,
   FETCH_GENERATIONS_FAILURE,
   FETCH_GENERATIONS_SUCCESS,
-  FETCH_CHILD_GENERATION_REQUEST,
-  FETCH_CHILD_GENERATION_FAILURE,
-  FETCH_CHILD_GENERATION_SUCCESS,
   FETCH_PARENT_GENERATION_REQUEST,
   FETCH_PARENT_GENERATION_FAILURE,
   FETCH_PARENT_GENERATION_SUCCESS
@@ -53,7 +50,7 @@ export const fetchGenerations = () => async dispatch => {
   } catch (error) {
     dispatch({ type: FETCH_GENERATIONS_FAILURE });
     throw new Error(
-      "Oops, there has been an issue when loading the list of newborn generation"
+      `Oops, there has been an issue when loading the list of newborn generation${error}`
     );
   }
 };
@@ -77,23 +74,3 @@ export const fetchParentGeneration = generationID => async dispatch => {
     );
   }
 };
-
-// export const fetchChildGeneration = (newbornA, newbornB) => async dispatch => {
-//   dispatch({ type: FETCH_PARENT_GENERATION_REQUEST });
-//   try {
-//     const childGenerationResponse = await API.graphql(
-//       graphqlOperation(queries.getGeneration, {
-//         id: generationID
-//       })
-//     );
-//     dispatch({
-//       type: FETCH_PARENT_GENERATION_SUCCESS,
-//       payload: parentGenerationResponse.data.getGeneration
-//     });
-//   } catch (error) {
-//     dispatch({ type: FETCH_PARENT_GENERATION_FAILURE });
-//     throw new Error(
-//       "Oops, there has been an issue when loading child newborns"
-//     );
-//   }
-// };

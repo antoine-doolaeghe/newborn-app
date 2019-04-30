@@ -12,7 +12,7 @@ import { Button } from "../../theme/buttons/button.style";
 import { Input } from "../../theme/inputs/input.style";
 
 function NewbornPrediction(props) {
-  const { newbornPredictionLoading, onPredictionClick } = props;
+  const { newbornPredictionLoading } = props;
   return (
     <NewbornPredictionContainer data-testid="newbornRecordPrediction">
       {newbornPredictionLoading ? (
@@ -89,7 +89,9 @@ function NewbornPrediction(props) {
         }}
       >
         <div style={{ flex: 2 }}>Prediction summary</div>
-        <Button style={{ flex: 1 }}>Run prediction</Button>
+        <Button color="primary" style={{ flex: 1 }}>
+          Run prediction
+        </Button>
       </div>
     </NewbornPredictionContainer>
   );

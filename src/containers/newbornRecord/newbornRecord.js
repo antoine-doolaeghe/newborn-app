@@ -17,34 +17,27 @@ import NewBornRecordPrediction from "../../components/newbornPrediction/newbornP
 
 import { returnNewbornRecordInfo } from "../../utils/helpers/newbornGlobalHelpers";
 import { returnNewbornPredictionData } from "../../utils/helpers/newbornPredictionHelpers";
-import { returnNewbornChartData } from "../../utils/helpers/newbornChartHelpers";
 
 const NewBornRecord = props => {
   const {
     newbornInfoLoading,
     newbornPredictionLoading,
-    newbornPrediction,
-    newbornInfo
+    newbornInfo,
+    fetchNewborn,
+    resetNewbornPrediction,
+    location
   } = props;
 
   const [error, setError] = useState("");
   const [isErrorOpen, setIsErrorOpen] = useState(false);
   useEffect(() => {
-    const {
-      newbornInfo,
-      fetchNewborn,
-      resetNewbornPrediction,
-      location
-    } = props;
     const newbornId = location.state.id;
     resetNewbornPrediction();
-    if (!newbornInfo && newbornId) {
-      fetchNewborn(newbornId, 100).catch(err => {
-        setError(err.message);
-        setIsErrorOpen(true);
-      });
-    }
-  }, [props.location]);
+    fetchNewborn(newbornId, 100).catch(err => {
+      setError(err.message);
+      setIsErrorOpen(true);
+    });
+  }, [fetchNewborn, location.state.id, resetNewbornPrediction]);
 
   const startPredictionTraining = () => {
     const { newbornInfo, startPredictionTraining } = props;
@@ -52,7 +45,7 @@ const NewBornRecord = props => {
     startPredictionTraining(predictionData);
   };
 
-  const newbornGraphInfo = props.newbornInfo
+  const newbornGraphInfo = newbornInfo
     ? returnNewbornRecordInfo(props.newbornInfo)
     : null;
 
@@ -66,7 +59,10 @@ const NewBornRecord = props => {
           margin="10px"
         >
           <NewbornRecordHeader data-testid="newbornRecordHeader" />
-          <NewBornRecord3dModel data-testid="newbornRecord3dModel" />
+          <NewBornRecord3dModel
+            newbornModelInfo={props.newbornModelInfo}
+            data-testid="newbornRecord3dModel"
+          />
         </FlexContainer>
         <FlexContainer
           direction="column"
@@ -93,7 +89,7 @@ const NewBornRecord = props => {
 
 NewBornRecord.propTypes = {
   fetchNewborn: PropTypes.func.isRequired,
-  newbornInfo: PropTypes.object.isRequired,
+  newbornInfo: PropTypes.object,
   newbornInfoLoading: PropTypes.bool.isRequired,
   newbornPrediction: PropTypes.object,
   location: PropTypes.object.isRequired,
@@ -104,6 +100,7 @@ NewBornRecord.propTypes = {
 
 const mapStateToProps = state => ({
   newbornInfo: state.newBornReducer.newbornInfo,
+  newbornModelInfo: state.newBornReducer.newbornModelInfo,
   newbornInfoLoading: state.newBornReducer.newbornInfoLoading,
   newbornPrediction: state.predictionReducer.newbornPrediction,
   newbornPredictionLoading: state.predictionReducer.newbornPredictionLoading
