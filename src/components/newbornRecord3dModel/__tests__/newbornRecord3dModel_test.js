@@ -6,7 +6,7 @@ import NewbornRecord3dModel from "../newbornRecord3dModel";
 describe("<NewbornRecordGraph />", () => {
   afterEach(cleanup);
   it("should display the record child element", () => {
-    const { getByTestId, debug } = render(<NewbornRecord3dModel />);
+    const { getByTestId } = render(<NewbornRecord3dModel />);
     expect(getByTestId("newbornRecord3dModel")).toBeTruthy();
   });
 });

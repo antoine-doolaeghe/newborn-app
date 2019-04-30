@@ -19,9 +19,10 @@ const NewbornRecordGraph = props => {
     newbornInfo.summaries.datasets &&
     newbornInfo.summaries.datasets.length !== 0;
   return (
-    <NewbornRecordGraphContainer data-testid="newbornRecordGraph">
+    <NewbornRecordGraphContainer data-testid="newbornRecordGraphContainer">
       <GraphRangeContainer>
         <GraphRangeButton
+          data-testid="graphRangeButton"
           onClick={() => {
             setRange(360000);
           }}
@@ -29,6 +30,7 @@ const NewbornRecordGraph = props => {
           1h
         </GraphRangeButton>
         <GraphRangeButton
+          data-testid="graphRangeButton"
           onClick={() => {
             setRange(660000);
           }}
@@ -36,6 +38,7 @@ const NewbornRecordGraph = props => {
           12h
         </GraphRangeButton>
         <GraphRangeButton
+          data-testid="graphRangeButton"
           onClick={() => {
             setRange(86400000);
           }}
@@ -43,6 +46,7 @@ const NewbornRecordGraph = props => {
           1d
         </GraphRangeButton>
         <GraphRangeButton
+          data-testid="graphRangeButton"
           onClick={() => {
             setRange(86400000);
           }}
@@ -50,6 +54,7 @@ const NewbornRecordGraph = props => {
           2d
         </GraphRangeButton>
         <GraphRangeButton
+          data-testid="graphRangeButton"
           onClick={() => {
             setRange(86400000);
           }}
@@ -57,6 +62,7 @@ const NewbornRecordGraph = props => {
           1w
         </GraphRangeButton>
         <GraphRangeButton
+          data-testid="graphRangeButton"
           onClick={() => {
             setRange(86400000);
           }}
