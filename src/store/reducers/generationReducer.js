@@ -17,6 +17,7 @@ const initialState = {
   generationListLoading: false,
   isAddNewbornToUserLoading: false,
   parentGeneration: {},
+  parentGenerationNewborns: [],
   parentGenerationLoading: false
 };
 
@@ -69,7 +70,10 @@ export default (state = initialState, action) => {
       return {
         ...state,
         parentGenerationLoading: false,
-        parentGeneration: action.payload
+        parentGeneration: action.payload,
+        parentGenerationNewborns: action.payload.newborns
+          ? action.payload.newborns.items
+          : initialState.parentGenerationNewborns
       };
 
     default:

@@ -50,12 +50,13 @@ export const fetchGenerations = () => async dispatch => {
   } catch (error) {
     dispatch({ type: FETCH_GENERATIONS_FAILURE });
     throw new Error(
-      "Oops, there has been an issue when loading the list of newborn generation"
+      `Oops, there has been an issue when loading the list of newborn generation${error}`
     );
   }
 };
 
 export const fetchParentGeneration = generationID => async dispatch => {
+  console.log("HERE");
   dispatch({ type: FETCH_PARENT_GENERATION_REQUEST });
   try {
     const parentGenerationResponse = await API.graphql(

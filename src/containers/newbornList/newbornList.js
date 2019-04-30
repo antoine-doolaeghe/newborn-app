@@ -28,10 +28,11 @@ class List extends Component {
   }
 
   componentDidMount() {
-    const { fetchGenerations } = this.props;
-    fetchGenerations().catch(error => {
-      this.handleErrorMessage(error);
-    });
+    const { fetchGenerations, generationList } = this.props;
+    if (generationList)
+      fetchGenerations().catch(error => {
+        this.handleErrorMessage(error);
+      });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -65,14 +66,18 @@ class List extends Component {
     const placeholderCardList = this.returnPlaceholderCardList();
 
     return (
-      <React.Fragment>
-        <Grid columnNumber={newbornCardList.length} rowNumber={1}>
+      <Fragment>
+        <Grid
+          columnNumber={newbornCardList.length}
+          data-testid="newborn-card-list"
+          rowNumber={1}
+        >
           {newbornCardList}
         </Grid>
         <Grid columnNumber={4} rowNumber={1}>
           {placeholderCardList}
         </Grid>
-      </React.Fragment>
+      </Fragment>
     );
   };
 
@@ -118,7 +123,11 @@ class List extends Component {
   };
 
   renderEmptyBornsIllustration = () => (
-    <img src="./images/no-borns.svg" alt="no borns" />
+    <img
+      data-testid="noBornIllustration"
+      src="./images/no-borns.svg"
+      alt="no borns"
+    />
   );
 
   returnPlaceholderCardList = () => {
@@ -133,9 +142,9 @@ class List extends Component {
 
   returnNewbornCardList = () => {
     const newbornCardList = [];
-    const { parentGeneration, currentUserId } = this.props;
+    const { parentGenerationNewborns, currentUserId } = this.props;
     const { hoveredNewborn, selectedNewborns } = this.state;
-    parentGeneration.newborns.items.forEach((newborn, newbornKey) => {
+    parentGenerationNewborns.forEach((newborn, newbornKey) => {
       const tooltipTitle = returnTooltipTitle(selectedNewborns);
       const newbornInfo = returnNewbornCardInfo(
         newborn,
@@ -170,13 +179,11 @@ class List extends Component {
     const {
       parentGenerationLoading,
       generationListLoading,
-      parentGeneration
+      parentGenerationNewborns
     } = this.props;
     const { isErrorOpen, errorMessage } = this.state;
     const hasNewborns =
-      parentGeneration.newborns &&
-      parentGeneration.newborns.items &&
-      parentGeneration.newborns.items.length > 0;
+      parentGenerationNewborns && parentGenerationNewborns.length > 0;
     return (
       <Fragment>
         {generationListLoading || parentGenerationLoading ? (
@@ -188,7 +195,7 @@ class List extends Component {
           </FlexContainer>
         ) : (
           <Fragment>
-            <GridContainer align="left">
+            <GridContainer align="left" data-testid="newbornListContainer">
               {hasNewborns
                 ? this.renderNewbornGeneration()
                 : this.renderEmptyBornsIllustration()}
@@ -202,13 +209,13 @@ class List extends Component {
 }
 
 List.propTypes = {
-  currentUserId: PropTypes.string.isRequired,
+  currentUserId: PropTypes.string,
   fetchGenerations: PropTypes.func.isRequired,
   fetchParentGeneration: PropTypes.func.isRequired,
   generationList: PropTypes.array.isRequired,
   generationListLoading: PropTypes.bool.isRequired,
-  parentGeneration: PropTypes.object.isRequired,
   parentGenerationLoading: PropTypes.bool.isRequired,
+  parentGenerationNewborns: PropTypes.array.isRequired,
   updateNewbornOwnership: PropTypes.func.isRequired
 };
 
@@ -219,6 +226,7 @@ const mapStateToProps = state => ({
   generationListLoading: state.generationReducer.generationListLoading,
   parentGeneration: state.generationReducer.parentGeneration,
   parentGenerationLoading: state.generationReducer.parentGenerationLoading,
+  parentGenerationNewborns: state.generationReducer.parentGenerationNewborns,
   isAddNewbornToUserLoading: state.newBornReducer.isAddNewbornToUserLoading
 });
 

@@ -32,7 +32,9 @@ function NewbornCard(props) {
         isSelected={newbornInfo.isSelected}
         data-newbornid={newbornInfo.id}
         isNewbornOwnedByCurrentUser={newbornInfo.isOwnedByCurrentUser}
-        data-testid="newbornCard"
+        data-testid={
+          !isPlaceholderCard ? "newbornCard" : "newbornCardPlaceholder"
+        }
         isPlaceholderCard={isPlaceholderCard}
       >
         {!isPlaceholderCard && (
