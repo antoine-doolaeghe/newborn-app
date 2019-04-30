@@ -56,7 +56,6 @@ export const fetchGenerations = () => async dispatch => {
 };
 
 export const fetchParentGeneration = generationID => async dispatch => {
-  console.log("HERE");
   dispatch({ type: FETCH_PARENT_GENERATION_REQUEST });
   try {
     const parentGenerationResponse = await API.graphql(

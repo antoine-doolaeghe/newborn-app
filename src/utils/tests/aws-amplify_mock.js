@@ -8,7 +8,7 @@ export const amplifyMock = data => {
       }
     },
     API: {
-      graphql: query => {
+      graphql: () => {
         return new Promise(resolve => {
           resolve(data);
         });
