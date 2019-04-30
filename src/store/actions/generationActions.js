@@ -74,23 +74,3 @@ export const fetchParentGeneration = generationID => async dispatch => {
     );
   }
 };
-
-// export const fetchChildGeneration = (newbornA, newbornB) => async dispatch => {
-//   dispatch({ type: FETCH_PARENT_GENERATION_REQUEST });
-//   try {
-//     const childGenerationResponse = await API.graphql(
-//       graphqlOperation(queries.getGeneration, {
-//         id: generationID
-//       })
-//     );
-//     dispatch({
-//       type: FETCH_PARENT_GENERATION_SUCCESS,
-//       payload: parentGenerationResponse.data.getGeneration
-//     });
-//   } catch (error) {
-//     dispatch({ type: FETCH_PARENT_GENERATION_FAILURE });
-//     throw new Error(
-//       "Oops, there has been an issue when loading child newborns"
-//     );
-//   }
-// };
