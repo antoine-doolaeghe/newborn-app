@@ -6,9 +6,10 @@ import Tooltip from "@material-ui/core/Tooltip";
 import NewBornCardHeader from "./newbornCardHeader/newbornCardHeader";
 import {
   NewbornCardWrapper,
-  NewbornCardBuyButton,
+  NewbornCardBuyWrapper,
   NewbornCardChartWrapper
 } from "./newbornCard.style";
+import { BuyButton } from "../../theme/buttons/button.style";
 import lineChartOptions from "./lineChartOptions";
 
 function NewbornCard(props) {
@@ -59,11 +60,14 @@ function NewbornCard(props) {
               <div data-testid="newbornCardEmptyGraph">No training record</div>
             )}
             {newbornInfo.isHovered && (
-              <NewbornCardBuyButton
-                onClick={handleNewbornBuy}
-                data-newborninfo={JSON.stringify(newbornInfo)}
-                data-testid="newbornOwnershipButton"
-              />
+              <NewbornCardBuyWrapper>
+                <BuyButton
+                  color="primary"
+                  onClick={handleNewbornBuy}
+                  data-newborninfo={JSON.stringify(newbornInfo)}
+                  data-testid="newbornOwnershipButton"
+                />
+              </NewbornCardBuyWrapper>
             )}
           </React.Fragment>
         )}

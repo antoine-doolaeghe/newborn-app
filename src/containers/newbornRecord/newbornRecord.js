@@ -19,26 +19,25 @@ import { returnNewbornRecordInfo } from "../../utils/helpers/newbornGlobalHelper
 import { returnNewbornPredictionData } from "../../utils/helpers/newbornPredictionHelpers";
 
 const NewBornRecord = props => {
-  const { newbornInfoLoading, newbornPredictionLoading, newbornInfo } = props;
+  const {
+    newbornInfoLoading,
+    newbornPredictionLoading,
+    newbornInfo,
+    fetchNewborn,
+    resetNewbornPrediction,
+    location
+  } = props;
 
   const [error, setError] = useState("");
   const [isErrorOpen, setIsErrorOpen] = useState(false);
   useEffect(() => {
-    const {
-      newbornInfo,
-      fetchNewborn,
-      resetNewbornPrediction,
-      location
-    } = props;
     const newbornId = location.state.id;
     resetNewbornPrediction();
-    if (!newbornInfo || (newbornInfo && newbornInfo.id !== newbornId)) {
-      fetchNewborn(newbornId, 100).catch(err => {
-        setError(err.message);
-        setIsErrorOpen(true);
-      });
-    }
-  }, [props.location]);
+    fetchNewborn(newbornId, 100).catch(err => {
+      setError(err.message);
+      setIsErrorOpen(true);
+    });
+  }, [fetchNewborn, location.state.id, resetNewbornPrediction]);
 
   const startPredictionTraining = () => {
     const { newbornInfo, startPredictionTraining } = props;

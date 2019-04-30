@@ -89,7 +89,9 @@ function NewbornPrediction(props) {
         }}
       >
         <div style={{ flex: 2 }}>Prediction summary</div>
-        <Button style={{ flex: 1 }}>Run prediction</Button>
+        <Button color="primary" style={{ flex: 1 }}>
+          Run prediction
+        </Button>
       </div>
     </NewbornPredictionContainer>
   );

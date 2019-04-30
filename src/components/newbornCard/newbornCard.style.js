@@ -20,19 +20,19 @@ export const NewbornCardWrapper = styled.section`
   }
 `;
 
-export const NewbornCardBuyButton = styled.button`
-  bottom: 10px;
-  border-radius: 2px;
-  border: 1px solid black;
-  height: 23px;
+export const NewbornCardBuyWrapper = styled.div`
+  bottom: 0px;
+  /* border-radius: 2px; */
+  /* border: 1px solid black; */
+  /* height: 23px; */
   position: absolute;
-  right: 10px;
-  width: 45px;
-  box-shadow: 0px;
-  &:hover {
+  right: 0px;
+  /* width: 45px; */
+  /* box-shadow: 0px; */
+  /* &:hover {
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
     cursor: pointer;
-  }
+  } */
 `;
 
 export const NewbornCardChartWrapper = styled.div`
