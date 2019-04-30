@@ -1,5 +1,9 @@
 import { returnNewbornChartData } from "../newbornChartHelpers";
 
+global.Date.UTC = () => {
+  return 1554054060000;
+};
+
 const MOCK_NEWBORN_SUMMARY_DATA = {
   episodes: {
     items: [
@@ -26,7 +30,7 @@ describe("returnNewbornChartData", () => {
       labels: [1],
       datasets: [
         {
-          data: [[1554057660000, 1]],
+          data: [[1554054060000, 1]],
           backgroundColor: ["black"],
           label: "summary data"
         }
@@ -48,7 +52,7 @@ describe("returnNewbornChartData", () => {
           label: "prediction data"
         },
         {
-          data: [[1554057660000, 1]],
+          data: [[1554054060000, 1]],
           backgroundColor: ["black"],
           label: "summary data"
         }
