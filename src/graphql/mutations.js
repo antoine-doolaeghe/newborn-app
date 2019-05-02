@@ -8,11 +8,14 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
     userName
     newborns {
       items {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       nextToken
     }
@@ -26,11 +29,14 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
     userName
     newborns {
       items {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       nextToken
     }
@@ -44,11 +50,14 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
     userName
     newborns {
       items {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       nextToken
     }
@@ -60,11 +69,14 @@ export const createGeneration = `mutation CreateGeneration($input: CreateGenerat
     id
     newborns {
       items {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       nextToken
     }
@@ -76,11 +88,14 @@ export const updateGeneration = `mutation UpdateGeneration($input: UpdateGenerat
     id
     newborns {
       items {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       nextToken
     }
@@ -92,11 +107,14 @@ export const deleteGeneration = `mutation DeleteGeneration($input: DeleteGenerat
     id
     newborns {
       items {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       nextToken
     }
@@ -105,24 +123,17 @@ export const deleteGeneration = `mutation DeleteGeneration($input: DeleteGenerat
 `;
 export const createNewborn = `mutation CreateNewborn($input: CreateNewbornInput!) {
   createNewborn(input: $input) {
-    id
     bio
-    name
     bornPlace
-    owner {
-      id
-      profileImage
-      userName
-      newborns {
-        nextToken
-      }
-    }
+    childs
     generation {
       id
       newborns {
         nextToken
       }
     }
+    hexColor
+    id
     models {
       items {
         id
@@ -131,22 +142,59 @@ export const createNewborn = `mutation CreateNewborn($input: CreateNewbornInput!
       }
       nextToken
     }
+    name
+    owner {
+      id
+      profileImage
+      userName
+      newborns {
+        nextToken
+      }
+    }
+    parents
+    partners
     predictions {
       items {
         meanReward
       }
       nextToken
     }
-    hexColor
   }
 }
 `;
-export const updateNewborn = `mutation UpdateNewborn($input: UpdateNewbornInput!) {
+export const updateNewborn = `mutation UpdateNewborn($input: UpdateNewbornInput!, $stepLimit: Int) {
   updateNewborn(input: $input) {
-    id
     bio
-    name
     bornPlace
+    childs
+    generation {
+      id
+      newborns {
+        nextToken
+      }
+    }
+    hexColor
+    id
+    models {
+      items {
+        id
+        cellInfos
+        cellPositions
+        episodes {
+          items {
+            steps(limit: $stepLimit) {
+              items {
+                meanReward
+                standardReward
+                step
+              }
+            }
+          }
+        }
+      }
+      nextToken
+    }
+    name
     owner {
       id
       profileImage
@@ -155,50 +203,30 @@ export const updateNewborn = `mutation UpdateNewborn($input: UpdateNewbornInput!
         nextToken
       }
     }
-    generation {
-      id
-      newborns {
-        nextToken
-      }
-    }
-    models {
-      items {
-        id
-        cellInfos
-        cellPositions
-      }
-      nextToken
-    }
+    parents
+    partners
     predictions {
       items {
         meanReward
       }
       nextToken
     }
-    hexColor
   }
 }
 `;
 export const deleteNewborn = `mutation DeleteNewborn($input: DeleteNewbornInput!) {
   deleteNewborn(input: $input) {
-    id
     bio
-    name
     bornPlace
-    owner {
-      id
-      profileImage
-      userName
-      newborns {
-        nextToken
-      }
-    }
+    childs
     generation {
       id
       newborns {
         nextToken
       }
     }
+    hexColor
+    id
     models {
       items {
         id
@@ -207,13 +235,23 @@ export const deleteNewborn = `mutation DeleteNewborn($input: DeleteNewbornInput!
       }
       nextToken
     }
+    name
+    owner {
+      id
+      profileImage
+      userName
+      newborns {
+        nextToken
+      }
+    }
+    parents
+    partners
     predictions {
       items {
         meanReward
       }
       nextToken
     }
-    hexColor
   }
 }
 `;
@@ -223,25 +261,28 @@ export const createModel = `mutation CreateModel($input: CreateModelInput!) {
     cellInfos
     cellPositions
     newborn {
-      id
       bio
-      name
       bornPlace
+      childs
+      generation {
+        id
+      }
+      hexColor
+      id
+      models {
+        nextToken
+      }
+      name
       owner {
         id
         profileImage
         userName
       }
-      generation {
-        id
-      }
-      models {
-        nextToken
-      }
+      parents
+      partners
       predictions {
         nextToken
       }
-      hexColor
     }
     episodes {
       items {
@@ -258,25 +299,28 @@ export const updateModel = `mutation UpdateModel($input: UpdateModelInput!) {
     cellInfos
     cellPositions
     newborn {
-      id
       bio
-      name
       bornPlace
+      childs
+      generation {
+        id
+      }
+      hexColor
+      id
+      models {
+        nextToken
+      }
+      name
       owner {
         id
         profileImage
         userName
       }
-      generation {
-        id
-      }
-      models {
-        nextToken
-      }
+      parents
+      partners
       predictions {
         nextToken
       }
-      hexColor
     }
     episodes {
       items {
@@ -293,25 +337,28 @@ export const deleteModel = `mutation DeleteModel($input: DeleteModelInput!) {
     cellInfos
     cellPositions
     newborn {
-      id
       bio
-      name
       bornPlace
+      childs
+      generation {
+        id
+      }
+      hexColor
+      id
+      models {
+        nextToken
+      }
+      name
       owner {
         id
         profileImage
         userName
       }
-      generation {
-        id
-      }
-      models {
-        nextToken
-      }
+      parents
+      partners
       predictions {
         nextToken
       }
-      hexColor
     }
     episodes {
       items {
@@ -330,11 +377,14 @@ export const createEpisode = `mutation CreateEpisode($input: CreateEpisodeInput!
       cellInfos
       cellPositions
       newborn {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       episodes {
         nextToken
@@ -359,11 +409,14 @@ export const updateEpisode = `mutation UpdateEpisode($input: UpdateEpisodeInput!
       cellInfos
       cellPositions
       newborn {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       episodes {
         nextToken
@@ -388,11 +441,14 @@ export const deleteEpisode = `mutation DeleteEpisode($input: DeleteEpisodeInput!
       cellInfos
       cellPositions
       newborn {
-        id
         bio
-        name
         bornPlace
+        childs
         hexColor
+        id
+        name
+        parents
+        partners
       }
       episodes {
         nextToken
@@ -470,25 +526,28 @@ export const createPrediction = `mutation CreatePrediction($input: CreatePredict
   createPrediction(input: $input) {
     meanReward
     newborn {
-      id
       bio
-      name
       bornPlace
+      childs
+      generation {
+        id
+      }
+      hexColor
+      id
+      models {
+        nextToken
+      }
+      name
       owner {
         id
         profileImage
         userName
       }
-      generation {
-        id
-      }
-      models {
-        nextToken
-      }
+      parents
+      partners
       predictions {
         nextToken
       }
-      hexColor
     }
   }
 }
@@ -497,25 +556,28 @@ export const updatePrediction = `mutation UpdatePrediction($input: UpdatePredict
   updatePrediction(input: $input) {
     meanReward
     newborn {
-      id
       bio
-      name
       bornPlace
+      childs
+      generation {
+        id
+      }
+      hexColor
+      id
+      models {
+        nextToken
+      }
+      name
       owner {
         id
         profileImage
         userName
       }
-      generation {
-        id
-      }
-      models {
-        nextToken
-      }
+      parents
+      partners
       predictions {
         nextToken
       }
-      hexColor
     }
   }
 }
@@ -524,25 +586,28 @@ export const deletePrediction = `mutation DeletePrediction($input: DeletePredict
   deletePrediction(input: $input) {
     meanReward
     newborn {
-      id
       bio
-      name
       bornPlace
+      childs
+      generation {
+        id
+      }
+      hexColor
+      id
+      models {
+        nextToken
+      }
+      name
       owner {
         id
         profileImage
         userName
       }
-      generation {
-        id
-      }
-      models {
-        nextToken
-      }
+      parents
+      partners
       predictions {
         nextToken
       }
-      hexColor
     }
   }
 }

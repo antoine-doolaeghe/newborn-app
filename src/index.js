@@ -1,26 +1,24 @@
-import React from 'react';
-import registerServiceWorker from './registerServiceWorker';
+import React from "react";
 
-import { Route, Switch } from 'react-router';
-import configureStore, { history } from './store/store';
-import { ConnectedRouter } from 'connected-react-router';
-import { Provider } from 'react-redux';
-import { render } from 'react-dom';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { Switch, Route } from "react-router";
 
-import Amplify from 'aws-amplify';
-import aws_config from './aws-exports';
+import { ConnectedRouter } from "connected-react-router";
+import { Provider } from "react-redux";
+import { render } from "react-dom";
+
+import Amplify from "aws-amplify";
+import configureStore, { history } from "./store/store";
+import registerServiceWorker from "./registerServiceWorker";
+import aws_config from "./aws-exports";
 
 // Route imports
-import Academy from './components/academy/academy';
-import Home from './components/home/home';
-import Live from './components/live/live';
-import MyBorn from './components/myBorn/myBorn';
-import NewBornRecord from './components/newbornRecord/newbornRecord';
-import MuiTheme from './utils/jss/MuiTheme';
+import Academy from "./containers/academy/academy";
+import NewbornList from "./containers/newbornList/newbornList";
+import Live from "./containers/live/live";
+import MyBorn from "./containers/myBorn/myBorn";
+import NewBornRecord from "./containers/newbornRecord/newbornRecord";
 
-const store = configureStore(/* provide initial state if any */)
-
+const store = configureStore(/* provide initial state if any */);
 
 // configure the amplify local config
 Amplify.configure(aws_config);
@@ -31,17 +29,18 @@ localStorage.openDrawer = openDrawer;
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <MuiThemeProvider theme={MuiTheme}>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/newborn-record/:id" component={NewBornRecord} />
-          <Route exact path="/my-born" component={MyBorn} />
-          <Route exact path="/academy" component={Academy} />
-          <Route exact path="/live" component={Live} />
-        </Switch>
-      </MuiThemeProvider>
+      <Switch>
+        <Route exact path="/" component={NewbornList} />
+        <Route
+          path="/newborn-record"
+          component={props => <NewBornRecord {...props} />}
+        />
+        <Route path="/my-born" component={MyBorn} />
+        <Route path="/academy" component={Academy} />
+        <Route path="/live" component={Live} />
+      </Switch>
     </ConnectedRouter>
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById("root")
 );
 registerServiceWorker();

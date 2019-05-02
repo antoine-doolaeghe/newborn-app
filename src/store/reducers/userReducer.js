@@ -1,10 +1,15 @@
 import {
   FETCH_LOGGED_IN_USER_FAILURE,
   FETCH_LOGGED_IN_USER_SUCCESS,
+  FETCH_USER_NEWBORNS_REQUEST,
+  FETCH_USER_NEWBORNS_SUCCESS
 } from "../actions/helpers/types";
 
 const initialState = {
   currentUser: null,
+  currentUserId: null,
+  currentUserNewbornList: [],
+  currentUserNewbornListLoading: true
 };
 
 export default (state = initialState, action) => {
@@ -12,16 +17,29 @@ export default (state = initialState, action) => {
     case FETCH_LOGGED_IN_USER_SUCCESS:
       return {
         ...state,
-        currentUser: action.payload
+        currentUser: action.payload,
+        currentUserId: action.payload.attributes.sub
       };
 
-    case FETCH_LOGGED_IN_USER_FAILURE: 
+    case FETCH_LOGGED_IN_USER_FAILURE:
       return {
         ...state,
-        currentUser: null,
-      }
+        currentUser: null
+      };
+
+    case FETCH_USER_NEWBORNS_REQUEST:
+      return {
+        ...state,
+        currentUserNewbornListLoading: true
+      };
+    case FETCH_USER_NEWBORNS_SUCCESS:
+      return {
+        ...state,
+        currentUserNewbornList: action.payload,
+        currentUserNewbornListLoading: false
+      };
 
     default:
-      return state
+      return state;
   }
-}
+};
