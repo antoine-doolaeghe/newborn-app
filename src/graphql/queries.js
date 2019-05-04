@@ -14,6 +14,7 @@ export const getUser = `query GetUser($id: ID!) {
         hexColor
         id
         name
+        sex
         parents
         partners
         models {
@@ -70,6 +71,7 @@ export const getGeneration = `query GetGeneration($id: ID!) {
         hexColor
         id
         name
+        sex
         parents
         partners
         owner {
@@ -129,6 +131,7 @@ export const getNewborn = `query GetNewborn($id: ID!, $stepLimit: Int) {
     }
     hexColor
     id
+    sex
     models {
       items {
         id
@@ -185,6 +188,7 @@ export const listNewborns = `query ListNewborns(
       hexColor
       id
       name
+      sex
       owner {
         id
         profileImage

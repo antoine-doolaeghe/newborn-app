@@ -23,6 +23,7 @@ type Newborn @model {
   parents: [String]
   partners: [String]
   predictions: [Prediction] @connection(name: "NewbornPrediction")
+  sex: String!
 }
 
 type Model @model {
