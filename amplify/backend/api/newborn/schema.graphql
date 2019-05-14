@@ -7,6 +7,7 @@ type User @model {
 
 type Generation @model {
   id: String!
+  index: Int!
   newborns: [Newborn] @connection(name: "GenerationNewborn")
 }
 
