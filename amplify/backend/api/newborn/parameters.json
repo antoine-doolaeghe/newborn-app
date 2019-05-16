@@ -1,5 +1,0 @@
-{
-    "AppSyncApiName": "newborn",
-    "DynamoDBBillingMode": "PAY_PER_REQUEST",
-    "APIKeyExpirationEpoch": "-1"
-}

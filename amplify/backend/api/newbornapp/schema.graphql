@@ -1,3 +1,7 @@
+type Query {
+  echo(msg: String): String
+}
+
 type User @model {
   id: String!
   profileImage: String

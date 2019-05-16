@@ -1,6 +1,6 @@
 {
 	"api": {
-		"newborn": {
+		"newbornapp": {
 			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
 			"output": {
@@ -9,9 +9,23 @@
 		}
 	},
 	"auth": {
-		"cognitoee3c6904": {
+		"cognito482ddef8": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation"
+		}
+	},
+	"function": {
+		"newbornauth": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": []
+		},
+		"newborncommunication": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": []
 		}
 	}
 }
