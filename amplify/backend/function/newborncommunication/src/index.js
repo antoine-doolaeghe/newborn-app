@@ -32,11 +32,16 @@ gfhUARMq/aclKIQAeemnptLIQEgM9Ea+1Zg8NrLvKwkNrcvADvrQ/TQW3PiFCsas5ZOnB9w=
 });
 
 exports.handler = function(event, context, callback) {
+  const newbornId = event.arguments.msg;
   ssh
-    .exec(`echo '${event.arguments.msg}'`, {
-      out: function(stdout) {
-        callback(null, stdout);
-      }
+    .exec("source /home/ubuntu/anaconda3/bin/activate  python3", {
+      out: console.log("activated python3")
     })
+    .exec(
+      `nohup mlagents-learn ./unity-volume/config/trainer_config.yaml --env=./unity-volume/newborn --train --newborn-id=${newbornId} --no-graphics`,
+      {
+        out: console.log.bind("successful launch of environment")
+      }
+    )
     .start();
 };
