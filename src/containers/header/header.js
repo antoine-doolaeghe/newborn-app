@@ -18,7 +18,7 @@ const Header = props => {
   useEffect(() => {
     const { fetchSingleUser } = props;
     fetchSingleUser();
-  }, []);
+  }, [props]);
 
   const handleLogout = () => {
     Auth.signOut()
@@ -72,6 +72,8 @@ const Header = props => {
     </HeaderContainer>
   );
 };
+
+Header.prototype = {};
 
 const mapStateToProps = state => ({
   currentUser: state.userReducer.currentUser
