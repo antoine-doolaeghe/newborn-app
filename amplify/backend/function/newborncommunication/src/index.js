@@ -1,12 +1,15 @@
-var SSH = require("simple-ssh");
-var fs = require("fs");
-const path = require("path");
+var node_ssh = require("node-ssh");
+var ssh = new node_ssh();
 
-var ssh = new SSH({
-  host: "ec2-100-26-185-251.compute-1.amazonaws.com",
-  user: "ubuntu",
-  // key: fs.readFileSync(path.join(__dirname, "ec2-test.pem"))
-  key: `-----BEGIN RSA PRIVATE KEY-----
+exports.handler = function(event, context, callback) {
+  const newbornId = event.arguments.msg;
+  const newbornPort = Math.floor(Math.random() * 9000) + 1000;
+  ssh
+    .connect({
+      host: "ec2-54-152-253-226.compute-1.amazonaws.com",
+      user: "ubuntu",
+      // key: fs.readFileSync(path.join(__dirname, "ec2-test.pem"))
+      privateKey: `-----BEGIN RSA PRIVATE KEY-----
 MIIEpQIBAAKCAQEAm2kNrrTEflym+CLoX/SDI+cDSNwzlZAIU9CYHvd0PzkxBTcqNqiZm+Bw9Udu
 wb32DPq+HV1SoEmp9NuBw3Eu1t75p2ECzouVQvTYHi7Kk6Hm1QaDDEdWz7BDvCWWFVbY+9VNylwh
 nz9GHwvgQqfrZbqjSPT/Aevf6b/92GjLQt+6a8DrEz90ZO67iVqBY/9NDkPeuO4h8Q4Xh+pXM9Fy
@@ -29,19 +32,15 @@ gkx7eUCqiy3KGVmLHdkc+93I+TKNqYCj1N7VJoi6IvIdcTkCgYEAs4Qyrm0cvF6X4j+a5IgVS3c6
 OucIBME7nAocS4nvtr09WeCwgbuF/w3Fe791QNFO8haeUxsMjHX4GOFlB+ymcdeAPrUymE8CUIuC
 gfhUARMq/aclKIQAeemnptLIQEgM9Ea+1Zg8NrLvKwkNrcvADvrQ/TQW3PiFCsas5ZOnB9w=
 -----END RSA PRIVATE KEY-----`
-});
-
-exports.handler = function(event, context, callback) {
-  const newbornId = event.arguments.msg;
-  ssh
-    .exec("source /home/ubuntu/anaconda3/bin/activate  python3", {
-      out: console.log("activated python3")
     })
-    .exec(
-      `nohup mlagents-learn ./unity-volume/config/trainer_config.yaml --env=./unity-volume/newborn --train --newborn-id=${newbornId} --no-graphics`,
-      {
-        out: console.log.bind("successful launch of environment")
-      }
-    )
-    .start();
+    .then(function() {
+      ssh
+        .execCommand(`nohup ./scripts.sh ${newbornId} ${newbornPort}`, {
+          cwd: "/home/ubuntu"
+        })
+        .then(function(result) {
+          console.log("STDOUT: " + result.stdout);
+          console.log("STDERR: " + result.stderr);
+        });
+    });
 };

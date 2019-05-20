@@ -5,6 +5,7 @@
   "main": "index.js",
   "license": "Apache-2.0",
   "dependencies": {
-    "simple-ssh": "^1.0.0"
+    "simple-ssh": "^1.0.0",
+    "node-ssh": "^6.0.0"
   }
 }

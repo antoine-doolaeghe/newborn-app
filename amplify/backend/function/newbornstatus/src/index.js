@@ -4,11 +4,12 @@ const ddb = new aws.DynamoDB.DocumentClient();
 const newbornTableName = "Newborn-cgfnpw6cc5a3hdvevr6vfbvxlq-dev";
 
 exports.handler = function(event, context) {
-  const trainingMessage = event.Records[0].Sns.Message;
+  const newbornId = JSON.parse(event.Records[0].Sns.Message).newbornId;
+  const trainingMessage = JSON.parse(event.Records[0].Sns.Message).status;
   const params = {
     TableName: newbornTableName,
     Key: {
-      id: "8425280452053986835"
+      id: newbornId
     },
     UpdateExpression: "set trainingStatus = :s",
     ExpressionAttributeValues: {
