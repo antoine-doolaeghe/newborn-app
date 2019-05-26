@@ -1,3 +1,8 @@
+type Query {
+  start(newbornId: String): String
+  terminate(instanceId: String): String
+}
+
 type User @model {
   id: String!
   profileImage: String
@@ -7,6 +12,7 @@ type User @model {
 
 type Generation @model {
   id: String!
+  index: Int!
   newborns: [Newborn] @connection(name: "GenerationNewborn")
 }
 
@@ -23,6 +29,9 @@ type Newborn @model {
   parents: [String]
   partners: [String]
   predictions: [Prediction] @connection(name: "NewbornPrediction")
+  sex: String!
+  instanceId: String
+  isTraining: Boolean
 }
 
 type Model @model {

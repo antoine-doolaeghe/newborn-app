@@ -8,7 +8,7 @@
     "@material-ui/icons": "^3.0.2",
     "@material-ui/styles": "^3.0.0-alpha.10",
     "@tensorflow/tfjs": "^1.0.4",
-    "aws-amplify": "^1.1.22",
+    "aws-amplify": "^1.1.28",
     "aws-amplify-react": "^2.3.2",
     "connected-react-router": "^6.3.2",
     "dayjs": "^1.8.13",
