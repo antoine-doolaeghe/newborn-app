@@ -1,5 +1,6 @@
 type Query {
-  echo(msg: String): String
+  start(newbornId: String): String
+  terminate(instanceId: String): String
 }
 
 type User @model {
@@ -29,6 +30,7 @@ type Newborn @model {
   partners: [String]
   predictions: [Prediction] @connection(name: "NewbornPrediction")
   sex: String!
+  instanceId: String
   isTraining: Boolean
 }
 

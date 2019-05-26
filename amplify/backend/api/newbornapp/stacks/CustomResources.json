@@ -31,21 +31,21 @@
       "Type": "Custom::EmptyResource",
       "Condition": "AlwaysFalse"
     },
-    "EchoLambdaDataSource": {
+    "StartLambdaDataSource": {
       "Type": "AWS::AppSync::DataSource",
       "Properties": {
         "ApiId": {
           "Ref": "AppSyncApiId"
         },
-        "Name": "EchoFunction",
+        "Name": "StartFunction",
         "Type": "AWS_LAMBDA",
         "ServiceRoleArn": {
-          "Fn::GetAtt": ["EchoLambdaDataSourceRole", "Arn"]
+          "Fn::GetAtt": ["StartLambdaDataSourceRole", "Arn"]
         },
         "LambdaConfig": {
           "LambdaFunctionArn": {
             "Fn::Sub": [
-              "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:newborncommunication-${env}",
+              "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:ec2start-${env}",
               {
                 "env": {
                   "Ref": "env"
@@ -56,12 +56,12 @@
         }
       }
     },
-    "EchoLambdaDataSourceRole": {
+    "StartLambdaDataSourceRole": {
       "Type": "AWS::IAM::Role",
       "Properties": {
         "RoleName": {
           "Fn::Sub": [
-            "EchoLambdaDataSourceRole-${env}",
+            "StartLambdaDataSourceRole-${env}",
             {
               "env": {
                 "Ref": "env"
@@ -93,7 +93,7 @@
                   "Resource": [
                     {
                       "Fn::Sub": [
-                        "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:newborncommunication-${env}",
+                        "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:ec2start-${env}",
                         {
                           "env": {
                             "Ref": "env"
@@ -109,20 +109,20 @@
         ]
       }
     },
-    "QueryEchoResolver": {
+    "QueryStartResolver": {
       "Type": "AWS::AppSync::Resolver",
       "Properties": {
         "ApiId": {
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": ["EchoLambdaDataSource", "Name"]
+          "Fn::GetAtt": ["StartLambdaDataSource", "Name"]
         },
         "TypeName": "Query",
-        "FieldName": "echo",
+        "FieldName": "start",
         "RequestMappingTemplateS3Location": {
           "Fn::Sub": [
-            "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.echo.req.vtl",
+            "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.start.req.vtl",
             {
               "S3DeploymentBucket": {
                 "Ref": "S3DeploymentBucket"
@@ -135,7 +135,124 @@
         },
         "ResponseMappingTemplateS3Location": {
           "Fn::Sub": [
-            "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.echo.res.vtl",
+            "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.start.res.vtl",
+            {
+              "S3DeploymentBucket": {
+                "Ref": "S3DeploymentBucket"
+              },
+              "S3DeploymentRootKey": {
+                "Ref": "S3DeploymentRootKey"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "TerminateLambdaDataSource": {
+      "Type": "AWS::AppSync::DataSource",
+      "Properties": {
+        "ApiId": {
+          "Ref": "AppSyncApiId"
+        },
+        "Name": "TerminateFunction",
+        "Type": "AWS_LAMBDA",
+        "ServiceRoleArn": {
+          "Fn::GetAtt": ["TerminateLambdaDataSourceRole", "Arn"]
+        },
+        "LambdaConfig": {
+          "LambdaFunctionArn": {
+            "Fn::Sub": [
+              "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:ec2terminate-${env}",
+              {
+                "env": {
+                  "Ref": "env"
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "TerminateLambdaDataSourceRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "RoleName": {
+          "Fn::Sub": [
+            "TerminateLambdaDataSourceRole-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        },
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "appsync.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "InvokeLambdaFunction",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": ["lambda:invokeFunction"],
+                  "Resource": [
+                    {
+                      "Fn::Sub": [
+                        "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:ec2terminate-${env}",
+                        {
+                          "env": {
+                            "Ref": "env"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "QueryTerminateResolver": {
+      "Type": "AWS::AppSync::Resolver",
+      "Properties": {
+        "ApiId": {
+          "Ref": "AppSyncApiId"
+        },
+        "DataSourceName": {
+          "Fn::GetAtt": ["TerminateLambdaDataSource", "Name"]
+        },
+        "TypeName": "Query",
+        "FieldName": "terminate",
+        "RequestMappingTemplateS3Location": {
+          "Fn::Sub": [
+            "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.terminate.req.vtl",
+            {
+              "S3DeploymentBucket": {
+                "Ref": "S3DeploymentBucket"
+              },
+              "S3DeploymentRootKey": {
+                "Ref": "S3DeploymentRootKey"
+              }
+            }
+          ]
+        },
+        "ResponseMappingTemplateS3Location": {
+          "Fn::Sub": [
+            "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.terminate.req.vtl",
             {
               "S3DeploymentBucket": {
                 "Ref": "S3DeploymentBucket"

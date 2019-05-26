@@ -27,13 +27,31 @@
 			"build": true,
 			"dependsOn": []
 		},
+		"newbornepisode": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": []
+		},
 		"newbornstatus": {
 			"service": "Lambda",
 			"providerPlugin": "awscloudformation",
 			"build": true,
 			"dependsOn": []
 		},
-		"newbornepisode": {
+		"newborntrainer": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": []
+		},
+		"ec2terminate": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": []
+		},
+		"ec2start": {
 			"service": "Lambda",
 			"providerPlugin": "awscloudformation",
 			"build": true,
