@@ -1,14 +1,12 @@
 var node_ssh = require("node-ssh");
 var ssh = new node_ssh();
 
-exports.handler = async event => {
-  // TODO implement
-
+exports.handler = function(event, context, callback) {
   const newbornId = event.arguments.msg;
   const newbornPort = Math.floor(Math.random() * 9000) + 1000;
   ssh
     .connect({
-      host: "ec2-3-82-155-140.compute-1.amazonaws.com",
+      host: "ec2-54-152-253-226.compute-1.amazonaws.com",
       user: "ubuntu",
       // key: fs.readFileSync(path.join(__dirname, "ec2-test.pem"))
       privateKey: `-----BEGIN RSA PRIVATE KEY-----
@@ -37,38 +35,12 @@ gfhUARMq/aclKIQAeemnptLIQEgM9Ea+1Zg8NrLvKwkNrcvADvrQ/TQW3PiFCsas5ZOnB9w=
     })
     .then(function() {
       ssh
-        .execCommand(`source /home/ubuntu/anaconda3/bin/activate python3`, {
+        .execCommand(`nohup ./scripts.sh ${newbornId} ${newbornPort}`, {
           cwd: "/home/ubuntu"
         })
         .then(function(result) {
           console.log("STDOUT: " + result.stdout);
           console.log("STDERR: " + result.stderr);
-        });
-      ssh
-        .execCommand(`cd newborn-ml-scripts/`, {
-          cwd: "/home/ubuntu"
-        })
-        .then(function(result) {
-          console.log("STDOUT: " + result.stdout);
-          console.log("STDERR: " + result.stderr);
-        });
-      ssh
-        .execCommand(
-          `mlagents-learn unity-volume/config/trainer_config.yaml --env=./newborn --train --newborn-id=${newbornId} --no-graphics --api-connection --base-port=${newbornPort} &`,
-          {
-            cwd: "/home/ubuntu"
-          }
-        )
-        .then(function(result) {
-          console.log("STDOUT: " + result.stdout);
-          console.log("STDERR: " + result.stderr);
-          return result;
         });
     });
-  return;
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify("Hello from Lambda!")
-  };
-  return response;
 };
