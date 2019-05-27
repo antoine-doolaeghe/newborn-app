@@ -39,12 +39,6 @@
 			"build": true,
 			"dependsOn": []
 		},
-		"newborntrainer": {
-			"service": "Lambda",
-			"providerPlugin": "awscloudformation",
-			"build": true,
-			"dependsOn": []
-		},
 		"ec2terminate": {
 			"service": "Lambda",
 			"providerPlugin": "awscloudformation",
@@ -52,6 +46,12 @@
 			"dependsOn": []
 		},
 		"ec2start": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": []
+		},
+		"newbornbuy": {
 			"service": "Lambda",
 			"providerPlugin": "awscloudformation",
 			"build": true,
