@@ -1,4 +1,5 @@
 type Query {
+  buy(newbornId: String): String
   start(newbornId: String): String
   terminate(instanceId: String): String
 }
