@@ -11,7 +11,7 @@ exports.handler = function(event, context) {
     Key: {
       id: newbornId
     },
-    UpdateExpression: "set trainingStatus = :s",
+    UpdateExpression: "set developmentStage = :s",
     ExpressionAttributeValues: {
       ":s": trainingMessage
     },
