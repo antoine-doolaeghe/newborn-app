@@ -1,33 +1,33 @@
 import { returnNewbornChartData } from "./newbornChartHelpers";
 
 export const returnNewbornCardInfo = (
-  newborn,
+  info,
   selectedNewborns,
   hoveredNewborn,
   currentUserId
 ) => {
   const isOwnedByCurrentUser =
-    newborn.owner && newborn.owner.id && newborn.owner.id === currentUserId;
-  const isSelected = selectedNewborns.includes(newborn.id);
+    info.owner && info.owner.id && info.owner.id === currentUserId;
+  const isSelected = selectedNewborns.includes(info.id);
   const newbornInfo = {
-    name: newborn.name || "",
-    id: newborn.id || "",
-    bornPlace: newborn.bornPlace || "unknown region",
+    name: info.name || "",
+    id: info.id || "",
+    bornPlace: info.bornPlace || "unknown region",
     isSelected,
-    isHovered: hoveredNewborn === newborn.id,
+    isHovered: hoveredNewborn === info.id,
     isOwnedByCurrentUser,
     color: isOwnedByCurrentUser ? "red" : isSelected ? "green" : "black",
-    summaries: returnNewbornChartData(newborn.models.items[0])
+    summaries: returnNewbornChartData(info)
   };
   return newbornInfo;
 };
 
-export const returnNewbornRecordInfo = newborn => {
+export const returnNewbornRecordInfo = info => {
   const newbornInfo = {
-    name: newborn.name || "",
-    id: newborn.id || "",
-    bornPlace: newborn.bornPlace || "unknown region",
-    summaries: returnNewbornChartData(newborn.models.items[0]),
+    name: info.name || "",
+    id: info.id || "",
+    bornPlace: info.bornPlace || "unknown region",
+    summaries: returnNewbornChartData(info),
     color: "black"
   };
   return newbornInfo;

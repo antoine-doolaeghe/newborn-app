@@ -1,42 +1,20 @@
-import dayjs from "dayjs";
+import { returnUtcTime } from "./globalHelpers";
 
-export const returnNewbornChartData = (newbornModelData, predictionData) => {
-  let newbornSummarySteps = {};
-  if (
-    newbornModelData &&
-    newbornModelData.episodes &&
-    newbornModelData.episodes.items.length > 0 &&
-    newbornModelData.episodes.items[0].steps
-  ) {
-    newbornSummarySteps = newbornModelData.episodes.items[0].steps.items;
-  } else {
-    return newbornSummarySteps;
-  }
-  const data = [];
-  const labels = [];
-
-  newbornSummarySteps.sort((a, b) => a.step - b.step);
-  newbornSummarySteps.forEach(item => {
+export const returnNewbornChartData = (info, predictionData) => {
+  const summarySteps = info.models.items[0].episodes.items[0].steps.items;
+  const dataset = [];
+  summarySteps.sort((a, b) => a.step - b.step);
+  summarySteps.forEach(item => {
     if (item.standardReward) {
       const roundedValue = item.standardReward.toFixed(2);
-      const val = [];
-      val.push(
-        Date.UTC(
-          dayjs(item.created).year(),
-          dayjs(item.created).month(),
-          dayjs(item.created).day(),
-          dayjs(item.created).hour(),
-          dayjs(item.created).minute()
-        )
-      );
-      val.push(parseFloat([roundedValue]));
-      data.push(val);
-      labels.push(item.step);
+      const data = [];
+      data.push(returnUtcTime(item.created));
+      data.push(parseFloat([roundedValue]));
+      dataset.push(data);
     }
   });
 
   const datasets = {
-    labels,
     datasets: []
   };
 
@@ -49,7 +27,7 @@ export const returnNewbornChartData = (newbornModelData, predictionData) => {
   }
 
   datasets.datasets.push({
-    data,
+    dataset,
     backgroundColor: ["black"],
     label: "summary data"
   });

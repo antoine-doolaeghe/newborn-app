@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import { withAuthenticator } from "aws-amplify-react";
+import { propTypes } from "./newbornRecord_propTypes";
+import { defaultPropTypes } from "./newbornRecord_defaultPropTypes";
 import * as actions from "../../store/actions";
 
 import { FlexContainer } from "../../theme/layout/grid.style";
@@ -88,22 +88,14 @@ const NewBornRecord = props => {
   );
 };
 
-NewBornRecord.propTypes = {
-  fetchNewborn: PropTypes.func.isRequired,
-  newbornInfo: PropTypes.object,
-  newbornInfoLoading: PropTypes.bool.isRequired,
-  newbornPrediction: PropTypes.object,
-  location: PropTypes.object.isRequired,
-  newbornPredictionLoading: PropTypes.bool.isRequired,
-  resetNewbornPrediction: PropTypes.func.isRequired,
-  startPredictionTraining: PropTypes.func.isRequired
-};
+NewBornRecord.defaultPropTypes = defaultPropTypes;
+
+NewBornRecord.propTypes = propTypes;
 
 const mapStateToProps = state => ({
   newbornInfo: state.newBornReducer.newbornInfo,
   newbornModelInfo: state.newBornReducer.newbornModelInfo,
   newbornInfoLoading: state.newBornReducer.newbornInfoLoading,
-  newbornPrediction: state.predictionReducer.newbornPrediction,
   newbornPredictionLoading: state.predictionReducer.newbornPredictionLoading
 });
 
