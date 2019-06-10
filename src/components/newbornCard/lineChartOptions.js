@@ -3,7 +3,7 @@ export default (data, lineColor, range) => {
     chart: {
       backgroundColor: "transparent",
       height: 150,
-      width: 246,
+      width: 220,
       type: "areaspline",
       margin: 0,
       padding: 0,

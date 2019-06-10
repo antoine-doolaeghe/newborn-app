@@ -35,7 +35,4 @@ export const NewbornCardBuyWrapper = styled.div`
   } */
 `;
 
-export const NewbornCardChartWrapper = styled.div`
-  position: absolute;
-  left: -13px;
-`;
+export const NewbornCardChartWrapper = styled.div``;
