@@ -1,7 +1,7 @@
 import React from "react";
 import "jest-dom/extend-expect";
 import { cleanup } from "react-testing-library";
-import { renderWithReduxAndRouter } from "../../../../utils/tests/integrations";
+import { renderWithReduxAndRouter } from "../../../../../utils/tests/integrations";
 import NewbornCardHeader from "../newbornCardHeader";
 
 describe("<NewbornCardHeader />", () => {

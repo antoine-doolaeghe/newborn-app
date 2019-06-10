@@ -12,7 +12,7 @@ import {
   FlexContainer
 } from "../../theme/layout/grid.style";
 import { ErrorDialog } from "../../theme/snackbars/error.style";
-import NewBornCard from "../../components/newbornCard/components/newbornCard/newbornCard";
+import { NewbornCard } from "../../components/newbornCard";
 import * as actions from "../../store/actions";
 import withHeader from "../header/withHeader";
 
@@ -136,7 +136,7 @@ class List extends Component {
     const placeholderCardList = [];
     for (let i = 0; i < 4; i += 1) {
       placeholderCardList.push(
-        <NewBornCard isPlaceholderCard newbornInfo={{}} tooltipOpen={false} />
+        <NewbornCard isPlaceholderCard newbornInfo={{}} tooltipOpen={false} />
       );
     }
     return placeholderCardList;
@@ -161,7 +161,7 @@ class List extends Component {
       );
 
       newbornCardList.push(
-        <NewBornCard
+        <NewbornCard
           isPlaceholderCard={false}
           handleNewbornSelect={this.handleNewbornSelect}
           handleNewbornHover={this.handleNewbornHover}
