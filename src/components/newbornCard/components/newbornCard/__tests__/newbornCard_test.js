@@ -2,7 +2,7 @@ import React from "react";
 import "jest-dom/extend-expect";
 import { fireEvent, cleanup } from "react-testing-library";
 import NewbornCard from "../newbornCard";
-import { renderWithReduxAndRouter } from "../../../utils/tests/integrations";
+import { renderWithReduxAndRouter } from "../../../../../utils/tests/integrations";
 
 describe("<NewbornCard />", () => {
   afterEach(cleanup);

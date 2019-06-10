@@ -12,7 +12,7 @@ import {
   FlexContainer
 } from "../../theme/layout/grid.style";
 import { ErrorDialog } from "../../theme/snackbars/error.style";
-import NewBornCard from "../../components/newbornCard/newbornCard";
+import NewBornCard from "../../components/newbornCard/components/newbornCard/newbornCard";
 import * as actions from "../../store/actions";
 import withHeader from "../header/withHeader";
 

@@ -2,15 +2,15 @@ import { returnUtcTime } from "./globalHelpers";
 
 export const returnNewbornChartData = (info, predictionData) => {
   const summarySteps = info.models.items[0].episodes.items[0].steps.items;
-  const dataset = [];
+  const data = [];
   summarySteps.sort((a, b) => a.step - b.step);
   summarySteps.forEach(item => {
     if (item.standardReward) {
       const roundedValue = item.standardReward.toFixed(2);
-      const data = [];
-      data.push(returnUtcTime(item.created));
-      data.push(parseFloat([roundedValue]));
-      dataset.push(data);
+      const values = [];
+      values.push(returnUtcTime(item.created));
+      values.push(parseFloat([roundedValue]));
+      data.push(values);
     }
   });
 
@@ -27,7 +27,7 @@ export const returnNewbornChartData = (info, predictionData) => {
   }
 
   datasets.datasets.push({
-    dataset,
+    data,
     backgroundColor: ["black"],
     label: "summary data"
   });

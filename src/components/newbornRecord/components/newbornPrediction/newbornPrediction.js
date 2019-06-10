@@ -7,9 +7,9 @@ import {
   InfoWrap,
   InfoTitle,
   InfoContent
-} from "../../theme/infos/info.style";
-import { Button } from "../../theme/buttons/button.style";
-import { Input } from "../../theme/inputs/input.style";
+} from "../../../../theme/infos/info.style";
+import { Button } from "../../../../theme/buttons/button.style";
+import { Input } from "../../../../theme/inputs/input.style";
 
 function NewbornPrediction(props) {
   const { newbornPredictionLoading } = props;

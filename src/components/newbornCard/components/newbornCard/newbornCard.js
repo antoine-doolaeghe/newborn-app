@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import Tooltip from "@material-ui/core/Tooltip";
-import NewBornCardHeader from "./newbornCardHeader/newbornCardHeader";
+import NewBornCardHeader from "../newbornCardHeader/newbornCardHeader";
 import {
   NewbornCardWrapper,
   NewbornCardBuyWrapper,
   NewbornCardChartWrapper
 } from "./newbornCard.style";
-import { BuyButton } from "../../theme/buttons/button.style";
-import lineChartOptions from "./lineChartOptions";
+import { BuyButton } from "../../../../theme/buttons/button.style";
+import lineChartOptions from "../../lineChartOptions";
 
 function NewbornCard(props) {
   const {

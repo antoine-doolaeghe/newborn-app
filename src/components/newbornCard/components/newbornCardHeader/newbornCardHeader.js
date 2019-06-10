@@ -5,7 +5,7 @@ import {
   Title,
   SubTitle
 } from "./newbornCardHeader.style";
-import { InfoChip } from "../../../theme/chips/info.style";
+import { InfoChip } from "../../../../theme/chips/info.style";
 
 function NewBornCardHeader(props) {
   return (

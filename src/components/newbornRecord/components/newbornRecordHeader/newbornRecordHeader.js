@@ -12,10 +12,10 @@ import {
   InfoWrap,
   InfoTitle,
   InfoContent
-} from "../../theme/infos/info.style";
-import { InfoChip } from "../../theme/chips/info.style";
-import { Button } from "../../theme/buttons/button.style";
-import { FlexContainer } from "../../theme/layout/grid.style";
+} from "../../../../theme/infos/info.style";
+import { InfoChip } from "../../../../theme/chips/info.style";
+import { Button } from "../../../../theme/buttons/button.style";
+import { FlexContainer } from "../../../../theme/layout/grid.style";
 
 function NewbornRecordHeader() {
   return (

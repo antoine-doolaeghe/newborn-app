@@ -10,13 +10,15 @@ import { FlexContainer } from "../../theme/layout/grid.style";
 import { ErrorDialog } from "../../theme/snackbars/error.style";
 
 import withHeader from "../header/withHeader";
-import NewbornRecordGraph from "../../components/newbornRecordGraph/newbornRecordGraph";
-import NewbornRecordHeader from "../../components/newbornRecordHeader/newbornRecordHeader";
-import NewBornRecord3dModel from "../../components/newbornRecord3dModel/newbornRecord3dModel";
-import NewBornRecordPrediction from "../../components/newbornPrediction/newbornPrediction";
+
+import {
+  NewbornRecordGraph,
+  NewbornRecordHeader,
+  NewbornRecord3dModel,
+  NewbornPrediction
+} from "../../components/newbornRecord";
 
 import { returnNewbornRecordInfo } from "../../utils/helpers/newbornGlobalHelpers";
-import { returnNewbornPredictionData } from "../../utils/helpers/newbornPredictionHelpers";
 
 const NewBornRecord = props => {
   const {
@@ -24,7 +26,6 @@ const NewBornRecord = props => {
     newbornPredictionLoading,
     newbornInfo,
     fetchNewborn,
-    resetNewbornPrediction,
     location
   } = props;
 
@@ -33,18 +34,11 @@ const NewBornRecord = props => {
 
   useEffect(() => {
     const newbornId = location.state.id;
-    resetNewbornPrediction();
     fetchNewborn(newbornId, 100).catch(err => {
       setError(err.message);
       setIsErrorOpen(true);
     });
-  }, [fetchNewborn, location.state.id, resetNewbornPrediction]);
-
-  const startPredictionTraining = () => {
-    const { newbornInfo, startPredictionTraining } = props;
-    const predictionData = returnNewbornPredictionData(newbornInfo);
-    startPredictionTraining(predictionData);
-  };
+  }, [fetchNewborn, location.state.id]);
 
   const newbornGraphInfo = newbornInfo
     ? returnNewbornRecordInfo(props.newbornInfo)
@@ -60,7 +54,7 @@ const NewBornRecord = props => {
           margin="10px"
         >
           <NewbornRecordHeader data-testid="newbornRecordHeader" />
-          <NewBornRecord3dModel
+          <NewbornRecord3dModel
             newbornModelInfo={props.newbornModelInfo}
             data-testid="newbornRecord3dModel"
           />
@@ -76,10 +70,9 @@ const NewBornRecord = props => {
             data-testid="newbornRecordGraph"
             newbornInfo={newbornGraphInfo}
           />
-          <NewBornRecordPrediction
+          <NewbornPrediction
             data-testid="newBornRecordPrediction"
             newbornPredictionLoading={newbornPredictionLoading}
-            onPredictionClick={startPredictionTraining}
           />
         </FlexContainer>
       </FlexContainer>
