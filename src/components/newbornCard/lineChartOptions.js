@@ -1,4 +1,4 @@
-export default (data, lineColor) => {
+export default (data, lineColor, range) => {
   return {
     chart: {
       backgroundColor: "transparent",
@@ -38,10 +38,19 @@ export default (data, lineColor) => {
       visible: false
     },
     xAxis: {
-      offset: 0,
-      minorGridLineWidth: 0,
-      visible: false,
-      categories: data.labels
+      type: "datetime",
+      dateTimeLabelFormats: {
+        // don't display the dummy year
+        month: "%e. %b",
+        year: "%b"
+      },
+      title: {
+        text: ""
+      },
+      range,
+      lineColor: "black",
+      lineWidth: 2,
+      opposite: true
     }
   };
 };

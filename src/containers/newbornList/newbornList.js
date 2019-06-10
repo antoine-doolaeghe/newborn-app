@@ -42,22 +42,24 @@ class List extends Component {
       generationList !== prevProps.generationList &&
       generationList.length > 0
     ) {
-      fetchParentGeneration(generationList[parentGenerationIndex].id).catch(
-        error => {
-          this.handleErrorMessage(error);
-        }
-      );
+      fetchParentGeneration(
+        generationList[parentGenerationIndex].id,
+        100
+      ).catch(error => {
+        this.handleErrorMessage(error);
+      });
     }
 
     if (
       selectedNewborns !== prevState.selectedNewborns &&
       selectedNewborns.length > 2
     ) {
-      fetchParentGeneration(generationList[parentGenerationIndex].id).catch(
-        error => {
-          this.handleErrorMessage(error);
-        }
-      );
+      fetchParentGeneration(
+        generationList[parentGenerationIndex].id,
+        100
+      ).catch(error => {
+        this.handleErrorMessage(error);
+      });
     }
   }
 

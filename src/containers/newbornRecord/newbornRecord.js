@@ -30,6 +30,7 @@ const NewBornRecord = props => {
 
   const [error, setError] = useState("");
   const [isErrorOpen, setIsErrorOpen] = useState(false);
+
   useEffect(() => {
     const newbornId = location.state.id;
     resetNewbornPrediction();

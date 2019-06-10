@@ -60,7 +60,7 @@ export const listUsers = `query ListUsers(
   }
 }
 `;
-export const getGeneration = `query GetGeneration($id: ID!) {
+export const getGeneration = `query GetGeneration($id: ID!, $stepLimit: Int) {
   getGeneration(id: $id) {
     id
     newborns {
@@ -84,7 +84,7 @@ export const getGeneration = `query GetGeneration($id: ID!) {
             cellPositions
             episodes {
               items {
-                steps {
+                steps(limit: $stepLimit) {
                   items {
                     created
                     meanReward

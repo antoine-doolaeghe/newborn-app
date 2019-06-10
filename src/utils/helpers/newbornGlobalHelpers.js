@@ -17,7 +17,7 @@ export const returnNewbornCardInfo = (
     isHovered: hoveredNewborn === newborn.id,
     isOwnedByCurrentUser,
     color: isOwnedByCurrentUser ? "red" : isSelected ? "green" : "black",
-    summaries: returnNewbornChartData(newborn)
+    summaries: returnNewbornChartData(newborn.models.items[0])
   };
   return newbornInfo;
 };
@@ -27,7 +27,7 @@ export const returnNewbornRecordInfo = newborn => {
     name: newborn.name || "",
     id: newborn.id || "",
     bornPlace: newborn.bornPlace || "unknown region",
-    summaries: returnNewbornChartData(newborn),
+    summaries: returnNewbornChartData(newborn.models.items[0]),
     color: "black"
   };
   return newbornInfo;

@@ -52,7 +52,8 @@ function NewbornCard(props) {
                   highcharts={Highcharts}
                   options={lineChartOptions(
                     newbornInfo.summaries,
-                    newbornInfo.color
+                    newbornInfo.color,
+                    86400000
                   )}
                 />
               </NewbornCardChartWrapper>

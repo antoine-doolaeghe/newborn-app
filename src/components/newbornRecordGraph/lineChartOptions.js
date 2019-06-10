@@ -42,7 +42,10 @@ export default (data, lineColor, range) => {
       series: {
         color: lineColor,
         pointPlacement: "between",
-        borderWidth: 0
+        borderWidth: 0,
+        dataGrouping: {
+          smoothed: true
+        }
       },
       areaspline: {
         // marker: {

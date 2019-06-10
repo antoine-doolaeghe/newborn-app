@@ -12,7 +12,7 @@ import lineChartOptions from "./lineChartOptions";
 
 const NewbornRecordGraph = props => {
   const { newbornInfo } = props;
-  const [range, setRange] = useState(86400000);
+  const [range, setRange] = useState(86400000); // graph
   const hasSummaryData =
     newbornInfo &&
     newbornInfo.summaries &&

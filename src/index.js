@@ -29,16 +29,14 @@ localStorage.openDrawer = openDrawer;
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Switch>
-        <Route exact path="/" component={NewbornList} />
-        <Route
-          path="/newborn-record"
-          component={props => <NewBornRecord {...props} />}
-        />
-        <Route path="/my-born" component={MyBorn} />
-        <Route path="/academy" component={Academy} />
-        <Route path="/live" component={Live} />
-      </Switch>
+      <Route exact path="/" component={NewbornList} />
+      <Route
+        path="/newborn-record"
+        component={props => <NewBornRecord {...props} />}
+      />
+      <Route path="/my-born" component={MyBorn} />
+      <Route path="/academy" component={Academy} />
+      <Route path="/live" component={Live} />
     </ConnectedRouter>
   </Provider>,
   document.getElementById("root")
