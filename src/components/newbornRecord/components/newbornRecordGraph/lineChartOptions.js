@@ -2,12 +2,13 @@ export default (data, lineColor, range) => {
   return {
     chart: {
       backgroundColor: "transparent",
-      height: 150,
-      width: 220,
+      height: 300,
+      width: 500,
       type: "areaspline",
-      margin: 0,
-      padding: 0,
       spacing: 0
+    },
+    credits: {
+      enabled: false
     },
     title: {
       text: ""
@@ -15,27 +16,6 @@ export default (data, lineColor, range) => {
     legend: {
       enabled: false,
       spanGaps: false
-    },
-    plotOptions: {
-      series: {
-        color: lineColor,
-        pointPlacement: "between",
-        borderWidth: 0
-      },
-      areaspline: {
-        marker: {
-          enabled: false
-        }
-      }
-    },
-    series: data.datasets,
-    credits: {
-      enabled: false
-    },
-    yAxis: {
-      offset: 0,
-      minorGridLineWidth: 0,
-      visible: false
     },
     xAxis: {
       type: "datetime",
@@ -51,6 +31,28 @@ export default (data, lineColor, range) => {
       lineColor: "black",
       lineWidth: 2,
       opposite: true
-    }
+    },
+    yAxis: {
+      title: {
+        text: ""
+      },
+      opposite: true
+    },
+    plotOptions: {
+      series: {
+        color: lineColor,
+        pointPlacement: "between",
+        borderWidth: 0,
+        dataGrouping: {
+          smoothed: true
+        }
+      },
+      areaspline: {
+        // marker: {
+        //   enabled: false
+        // }
+      }
+    },
+    series: data.datasets
   };
 };

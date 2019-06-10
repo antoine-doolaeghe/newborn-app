@@ -16,7 +16,22 @@ jest.mock("aws-amplify", () => {
             {
               name: "he",
               id: "id",
-              bornPlace: "unknown region"
+              bornPlace: "unknown region",
+              models: {
+                items: [
+                  {
+                    episodes: {
+                      items: [
+                        {
+                          steps: {
+                            items: []
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
             }
           ]
         }

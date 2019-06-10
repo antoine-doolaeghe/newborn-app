@@ -11,7 +11,7 @@ import {
   GridContainer,
   FlexContainer
 } from "../../theme/layout/grid.style";
-import NewBornCard from "../../components/newbornCard/newbornCard";
+import NewBornCard from "../../components/newbornCard/components/newbornCard/newbornCard";
 
 class MyBorn extends Component {
   componentDidMount() {

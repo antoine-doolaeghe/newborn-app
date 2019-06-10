@@ -65,10 +65,6 @@
       "amplify/**/*.js",
       "!src/index.js",
       "!test_helpers/"
-    ],
-    "rootDir": [
-      "src",
-      "amplify"
     ]
   },
   "devDependencies": {

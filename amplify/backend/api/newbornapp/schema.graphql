@@ -24,6 +24,8 @@ type Newborn @model {
   generation: Generation! @connection(name: "GenerationNewborn")
   hexColor: String
   id: String!
+  instanceId: String
+  training: Boolean
   models: [Model] @connection(name: "NewbornModel")
   name: String!
   owner: User @connection(name: "NewbornOwner")
@@ -31,8 +33,7 @@ type Newborn @model {
   partners: [String]
   predictions: [Prediction] @connection(name: "NewbornPrediction")
   sex: String!
-  instanceId: String
-  isTraining: Boolean
+  developmentStage: String
 }
 
 type Model @model {

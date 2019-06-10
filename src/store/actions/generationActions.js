@@ -55,12 +55,16 @@ export const fetchGenerations = () => async dispatch => {
   }
 };
 
-export const fetchParentGeneration = generationID => async dispatch => {
+export const fetchParentGeneration = (
+  generationID,
+  newbornSummaryStepLimit
+) => async dispatch => {
   dispatch({ type: FETCH_PARENT_GENERATION_REQUEST });
   try {
     const parentGenerationResponse = await API.graphql(
       graphqlOperation(queries.getGeneration, {
-        id: generationID
+        id: generationID,
+        stepLimit: newbornSummaryStepLimit
       })
     );
     dispatch({

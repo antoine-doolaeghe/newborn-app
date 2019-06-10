@@ -16,9 +16,9 @@ const Header = props => {
   const [menuProfileOpen, setProfileNavOpen] = useState(false);
 
   useEffect(() => {
-    const { fetchSingleUser } = props;
-    fetchSingleUser();
-  }, [props]);
+    props.fetchSingleUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleLogout = () => {
     Auth.signOut()
