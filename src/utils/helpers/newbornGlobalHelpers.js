@@ -1,4 +1,15 @@
+import dayjs from "dayjs";
 import { returnNewbornChartData } from "./newbornChartHelpers";
+
+export const returnUtcTime = time => {
+  return Date.UTC(
+    dayjs(time).year(),
+    dayjs(time).month(),
+    dayjs(time).date(),
+    dayjs(time).hour(),
+    dayjs(time).minute()
+  );
+};
 
 export const returnNewbornCardInfo = (
   info,

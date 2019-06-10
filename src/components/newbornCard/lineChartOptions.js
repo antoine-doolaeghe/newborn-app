@@ -16,6 +16,14 @@ export default (data, lineColor, range) => {
       enabled: false,
       spanGaps: false
     },
+    tooltip: {
+      positioner() {
+        return { x: 80, y: 50 };
+      },
+      shadow: false,
+      borderWidth: 0,
+      backgroundColor: "white"
+    },
     plotOptions: {
       series: {
         color: lineColor,

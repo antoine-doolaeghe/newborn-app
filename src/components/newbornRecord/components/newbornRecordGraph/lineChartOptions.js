@@ -5,13 +5,22 @@ export default (data, lineColor, range) => {
       height: 300,
       width: 500,
       type: "areaspline",
-      spacing: 0
+      spacing: 0,
+      zoomType: "x"
     },
     credits: {
       enabled: false
     },
     title: {
       text: ""
+    },
+    tooltip: {
+      positioner() {
+        return { x: 80, y: 50 };
+      },
+      shadow: false,
+      borderWidth: 0,
+      backgroundColor: "white"
     },
     legend: {
       enabled: false,
@@ -20,7 +29,6 @@ export default (data, lineColor, range) => {
     xAxis: {
       type: "datetime",
       dateTimeLabelFormats: {
-        // don't display the dummy year
         month: "%e. %b",
         year: "%b"
       },

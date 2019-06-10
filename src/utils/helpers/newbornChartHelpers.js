@@ -1,4 +1,4 @@
-import { returnUtcTime } from "./globalHelpers";
+import { returnUtcTime } from "./newbornGlobalHelpers";
 
 export const returnNewbornChartData = (info, predictionData) => {
   const summarySteps = info.models.items[0].episodes.items[0].steps.items;

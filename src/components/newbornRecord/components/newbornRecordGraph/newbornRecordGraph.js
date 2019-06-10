@@ -10,6 +10,14 @@ import {
 } from "./newbornRecordGraph.style";
 import lineChartOptions from "./lineChartOptions";
 
+const graphTimeRange = {
+  hour: 360000,
+  twoHour: 360000 * 2,
+  day: 86400000,
+  twoDay: 86400000 * 2,
+  week: 86400000 * 7
+};
+
 const NewbornRecordGraph = props => {
   const { newbornInfo } = props;
   const [range, setRange] = useState(86400000); // graph
@@ -24,7 +32,7 @@ const NewbornRecordGraph = props => {
         <GraphRangeButton
           data-testid="graphRangeButton"
           onClick={() => {
-            setRange(360000);
+            setRange(graphTimeRange.hour);
           }}
         >
           1h
@@ -32,15 +40,15 @@ const NewbornRecordGraph = props => {
         <GraphRangeButton
           data-testid="graphRangeButton"
           onClick={() => {
-            setRange(660000);
+            setRange(graphTimeRange.twoHour);
           }}
         >
-          12h
+          2h
         </GraphRangeButton>
         <GraphRangeButton
           data-testid="graphRangeButton"
           onClick={() => {
-            setRange(86400000);
+            setRange(graphTimeRange.day);
           }}
         >
           1d
@@ -48,7 +56,7 @@ const NewbornRecordGraph = props => {
         <GraphRangeButton
           data-testid="graphRangeButton"
           onClick={() => {
-            setRange(86400000);
+            setRange(graphTimeRange.twoDay);
           }}
         >
           2d
@@ -56,7 +64,7 @@ const NewbornRecordGraph = props => {
         <GraphRangeButton
           data-testid="graphRangeButton"
           onClick={() => {
-            setRange(86400000);
+            setRange(graphTimeRange.week);
           }}
         >
           1w
@@ -64,7 +72,7 @@ const NewbornRecordGraph = props => {
         <GraphRangeButton
           data-testid="graphRangeButton"
           onClick={() => {
-            setRange(86400000);
+            setRange(graphTimeRange.week);
           }}
         >
           All
