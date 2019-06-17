@@ -4,7 +4,7 @@ export default (data, lineColor, range) => {
       backgroundColor: "transparent",
       height: 300,
       width: 500,
-      type: "areaspline",
+      type: "line",
       spacing: 0,
       zoomType: "x"
     },
@@ -35,7 +35,7 @@ export default (data, lineColor, range) => {
       title: {
         text: ""
       },
-      range,
+      // range,
       lineColor: "black",
       lineWidth: 2,
       opposite: true
@@ -54,11 +54,6 @@ export default (data, lineColor, range) => {
         dataGrouping: {
           smoothed: true
         }
-      },
-      areaspline: {
-        // marker: {
-        //   enabled: false
-        // }
       }
     },
     series: data.datasets

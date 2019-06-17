@@ -43,6 +43,7 @@ export default (data, lineColor, range) => {
     yAxis: {
       offset: 0,
       minorGridLineWidth: 0,
+      min: 0,
       visible: false
     },
     xAxis: {

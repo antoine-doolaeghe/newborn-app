@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   HeaderContainer,
   HeaderName,
@@ -17,19 +18,25 @@ import { InfoChip } from "../../../../theme/chips/info.style";
 import { Button } from "../../../../theme/buttons/button.style";
 import { FlexContainer } from "../../../../theme/layout/grid.style";
 
-function NewbornRecordHeader() {
+function NewbornRecordHeader(props) {
+  const { newbornInfo } = props;
+  const currentStepMeanReward = newbornInfo
+    ? newbornInfo.currentStepMeanReward
+    : "";
+  const trainingStage = newbornInfo ? newbornInfo.trainingStage : "";
+  const name = newbornInfo ? newbornInfo.id : "";
   return (
     <HeaderContainer data-testid="newbornRecordHeader">
       <FlexContainer flex={0.5} direction="column" margin="8px 10px">
         <FlexContainer width="100%" justify="space-between">
-          <HeaderName>Header name</HeaderName>
+          <HeaderName>{name}</HeaderName>
           <Button color="primary">Buy now</Button>
         </FlexContainer>
       </FlexContainer>
       <HeaderValueContainer>
         <FlexContainer align="center">
-          <HeaderValue>189,45</HeaderValue>
-          <InfoChip>18%</InfoChip>
+          <HeaderValue>{currentStepMeanReward}</HeaderValue>
+          <InfoChip>{trainingStage}</InfoChip>
         </FlexContainer>
       </HeaderValueContainer>
       <InfoContainer>
@@ -77,5 +84,16 @@ function NewbornRecordHeader() {
     </HeaderContainer>
   );
 }
+
+NewbornRecordHeader.defaultPropTypes = {
+  newbornInfo: {
+    developmentStage: "",
+    currentStep: ""
+  }
+};
+
+NewbornRecordHeader.propTypes = {
+  newbornInfo: PropTypes.object.isRequired
+};
 
 export default NewbornRecordHeader;

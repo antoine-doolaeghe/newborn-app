@@ -10,7 +10,8 @@ import {
   FETCH_NEWBORN_EPISODES_REQUEST,
   FETCH_NEWBORN_EPISODE_SUCCESS,
   FETCH_NEWBORN_EPISODE_REQUEST,
-  RESET_NEWBORN_EPISODE
+  RESET_NEWBORN_EPISODE,
+  SUBSCRIBE_NEWBORN_SUCCESS
 } from "../actions/helpers/types";
 
 const initialState = {
@@ -87,6 +88,27 @@ export default (state = initialState, action) => {
         newbornEpisode: null,
         newbornEpisodeLoading: false
       };
+
+    case SUBSCRIBE_NEWBORN_SUCCESS:
+      const to_retrurn = {
+        ...state,
+        newbornInfo: {
+          ...state.newbornInfo,
+          models: {
+            items: [
+              {
+                ...state.newbornInfo.models.items[0],
+                episodes: {
+                  items: action.payload.items
+                }
+              }
+            ]
+          }
+        }
+      };
+
+      console.log(to_retrurn);
+      return to_retrurn;
 
     default:
       return state;

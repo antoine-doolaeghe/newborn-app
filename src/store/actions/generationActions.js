@@ -64,6 +64,7 @@ export const fetchParentGeneration = (
     const parentGenerationResponse = await API.graphql(
       graphqlOperation(queries.getGeneration, {
         id: generationID,
+        newbornLimit: 100,
         stepLimit: newbornSummaryStepLimit
       })
     );

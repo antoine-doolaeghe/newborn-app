@@ -41,7 +41,10 @@ function NewbornCard(props) {
         {!isPlaceholderCard && (
           <React.Fragment>
             <NewBornCardHeader
-              title={newbornInfo.name}
+              title={newbornInfo.id.substring(
+                newbornInfo.id.length - 3,
+                newbornInfo.id.length - 1
+              )}
               subTitle="1y/2m/12d"
               newbornId={newbornInfo.id}
               data-testid="newbornHeader"

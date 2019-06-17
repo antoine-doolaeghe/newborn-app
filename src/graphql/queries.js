@@ -60,10 +60,10 @@ export const listUsers = `query ListUsers(
   }
 }
 `;
-export const getGeneration = `query GetGeneration($id: ID!, $stepLimit: Int) {
+export const getGeneration = `query GetGeneration($id: ID!, $newbornLimit: Int, $stepLimit: Int) {
   getGeneration(id: $id) {
     id
-    newborns {
+    newborns(limit: $newbornLimit) {
       items {
         bio
         bornPlace
@@ -84,6 +84,7 @@ export const getGeneration = `query GetGeneration($id: ID!, $stepLimit: Int) {
             cellPositions
             episodes {
               items {
+                created
                 steps(limit: $stepLimit) {
                   items {
                     created
@@ -123,6 +124,7 @@ export const getNewborn = `query GetNewborn($id: ID!, $stepLimit: Int) {
     bio
     bornPlace
     childs
+    trainingStage
     generation {
       id
       newborns {
@@ -138,6 +140,8 @@ export const getNewborn = `query GetNewborn($id: ID!, $stepLimit: Int) {
         cellPositions
         episodes {
           items {
+            id
+            created
             steps(limit: $stepLimit) {
               items {
                 created

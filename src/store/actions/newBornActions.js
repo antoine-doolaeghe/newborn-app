@@ -13,10 +13,12 @@ import {
   FETCH_NEWBORN_EPISODE_REQUEST,
   FETCH_NEWBORN_EPISODE_FAILURE,
   FETCH_NEWBORN_EPISODE_SUCCESS,
-  RESET_NEWBORN_EPISODE
+  RESET_NEWBORN_EPISODE,
+  SUBSCRIBE_NEWBORN_SUCCESS
 } from "./helpers/types";
 
 import * as queries from "../../graphql/queries";
+import * as subscriptions from "../../graphql/subscriptions";
 
 export const fetchNewborns = newbornSummaryStepLimit => async dispatch => {
   dispatch({ type: FETCH_NEWBORNS_REQUEST });
@@ -57,6 +59,19 @@ export const fetchNewborn = (
     dispatch({ type: FETCH_NEWBORN_FAILURE });
     throw new Error("Could not request the born");
   }
+};
+
+export const subscribeNewborn = newbornId => async dispatch => {
+  API.graphql(graphqlOperation(subscriptions.onUpdateNewborn)).subscribe({
+    next: newborn => {
+      if (newborn.value.data.onUpdateNewborn.id === newbornId) {
+        dispatch({
+          type: SUBSCRIBE_NEWBORN_SUCCESS,
+          payload: newborn.value.data.onUpdateNewborn.models.items[0].episodes
+        });
+      }
+    }
+  });
 };
 
 export const resetNewborn = () => dispatch => {

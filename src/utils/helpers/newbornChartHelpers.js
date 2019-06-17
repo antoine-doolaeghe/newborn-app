@@ -1,12 +1,29 @@
-import { returnUtcTime } from "./newbornGlobalHelpers";
+import { returnUtcTime, sortByDate } from "./newbornGlobalHelpers";
 
-export const returnNewbornChartData = (info, predictionData) => {
-  const summarySteps = info.models.items[0].episodes.items[0].steps.items;
+export const returnSortedEpisodes = info => {
+  let episodes = [];
+
+  if (info.models.items[0].episodes.items[0]) {
+    episodes = info.models.items[0].episodes.items;
+    return sortByDate(episodes);
+  }
+
+  return episodes;
+};
+
+export const returnSortedSteps = (episodes, key) => {
+  const steps = [];
+  if (episodes[key] && episodes[key].steps) {
+    return sortByDate(episodes[0].steps.items);
+  }
+  return steps;
+};
+
+export const returnNewbornChartData = (steps, predictionData) => {
   const data = [];
-  summarySteps.sort((a, b) => a.step - b.step);
-  summarySteps.forEach(item => {
-    if (item.standardReward) {
-      const roundedValue = item.standardReward.toFixed(2);
+  steps.forEach(item => {
+    if (item.meanReward) {
+      const roundedValue = item.meanReward.toFixed(2);
       const values = [];
       values.push(returnUtcTime(item.created));
       values.push(parseFloat([roundedValue]));

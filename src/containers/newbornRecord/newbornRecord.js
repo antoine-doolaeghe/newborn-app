@@ -18,7 +18,7 @@ import {
   NewbornPrediction
 } from "../../components/newbornRecord";
 
-import { returnNewbornRecordInfo } from "../../utils/helpers/newbornGlobalHelpers";
+import { returnNewbornRecordInfo } from "./newbornRecordHelpers";
 
 const NewBornRecord = props => {
   const {
@@ -26,6 +26,7 @@ const NewBornRecord = props => {
     newbornPredictionLoading,
     newbornInfo,
     fetchNewborn,
+    subscribeNewborn,
     location
   } = props;
 
@@ -34,16 +35,16 @@ const NewBornRecord = props => {
 
   useEffect(() => {
     const newbornId = location.state.id;
-    fetchNewborn(newbornId, 100).catch(err => {
+    fetchNewborn(newbornId, 400).catch(err => {
       setError(err.message);
       setIsErrorOpen(true);
     });
-  }, [fetchNewborn, location.state.id]);
+    subscribeNewborn(newbornId);
+  }, [fetchNewborn, location.state.id, subscribeNewborn]);
 
-  const newbornGraphInfo = newbornInfo
+  const newbornRecordInfo = newbornInfo
     ? returnNewbornRecordInfo(props.newbornInfo)
     : null;
-
   return (
     <React.Fragment>
       <FlexContainer>
@@ -53,7 +54,10 @@ const NewBornRecord = props => {
           max-width="500px"
           margin="10px"
         >
-          <NewbornRecordHeader data-testid="newbornRecordHeader" />
+          <NewbornRecordHeader
+            newbornInfo={newbornRecordInfo}
+            data-testid="newbornRecordHeader"
+          />
           <NewbornRecord3dModel
             newbornModelInfo={props.newbornModelInfo}
             data-testid="newbornRecord3dModel"
@@ -68,7 +72,7 @@ const NewBornRecord = props => {
           <NewbornRecordGraph
             newbornInfoLoading={newbornInfoLoading}
             data-testid="newbornRecordGraph"
-            newbornInfo={newbornGraphInfo}
+            newbornInfo={newbornRecordInfo}
           />
           <NewbornPrediction
             data-testid="newBornRecordPrediction"

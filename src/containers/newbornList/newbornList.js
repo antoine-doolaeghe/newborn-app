@@ -3,8 +3,11 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { withRouter } from "react-router";
-import { returnTooltipTitle, isTooltipOpen } from "./newbornList_helpers";
-import { returnNewbornCardInfo } from "../../utils/helpers/newbornGlobalHelpers";
+import {
+  returnTooltipTitle,
+  isTooltipOpen,
+  returnNewbornCardInfo
+} from "./newbornList_helpers";
 
 import {
   Grid,
