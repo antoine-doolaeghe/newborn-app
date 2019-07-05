@@ -25,7 +25,7 @@ class List extends Component {
     this.state = {
       errorMessage: "",
       isErrorOpen: false,
-      parentGenerationIndex: 0,
+      generationIndex: 0,
       selectedNewborns: []
     };
   }
@@ -38,31 +38,18 @@ class List extends Component {
       });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const { generationList, fetchParentGeneration } = this.props;
-    const { parentGenerationIndex, selectedNewborns } = this.state;
+  componentDidUpdate(prevProps) {
+    const { generationList, fetchGeneration } = this.props;
+    const { generationIndex } = this.state;
     if (
       generationList !== prevProps.generationList &&
       generationList.length > 0
     ) {
-      fetchParentGeneration(
-        generationList[parentGenerationIndex].id,
-        100
-      ).catch(error => {
-        this.handleErrorMessage(error);
-      });
-    }
-
-    if (
-      selectedNewborns !== prevState.selectedNewborns &&
-      selectedNewborns.length > 2
-    ) {
-      fetchParentGeneration(
-        generationList[parentGenerationIndex].id,
-        100
-      ).catch(error => {
-        this.handleErrorMessage(error);
-      });
+      fetchGeneration(generationList[generationIndex].id, 100, 10).catch(
+        error => {
+          this.handleErrorMessage(error);
+        }
+      );
     }
   }
 
@@ -88,7 +75,8 @@ class List extends Component {
 
   handleNewbornSelect = event => {
     const newbornId = event.target.closest("section").dataset.newbornid;
-    const { selectedNewborns } = this.state;
+    const { selectedNewborns, generationIndex } = this.state;
+    const { generationList, filterGeneration } = this.props;
     if (selectedNewborns.includes(newbornId)) {
       this.setState({
         selectedNewborns: selectedNewborns.filter(
@@ -96,6 +84,20 @@ class List extends Component {
         )
       });
     } else if (selectedNewborns.length < 2) {
+      if (selectedNewborns.length === 0) {
+        filterGeneration(
+          generationList[generationIndex].id,
+          newbornId,
+          100,
+          10
+        ).catch(error => {
+          this.handleErrorMessage(error);
+        });
+      } else if (selectedNewborns.length === 1) {
+        console.log("HERE2");
+      }
+      // if the selection is 1 then partner
+      // if the selection is 2 then childs
       this.setState({
         selectedNewborns: [...selectedNewborns, newbornId]
       });
@@ -147,9 +149,9 @@ class List extends Component {
 
   returnNewbornCardList = () => {
     const newbornCardList = [];
-    const { parentGenerationNewborns, currentUserId } = this.props;
+    const { generationNewborns, currentUserId } = this.props;
     const { hoveredNewborn, selectedNewborns } = this.state;
-    parentGenerationNewborns.forEach((newborn, newbornKey) => {
+    generationNewborns.forEach((newborn, newbornKey) => {
       const tooltipTitle = returnTooltipTitle(selectedNewborns);
       const newbornInfo = returnNewbornCardInfo(
         newborn,
@@ -182,16 +184,15 @@ class List extends Component {
 
   render() {
     const {
-      parentGenerationLoading,
+      generationLoading,
       generationListLoading,
-      parentGenerationNewborns
+      generationNewborns
     } = this.props;
     const { isErrorOpen, errorMessage } = this.state;
-    const hasNewborns =
-      parentGenerationNewborns && parentGenerationNewborns.length > 0;
+    const hasNewborns = generationNewborns && generationNewborns.length > 0;
     return (
       <Fragment>
-        {generationListLoading || parentGenerationLoading ? (
+        {generationListLoading || generationLoading ? (
           <FlexContainer>
             <CircularProgress
               variant="indeterminate"
@@ -216,11 +217,11 @@ class List extends Component {
 List.propTypes = {
   currentUserId: PropTypes.string,
   fetchGenerations: PropTypes.func.isRequired,
-  fetchParentGeneration: PropTypes.func.isRequired,
+  fetchGeneration: PropTypes.func.isRequired,
   generationList: PropTypes.array.isRequired,
   generationListLoading: PropTypes.bool.isRequired,
-  parentGenerationLoading: PropTypes.bool.isRequired,
-  parentGenerationNewborns: PropTypes.array.isRequired,
+  generationLoading: PropTypes.bool.isRequired,
+  generationNewborns: PropTypes.array.isRequired,
   updateNewbornOwnership: PropTypes.func.isRequired
 };
 
@@ -229,9 +230,9 @@ const mapStateToProps = state => ({
   currentUserId: state.userReducer.currentUserId,
   generationList: state.generationReducer.generationList,
   generationListLoading: state.generationReducer.generationListLoading,
-  parentGeneration: state.generationReducer.parentGeneration,
-  parentGenerationLoading: state.generationReducer.parentGenerationLoading,
-  parentGenerationNewborns: state.generationReducer.parentGenerationNewborns,
+  generation: state.generationReducer.generation,
+  generationLoading: state.generationReducer.generationLoading,
+  generationNewborns: state.generationReducer.generationNewborns,
   isAddNewbornToUserLoading: state.newBornReducer.isAddNewbornToUserLoading
 });
 

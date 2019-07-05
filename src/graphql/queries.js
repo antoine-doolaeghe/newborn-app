@@ -103,6 +103,62 @@ export const getGeneration = `query GetGeneration($id: ID!, $newbornLimit: Int, 
   }
 }
 `;
+
+export const getFilteredGeneration = `query GetGeneration($id: ID!,$partnerFilter: String, $newbornLimit: Int, $stepLimit: Int) {
+  getGeneration(id: $id) {
+    id
+    newborns(limit: $newbornLimit, filter: {
+      or: [{
+        partners: {
+          contains: $partnerFilter
+        }
+      },
+      {
+        id: {
+          eq: $partnerFilter
+        }
+      }]
+    }) {
+      items {
+        bio
+        bornPlace
+        childs
+        hexColor
+        id
+        name
+        sex
+        parents
+        partners
+        owner {
+          id
+        }
+        models {
+          items {
+            id
+            cellInfos
+            cellPositions
+            episodes {
+              items {
+                created
+                steps(limit: $stepLimit) {
+                  items {
+                    created
+                    meanReward
+                    standardReward
+                    step
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      nextToken
+    }
+  }
+}
+`;
+
 export const listGenerations = `query ListGenerations(
   $filter: ModelGenerationFilterInput
   $limit: Int

@@ -20,12 +20,15 @@ import {
 import * as queries from "../../graphql/queries";
 import * as subscriptions from "../../graphql/subscriptions";
 
-export const fetchNewborns = newbornSummaryStepLimit => async dispatch => {
+export const fetchNewborns = (
+  newbornLimit,
+  newbornSummaryStepLimit
+) => async dispatch => {
   dispatch({ type: FETCH_NEWBORNS_REQUEST });
   try {
     const newBornListresponse = await API.graphql(
       graphqlOperation(queries.listNewborns, {
-        limit: 100,
+        limit: newbornLimit,
         stepLimit: newbornSummaryStepLimit
       })
     );

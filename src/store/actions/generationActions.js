@@ -6,9 +6,12 @@ import {
   FETCH_GENERATIONS_REQUEST,
   FETCH_GENERATIONS_FAILURE,
   FETCH_GENERATIONS_SUCCESS,
-  FETCH_PARENT_GENERATION_REQUEST,
-  FETCH_PARENT_GENERATION_FAILURE,
-  FETCH_PARENT_GENERATION_SUCCESS
+  FETCH_GENERATION_REQUEST,
+  FETCH_GENERATION_FAILURE,
+  FETCH_GENERATION_SUCCESS,
+  FILTER_GENERATION_REQUEST,
+  FILTER_GENERATION_SUCCESS,
+  FILTER_GENERATION_FAILURE
 } from "./helpers/types";
 
 import * as queries from "../../graphql/queries";
@@ -55,27 +58,60 @@ export const fetchGenerations = () => async dispatch => {
   }
 };
 
-export const fetchParentGeneration = (
-  generationID,
-  newbornSummaryStepLimit
+export const fetchGeneration = (
+  id,
+  newbornLimit,
+  stepLimit
 ) => async dispatch => {
-  dispatch({ type: FETCH_PARENT_GENERATION_REQUEST });
+  dispatch({ type: FETCH_GENERATION_REQUEST });
   try {
-    const parentGenerationResponse = await API.graphql(
+    const generationResponse = await API.graphql(
       graphqlOperation(queries.getGeneration, {
-        id: generationID,
-        newbornLimit: 100,
-        stepLimit: newbornSummaryStepLimit
+        id,
+        newbornLimit,
+        stepLimit
       })
     );
     dispatch({
-      type: FETCH_PARENT_GENERATION_SUCCESS,
-      payload: parentGenerationResponse.data.getGeneration
+      type: FETCH_GENERATION_SUCCESS,
+      payload: generationResponse.data.getGeneration
     });
   } catch (error) {
-    dispatch({ type: FETCH_PARENT_GENERATION_FAILURE });
+    dispatch({ type: FETCH_GENERATION_FAILURE });
     throw new Error(
-      "Oops, there has been an issue when loading parent generation"
+      `Oops, there has been an issue when loading parent generation ${JSON.stringify(
+        error
+      )}`
+    );
+  }
+};
+
+export const filterGeneration = (
+  id,
+  partnerFilter,
+  newbornLimit,
+  stepLimit
+) => async dispatch => {
+  dispatch({ type: FILTER_GENERATION_REQUEST });
+  try {
+    const generationResponse = await API.graphql(
+      graphqlOperation(queries.getFilteredGeneration, {
+        id,
+        partnerFilter,
+        newbornLimit,
+        stepLimit
+      })
+    );
+    dispatch({
+      type: FILTER_GENERATION_SUCCESS,
+      payload: generationResponse.data.getGeneration
+    });
+  } catch (error) {
+    dispatch({ type: FILTER_GENERATION_FAILURE });
+    throw new Error(
+      `Oops, there has been an issue when loading parent generation ${JSON.stringify(
+        error
+      )}`
     );
   }
 };

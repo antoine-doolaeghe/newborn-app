@@ -43,7 +43,7 @@ function NewbornCard(props) {
             <NewBornCardHeader
               title={newbornInfo.id.substring(
                 newbornInfo.id.length - 3,
-                newbornInfo.id.length - 1
+                newbornInfo.id.length
               )}
               subTitle="1y/2m/12d"
               newbornId={newbornInfo.id}

@@ -6,19 +6,20 @@ import {
   ADD_NEWBORN_TO_USER_SUCCESS,
   FETCH_GENERATIONS_REQUEST,
   FETCH_GENERATIONS_SUCCESS,
-  FETCH_PARENT_GENERATION_REQUEST,
-  FETCH_PARENT_GENERATION_SUCCESS
+  FETCH_GENERATION_REQUEST,
+  FETCH_GENERATION_SUCCESS,
+  FILTER_GENERATION_REQUEST,
+  FILTER_GENERATION_SUCCESS
 } from "../actions/helpers/types";
 
 const initialState = {
-  childGeneration: [],
-  childGenerationLoading: false,
   generationList: [],
   generationListLoading: false,
   isAddNewbornToUserLoading: false,
-  parentGeneration: {},
-  parentGenerationNewborns: [],
-  parentGenerationLoading: false
+  generation: {},
+  generationNewborns: [],
+  generationLoading: false,
+  filterGenerationLoading: false
 };
 
 export default (state = initialState, action) => {
@@ -32,9 +33,9 @@ export default (state = initialState, action) => {
     case ADD_NEWBORN_TO_USER_SUCCESS:
       return {
         ...state,
-        parentGeneration: {
+        generation: {
           newborns: {
-            items: state.parentGeneration.newborns.items.map(newborn =>
+            items: state.generation.newborns.items.map(newborn =>
               newborn.id === action.payload.id ? action.payload : newborn
             )
           }
@@ -47,6 +48,7 @@ export default (state = initialState, action) => {
         ...state,
         isAddingNewbornToUser: false
       };
+
     case FETCH_GENERATIONS_REQUEST:
       return {
         ...state,
@@ -60,20 +62,36 @@ export default (state = initialState, action) => {
         generationList: action.payload
       };
 
-    case FETCH_PARENT_GENERATION_REQUEST:
+    case FETCH_GENERATION_REQUEST:
       return {
         ...state,
-        parentGenerationLoading: true
+        generationLoading: true
       };
 
-    case FETCH_PARENT_GENERATION_SUCCESS:
+    case FETCH_GENERATION_SUCCESS:
       return {
         ...state,
-        parentGenerationLoading: false,
-        parentGeneration: action.payload,
-        parentGenerationNewborns: action.payload.newborns
+        generationLoading: false,
+        generation: action.payload,
+        generationNewborns: action.payload.newborns
           ? action.payload.newborns.items
-          : initialState.parentGenerationNewborns
+          : initialState.generationNewborns
+      };
+
+    case FILTER_GENERATION_REQUEST:
+      return {
+        ...state,
+        filterGenerationLoading: true
+      };
+
+    case FILTER_GENERATION_SUCCESS:
+      return {
+        ...state,
+        filterGenerationLoading: false,
+        generation: action.payload,
+        generationNewborns: action.payload.newborns
+          ? action.payload.newborns.items
+          : initialState.generationNewborns
       };
 
     default:

@@ -19,7 +19,6 @@ export const sortByDate = episodes => {
 
 export const returnSortedEpisodes = info => {
   let episodes = [];
-  console.log(info);
   if (info.models.items[0].episodes.items[0]) {
     episodes = info.models.items[0].episodes.items;
     return sortByDate(episodes);
