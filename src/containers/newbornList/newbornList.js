@@ -76,8 +76,13 @@ class List extends Component {
   handleNewbornSelect = event => {
     const newbornId = event.target.closest("section").dataset.newbornid;
     const { selectedNewborns, generationIndex } = this.state;
-    const { generationList, filterGeneration } = this.props;
+    const { generationList, filterGeneration, fetchGeneration } = this.props;
     if (selectedNewborns.includes(newbornId)) {
+      fetchGeneration(generationList[generationIndex].id, 100, 10).catch(
+        error => {
+          this.handleErrorMessage(error);
+        }
+      );
       this.setState({
         selectedNewborns: selectedNewborns.filter(
           newborn => newborn !== newbornId
