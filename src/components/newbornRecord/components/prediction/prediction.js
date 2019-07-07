@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { NewbornPredictionContainer } from "./newbornPrediction.style";
+import { NewbornPredictionContainer } from "./prediction.style";
 import {
   InfoContainer,
   Info,

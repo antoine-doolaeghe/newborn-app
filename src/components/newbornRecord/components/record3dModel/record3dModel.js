@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as THREE from "three";
 import OrbitControls from "orbit-controls-es6";
-import { NewbornRecord3dModelContainer } from "./newbornRecord3dModel.style";
+import { NewbornRecord3dModelContainer } from "./record3dModel.style";
 
 class NewBornRecord3dModel extends Component {
   componentDidUpdate() {

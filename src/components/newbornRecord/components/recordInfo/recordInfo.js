@@ -1,5 +1,5 @@
 import React from "react";
-import { InfoContainer } from "./newbornRecordInfo.style";
+import { InfoContainer } from "./recordInfo.style";
 
 function NewBornRecordInfo() {
   return <InfoContainer />;

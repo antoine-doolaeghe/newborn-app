@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  GraphRangeContainer,
-  GraphRangeButton
-} from "../newbornRecordGraph.style";
+import { GraphRangeContainer, GraphRangeButton } from "../recordGraph.style";
 
 const graphTimeRange = {
   hour: 360000,

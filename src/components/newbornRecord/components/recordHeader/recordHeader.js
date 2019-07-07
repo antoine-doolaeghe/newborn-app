@@ -5,7 +5,7 @@ import {
   HeaderName,
   HeaderValue,
   HeaderValueContainer
-} from "./newbornRecordHeader.style";
+} from "./recordHeader.style";
 import {
   InfoContainer,
   Info,
@@ -18,7 +18,7 @@ import { InfoChip } from "../../../../theme/chips/info.style";
 import { Button } from "../../../../theme/buttons/button.style";
 import { FlexContainer } from "../../../../theme/layout/grid.style";
 
-function NewbornRecordHeader(props) {
+function RecordHeader(props) {
   const { newbornInfo } = props;
   const currentStepMeanReward = newbornInfo
     ? newbornInfo.currentStepMeanReward
@@ -85,15 +85,15 @@ function NewbornRecordHeader(props) {
   );
 }
 
-NewbornRecordHeader.defaultPropTypes = {
+RecordHeader.defaultPropTypes = {
   newbornInfo: {
     developmentStage: "",
     currentStep: ""
   }
 };
 
-NewbornRecordHeader.propTypes = {
+RecordHeader.propTypes = {
   newbornInfo: PropTypes.object.isRequired
 };
 
-export default NewbornRecordHeader;
+export default RecordHeader;

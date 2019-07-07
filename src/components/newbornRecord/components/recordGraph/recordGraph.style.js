@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NewbornRecordGraphContainer = styled.section`
+export const RcordGraphContainer = styled.section`
   align-items: center;
   position: relative;
   display: flex;

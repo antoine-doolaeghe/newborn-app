@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { withRouter } from "react-router";
-import { connect } from "react-redux";
 import { withAuthenticator } from "aws-amplify-react";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
 import { propTypes } from "./newbornRecord_propTypes";
 import { defaultPropTypes } from "./newbornRecord_defaultPropTypes";
-import * as actions from "../../store/actions";
+import * as queries from "../../graphql/queries";
 
 import { FlexContainer } from "../../theme/layout/grid.style";
 import { ErrorDialog } from "../../theme/snackbars/error.style";
@@ -21,67 +22,61 @@ import {
 import { returnNewbornRecordInfo } from "./newbornRecordHelpers";
 
 const NewBornRecord = props => {
-  const {
-    newbornInfoLoading,
-    newbornPredictionLoading,
-    newbornInfo,
-    fetchNewborn,
-    subscribeNewborn,
-    location
-  } = props;
-
-  const [error, setError] = useState("");
-  const [isErrorOpen, setIsErrorOpen] = useState(false);
-
-  useEffect(() => {
-    const newbornId = location.state.id;
-    fetchNewborn(newbornId, 400).catch(err => {
-      setError(err.message);
-      setIsErrorOpen(true);
-    });
-    subscribeNewborn(newbornId);
-  }, [fetchNewborn, location.state.id, subscribeNewborn]);
-
-  const newbornRecordInfo = newbornInfo
-    ? returnNewbornRecordInfo(props.newbornInfo)
-    : null;
+  const { newbornPredictionLoading, location } = props;
   return (
-    <React.Fragment>
-      <FlexContainer>
-        <FlexContainer
-          direction="column"
-          width="500px"
-          max-width="500px"
-          margin="10px"
-        >
-          <NewbornRecordHeader
-            newbornInfo={newbornRecordInfo}
-            data-testid="newbornRecordHeader"
-          />
-          <NewbornRecord3dModel
-            newbornModelInfo={props.newbornModelInfo}
-            data-testid="newbornRecord3dModel"
-          />
-        </FlexContainer>
-        <FlexContainer
-          direction="column"
-          width="500px"
-          max-width="500px"
-          margin="10px"
-        >
-          <NewbornRecordGraph
-            newbornInfoLoading={newbornInfoLoading}
-            data-testid="newbornRecordGraph"
-            newbornInfo={newbornRecordInfo}
-          />
-          <NewbornPrediction
-            data-testid="newBornRecordPrediction"
-            newbornPredictionLoading={newbornPredictionLoading}
-          />
-        </FlexContainer>
-      </FlexContainer>
-      <ErrorDialog open={isErrorOpen} message={error} />
-    </React.Fragment>
+    <Query
+      query={gql(queries.getNewborn)}
+      variables={{ id: location.state.id }}
+    >
+      {({ data, loading, error }) => {
+        if (error) {
+          return <ErrorDialog open message={error.message} />;
+        }
+
+        if (loading) {
+          return "loading";
+        }
+
+        const newbornRecordInfo = returnNewbornRecordInfo(data.getNewborn);
+
+        return (
+          <React.Fragment>
+            <FlexContainer>
+              <FlexContainer
+                direction="column"
+                width="500px"
+                max-width="500px"
+                margin="10px"
+              >
+                <NewbornRecordHeader
+                  newbornInfo={newbornRecordInfo}
+                  data-testid="newbornRecordHeader"
+                />
+                <NewbornRecord3dModel
+                  newbornModelInfo={props.newbornModelInfo}
+                  data-testid="newbornRecord3dModel"
+                />
+              </FlexContainer>
+              <FlexContainer
+                direction="column"
+                width="500px"
+                max-width="500px"
+                margin="10px"
+              >
+                <NewbornRecordGraph
+                  data-testid="newbornRecordGraph"
+                  newbornModel={newbornRecordInfo.model}
+                />
+                <NewbornPrediction
+                  data-testid="newBornRecordPrediction"
+                  newbornPredictionLoading={newbornPredictionLoading}
+                />
+              </FlexContainer>
+            </FlexContainer>
+          </React.Fragment>
+        );
+      }}
+    </Query>
   );
 };
 
@@ -89,18 +84,4 @@ NewBornRecord.defaultPropTypes = defaultPropTypes;
 
 NewBornRecord.propTypes = propTypes;
 
-const mapStateToProps = state => ({
-  newbornInfo: state.newBornReducer.newbornInfo,
-  newbornModelInfo: state.newBornReducer.newbornModelInfo,
-  newbornInfoLoading: state.newBornReducer.newbornInfoLoading,
-  newbornPredictionLoading: state.predictionReducer.newbornPredictionLoading
-});
-
-export default withAuthenticator(
-  withHeader(
-    connect(
-      mapStateToProps,
-      actions
-    )(withRouter(NewBornRecord))
-  )
-);
+export default withAuthenticator(withHeader(withRouter(NewBornRecord)));
