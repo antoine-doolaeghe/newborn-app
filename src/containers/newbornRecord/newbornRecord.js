@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 import { withAuthenticator } from "aws-amplify-react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";

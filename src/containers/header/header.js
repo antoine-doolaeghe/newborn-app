@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React, { useState, useEffect } from "react";
 import { Auth } from "aws-amplify";
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 import {
   HeaderContainer,
   HeaderMenuIcon,
@@ -9,14 +9,12 @@ import {
   HeaderMenu,
   MenuItem
 } from "./header.style";
-import * as actions from "../../store/actions";
 
 const Header = props => {
   const [menuNavOpen, setMenuNavOpen] = useState(false);
   const [menuProfileOpen, setProfileNavOpen] = useState(false);
 
   useEffect(() => {
-    props.fetchSingleUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -75,13 +73,4 @@ const Header = props => {
 
 Header.prototype = {};
 
-const mapStateToProps = state => ({
-  currentUser: state.userReducer.currentUser
-});
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    actions
-  )(Header)
-);
+export default withRouter(Header);

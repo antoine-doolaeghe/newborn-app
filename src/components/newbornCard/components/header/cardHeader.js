@@ -1,28 +1,28 @@
 import React from "react";
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 import {
   NewbornCardHeaderContainer,
   Title,
   SubTitle
-} from "./newbornCardHeader.style";
+} from "./cardHeader.style";
 import { InfoChip } from "../../../../theme/chips/info.style";
 
-function NewBornCardHeader(props) {
+function NewBornCardHeader({ history, newbornId, title, subTitle }) {
   return (
     <NewbornCardHeaderContainer
       onClick={() => {
-        props.history.push({
+        history.push({
           pathname: `/newborn-record`,
-          search: `?id=${props.newbornId}`,
+          search: `?id=${newbornId}`,
           state: {
-            id: props.newbornId
+            id: newbornId
           }
         });
       }}
     >
       <div>
-        <Title>{props.title}</Title>
-        <SubTitle>{props.subTitle}</SubTitle>
+        <Title>{title}</Title>
+        <SubTitle>{subTitle}</SubTitle>
       </div>
       <InfoChip>+ 5%</InfoChip>
     </NewbornCardHeaderContainer>

@@ -42,6 +42,7 @@ export const getUser = `query GetUser($id: ID!) {
   }
 }
 `;
+
 export const listUsers = `query ListUsers(
   $filter: ModelUserFilterInput
   $limit: Int
@@ -60,104 +61,6 @@ export const listUsers = `query ListUsers(
   }
 }
 `;
-export const getGeneration = `query GetGeneration($id: ID!, $newbornLimit: Int, $stepLimit: Int) {
-  getGeneration(id: $id) {
-    id
-    newborns(limit: $newbornLimit) {
-      items {
-        bio
-        bornPlace
-        childs
-        hexColor
-        id
-        name
-        sex
-        parents
-        partners
-        owner {
-          id
-        }
-        models {
-          items {
-            id
-            cellInfos
-            cellPositions
-            episodes {
-              items {
-                created
-                steps(limit: $stepLimit) {
-                  items {
-                    created
-                    meanReward
-                    standardReward
-                    step
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      nextToken
-    }
-  }
-}
-`;
-
-export const getFilteredGeneration = `query GetGeneration($id: ID!,$partnerFilter: String, $newbornLimit: Int, $stepLimit: Int) {
-  getGeneration(id: $id) {
-    id
-    newborns(limit: $newbornLimit, filter: {
-      or: [{
-        partners: {
-          contains: $partnerFilter
-        }
-      },
-      {
-        id: {
-          eq: $partnerFilter
-        }
-      }]
-    }) {
-      items {
-        bio
-        bornPlace
-        childs
-        hexColor
-        id
-        name
-        sex
-        parents
-        partners
-        owner {
-          id
-        }
-        models {
-          items {
-            id
-            cellInfos
-            cellPositions
-            episodes {
-              items {
-                created
-                steps(limit: $stepLimit) {
-                  items {
-                    created
-                    meanReward
-                    standardReward
-                    step
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      nextToken
-    }
-  }
-}
-`;
 
 export const listGenerations = `query ListGenerations(
   $filter: ModelGenerationFilterInput
@@ -168,14 +71,48 @@ export const listGenerations = `query ListGenerations(
     items {
       id
       newborns {
-        nextToken
+        items {
+          bio
+          bornPlace
+          childs
+          hexColor
+          id
+          name
+          sex
+          parents
+          partners
+          owner {
+            id
+          }
+          models {
+            items {
+              id
+              cellInfos
+              cellPositions
+              episodes {
+                items {
+                  id
+                  created
+                  steps {
+                    items {
+                      created
+                      meanReward
+                      standardReward
+                      step
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
     nextToken
   }
 }
 `;
-export const getNewborn = `query GetNewborn($id: ID!, $stepLimit: Int) {
+export const getNewborn = `query GetNewborn($id: ID!) {
   getNewborn(id: $id) {
     bio
     bornPlace
@@ -194,40 +131,9 @@ export const getNewborn = `query GetNewborn($id: ID!, $stepLimit: Int) {
       items {
         id
         cellPositions
-        episodes {
-          items {
-            id
-            created
-            steps(limit: $stepLimit) {
-              items {
-                created
-                meanReward
-                standardReward
-                step
-              }
-            }
-          }
-        }
       }
-      nextToken
     }
     name
-    owner {
-      id
-      profileImage
-      userName
-      newborns {
-        nextToken
-      }
-    }
-    parents
-    partners
-    predictions {
-      items {
-        meanReward
-      }
-      nextToken
-    }
   }
 }
 `;
@@ -269,35 +175,19 @@ export const getModel = `query GetModel($id: ID!) {
     id
     cellInfos
     cellPositions
-    newborn {
-      bio
-      bornPlace
-      childs
-      generation {
-        id
-      }
-      hexColor
-      id
-      models {
-        nextToken
-      }
-      name
-      owner {
-        id
-        profileImage
-        userName
-      }
-      parents
-      partners
-      predictions {
-        nextToken
-      }
-    }
     episodes {
       items {
         id
+        created
+        steps {
+          items {
+            created
+            meanReward
+            standardReward
+            step
+          }
+        }
       }
-      nextToken
     }
   }
 }

@@ -1,4 +1,4 @@
-import NewbornCard from "./components/newbornCard";
-import NewbornCardHeader from "./components/newbornCardHeader";
+import NewbornCard from "./components/cardWrapper";
+import NewbornCardHeader from "./components/header";
 
 export { NewbornCard, NewbornCardHeader };

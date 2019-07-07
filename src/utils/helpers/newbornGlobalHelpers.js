@@ -17,11 +17,10 @@ export const sortByDate = episodes => {
   });
 };
 
-export const returnSortedEpisodes = info => {
-  let episodes = [];
-  if (info.models.items[0].episodes.items[0]) {
-    episodes = info.models.items[0].episodes.items;
-    return sortByDate(episodes);
+export const returnSortedEpisodes = model => {
+  const episodes = [];
+  if (model && model.episodes && model.episodes.items[0]) {
+    return sortByDate(model.episodes.items);
   }
   return episodes;
 };
