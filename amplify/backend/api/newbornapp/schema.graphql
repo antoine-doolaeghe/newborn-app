@@ -21,6 +21,7 @@ type Newborn @model {
   bio: String
   bornPlace: String
   childs: [String]
+  createdAt: String
   generation: Generation! @connection(name: "GenerationNewborn")
   hexColor: String
   id: String!

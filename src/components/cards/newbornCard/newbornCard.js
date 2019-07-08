@@ -16,9 +16,10 @@ function NewbornCard(props) {
   const {
     onPartnerClick,
     onChildClick,
-    isSelected,
+    color,
     isPlaceholderCard,
-    newbornInfo
+    newbornInfo,
+    onClick
   } = props;
 
   const [hovered, setHovered] = useState(false);
@@ -40,8 +41,9 @@ function NewbornCard(props) {
 
   return (
     <CardWrapper
-      isSelected={isSelected}
+      color={color}
       data-newbornid={newbornInfo.id}
+      onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       isNewbornOwnedByCurrentUser={newbornInfo.isOwnedByCurrentUser}
@@ -54,8 +56,7 @@ function NewbornCard(props) {
               newbornInfo.id.length - 3,
               newbornInfo.id.length
             )}
-            subTitle="1y/2m/12d"
-            newbornId={newbornInfo.id}
+            subTitle={newbornInfo.dob}
             data-testid="newbornHeader"
           />
           <CardChartWrapper data-testid="newbornCardGraph">
@@ -63,7 +64,7 @@ function NewbornCard(props) {
               highcharts={Highcharts}
               options={lineChartOptions(
                 newbornInfo.summaries,
-                newbornInfo.color,
+                newbornInfo.color.dark,
                 86400000
               )}
             />

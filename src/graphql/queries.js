@@ -75,6 +75,7 @@ export const listGenerations = `query ListGenerations(
           bio
           bornPlace
           childs
+          createdAt
           hexColor
           id
           name

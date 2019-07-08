@@ -1,5 +1,6 @@
 import React from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { withRouter } from "react-router-dom";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import { returnNewbornCardInfo } from "./newbornList_helpers";
@@ -16,6 +17,7 @@ const GET_SELECTED_NEWBORN = gql`
 function NewbornList(props) {
   const {
     currentUserId,
+    history,
     generation: {
       newborns: { items }
     }
@@ -33,9 +35,19 @@ function NewbornList(props) {
     );
   };
 
+  const onCardClick = id => {
+    history.push({
+      pathname: `/newborn-record`,
+      search: `?id=${id}`,
+      state: {
+        id
+      }
+    });
+  };
+
   return (
     <Query query={GET_SELECTED_NEWBORN}>
-      {({ data, client, loading }) => {
+      {({ data: { selectedChild, selectedPartner }, client, loading }) => {
         if (loading) {
           return (
             <FlexContainer height="280px">
@@ -48,15 +60,12 @@ function NewbornList(props) {
         }
         const newbornCardList = [];
         items.forEach((newborn, newbornKey) => {
-          const newbornInfo = returnNewbornCardInfo(newborn, currentUserId);
-          const isPartnerSelected =
-            data.selectedPartner === newbornInfo.id ||
-            (newborn.partners &&
-              newborn.partners.includes(data.selectedPartner));
-
-          const isChildSelected =
-            data.selectedChild === newbornInfo.id ||
-            (newborn.partners && newborn.partners.includes(data.selectedChild));
+          const newbornInfo = returnNewbornCardInfo(
+            newborn,
+            currentUserId,
+            selectedPartner,
+            selectedChild
+          );
 
           newbornCardList.push(
             <NewbornCard
@@ -64,22 +73,24 @@ function NewbornList(props) {
               newbornInfo={newbornInfo}
               currentUserId={currentUserId}
               key={newbornKey}
-              isSelected={isPartnerSelected || isChildSelected}
-              onPartnerClick={() => {
-                console.log("HERE");
+              color={newbornInfo.color}
+              onClick={() => onCardClick(newbornInfo.id)}
+              onPartnerClick={event => {
+                event.stopPropagation();
                 client.writeData({
                   data: {
                     selectedPartner: newbornInfo.id
                   }
                 });
               }}
-              onChildClick={() =>
+              onChildClick={event => {
+                event.stopPropagation();
                 client.writeData({
                   data: {
                     selectedChild: newbornInfo.id
                   }
-                })
-              }
+                });
+              }}
               partners={[]}
             />
           );
@@ -90,4 +101,4 @@ function NewbornList(props) {
   );
 }
 
-export default NewbornList;
+export default withRouter(NewbornList);

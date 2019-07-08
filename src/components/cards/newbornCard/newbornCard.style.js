@@ -1,14 +1,9 @@
 import styled from "styled-components";
+import { colors } from "../../../theme/theme";
 
 export const CardWrapper = styled.section`
-  border: ${props =>
-    props.isPlaceholderCard
-      ? "2px dashed black"
-      : props.isNewbornOwnedByCurrentUser
-      ? "2px solid red"
-      : props.isSelected
-      ? "2px solid green"
-      : "2px solid black"};
+  border: ${props => `2px solid ${props.color.dark}`};
+  background: ${props => props.color.light};
   border-radius: 5px;
   height: 220px;
   position: relative;

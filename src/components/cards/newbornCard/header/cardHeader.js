@@ -1,5 +1,4 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 import {
   NewbornCardHeaderContainer,
   Title,
@@ -7,19 +6,9 @@ import {
 } from "./cardHeader.style";
 import { Badge } from "../../../badges";
 
-function CardHeader({ history, newbornId, title, subTitle }) {
+function CardHeader({ title, subTitle }) {
   return (
-    <NewbornCardHeaderContainer
-      onClick={() => {
-        history.push({
-          pathname: `/newborn-record`,
-          search: `?id=${newbornId}`,
-          state: {
-            id: newbornId
-          }
-        });
-      }}
-    >
+    <NewbornCardHeaderContainer>
       <div>
         <Title>{title}</Title>
         <SubTitle>{subTitle}</SubTitle>
@@ -29,4 +18,4 @@ function CardHeader({ history, newbornId, title, subTitle }) {
   );
 }
 
-export default withRouter(CardHeader);
+export default CardHeader;
