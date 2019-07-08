@@ -35,7 +35,6 @@ export const HeaderProfileIcon = styled.div`
 export const HeaderMenu = styled.div`
   border-right: 1px solid black;
   width: 150px;
-  background: black;
   display: ${props => (props.open ? "block" : "none")};
   position: absolute;
   top: 55px;
@@ -43,6 +42,7 @@ export const HeaderMenu = styled.div`
 
 export const MenuItem = styled.div`
   border-right: 1px solid black;
+  background: "white";
   width: 55px;
   height: 100%;
   &:hover {

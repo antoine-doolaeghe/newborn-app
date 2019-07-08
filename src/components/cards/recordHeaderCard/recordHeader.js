@@ -13,10 +13,10 @@ import {
   InfoWrap,
   InfoTitle,
   InfoContent
-} from "../infos/info.style";
-import { InfoChip } from "../../../badge/infoChip/style/info.style";
-import { Button } from "../../../buttons/buttons/button.style";
-import { FlexContainer } from "../../../../theme/layout/grid.style";
+} from "./infos/info.style";
+import { Badge } from "../../badges";
+import { Button } from "../../buttons/buttons/button.style";
+import { FlexContainer } from "../../../theme/layout/grid.style";
 
 function RecordHeader(props) {
   const { newbornInfo } = props;
@@ -36,7 +36,7 @@ function RecordHeader(props) {
       <HeaderValueContainer>
         <FlexContainer align="center">
           <HeaderValue>{currentStepMeanReward}</HeaderValue>
-          <InfoChip>{trainingStage}</InfoChip>
+          <Badge label={trainingStage} />
         </FlexContainer>
       </HeaderValueContainer>
       <InfoContainer>

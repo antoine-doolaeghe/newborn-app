@@ -8,7 +8,7 @@ import * as queries from "../../../graphql/queries";
 import { FlexContainer } from "../../../theme/layout/grid.style";
 import NewbornList from "../newbornList/newbornList";
 import withHeader from "../../header/withHeader";
-import { ErrorDialog } from "../../../theme/snackbars/error.style";
+import { ErrorDialog } from "../../../components/snackbars/errorSnackBar/style/error.style";
 
 function GenerationList() {
   const returnNewbornGeneration = () => {

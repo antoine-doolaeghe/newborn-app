@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import { returnNewbornCardInfo } from "./newbornList_helpers";
 import { Grid, FlexContainer } from "../../../theme/layout/grid.style";
-import { NewbornCard } from "../../../components/newbornCard";
+import { NewbornCard } from "../../../components/cards";
 
 const GET_SELECTED_NEWBORN = gql`
   {
@@ -65,13 +65,14 @@ function NewbornList(props) {
               currentUserId={currentUserId}
               key={newbornKey}
               isSelected={isPartnerSelected || isChildSelected}
-              onPartnerClick={() =>
+              onPartnerClick={() => {
+                console.log("HERE");
                 client.writeData({
                   data: {
                     selectedPartner: newbornInfo.id
                   }
-                })
-              }
+                });
+              }}
               onChildClick={() =>
                 client.writeData({
                   data: {

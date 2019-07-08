@@ -1,58 +1,61 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import { withAuthenticator } from "aws-amplify-react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 import { propTypes } from "./newbornRecord_propTypes";
 import { defaultPropTypes } from "./newbornRecord_defaultPropTypes";
 import * as queries from "../../graphql/queries";
-
 import { FlexContainer } from "../../theme/layout/grid.style";
-import { ErrorDialog } from "../../theme/snackbars/error.style";
+import { ErrorDialog } from "../../components/snackbars/errorSnackBar/style/error.style";
 
 import withHeader from "../header/withHeader";
 
-import {
-  NewbornRecordGraph,
-  NewbornRecordHeader,
-  NewbornRecord3dModel,
-  NewbornPrediction
-} from "../../components/newbornRecord";
+import RecordGraph from "../../components/graphs/recordGraph/recordGraph";
+import RecordHeader from "../../components/cards/recordHeaderCard/recordHeader";
+import Record3dModel from "../../components/3dModel/record3dModel/record3dModel";
 
 import { returnNewbornRecordInfo } from "./newbornRecordHelpers";
 
 const NewBornRecord = props => {
   const { newbornPredictionLoading, location } = props;
   return (
-    <Query
-      query={gql(queries.getNewborn)}
-      variables={{ id: location.state.id }}
-    >
-      {({ data, loading, error }) => {
-        if (error) {
-          return <ErrorDialog open message={error.message} />;
-        }
+    <FlexContainer>
+      <Query
+        query={gql(queries.getNewborn)}
+        variables={{ id: location.state.id }}
+      >
+        {({ data, loading, error }) => {
+          if (error) {
+            return <ErrorDialog open message={error.message} />;
+          }
 
-        if (loading) {
-          return "loading";
-        }
+          if (loading) {
+            return (
+              <CircularProgress
+                variant="indeterminate"
+                data-testid="newbornListLoading"
+              />
+            );
+          }
 
-        const newbornRecordInfo = returnNewbornRecordInfo(data.getNewborn);
+          const newbornRecordInfo = returnNewbornRecordInfo(data.getNewborn);
 
-        return (
-          <React.Fragment>
-            <FlexContainer>
+          return (
+            <Fragment>
               <FlexContainer
                 direction="column"
                 width="500px"
                 max-width="500px"
                 margin="10px"
               >
-                <NewbornRecordHeader
+                <RecordHeader
                   newbornInfo={newbornRecordInfo}
                   data-testid="newbornRecordHeader"
                 />
-                <NewbornRecord3dModel
+                <Record3dModel
                   newbornModelInfo={props.newbornModelInfo}
                   data-testid="newbornRecord3dModel"
                 />
@@ -63,20 +66,16 @@ const NewBornRecord = props => {
                 max-width="500px"
                 margin="10px"
               >
-                <NewbornRecordGraph
+                <RecordGraph
                   data-testid="newbornRecordGraph"
                   newbornModel={newbornRecordInfo.model}
                 />
-                <NewbornPrediction
-                  data-testid="newBornRecordPrediction"
-                  newbornPredictionLoading={newbornPredictionLoading}
-                />
               </FlexContainer>
-            </FlexContainer>
-          </React.Fragment>
-        );
-      }}
-    </Query>
+            </Fragment>
+          );
+        }}
+      </Query>
+    </FlexContainer>
   );
 };
 

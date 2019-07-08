@@ -1,4 +1,3 @@
-import { connect } from "react-redux";
 import React, { useState, useEffect } from "react";
 import { Auth } from "aws-amplify";
 import { withRouter } from "react-router-dom";
@@ -13,11 +12,6 @@ import {
 const Header = props => {
   const [menuNavOpen, setMenuNavOpen] = useState(false);
   const [menuProfileOpen, setProfileNavOpen] = useState(false);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const handleLogout = () => {
     Auth.signOut()
       .then(data => console.log(data))
@@ -25,8 +19,6 @@ const Header = props => {
   };
 
   const { currentUser } = props;
-  const { username } = currentUser || {};
-
   const renderNavigationMenu = (
     <HeaderMenu
       open={menuNavOpen}
@@ -34,7 +26,7 @@ const Header = props => {
         setMenuNavOpen(!menuNavOpen);
       }}
     >
-      <MenuItem onClick={handleLogout}>{username}</MenuItem>
+      <MenuItem onClick={handleLogout}>{currentUser}</MenuItem>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </HeaderMenu>
   );
@@ -46,7 +38,7 @@ const Header = props => {
         setProfileNavOpen(!menuProfileOpen);
       }}
     >
-      <MenuItem onClick={handleLogout}>{username}</MenuItem>
+      <MenuItem onClick={handleLogout}>{currentUser}</MenuItem>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </HeaderMenu>
   );
@@ -71,6 +63,8 @@ const Header = props => {
   );
 };
 
-Header.prototype = {};
+Header.defaultProps = {
+  currentUser: ""
+};
 
 export default withRouter(Header);

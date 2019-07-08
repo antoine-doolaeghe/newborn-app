@@ -12,7 +12,7 @@ import registerServiceWorker from "./registerServiceWorker";
 import aws_config from "./aws-exports";
 
 // Route imports
-import NewbornList from "./containers/generations/generationList/generationList";
+import GenerationList from "./containers/generations/generationList/generationList";
 import NewBornRecord from "./containers/newbornRecord/newbornRecord";
 
 const cache = new InMemoryCache({});
@@ -31,7 +31,7 @@ render(
   <ApolloProvider client={client}>
     <Router>
       <Switch>
-        <Route exact path="/" component={NewbornList} />
+        <Route exact path="/" component={GenerationList} />
         <Route path="/newborn-record" component={NewBornRecord} />
       </Switch>
     </Router>
