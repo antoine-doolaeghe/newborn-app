@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { withRouter } from "react-router-dom";
 import gql from "graphql-tag";
@@ -18,26 +18,24 @@ const GET_SELECTED_NEWBORN = gql`
 function NewbornList(props) {
   const {
     currentUserId,
-    history,
     generation: {
       id,
       newborns: { items }
     }
   } = props;
 
-  const onCardClick = id => {
-    history.push({
-      pathname: `/newborn-record`,
-      search: `?id=${id}`,
-      state: {
-        id
-      }
-    });
-  };
-
   return (
     <Query query={GET_SELECTED_NEWBORN}>
-      {({ data: { selectedChild, selectedPartner }, client, loading }) => {
+      {({
+        data: { selectedChild, selectedPartner },
+        client,
+        loading,
+        error
+      }) => {
+        if (error) {
+          return "error";
+        }
+
         if (loading) {
           return (
             <FlexContainer height="280px">
@@ -48,6 +46,7 @@ function NewbornList(props) {
             </FlexContainer>
           );
         }
+
         const generationTitle = () => {
           // TODO: label component
           return (
@@ -57,6 +56,7 @@ function NewbornList(props) {
             </Fragment>
           );
         };
+
         const newbornCardList = [];
         items.forEach((newborn, newbornKey) => {
           const newbornInfo = returnNewbornCardInfo(
@@ -73,7 +73,7 @@ function NewbornList(props) {
               currentUserId={currentUserId}
               key={newbornKey}
               color={newbornInfo.color}
-              onClick={() => onCardClick(newbornInfo.id)}
+              onClick={props.onRecordOpen}
               onPartnerClick={event => {
                 event.stopPropagation();
                 client.writeData({

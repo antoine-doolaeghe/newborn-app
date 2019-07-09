@@ -32,7 +32,6 @@ render(
     <Router>
       <Switch>
         <Route exact path="/" component={GenerationList} />
-        <Route path="/newborn-record" component={NewBornRecord} />
       </Switch>
     </Router>
   </ApolloProvider>,

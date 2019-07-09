@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
@@ -10,7 +10,16 @@ import NewbornList from "../newbornList/newbornList";
 import withHeader from "../../header/withHeader";
 import { ErrorDialog } from "../../../components/snackbars/errorSnackBar/style/error.style";
 
+import NewbornRecord from "../../newbornRecord/newbornRecord";
+
 function GenerationList() {
+  const [isRecordOpen, setIsRecordOpen] = useState(false);
+  const [id, setId] = useState("");
+  const onRecordClose = () => setIsRecordOpen(false);
+  const onRecordOpen = () => {
+    setId("252151848685715920746652");
+    setIsRecordOpen(true);
+  };
   const returnNewbornGeneration = () => {
     return (
       <Query query={gql(queries.listGenerations)}>
@@ -29,7 +38,19 @@ function GenerationList() {
             );
           }
           return data.listGenerations.items.map(generation => {
-            return <NewbornList generation={generation} />;
+            return (
+              <div>
+                <NewbornRecord
+                  id={id}
+                  open={isRecordOpen}
+                  onClose={onRecordClose}
+                />
+                <NewbornList
+                  generation={generation}
+                  onRecordOpen={onRecordOpen}
+                />
+              </div>
+            );
           });
         }}
       </Query>
