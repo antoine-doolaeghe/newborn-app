@@ -2,14 +2,14 @@ import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import CardHeader from "./header/cardHeader";
+import CardHeader from "./header";
 
 import {
   CardWrapper,
   CardButtonWrapper,
   CardChartWrapper
 } from "./newbornCard.style";
-import { BadgeButton } from "../../buttons";
+import CardButton from "./button";
 import lineChartOptions from "./lineChartOptions";
 
 function NewbornCard(props) {
@@ -28,12 +28,18 @@ function NewbornCard(props) {
     if (hovered) {
       return (
         <CardButtonWrapper>
-          <BadgeButton color="primary" onClick={onPartnerClick}>
-            P 1
-          </BadgeButton>
-          <BadgeButton color="secondary" onClick={onChildClick}>
-            C 0
-          </BadgeButton>
+          <CardButton
+            color="primary"
+            onClick={onPartnerClick}
+            iconLabel="p"
+            label="1"
+          />
+          <CardButton
+            color="secondary"
+            onClick={onChildClick}
+            iconLabel="c"
+            label="1"
+          />
         </CardButtonWrapper>
       );
     }
@@ -52,10 +58,7 @@ function NewbornCard(props) {
       {!isPlaceholderCard && (
         <Fragment>
           <CardHeader
-            title={newbornInfo.id.substring(
-              newbornInfo.id.length - 3,
-              newbornInfo.id.length
-            )}
+            title={newbornInfo.title}
             subTitle={newbornInfo.dob}
             data-testid="newbornHeader"
           />

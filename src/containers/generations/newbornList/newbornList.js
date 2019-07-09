@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { withRouter } from "react-router-dom";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import { returnNewbornCardInfo } from "./newbornList_helpers";
-import { Grid, FlexContainer } from "../../../theme/layout/grid.style";
+import { FlexContainer } from "../../../theme/layout/grid.style";
+import { CardList } from "../../../components/lists";
 import { NewbornCard } from "../../../components/cards";
 
 const GET_SELECTED_NEWBORN = gql`
@@ -19,21 +20,10 @@ function NewbornList(props) {
     currentUserId,
     history,
     generation: {
+      id,
       newborns: { items }
     }
   } = props;
-
-  const returnGridList = (newbornCardList, columnNumber) => {
-    return (
-      <Grid
-        columnNumber={columnNumber}
-        data-testid="newborn-card-list"
-        rowNumber={1}
-      >
-        {newbornCardList}
-      </Grid>
-    );
-  };
 
   const onCardClick = id => {
     history.push({
@@ -58,6 +48,15 @@ function NewbornList(props) {
             </FlexContainer>
           );
         }
+        const generationTitle = () => {
+          // TODO: label component
+          return (
+            <Fragment>
+              <span>Generation: </span>
+              {id}
+            </Fragment>
+          );
+        };
         const newbornCardList = [];
         items.forEach((newborn, newbornKey) => {
           const newbornInfo = returnNewbornCardInfo(
@@ -95,7 +94,13 @@ function NewbornList(props) {
             />
           );
         });
-        return returnGridList(newbornCardList, items.length);
+        return (
+          <CardList
+            list={newbornCardList}
+            listTitle={generationTitle()}
+            id="newborn-card-list"
+          />
+        );
       }}
     </Query>
   );

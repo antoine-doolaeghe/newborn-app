@@ -7,11 +7,13 @@ export const StyledBadgeButton = styled.button`
   border: none;
   border-radius: 2px;
   color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center
   font-family: "IBM Plex Sans", sans-serif;
   font-size: 0.875rem;
   font-weight: 400;
-  height: 25px;
-  width: 35px;
+  padding: 3px 7px;
   margin: 5px;
   outline: none;
   &:hover {

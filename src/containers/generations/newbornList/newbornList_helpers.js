@@ -25,25 +25,31 @@ export const returnNewbornCardInfo = (
 ) => {
   const isOwnedByCurrentUser =
     info.owner && info.owner.id && info.owner.id === currentUserId;
+
   const episodes = info.models
     ? returnSortedEpisodes(info.models.items[0])
     : null;
+
   const isPartnerSelected =
     selectedPartner === info.id ||
     (info.partners && info.partners.includes(selectedPartner));
+
   const isChildSelected =
     selectedChild === info.id ||
     (info.partners && info.partners.includes(selectedChild));
+
   const color = isPartnerSelected
     ? colors.primary
     : isChildSelected
     ? colors.secondary
     : colors.dark;
+
   const steps = returnSortedSteps(episodes, 0);
   const dayJsDob = dayjs(info.createdAt);
   const dob = `${dayJsDob.year()}-${dayJsDob.month()}-${dayJsDob.date()}`;
+
   const newbornInfo = {
-    name: info.name || "",
+    title: info.id.substring(info.id.length - 3, info.id.length),
     id: info.id || "",
     dob,
     color,
