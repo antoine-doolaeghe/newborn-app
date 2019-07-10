@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NewbornCardHeaderContainer = styled.section`
+export const NewbornCardHeaderContainer = styled.div`
   border-bottom: 1px dotted black;
   display: flex;
   justify-content: space-between;

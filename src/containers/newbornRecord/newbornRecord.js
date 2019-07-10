@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import Dialog from "@material-ui/core/Dialog";
+import styled from "styled-components";
 import { propTypes } from "./newbornRecord_propTypes";
 import { defaultPropTypes } from "./newbornRecord_defaultPropTypes";
 import * as queries from "../../graphql/queries";
@@ -16,17 +17,15 @@ import Record3dModel from "../../components/3dModel/record3dModel/record3dModel"
 
 import { returnNewbornRecordInfo } from "./newbornRecordHelpers";
 
-const NewBornRecord = props => {
-  const { newbornPredictionLoading, location } = props;
-  console.log(props.id);
+const NewbornRecordWrapper = styled.section`
+  display: flex;
+`;
+
+const NewBornRecord = ({ id, open, onClose, newbornModelInfo }) => {
   return (
-    <Dialog
-      onClose={props.onClose}
-      open={props.open}
-      aria-labelledby="simple-dialog-title"
-    >
-      <FlexContainer>
-        <Query query={gql(queries.getNewborn)} variables={{ id: props.id }}>
+    <Dialog onClose={onClose} open={open} maxWidth="lg">
+      <NewbornRecordWrapper>
+        <Query query={gql(queries.getNewborn)} variables={{ id }}>
           {({ data, loading, error }) => {
             if (error) {
               return <ErrorDialog open message={error.message} />;
@@ -56,7 +55,7 @@ const NewBornRecord = props => {
                     data-testid="newbornRecordHeader"
                   />
                   <Record3dModel
-                    newbornModelInfo={props.newbornModelInfo}
+                    newbornModelInfo={newbornModelInfo}
                     data-testid="newbornRecord3dModel"
                   />
                 </FlexContainer>
@@ -75,7 +74,7 @@ const NewBornRecord = props => {
             );
           }}
         </Query>
-      </FlexContainer>
+      </NewbornRecordWrapper>
     </Dialog>
   );
 };

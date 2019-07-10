@@ -1,7 +1,5 @@
 import React from "react";
-
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
 import { render } from "react-dom";
 
 import Amplify from "aws-amplify";
@@ -11,9 +9,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import registerServiceWorker from "./registerServiceWorker";
 import aws_config from "./aws-exports";
 
-// Route imports
-import GenerationList from "./containers/generations/generationList/generationList";
-import NewBornRecord from "./containers/newbornRecord/newbornRecord";
+import { Main } from "./pages";
 
 const cache = new InMemoryCache({});
 const client = new ApolloClient({
@@ -31,7 +27,7 @@ render(
   <ApolloProvider client={client}>
     <Router>
       <Switch>
-        <Route exact path="/" component={GenerationList} />
+        <Route exact path="/" component={Main} />
       </Switch>
     </Router>
   </ApolloProvider>,
