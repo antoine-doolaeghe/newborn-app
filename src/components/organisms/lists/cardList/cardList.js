@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid } from "../../../theme/layout/grid.style";
-import { colors } from "../../../theme/theme";
+import { Grid } from "../../../../theme/layout/grid.style";
+import { colors } from "../../../../theme/theme";
 
 export const CardListWrapper = styled.div`
   position: relative;

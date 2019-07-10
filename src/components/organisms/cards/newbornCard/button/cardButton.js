@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { BadgeButton } from "../../../buttons";
-import { colors } from "../../../../theme/theme";
+import { BadgeButton } from "../../../../molecules/buttons";
+import { colors } from "../../../../../theme/theme";
 
 export const IconLabelWrapper = styled.div`
   background: white;

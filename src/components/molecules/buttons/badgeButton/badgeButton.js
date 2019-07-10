@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { colors } from "../../../theme/theme";
+import { colors } from "../../../../theme/theme";
 
 export const StyledBadgeButton = styled.button`
   background: ${props => colors[props.color].main};

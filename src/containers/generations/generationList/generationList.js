@@ -5,7 +5,7 @@ import { Query } from "react-apollo";
 import * as queries from "../../../graphql/queries";
 import { FlexContainer } from "../../../theme/layout/grid.style";
 import NewbornList from "../newbornList/newbornList";
-import { ErrorDialog } from "../../../components/snackbars/errorSnackBar/style/error.style";
+import { ErrorDialog } from "../../../components/organisms/snackbars/errorSnackBar/style/error.style";
 
 import NewbornRecord from "../../newbornRecord/newbornRecord";
 

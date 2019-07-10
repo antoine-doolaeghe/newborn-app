@@ -8,26 +8,13 @@ import { RcordGraphContainer } from "./recordGraph.style";
 import * as queries from "../../../graphql/queries";
 import GraphRangeSelect from "./graphRangeSelect";
 import lineChartOptions from "./lineChartOptions";
-import { ErrorDialog } from "../../snackbars/errorSnackBar/style/error.style";
+import { ErrorDialog } from "../../../components/organisms/snackbars/errorSnackBar/style/error.style";
 
 import { returnNewbornChartData } from "../../../utils/helpers/newbornChartHelpers";
 import {
   returnSortedEpisodes,
   returnSortedSteps
 } from "../../../utils/helpers/newbornGlobalHelpers";
-
-// export const subscribeNewborn = newbornId => async dispatch => {
-//   API.graphql(graphqlOperation(subscriptions.onUpdateNewborn)).subscribe({
-//     next: newborn => {
-//       if (newborn.value.data.onUpdateNewborn.id === newbornId) {
-//         dispatch({
-//           type: SUBSCRIBE_NEWBORN_SUCCESS,
-//           payload: newborn.value.data.onUpdateNewborn.models.items[0].episodes
-//         });
-//       }
-//     }
-//   });
-// };
 
 const RecordGraph = props => {
   const {

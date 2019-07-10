@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../../theme/theme";
+import { colors } from "../../../../theme/theme";
 
 export const CardWrapper = styled.section`
   border: ${props => `2px solid ${props.color.dark}`};

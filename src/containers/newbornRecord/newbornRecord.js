@@ -9,11 +9,11 @@ import { propTypes } from "./newbornRecord_propTypes";
 import { defaultPropTypes } from "./newbornRecord_defaultPropTypes";
 import * as queries from "../../graphql/queries";
 import { FlexContainer } from "../../theme/layout/grid.style";
-import { ErrorDialog } from "../../components/snackbars/errorSnackBar/style/error.style";
+import { ErrorDialog } from "../../components/organisms/snackbars/errorSnackBar/style/error.style";
 
-import RecordGraph from "../../components/graphs/recordGraph/recordGraph";
-import RecordHeader from "../../components/cards/recordHeaderCard/recordHeader";
-import Record3dModel from "../../components/3dModel/record3dModel/record3dModel";
+import RecordGraph from "./recordGraph/recordGraph";
+import RecordHeader from "../../components/organisms/cards/recordHeaderCard/recordHeader";
+import Record3dModel from "../../components/organisms/3dModel/record3dModel/record3dModel";
 
 import { returnNewbornRecordInfo } from "./newbornRecordHelpers";
 
