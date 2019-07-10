@@ -21,11 +21,11 @@ type Newborn @model {
   bio: String
   bornPlace: String
   childs: [String]
+  createdAt: String
   generation: Generation! @connection(name: "GenerationNewborn")
   hexColor: String
   id: String!
   instanceId: String
-  training: Boolean
   models: [Model] @connection(name: "NewbornModel")
   name: String!
   owner: User @connection(name: "NewbornOwner")
@@ -33,7 +33,9 @@ type Newborn @model {
   partners: [String]
   predictions: [Prediction] @connection(name: "NewbornPrediction")
   sex: String!
-  developmentStage: String
+  steps: Int
+  training: Boolean
+  trainingStage: String
 }
 
 type Model @model {
@@ -62,4 +64,9 @@ type Summary @model {
 type Prediction @model {
   meanReward: Float
   newborn: Newborn @connection(name: "NewbornPrediction")
+}
+
+type Subscription {
+  onCreateSummarySet(summaryEpisodeId: String!): Summary
+    @aws_subscribe(mutations: ["createSummary"])
 }

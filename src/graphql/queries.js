@@ -42,6 +42,7 @@ export const getUser = `query GetUser($id: ID!) {
   }
 }
 `;
+
 export const listUsers = `query ListUsers(
   $filter: ModelUserFilterInput
   $limit: Int
@@ -60,48 +61,7 @@ export const listUsers = `query ListUsers(
   }
 }
 `;
-export const getGeneration = `query GetGeneration($id: ID!) {
-  getGeneration(id: $id) {
-    id
-    newborns {
-      items {
-        bio
-        bornPlace
-        childs
-        hexColor
-        id
-        name
-        sex
-        parents
-        partners
-        owner {
-          id
-        }
-        models {
-          items {
-            id
-            cellInfos
-            cellPositions
-            episodes {
-              items {
-                steps {
-                  items {
-                    created
-                    meanReward
-                    standardReward
-                    step
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      nextToken
-    }
-  }
-}
-`;
+
 export const listGenerations = `query ListGenerations(
   $filter: ModelGenerationFilterInput
   $limit: Int
@@ -111,18 +71,54 @@ export const listGenerations = `query ListGenerations(
     items {
       id
       newborns {
-        nextToken
+        items {
+          bio
+          bornPlace
+          childs
+          createdAt
+          hexColor
+          id
+          name
+          sex
+          parents
+          partners
+          owner {
+            id
+          }
+          models {
+            items {
+              id
+              cellInfos
+              cellPositions
+              episodes {
+                items {
+                  id
+                  created
+                  steps {
+                    items {
+                      created
+                      meanReward
+                      standardReward
+                      step
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
     nextToken
   }
 }
 `;
-export const getNewborn = `query GetNewborn($id: ID!, $stepLimit: Int) {
+export const getNewborn = `query GetNewborn($id: ID!) {
   getNewborn(id: $id) {
     bio
     bornPlace
     childs
+    trainingStage
     generation {
       id
       newborns {
@@ -136,38 +132,9 @@ export const getNewborn = `query GetNewborn($id: ID!, $stepLimit: Int) {
       items {
         id
         cellPositions
-        episodes {
-          items {
-            steps(limit: $stepLimit) {
-              items {
-                created
-                meanReward
-                standardReward
-                step
-              }
-            }
-          }
-        }
       }
-      nextToken
     }
     name
-    owner {
-      id
-      profileImage
-      userName
-      newborns {
-        nextToken
-      }
-    }
-    parents
-    partners
-    predictions {
-      items {
-        meanReward
-      }
-      nextToken
-    }
   }
 }
 `;
@@ -209,35 +176,19 @@ export const getModel = `query GetModel($id: ID!) {
     id
     cellInfos
     cellPositions
-    newborn {
-      bio
-      bornPlace
-      childs
-      generation {
-        id
-      }
-      hexColor
-      id
-      models {
-        nextToken
-      }
-      name
-      owner {
-        id
-        profileImage
-        userName
-      }
-      parents
-      partners
-      predictions {
-        nextToken
-      }
-    }
     episodes {
       items {
         id
+        created
+        steps {
+          items {
+            created
+            meanReward
+            standardReward
+            step
+          }
+        }
       }
-      nextToken
     }
   }
 }

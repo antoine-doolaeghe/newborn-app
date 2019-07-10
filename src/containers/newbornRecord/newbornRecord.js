@@ -1,116 +1,86 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React, { Fragment } from "react";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
-import { withRouter } from "react-router";
-import { connect } from "react-redux";
-import { withAuthenticator } from "aws-amplify-react";
-import * as actions from "../../store/actions";
-
+import Dialog from "@material-ui/core/Dialog";
+import styled from "styled-components";
+import { propTypes } from "./newbornRecord_propTypes";
+import { defaultPropTypes } from "./newbornRecord_defaultPropTypes";
+import * as queries from "../../graphql/queries";
 import { FlexContainer } from "../../theme/layout/grid.style";
-import { ErrorDialog } from "../../theme/snackbars/error.style";
+import { ErrorDialog } from "../../components/snackbars/errorSnackBar/style/error.style";
 
-import withHeader from "../header/withHeader";
-import NewbornRecordGraph from "../../components/newbornRecordGraph/newbornRecordGraph";
-import NewbornRecordHeader from "../../components/newbornRecordHeader/newbornRecordHeader";
-import NewBornRecord3dModel from "../../components/newbornRecord3dModel/newbornRecord3dModel";
-import NewBornRecordPrediction from "../../components/newbornPrediction/newbornPrediction";
+import RecordGraph from "../../components/graphs/recordGraph/recordGraph";
+import RecordHeader from "../../components/cards/recordHeaderCard/recordHeader";
+import Record3dModel from "../../components/3dModel/record3dModel/record3dModel";
 
-import { returnNewbornRecordInfo } from "../../utils/helpers/newbornGlobalHelpers";
-import { returnNewbornPredictionData } from "../../utils/helpers/newbornPredictionHelpers";
+import { returnNewbornRecordInfo } from "./newbornRecordHelpers";
 
-const NewBornRecord = props => {
-  const {
-    newbornInfoLoading,
-    newbornPredictionLoading,
-    newbornInfo,
-    fetchNewborn,
-    resetNewbornPrediction,
-    location
-  } = props;
+const NewbornRecordWrapper = styled.section`
+  display: flex;
+`;
 
-  const [error, setError] = useState("");
-  const [isErrorOpen, setIsErrorOpen] = useState(false);
-  useEffect(() => {
-    const newbornId = location.state.id;
-    resetNewbornPrediction();
-    fetchNewborn(newbornId, 100).catch(err => {
-      setError(err.message);
-      setIsErrorOpen(true);
-    });
-  }, [fetchNewborn, location.state.id, resetNewbornPrediction]);
-
-  const startPredictionTraining = () => {
-    const { newbornInfo, startPredictionTraining } = props;
-    const predictionData = returnNewbornPredictionData(newbornInfo);
-    startPredictionTraining(predictionData);
-  };
-
-  const newbornGraphInfo = newbornInfo
-    ? returnNewbornRecordInfo(props.newbornInfo)
-    : null;
-
+const NewBornRecord = ({ id, open, onClose, newbornModelInfo }) => {
   return (
-    <React.Fragment>
-      <FlexContainer>
-        <FlexContainer
-          direction="column"
-          width="500px"
-          max-width="500px"
-          margin="10px"
-        >
-          <NewbornRecordHeader data-testid="newbornRecordHeader" />
-          <NewBornRecord3dModel
-            newbornModelInfo={props.newbornModelInfo}
-            data-testid="newbornRecord3dModel"
-          />
-        </FlexContainer>
-        <FlexContainer
-          direction="column"
-          width="500px"
-          max-width="500px"
-          margin="10px"
-        >
-          <NewbornRecordGraph
-            newbornInfoLoading={newbornInfoLoading}
-            data-testid="newbornRecordGraph"
-            newbornInfo={newbornGraphInfo}
-          />
-          <NewBornRecordPrediction
-            data-testid="newBornRecordPrediction"
-            newbornPredictionLoading={newbornPredictionLoading}
-            onPredictionClick={startPredictionTraining}
-          />
-        </FlexContainer>
-      </FlexContainer>
-      <ErrorDialog open={isErrorOpen} message={error} />
-    </React.Fragment>
+    <Dialog onClose={onClose} open={open} maxWidth="lg">
+      <NewbornRecordWrapper>
+        <Query query={gql(queries.getNewborn)} variables={{ id }}>
+          {({ data, loading, error }) => {
+            if (error) {
+              return <ErrorDialog open message={error.message} />;
+            }
+
+            if (loading || !data.getNewborn) {
+              return (
+                <CircularProgress
+                  variant="indeterminate"
+                  data-testid="newbornListLoading"
+                />
+              );
+            }
+
+            const newbornRecordInfo = returnNewbornRecordInfo(data.getNewborn);
+
+            return (
+              <Fragment>
+                <FlexContainer
+                  direction="column"
+                  width="500px"
+                  max-width="500px"
+                  margin="10px"
+                >
+                  <RecordHeader
+                    newbornInfo={newbornRecordInfo}
+                    data-testid="newbornRecordHeader"
+                  />
+                  <Record3dModel
+                    newbornModelInfo={newbornModelInfo}
+                    data-testid="newbornRecord3dModel"
+                  />
+                </FlexContainer>
+                <FlexContainer
+                  direction="column"
+                  width="500px"
+                  max-width="500px"
+                  margin="10px"
+                >
+                  <RecordGraph
+                    data-testid="newbornRecordGraph"
+                    newbornModel={newbornRecordInfo.model}
+                  />
+                </FlexContainer>
+              </Fragment>
+            );
+          }}
+        </Query>
+      </NewbornRecordWrapper>
+    </Dialog>
   );
 };
 
-NewBornRecord.propTypes = {
-  fetchNewborn: PropTypes.func.isRequired,
-  newbornInfo: PropTypes.object,
-  newbornInfoLoading: PropTypes.bool.isRequired,
-  newbornPrediction: PropTypes.object,
-  location: PropTypes.object.isRequired,
-  newbornPredictionLoading: PropTypes.bool.isRequired,
-  resetNewbornPrediction: PropTypes.func.isRequired,
-  startPredictionTraining: PropTypes.func.isRequired
-};
+NewBornRecord.defaultPropTypes = defaultPropTypes;
 
-const mapStateToProps = state => ({
-  newbornInfo: state.newBornReducer.newbornInfo,
-  newbornModelInfo: state.newBornReducer.newbornModelInfo,
-  newbornInfoLoading: state.newBornReducer.newbornInfoLoading,
-  newbornPrediction: state.predictionReducer.newbornPrediction,
-  newbornPredictionLoading: state.predictionReducer.newbornPredictionLoading
-});
+NewBornRecord.propTypes = propTypes;
 
-export default withAuthenticator(
-  withHeader(
-    connect(
-      mapStateToProps,
-      actions
-    )(withRouter(NewBornRecord))
-  )
-);
+export default NewBornRecord;

@@ -167,14 +167,15 @@ export const updateNewborn = `mutation UpdateNewborn($input: UpdateNewbornInput!
     bio
     bornPlace
     childs
-    generation {
-      id
-      newborns {
-        nextToken
-      }
-    }
     hexColor
     id
+    name
+    sex
+    parents
+    partners
+    owner {
+      id
+    }
     models {
       items {
         id
@@ -182,8 +183,10 @@ export const updateNewborn = `mutation UpdateNewborn($input: UpdateNewbornInput!
         cellPositions
         episodes {
           items {
+            created
             steps(limit: $stepLimit) {
               items {
+                created
                 meanReward
                 standardReward
                 step
@@ -192,24 +195,6 @@ export const updateNewborn = `mutation UpdateNewborn($input: UpdateNewbornInput!
           }
         }
       }
-      nextToken
-    }
-    name
-    owner {
-      id
-      profileImage
-      userName
-      newborns {
-        nextToken
-      }
-    }
-    parents
-    partners
-    predictions {
-      items {
-        meanReward
-      }
-      nextToken
     }
   }
 }

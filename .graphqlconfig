@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "newborn-app": {
+      "schemaPath": "amplify/backend/api/newbornapp/schema.graphql"
+    }
+  }
+}

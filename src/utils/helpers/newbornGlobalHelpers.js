@@ -1,34 +1,34 @@
-import { returnNewbornChartData } from "./newbornChartHelpers";
+import dayjs from "dayjs";
 
-export const returnNewbornCardInfo = (
-  newborn,
-  selectedNewborns,
-  hoveredNewborn,
-  currentUserId
-) => {
-  const isOwnedByCurrentUser =
-    newborn.owner && newborn.owner.id && newborn.owner.id === currentUserId;
-  const isSelected = selectedNewborns.includes(newborn.id);
-  const newbornInfo = {
-    name: newborn.name || "",
-    id: newborn.id || "",
-    bornPlace: newborn.bornPlace || "unknown region",
-    isSelected,
-    isHovered: hoveredNewborn === newborn.id,
-    isOwnedByCurrentUser,
-    color: isOwnedByCurrentUser ? "red" : isSelected ? "green" : "black",
-    summaries: returnNewbornChartData(newborn)
-  };
-  return newbornInfo;
+export const returnUtcTime = time => {
+  return Date.UTC(
+    dayjs(time).year(),
+    dayjs(time).month(),
+    dayjs(time).date(),
+    dayjs(time).hour(),
+    dayjs(time).minute(),
+    dayjs(time).second()
+  );
 };
 
-export const returnNewbornRecordInfo = newborn => {
-  const newbornInfo = {
-    name: newborn.name || "",
-    id: newborn.id || "",
-    bornPlace: newborn.bornPlace || "unknown region",
-    summaries: returnNewbornChartData(newborn),
-    color: "black"
-  };
-  return newbornInfo;
+export const sortByDate = episodes => {
+  return episodes.sort((a, b) => {
+    return new Date(a.created) - new Date(b.created);
+  });
+};
+
+export const returnSortedEpisodes = model => {
+  const episodes = [];
+  if (model && model.episodes && model.episodes.items[0]) {
+    return sortByDate(model.episodes.items);
+  }
+  return episodes;
+};
+
+export const returnSortedSteps = (episodes, key) => {
+  const steps = [];
+  if (episodes[key] && episodes[key].steps) {
+    return sortByDate(episodes[0].steps.items);
+  }
+  return steps;
 };

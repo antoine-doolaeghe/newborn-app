@@ -1,7 +1,6 @@
-import { connect } from "react-redux";
 import React, { useState, useEffect } from "react";
 import { Auth } from "aws-amplify";
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 import {
   HeaderContainer,
   HeaderMenuIcon,
@@ -9,17 +8,10 @@ import {
   HeaderMenu,
   MenuItem
 } from "./header.style";
-import * as actions from "../../store/actions";
 
 const Header = props => {
   const [menuNavOpen, setMenuNavOpen] = useState(false);
   const [menuProfileOpen, setProfileNavOpen] = useState(false);
-
-  useEffect(() => {
-    const { fetchSingleUser } = props;
-    fetchSingleUser();
-  }, [props]);
-
   const handleLogout = () => {
     Auth.signOut()
       .then(data => console.log(data))
@@ -27,8 +19,6 @@ const Header = props => {
   };
 
   const { currentUser } = props;
-  const { username } = currentUser || {};
-
   const renderNavigationMenu = (
     <HeaderMenu
       open={menuNavOpen}
@@ -36,7 +26,7 @@ const Header = props => {
         setMenuNavOpen(!menuNavOpen);
       }}
     >
-      <MenuItem onClick={handleLogout}>{username}</MenuItem>
+      <MenuItem onClick={handleLogout}>{currentUser}</MenuItem>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </HeaderMenu>
   );
@@ -48,7 +38,7 @@ const Header = props => {
         setProfileNavOpen(!menuProfileOpen);
       }}
     >
-      <MenuItem onClick={handleLogout}>{username}</MenuItem>
+      <MenuItem onClick={handleLogout}>{currentUser}</MenuItem>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </HeaderMenu>
   );
@@ -73,15 +63,8 @@ const Header = props => {
   );
 };
 
-Header.prototype = {};
+Header.defaultProps = {
+  currentUser: ""
+};
 
-const mapStateToProps = state => ({
-  currentUser: state.userReducer.currentUser
-});
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    actions
-  )(Header)
-);
+export default withRouter(Header);

@@ -13,20 +13,20 @@ export const colors = {
   },
   primary: {
     main: "#CC0000",
-    light: "",
-    dark: "#CC0000",
+    light: "#FFEEEE",
+    dark: "#880000",
     contrastText: "#FFFFFF"
   },
   secondary: {
-    main: "#660000",
-    light: "",
-    dark: "#660000",
+    main: "#2A57C6",
+    light: "#E9EFFF",
+    dark: "#00144B",
     contrastText: "#FFFFFF"
   },
   sub: {
     main: "#2A57C6",
-    light: "",
-    dark: "#2A57C6",
+    light: "#E9EFFF",
+    dark: "#00144B",
     contrastText: "#FFFFFF"
   }
 };

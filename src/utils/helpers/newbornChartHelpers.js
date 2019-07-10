@@ -1,42 +1,37 @@
-import dayjs from "dayjs";
+import { returnUtcTime, sortByDate } from "./newbornGlobalHelpers";
 
-export const returnNewbornChartData = (newbornModelData, predictionData) => {
-  let newbornSummarySteps = {};
-  if (
-    newbornModelData &&
-    newbornModelData.episodes &&
-    newbornModelData.episodes.items.length > 0 &&
-    newbornModelData.episodes.items[0].steps
-  ) {
-    newbornSummarySteps = newbornModelData.episodes.items[0].steps.items;
-  } else {
-    return newbornSummarySteps;
+export const returnSortedEpisodes = info => {
+  let episodes = [];
+
+  if (info.models.items[0].episodes.items[0]) {
+    episodes = info.models.items[0].episodes.items;
+    return sortByDate(episodes);
   }
-  const data = [];
-  const labels = [];
 
-  newbornSummarySteps.sort((a, b) => a.step - b.step);
-  newbornSummarySteps.forEach(item => {
-    if (item.standardReward) {
-      const roundedValue = item.standardReward.toFixed(2);
-      const val = [];
-      val.push(
-        Date.UTC(
-          dayjs(item.created).year(),
-          dayjs(item.created).month(),
-          dayjs(item.created).day(),
-          dayjs(item.created).hour(),
-          dayjs(item.created).minute()
-        )
-      );
-      val.push(parseFloat([roundedValue]));
-      data.push(val);
-      labels.push(item.step);
+  return episodes;
+};
+
+export const returnSortedSteps = (episodes, key) => {
+  const steps = [];
+  if (episodes[key] && episodes[key].steps) {
+    return sortByDate(episodes[0].steps.items);
+  }
+  return steps;
+};
+
+export const returnNewbornChartData = (steps, predictionData) => {
+  const data = [];
+  steps.forEach(item => {
+    if (item.meanReward) {
+      const roundedValue = item.meanReward.toFixed(2);
+      const values = [];
+      values.push(returnUtcTime(item.created));
+      values.push(parseFloat([roundedValue]));
+      data.push(values);
     }
   });
 
   const datasets = {
-    labels,
     datasets: []
   };
 

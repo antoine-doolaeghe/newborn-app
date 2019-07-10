@@ -180,6 +180,15 @@ export const onUpdateNewborn = `subscription OnUpdateNewborn {
         id
         cellInfos
         cellPositions
+        episodes {
+          items {
+            steps(limit: 10000) {
+              items {
+                step
+              }
+            }
+          }
+        }
       }
       nextToken
     }
