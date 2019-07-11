@@ -1,12 +1,12 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { withRouter } from "react-router-dom";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import { returnNewbornCardInfo } from "./newbornList_helpers";
 import { FlexContainer } from "../../../theme/layout/grid.style";
-import { CardList } from "../../../components/lists";
-import { NewbornCard } from "../../../components/cards";
+import { CardList } from "../../../components/organisms/lists";
+import { NewbornCard } from "../../../components/organisms/cards";
 
 const GET_SELECTED_NEWBORN = gql`
   {

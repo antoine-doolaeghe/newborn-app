@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Auth } from "aws-amplify";
 import { withRouter } from "react-router-dom";
 import {
@@ -8,6 +8,8 @@ import {
   HeaderMenu,
   MenuItem
 } from "./header.style";
+
+import Drawer from "../../components/organisms/drawer/drawer";
 
 const Header = props => {
   const [menuNavOpen, setMenuNavOpen] = useState(false);
@@ -59,6 +61,7 @@ const Header = props => {
       />
       {renderProfileMenu}
       {renderNavigationMenu}
+      <Drawer open={menuNavOpen} />
     </HeaderContainer>
   );
 };
