@@ -1,7 +1,7 @@
 import React from "react";
 import "jest-dom/extend-expect";
 import { cleanup, render } from "react-testing-library";
-import NewbornRecordGraph from "../RecordGraph";
+import NewbornRecordGraph from "../recordGraph/RecordGraph";
 
 describe("<NewbornRecordGraph />", () => {
   afterEach(cleanup);

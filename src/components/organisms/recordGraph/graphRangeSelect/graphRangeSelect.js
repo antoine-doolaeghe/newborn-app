@@ -2,64 +2,65 @@ import React from "react";
 import { GraphRangeContainer, GraphRangeButton } from "../recordGraph.style";
 
 const graphTimeRange = {
-  hour: 360000,
-  twoHour: 360000 * 2,
-  day: 86400000,
-  twoDay: 86400000 * 2,
-  week: 86400000 * 7
+  hour: { label: "1h", timeRange: 360000 },
+  twoHour: { label: "2h", timeRange: 360000 * 2 },
+  day: { label: "1d", timeRange: 86400000 },
+  twoDay: { label: "2d", timeRange: 86400000 * 2 },
+  week: { label: "week", timeRange: 86400000 * 7 }
 };
 
 export const GraphRangeSelect = props => {
   const { setRange } = props;
+
   return (
     <GraphRangeContainer>
       <GraphRangeButton
         data-testid="graphRangeButton"
         onClick={() => {
-          setRange(graphTimeRange.hour);
+          setRange(graphTimeRange.hour.timeRange);
         }}
       >
-        1h
+        {graphTimeRange.hour.label}
       </GraphRangeButton>
       <GraphRangeButton
         data-testid="graphRangeButton"
         onClick={() => {
-          setRange(graphTimeRange.twoHour);
+          setRange(graphTimeRange.twoHour.timeRange);
         }}
       >
-        2h
+        {graphTimeRange.twoHour.label}
       </GraphRangeButton>
       <GraphRangeButton
         data-testid="graphRangeButton"
         onClick={() => {
-          setRange(graphTimeRange.day);
+          setRange(graphTimeRange.day.timeRange);
         }}
       >
-        1d
+        {graphTimeRange.day.label}
       </GraphRangeButton>
       <GraphRangeButton
         data-testid="graphRangeButton"
         onClick={() => {
-          setRange(graphTimeRange.twoDay);
+          setRange(graphTimeRange.twoDay.timeRange);
         }}
       >
-        2d
+        {graphTimeRange.twoDay.label}
       </GraphRangeButton>
       <GraphRangeButton
         data-testid="graphRangeButton"
         onClick={() => {
-          setRange(graphTimeRange.week);
+          setRange(graphTimeRange.week.timeRange);
         }}
       >
-        1w
+        {graphTimeRange.week.label}
       </GraphRangeButton>
       <GraphRangeButton
         data-testid="graphRangeButton"
         onClick={() => {
-          setRange(graphTimeRange.week);
+          setRange(graphTimeRange.week.timeRange);
         }}
       >
-        All
+        {graphTimeRange.week.label}
       </GraphRangeButton>
     </GraphRangeContainer>
   );

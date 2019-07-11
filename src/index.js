@@ -9,7 +9,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import registerServiceWorker from "./registerServiceWorker";
 import aws_config from "./aws-exports";
 
-import { Main } from "./pages";
+import { Main, Trainer } from "./pages";
 
 const cache = new InMemoryCache({});
 const client = new ApolloClient({
@@ -28,6 +28,7 @@ render(
     <Router>
       <Switch>
         <Route exact path="/" component={Main} />
+        <Route exact path="/trainer" component={Trainer} />
       </Switch>
     </Router>
   </ApolloProvider>,

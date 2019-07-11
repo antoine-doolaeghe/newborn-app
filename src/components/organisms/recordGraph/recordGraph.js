@@ -8,7 +8,7 @@ import { RcordGraphContainer } from "./recordGraph.style";
 import * as queries from "../../../graphql/queries";
 import GraphRangeSelect from "./graphRangeSelect";
 import lineChartOptions from "./lineChartOptions";
-import { ErrorDialog } from "../../../components/organisms/snackbars/errorSnackBar/style/error.style";
+import { ErrorDialog } from "../../molecules/snackbars/errorSnackBar/style/error.style";
 
 import { returnNewbornChartData } from "../../../utils/helpers/newbornChartHelpers";
 import {
@@ -20,7 +20,9 @@ const RecordGraph = props => {
   const {
     newbornModel: { id }
   } = props;
+
   const [range, setRange] = useState(86400000);
+
   const returnNoEpisode = () => (
     <div data-testid="newbornCardEmptyGraph">No training episode</div>
   );
