@@ -29,6 +29,7 @@ render(
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/trainer" component={Trainer} />
+        <Route exact path="/live" component={Trainer} />
       </Switch>
     </Router>
   </ApolloProvider>,

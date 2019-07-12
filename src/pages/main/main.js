@@ -8,4 +8,4 @@ function Main() {
   return <GenerationList />;
 }
 
-export default withAuthenticator(withHeader(Main));
+export default withHeader(Main);

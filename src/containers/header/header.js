@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+import Styled from "styled-components";
 import { Auth } from "aws-amplify";
 import { withRouter } from "react-router-dom";
-import {
-  HeaderContainer,
-  HeaderMenuIcon,
-  HeaderProfileIcon,
-  HeaderMenu,
-  MenuItem
-} from "./header.style";
+import { HeaderContainer } from "./header.style";
+import NavigationButton from "./navigationButton";
+import ProfileButton from "./profileButton/profileButton";
+import SearchInput from "../../components/molecules/inputs/searchInput/searchInput";
 
-import Drawer from "../../components/organisms/drawer/drawer";
+const NavigationWrapper = Styled.section`
+  display: flex;
+  position: absolute;
+  right: ${props => (props.right ? "0px" : null)};
+  left: ${props => (props.left ? "0px" : null)};
+`;
 
 const Header = props => {
   const [menuNavOpen, setMenuNavOpen] = useState(false);
@@ -20,48 +23,29 @@ const Header = props => {
       .catch(err => console.log(err));
   };
 
-  const { currentUser } = props;
-  const renderNavigationMenu = (
-    <HeaderMenu
-      open={menuNavOpen}
-      onClose={() => {
-        setMenuNavOpen(!menuNavOpen);
-      }}
-    >
-      <MenuItem onClick={handleLogout}>{currentUser}</MenuItem>
-      <MenuItem onClick={handleLogout}>Logout</MenuItem>
-    </HeaderMenu>
-  );
+  const returnLeftHandSideNavigation = () => {
+    return (
+      <NavigationWrapper left>
+        <NavigationButton navigation="Home" />
+        <NavigationButton navigation="Live" />
+      </NavigationWrapper>
+    );
+  };
 
-  const renderProfileMenu = (
-    <HeaderMenu
-      open={menuProfileOpen}
-      onClose={() => {
-        setProfileNavOpen(!menuProfileOpen);
-      }}
-    >
-      <MenuItem onClick={handleLogout}>{currentUser}</MenuItem>
-      <MenuItem onClick={handleLogout}>Logout</MenuItem>
-    </HeaderMenu>
-  );
+  const returnRightHandSideNavigation = () => {
+    return (
+      <NavigationWrapper right>
+        <SearchInput />
+        <ProfileButton color="primary" />
+      </NavigationWrapper>
+    );
+  };
 
   return (
     <HeaderContainer>
-      <HeaderMenuIcon
-        open={menuNavOpen}
-        onClick={() => {
-          setMenuNavOpen(!menuNavOpen);
-        }}
-      />
-      <HeaderProfileIcon
-        open={menuProfileOpen}
-        onClick={() => {
-          setProfileNavOpen(!menuProfileOpen);
-        }}
-      />
-      {renderProfileMenu}
-      {renderNavigationMenu}
-      <Drawer open={menuNavOpen} />
+      {returnLeftHandSideNavigation()}
+      <img src="/images/newborn-logo.png" style={{ height: 55, width: 55 }} />
+      {returnRightHandSideNavigation()}
     </HeaderContainer>
   );
 };
