@@ -17,15 +17,7 @@ export const returnTooltipTitle = selectedNewborns => {
   return "";
 };
 
-export const returnNewbornCardInfo = (
-  info,
-  currentUserId,
-  selectedPartner,
-  selectedChild
-) => {
-  const isOwnedByCurrentUser =
-    info.owner && info.owner.id && info.owner.id === currentUserId;
-
+export const returnNewbornCardInfo = (info, selectedPartner, selectedChild) => {
   const episodes = info.models
     ? returnSortedEpisodes(info.models.items[0])
     : null;
@@ -54,7 +46,6 @@ export const returnNewbornCardInfo = (
     dob,
     color,
     bornPlace: info.bornPlace || "unknown region",
-    isOwnedByCurrentUser,
     summaries: returnNewbornChartData(steps)
   };
   return newbornInfo;

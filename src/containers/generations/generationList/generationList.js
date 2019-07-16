@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import { CircularProgress } from "../../../components/atoms/progress";
 import * as queries from "../../../graphql/queries";
 import { FlexContainer } from "../../../theme/layout/grid.style";
-import NewbornList from "../newbornList/newbornList";
+import NewbornList from "../../newborns/newbornList/newbornList";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 
-import NewbornRecord from "../../newbornRecord/newbornRecord";
+import NewbornRecord from "../../record/newbornRecord";
 
 function GenerationList() {
   const [isRecordOpen, setIsRecordOpen] = useState(false);
@@ -18,9 +18,11 @@ function GenerationList() {
     setIsRecordOpen(true);
   };
   const returnNewbornGeneration = () => {
+    console.log("HERE");
     return (
       <Query query={gql(queries.listGenerations)}>
         {({ data, loading, error }) => {
+          console.log(data, loading, error);
           if (error) {
             return <ErrorDialog open message={error.message} />;
           }
@@ -34,6 +36,7 @@ function GenerationList() {
               </FlexContainer>
             );
           }
+
           return data.listGenerations.items.map(generation => {
             return (
               <div>
@@ -43,7 +46,8 @@ function GenerationList() {
                   onClose={onRecordClose}
                 />
                 <NewbornList
-                  generation={generation}
+                  title={generation.id}
+                  items={generation.newborns.items}
                   onRecordOpen={onRecordOpen}
                 />
               </div>
