@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import Styled from "styled-components";
+import React, { useEffect, useState } from "react";
+import { withAuthenticator } from "aws-amplify-react";
 import { Auth } from "aws-amplify";
-import { withRouter } from "react-router-dom";
+import Styled from "styled-components";
+import { withRouter, Link } from "react-router-dom";
+import withCurrentUser from "../withCurrentUser/withCurrentUser";
 import { HeaderContainer } from "./header.style";
 import NavigationButton from "./navigationButton";
 import ProfileButton from "./profileButton/profileButton";
-import SearchInput from "../../components/molecules/inputs/searchInput/searchInput";
+import SearchInput from "../../components/molecules/inputs/iconButtonInput/iconButtonInput";
 
 const NavigationWrapper = Styled.section`
   display: flex;
@@ -14,20 +16,22 @@ const NavigationWrapper = Styled.section`
   left: ${props => (props.left ? "0px" : null)};
 `;
 
-const Header = props => {
-  const [menuNavOpen, setMenuNavOpen] = useState(false);
-  const [menuProfileOpen, setProfileNavOpen] = useState(false);
-  const handleLogout = () => {
-    Auth.signOut()
-      .then(data => console.log(data))
-      .catch(err => console.log(err));
-  };
+const HeaderLogo = Styled.img`
+  height: 55px;
+  width: 55px;
+`;
 
+const Header = ({ location }) => {
+  const redirect = location.pathname === "/" ? "catalogue" : "/";
   const returnLeftHandSideNavigation = () => {
     return (
       <NavigationWrapper left>
-        <NavigationButton navigation="Home" />
-        <NavigationButton navigation="Live" />
+        <Link to={redirect}>
+          <NavigationButton redirect={redirect} />
+        </Link>
+        <Link to="/live">
+          <NavigationButton redirect="live" />
+        </Link>
       </NavigationWrapper>
     );
   };
@@ -41,10 +45,14 @@ const Header = props => {
     );
   };
 
+  const returnNewbornLogo = () => {
+    return <HeaderLogo src="/images/newborn-logo.png" />;
+  };
+
   return (
     <HeaderContainer>
       {returnLeftHandSideNavigation()}
-      <img src="/images/newborn-logo.png" style={{ height: 55, width: 55 }} />
+      {returnNewbornLogo()}
       {returnRightHandSideNavigation()}
     </HeaderContainer>
   );
@@ -54,4 +62,4 @@ Header.defaultProps = {
   currentUser: ""
 };
 
-export default withRouter(Header);
+export default withCurrentUser(withRouter(Header));

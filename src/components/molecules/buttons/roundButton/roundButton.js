@@ -1,23 +1,42 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Button } from "../buttons/button.style";
+import { Button } from "../button.style";
+import { Theme } from "../../../../theme/theme";
 
 const StyledRoundButton = styled(Button)`
-  height: 55px;
-  border-radius: 55px;
-  width: ${props => {
-    return props.width ? props.width : "55px";
-  }};
+  height: ${props => props.size};
+  border-radius: ${props => props.size};
+  width: ${props => props.size};
   display: flex;
   justify-content: space-around;
-  font-size: 20px;
+  font-size: ${Theme.fontSize.medium};
 `;
 
-const RoundButton = ({ children, onClick, color, width }) => {
+const RoundButton = ({ children, onClick, color, size }) => {
   return (
-    <StyledRoundButton width={width} onClick={onClick} color={color}>
+    <StyledRoundButton size={size} onClick={onClick} color={color}>
       {children}
     </StyledRoundButton>
   );
+};
+
+RoundButton.defaultProps = {
+  children: "",
+  size: "55px"
+};
+
+RoundButton.propTypes = {
+  children: PropTypes.node,
+  size: PropTypes.string,
+  color: PropTypes.oneOf([
+    "light",
+    "dark",
+    "primary",
+    "secondary",
+    "success",
+    "danger"
+  ]).isRequired,
+  onClick: PropTypes.func.isRequired
 };
 export default RoundButton;

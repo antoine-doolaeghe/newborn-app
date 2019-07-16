@@ -1,3 +1,3 @@
-import Badge from "./badge/badge";
+import Badge from "./badge";
 
 export { Badge };

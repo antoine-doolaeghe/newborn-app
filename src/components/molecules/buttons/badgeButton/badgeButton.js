@@ -1,25 +1,23 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
-import { colors } from "../../../../theme/theme";
+import { Theme } from "../../../../theme/theme";
+import { Button } from "../button.style";
 
-export const StyledBadgeButton = styled.button`
+export const StyledBadgeButton = styled(Button)`
   align-items: center;
-  background: ${props => colors[props.color].main};
-  border-radius: 2px;
+  background: ${props => Theme.palette[props.color].main};
+  border-radius: ${Theme.radius.medium};
   border: none;
-  color: white;
+  color: ${Theme.font.light};
   display: flex;
-  font-family: "IBM Plex Sans", sans-serif;
-  font-size: 0.875rem;
-  font-weight: 400;
+  font-family: ${Theme.fontFamily};
+  font-size: ${Theme.fontSize.small};
+  font-weight: ${Theme.weight.normal};
   justify-content: space-around;
-  margin: 5px;
+  margin: ${Theme.spacing.small};
   outline: none;
   padding: 3px 7px;
-  &:hover {
-    cursor: pointer;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
-  }
 `;
 
 const BadgeButton = ({ children, onClick, color }) => {
@@ -29,4 +27,22 @@ const BadgeButton = ({ children, onClick, color }) => {
     </StyledBadgeButton>
   );
 };
+
+BadgeButton.defaultProps = {
+  children: ""
+};
+
+BadgeButton.propTypes = {
+  children: PropTypes.node,
+  color: PropTypes.oneOf([
+    "light",
+    "dark",
+    "primary",
+    "secondary",
+    "success",
+    "danger"
+  ]).isRequired,
+  onClick: PropTypes.func.isRequired
+};
+
 export default BadgeButton;

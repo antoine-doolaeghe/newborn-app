@@ -9,6 +9,7 @@ type User @model {
   profileImage: String
   userName: String
   newborns: [Newborn] @connection(name: "NewbornOwner")
+  trainers: [Trainer] @connection(name: "TrainerOwner")
 }
 
 type Generation @model {
@@ -69,4 +70,10 @@ type Prediction @model {
 type Subscription {
   onCreateSummarySet(summaryEpisodeId: String!): Summary
     @aws_subscribe(mutations: ["createSummary"])
+}
+
+type Trainer @model {
+  createdAt: String
+  id: String!
+  owner: User @connection(name: "TrainerOwner")
 }

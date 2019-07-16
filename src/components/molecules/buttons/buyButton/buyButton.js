@@ -2,9 +2,9 @@ import React from "react";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import * as mutations from "../../../graphql/mutations";
-import { Button } from "../buttons/button.style";
-import { FlexContainer } from "../../../theme/layout/grid.style";
+import * as mutations from "../../../../graphql/mutations";
+import { Button } from "../button.style";
+import { FlexContainer } from "../../../../theme/layout/grid.style";
 
 const BuyButton = ({ id, currentUserId, newbornInfo }) => {
   const onClick = (event, buy) => {

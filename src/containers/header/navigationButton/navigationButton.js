@@ -1,46 +1,42 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
 import Home from "@material-ui/icons/Home";
 import { IconButton } from "../../../components/molecules/buttons";
 
-const NavigationButton = ({ navigation, location }) => {
+const NavigationButton = ({ redirect }) => {
   const returnNavigationIcon = () => {
-    switch (navigation) {
-      case "Live":
+    switch (redirect) {
+      case "live":
         return <PlayCircleOutline />;
-      case "Home":
+      case "catalogue":
+        return <Home />;
+      case "/":
         return <Home />;
       default:
-        return "hello";
+        return "";
     }
   };
   const returnNavigationText = () => {
-    switch (navigation) {
-      case "Live":
+    switch (redirect) {
+      case "live":
         return "Live";
-      case "Home":
+      case "catalogue":
         return "";
       default:
-        return "hello";
+        return "";
     }
   };
   const returnWidth = () => {
-    switch (navigation) {
-      case "Live":
-        return "100px";
-      default:
-        return null;
+    if (redirect === "live") {
+      return "100px";
     }
   };
 
   return (
-    <Link to="/trainer">
-      <IconButton color="dark" width={returnWidth()}>
-        {returnNavigationIcon()}
-        {returnNavigationText()}
-      </IconButton>
-    </Link>
+    <IconButton color="dark" width={returnWidth()}>
+      {returnNavigationIcon()}
+      {returnNavigationText()}
+    </IconButton>
   );
 };
 

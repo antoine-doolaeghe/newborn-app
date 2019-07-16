@@ -1,21 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import { BadgeButton } from "../../../../molecules/buttons";
-import { colors } from "../../../../../theme/theme";
+import { Theme } from "../../../../../theme/theme";
 
 export const IconLabelWrapper = styled.div`
-  background: white;
-  border-radius: 10px;
-  color: ${props => colors[props.color].main};
+  background: ${Theme.palette.default.main};
+  border-radius: ${Theme.radius.medium};
+  color: ${props => Theme.palette[props.color].main};
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 700;
+  font-weight: ${Theme.weight.bold};
   text-transform: capitalize;
-  font-size: 0.9rem;
-  height: 17px;
-  width: 17px;
-  margin: 5px;
+  font-size: ${Theme.fontSize.medium};
+  height: ${Theme.spacing.msmall};
+  width: ${Theme.spacing.msmall};
+  margin: ${Theme.spacing.small};
 `;
 
 function CardButton({ onClick, color, iconLabel, label }) {

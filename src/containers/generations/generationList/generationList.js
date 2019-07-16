@@ -18,11 +18,9 @@ function GenerationList() {
     setIsRecordOpen(true);
   };
   const returnNewbornGeneration = () => {
-    console.log("HERE");
     return (
       <Query query={gql(queries.listGenerations)}>
         {({ data, loading, error }) => {
-          console.log(data, loading, error);
           if (error) {
             return <ErrorDialog open message={error.message} />;
           }

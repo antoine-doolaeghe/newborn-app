@@ -1,5 +1,4 @@
 import React from "react";
-import withCurrentUser from "../withCurrentUser/withCurrentUser";
 import Header from "./header";
 
 export default function withHeader(WrapperHeaderComp) {
@@ -7,10 +6,10 @@ export default function withHeader(WrapperHeaderComp) {
     return (
       <div style={{ width: "100%" }}>
         <Header {...props} />
-        <WrapperHeaderComp />
+        <WrapperHeaderComp {...props} />
       </div>
     );
   };
 
-  return withCurrentUser(headerHoc);
+  return headerHoc;
 }
