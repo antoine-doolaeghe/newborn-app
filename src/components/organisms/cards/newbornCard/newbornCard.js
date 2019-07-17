@@ -32,13 +32,13 @@ function NewbornCard(props) {
             color="primary"
             onClick={onPartnerClick}
             iconLabel="p"
-            label="1"
+            label={newbornInfo.partners}
           />
           <CardButton
             color="secondary"
             onClick={onChildClick}
             iconLabel="c"
-            label="1"
+            label={newbornInfo.childs}
           />
         </CardButtonWrapper>
       );

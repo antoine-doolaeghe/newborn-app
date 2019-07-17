@@ -4,15 +4,21 @@ const Theme = {
   palette: {
     default: {
       main: "#FFFFFF",
-      light: "",
-      dark: "#000000",
+      light: "#FFFFFF",
+      dark: "#FFFFFF",
       contrastText: "#000000"
     },
     dark: {
-      main: "#000000",
-      light: "",
+      main: "#323232",
+      light: "#B2B2B2",
       dark: "#000000",
       contrastText: "#FFFFFF"
+    },
+    light: {
+      main: "#BCBCBC",
+      light: "#FFFFFF",
+      dark: "#898989",
+      contrastText: "#000000"
     },
     primary: {
       main: "#CC0000",
@@ -66,11 +72,11 @@ const Theme = {
     bold: 700
   },
   fontSize: {
-    "x-small": "0.75rem",
+    xsmall: "0.75rem",
     small: "1rem",
     medium: "1.25rem",
     large: "2rem",
-    "x-large": "2.75rem"
+    xlarge: "2.75rem"
   },
   fontFamily: "IBM Plex Sans",
   spacing: {

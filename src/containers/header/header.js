@@ -26,10 +26,10 @@ const Header = ({ location }) => {
   const returnLeftHandSideNavigation = () => {
     return (
       <NavigationWrapper left>
-        <Link to={redirect}>
+        <Link style={{ textDecoration: "none" }} to={redirect}>
           <NavigationButton redirect={redirect} />
         </Link>
-        <Link to="/live">
+        <Link style={{ textDecoration: "none" }} to="/live">
           <NavigationButton redirect="live" />
         </Link>
       </NavigationWrapper>

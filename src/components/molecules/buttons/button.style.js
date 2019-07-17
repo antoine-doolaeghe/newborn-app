@@ -18,5 +18,6 @@ export const Button = styled.button`
   &:hover {
     cursor: pointer;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
+    background: ${props => Theme.palette[props.color].dark};
   }
 `;

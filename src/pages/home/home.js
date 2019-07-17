@@ -11,14 +11,31 @@ import Text from "../../components/atoms/text/text";
 import * as queries from "../../graphql/queries";
 
 function Home(props) {
-  const returnListTitle = () => (
+  const returnListTitle = title => (
     <Text size="large" weight="bold">
-      My Newborns
+      {title}
     </Text>
   );
   if (props.currentUserId) {
     return (
       <div>
+        <Query
+          query={gql(queries.getUserTrainers)}
+          variables={{ id: props.currentUserId }}
+        >
+          {({ data, loading, error }) => {
+            if (data.getUser) {
+              const currentUser = data.getUser;
+              return (
+                <TrainerList
+                  title={returnListTitle("My Trainers")}
+                  items={data.getUser.trainers.items}
+                />
+              );
+            }
+            return null;
+          }}
+        </Query>
         <Query
           query={gql(queries.getUserNewborns)}
           variables={{ id: props.currentUserId }}
@@ -28,25 +45,10 @@ function Home(props) {
               const currentUser = data.getUser;
               return (
                 <NewbornList
-                  title={returnListTitle()}
+                  title={returnListTitle("My Newborns")}
                   items={data.getUser.newborns.items}
                 />
               );
-            }
-            return null;
-          }}
-        </Query>
-        <Text size="large" weight="bold">
-          My Trainers
-        </Text>
-        <Query
-          query={gql(queries.getUserTrainers)}
-          variables={{ id: props.currentUserId }}
-        >
-          {({ data, loading, error }) => {
-            if (data.getUser) {
-              const currentUser = data.getUser;
-              return <TrainerList items={data.getUser.trainers.items} />;
             }
             return null;
           }}

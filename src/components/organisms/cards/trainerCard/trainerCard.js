@@ -1,21 +1,26 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-
+import Build from "@material-ui/icons/Build";
 import { CardWrapper } from "../newbornCard/newbornCard.style";
-
+import CardHeader from "../newbornCard/header/cardHeader";
 import { Theme } from "../../../../theme/theme";
 
 function TrainerCard() {
   return (
-    <CardWrapper color={Theme.palette.dark}>
-      <Link to="./builder">
+    <CardWrapper>
+      <Link style={{ textDecoration: "none" }} to="./builder">
         <Fragment>
-          <img
-            src="/images/newborn-logo.png"
+          <CardHeader title="hey" subTitle="hey" data-testid="newbornHeader" />
+          <div
             style={{
+              backgroundImage: "url('/images/builder.png')",
               border: "none",
-              background: "grey",
+              backgroundRepeat: "round",
+              borderRadius: 5,
               height: "100%",
+              position: "absolute",
+              top: 0,
+              zIndex: -1,
               width: "100%"
             }}
           />

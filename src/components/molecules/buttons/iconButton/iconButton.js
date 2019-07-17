@@ -10,6 +10,7 @@ const StyledIconButton = styled(Button)`
   display: flex;
   justify-content: space-around;
   font-size: ${Theme.fontSize.medium};
+  text-decoration: none;
 `;
 
 const IconButton = ({ children, onClick, color, width, height }) => {

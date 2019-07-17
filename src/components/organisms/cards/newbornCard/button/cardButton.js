@@ -12,7 +12,6 @@ export const IconLabelWrapper = styled.div`
   align-items: center;
   font-weight: ${Theme.weight.bold};
   text-transform: capitalize;
-  font-size: ${Theme.fontSize.medium};
   height: ${Theme.spacing.msmall};
   width: ${Theme.spacing.msmall};
   margin: ${Theme.spacing.small};

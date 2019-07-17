@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { Theme } from "../../theme/theme";
 
 export const HeaderContainer = styled.section`
   position: relative;
-  border-bottom: 6px solid;
+  border-bottom: 6px solid ${Theme.palette.dark.main};
   height: 55px;
   align-items: center;
   display: flex;

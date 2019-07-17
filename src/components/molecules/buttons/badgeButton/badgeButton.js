@@ -12,12 +12,13 @@ export const StyledBadgeButton = styled(Button)`
   color: ${Theme.font.light};
   display: flex;
   font-family: ${Theme.fontFamily};
-  font-size: ${Theme.fontSize.small};
+  font-size: ${Theme.fontSize.xsmall};
   font-weight: ${Theme.weight.normal};
   justify-content: space-around;
   margin: ${Theme.spacing.small};
   outline: none;
   padding: 3px 7px;
+  width: fit-content;
 `;
 
 const BadgeButton = ({ children, onClick, color }) => {

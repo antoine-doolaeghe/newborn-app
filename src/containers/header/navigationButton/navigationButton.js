@@ -1,5 +1,6 @@
 import React from "react";
 import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
+import ViewList from "@material-ui/icons/ViewList";
 import Home from "@material-ui/icons/Home";
 import { IconButton } from "../../../components/molecules/buttons";
 
@@ -9,7 +10,7 @@ const NavigationButton = ({ redirect }) => {
       case "live":
         return <PlayCircleOutline />;
       case "catalogue":
-        return <Home />;
+        return <ViewList />;
       case "/":
         return <Home />;
       default:

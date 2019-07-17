@@ -11,7 +11,7 @@ export const CardListGrid = styled(Grid)`
   padding-bottom: 20px;
 `;
 export const ListTitle = styled.p`
-  margin: 0;
+  margin: 25px;
 `;
 
 function CardList({ list, listTitle, id }) {

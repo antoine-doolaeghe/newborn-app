@@ -9,7 +9,6 @@ export const StyledBadge = styled.div`
   border-radius: ${Theme.radius.small};
   display: flex;
   font-family: ${Theme.fontFamily};
-  font-size: ${Theme.fontSize.medium};
   font-size: ${Theme.fontSize.small};
   font-weight: ${Theme.weight.normal};
   font-weight: ${Theme.weight.normal};

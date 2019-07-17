@@ -3,13 +3,15 @@ import TrainerCard from "../../../components/organisms/cards/trainerCard/trainer
 import CardList from "../../../components/organisms/lists/cardList/cardList";
 
 function TrainerList(props) {
-  const { items } = props;
+  const { items, title } = props;
 
   const newbornCardList = [];
   items.forEach(trainer => {
     newbornCardList.push(<TrainerCard />);
   });
-  return <CardList list={newbornCardList} id="newborn-card-list" />;
+  return (
+    <CardList listTitle={title} list={newbornCardList} id="newborn-card-list" />
+  );
 }
 
 export default TrainerList;

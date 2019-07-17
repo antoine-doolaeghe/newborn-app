@@ -6,7 +6,10 @@ import { Query } from "react-apollo";
 import { returnNewbornCardInfo } from "./newbornList_helpers";
 import { FlexContainer } from "../../../theme/layout/grid.style";
 import { CardList } from "../../../components/organisms/lists";
-import { NewbornCard } from "../../../components/organisms/cards";
+import {
+  NewbornCard,
+  NewbornCardLoader
+} from "../../../components/organisms/cards";
 
 const GET_SELECTED_NEWBORN = gql`
   {
@@ -16,27 +19,32 @@ const GET_SELECTED_NEWBORN = gql`
 `;
 
 function NewbornList(props) {
-  const { title, items } = props;
+  const { title, items, isLoading } = props;
   return (
     <Query query={GET_SELECTED_NEWBORN}>
-      {({
-        data: { selectedChild, selectedPartner },
-        client,
-        loading,
-        error
-      }) => {
+      {({ data: { selectedChild, selectedPartner }, client, error }) => {
         if (error) {
           return "error";
         }
 
-        if (loading) {
+        if (isLoading) {
+          const loadingList = [
+            <NewbornCardLoader />,
+            <NewbornCardLoader />,
+            <NewbornCardLoader />,
+            <NewbornCardLoader />,
+            <NewbornCardLoader />,
+            <NewbornCardLoader />,
+            <NewbornCardLoader />,
+            <NewbornCardLoader />,
+            <NewbornCardLoader />
+          ];
           return (
-            <FlexContainer height="280px">
-              <CircularProgress
-                variant="indeterminate"
-                data-testid="newbornListLoading"
-              />
-            </FlexContainer>
+            <CardList
+              list={loadingList}
+              listTitle="loading"
+              id="newborn-card-list"
+            />
           );
         }
 
@@ -83,7 +91,7 @@ function NewbornList(props) {
         return (
           <CardList
             list={newbornCardList}
-            listTitle={generationTitle()}
+            listTitle={title}
             id="newborn-card-list"
           />
         );

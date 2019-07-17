@@ -8,6 +8,7 @@ import NewbornList from "../../newborns/newbornList/newbornList";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 
 import NewbornRecord from "../../record/newbornRecord";
+import { NewbornCardLoader } from "../../../components/organisms/cards";
 
 function GenerationList() {
   const [isRecordOpen, setIsRecordOpen] = useState(false);
@@ -25,14 +26,11 @@ function GenerationList() {
             return <ErrorDialog open message={error.message} />;
           }
           if (loading) {
-            return (
-              <FlexContainer height="280px">
-                <CircularProgress
-                  variant="indeterminate"
-                  data-testid="newbornListLoading"
-                />
-              </FlexContainer>
-            );
+            return [
+              <NewbornList items={[]} isLoading={loading} />,
+              <NewbornList items={[]} isLoading={loading} />,
+              <NewbornList items={[]} isLoading={loading} />
+            ];
           }
 
           return data.listGenerations.items.map(generation => {
@@ -47,6 +45,7 @@ function GenerationList() {
                   title={generation.id}
                   items={generation.newborns.items}
                   onRecordOpen={onRecordOpen}
+                  isLoading={loading}
                 />
               </div>
             );

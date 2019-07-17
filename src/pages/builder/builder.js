@@ -8,7 +8,10 @@ function Builder() {
       onProgress: window.UnityProgress
     });
   }, []);
-  return <div id="gameContainer" style={{ width: "100%", height: "100%" }} />;
+  return (<div>
+    <div> Hello </div>
+    <div id="gameContainer" style={{ width: "50%", height: "100%", position: "absolute", right: 0 }} />
+  </div>);
 }
 
 export default withHeader(Builder);

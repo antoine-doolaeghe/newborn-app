@@ -34,7 +34,7 @@ export const returnNewbornCardInfo = (info, selectedPartner, selectedChild) => {
     ? Theme.palette.primary
     : isChildSelected
     ? Theme.palette.secondary
-    : Theme.palette.dark;
+    : Theme.palette.light;
 
   const steps = returnSortedSteps(episodes, 0);
   const dayJsDob = dayjs(info.createdAt);
@@ -45,6 +45,8 @@ export const returnNewbornCardInfo = (info, selectedPartner, selectedChild) => {
     id: info.id || "",
     dob,
     color,
+    childs: info.childs ? info.childs.length : 0,
+    partners: info.partners ? info.partners.length : 0,
     bornPlace: info.bornPlace || "unknown region",
     summaries: returnNewbornChartData(steps)
   };
