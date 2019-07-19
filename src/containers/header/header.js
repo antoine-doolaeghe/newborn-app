@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { withAuthenticator } from "aws-amplify-react";
+import { withApollo } from "react-apollo";
 import { Auth } from "aws-amplify";
 import Styled from "styled-components";
 import { withRouter, Link } from "react-router-dom";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
 import withCurrentUser from "../withCurrentUser/withCurrentUser";
 import { HeaderContainer } from "./header.style";
 import NavigationButton from "./navigationButton";
@@ -21,8 +24,36 @@ const HeaderLogo = Styled.img`
   width: 55px;
 `;
 
-const Header = ({ location }) => {
+const Header = ({ client, location, currentUserName }) => {
   const redirect = location.pathname === "/" ? "catalogue" : "/";
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleLogout = () => {
+    client.cache.reset();
+    Auth.signOut()
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
+  };
+
+  function handleClickListItem(event) {
+    setAnchorEl(event.currentTarget);
+  }
+
+  function handleMenuItemClick() {
+    setAnchorEl(null);
+  }
+
+  function handleClose() {
+    setAnchorEl(null);
+  }
+
+  function returnProfileName() {
+    if (currentUserName) {
+      return currentUserName[0];
+    }
+    return "";
+  }
+
   const returnLeftHandSideNavigation = () => {
     return (
       <NavigationWrapper left>
@@ -40,7 +71,20 @@ const Header = ({ location }) => {
     return (
       <NavigationWrapper right>
         <SearchInput />
-        <ProfileButton color="primary" />
+        <ProfileButton
+          profileName={returnProfileName()}
+          onClick={handleClickListItem}
+        />
+        <Menu
+          id="lock-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={() => handleMenuItemClick()}>Profile</MenuItem>
+          <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
+        </Menu>
       </NavigationWrapper>
     );
   };
@@ -62,4 +106,6 @@ Header.defaultProps = {
   currentUser: ""
 };
 
-export default withCurrentUser(withRouter(Header));
+export default withAuthenticator(
+  withCurrentUser(withApollo(withRouter(Header)))
+);

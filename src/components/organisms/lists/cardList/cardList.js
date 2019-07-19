@@ -8,16 +8,17 @@ export const CardListWrapper = styled.div`
   border-bottom: 1px solid ${Theme.palette.dark.dark};
 `;
 export const CardListGrid = styled(Grid)`
+  align-items: center;
   padding-bottom: 20px;
 `;
 export const ListTitle = styled.p`
   margin: 25px;
 `;
 
-function CardList({ list, listTitle, id }) {
+function CardList({ list, title, id }) {
   return (
     <CardListWrapper>
-      <ListTitle>{listTitle}</ListTitle>
+      <ListTitle>{title}</ListTitle>
       <CardListGrid columnNumber={list.length} data-testid={id} rowNumber={1}>
         {list}
       </CardListGrid>

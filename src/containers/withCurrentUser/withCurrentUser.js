@@ -6,6 +6,7 @@ import { Auth } from "aws-amplify";
 const GET_CURRENT_USER = gql`
   {
     currentUserId @client
+    currentUserName @client
   }
 `;
 
@@ -18,16 +19,20 @@ export default function withCurrentUser(Component) {
             if (!data.currentUserId) {
               client.writeData({
                 data: {
-                  currentUserId: currentUser.attributes.sub
+                  currentUserId: currentUser.attributes.sub,
+                  currentUserName: currentUser.username
                 }
               });
             }
           });
-          return <Component currentUserId={data.currentUserId} />;
+          return (
+            <Component
+              currentUserName={data.currentUserName}
+              currentUserId={data.currentUserId}
+            />
+          );
         }}
       </Query>
     );
-
-    // return <Component currentUser={{}} />;
   };
 }

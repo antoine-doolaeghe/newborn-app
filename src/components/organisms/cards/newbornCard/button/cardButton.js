@@ -5,7 +5,7 @@ import { Theme } from "../../../../../theme/theme";
 
 export const IconLabelWrapper = styled.div`
   background: ${Theme.palette.default.main};
-  border-radius: ${Theme.radius.medium};
+  border-radius: ${Theme.radius.small};
   color: ${props => Theme.palette[props.color].main};
   display: flex;
   justify-content: center;

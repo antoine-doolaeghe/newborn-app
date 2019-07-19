@@ -5,6 +5,7 @@ export const CardWrapper = styled.section`
   background: ${props => (props.color ? props.color.light : null)};
   border-radius: 5px;
   height: 220px;
+  margin-left: 30px;
   position: relative;
   width: 220px;
   &:hover {

@@ -4,7 +4,7 @@ import { Theme } from "../../../theme/theme";
 export const Button = styled.button`
   align-items: center;
   background: ${props => Theme.palette[props.color].main};
-  border-radius: ${Theme.radius.medium};
+  border-radius: ${Theme.radius.small};
   border: none;
   color: ${Theme.font.light};
   display: flex;

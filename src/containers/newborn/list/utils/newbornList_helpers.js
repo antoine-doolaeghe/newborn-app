@@ -1,11 +1,11 @@
 import dayjs from "dayjs";
-import { returnNewbornChartData } from "../../../utils/helpers/newbornChartHelpers";
+import { returnNewbornChartData } from "../../../../utils/helpers/newbornChartHelpers";
 import {
   returnSortedEpisodes,
   returnSortedSteps
-} from "../../../utils/helpers/newbornGlobalHelpers";
+} from "../../../../utils/helpers/newbornGlobalHelpers";
 
-import { Theme } from "../../../theme/theme";
+import { Theme } from "../../../../theme/theme";
 
 export const returnTooltipTitle = selectedNewborns => {
   if (selectedNewborns.length === 0)

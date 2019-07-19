@@ -7,7 +7,7 @@ import { Button } from "../button.style";
 export const StyledBadgeButton = styled(Button)`
   align-items: center;
   background: ${props => Theme.palette[props.color].main};
-  border-radius: ${Theme.radius.medium};
+  border-radius: ${Theme.radius.small};
   border: none;
   color: ${Theme.font.light};
   display: flex;

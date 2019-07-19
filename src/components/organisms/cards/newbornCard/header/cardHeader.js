@@ -6,14 +6,14 @@ import {
 } from "./cardHeader.style";
 import { Badge } from "../../../../atoms/badges";
 
-function CardHeader({ title, subTitle }) {
+function CardHeader({ title, subTitle, displayBadge }) {
   return (
     <NewbornCardHeaderContainer>
       <div>
         <Title>{title}</Title>
         <SubTitle>{subTitle}</SubTitle>
       </div>
-      <Badge />
+      {displayBadge && <Badge />}
     </NewbornCardHeaderContainer>
   );
 }

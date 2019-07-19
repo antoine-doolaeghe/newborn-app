@@ -23,7 +23,12 @@ const NewbornRecordWrapper = styled.section`
 
 const NewBornRecord = ({ id, open, onClose, newbornModelInfo }) => {
   return (
-    <Dialog onClose={onClose} open={open} maxWidth="lg">
+    <Dialog
+      transitionDuration={350}
+      onClose={onClose}
+      open={open}
+      maxWidth="lg"
+    >
       <NewbornRecordWrapper>
         <Query query={gql(queries.getNewborn)} variables={{ id }}>
           {({ data, loading, error }) => {
