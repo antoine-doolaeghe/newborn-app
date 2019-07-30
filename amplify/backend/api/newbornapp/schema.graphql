@@ -2,6 +2,8 @@ type Query {
   buy(newbornId: String): String
   start(newbornId: String): String
   terminate(instanceId: String): String
+  updateTrainer(trainerKey: String, trainerData: String): String
+  downloadTrainer(trainerKey: String): String
 }
 
 type User @model {
@@ -76,4 +78,5 @@ type Trainer @model {
   createdAt: String
   id: String!
   owner: User @connection(name: "TrainerOwner")
+  data: String
 }
