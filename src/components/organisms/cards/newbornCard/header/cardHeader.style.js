@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
 export const NewbornCardHeaderContainer = styled.div`
-  border-bottom: 1px dotted black;
   display: flex;
   justify-content: space-between;
-  padding: 7px 0px;
-  margin: 0px 7px;
+  padding: 5px 0px;
+  margin: 0px 5px;
   text-transform: capitalize;
   z-index: 90;
   &:hover {

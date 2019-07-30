@@ -58,7 +58,7 @@ export default (data, lineColor, range) => {
       },
       range,
       lineColor: "black",
-      lineWidth: 2,
+      lineWidth: 0,
       opposite: true
     }
   };

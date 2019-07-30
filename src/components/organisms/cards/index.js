@@ -1,3 +1,3 @@
-import NewbornCard from "./newbornCard";
+import { NewbornCard, NewbornCardLoader } from "./newbornCard";
 
-export { NewbornCard };
+export { NewbornCard, NewbornCardLoader };

@@ -1,4 +1,5 @@
-import Main from "./main/main";
-import Trainer from "./trainer/trainer";
+import Catalogue from "./catalogue/catalogue";
+import Home from "./home/home";
+import Builder from "./builder/builder";
 
-export { Main, Trainer };
+export { Catalogue, Home, Builder };

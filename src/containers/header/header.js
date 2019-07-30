@@ -1,67 +1,103 @@
-import React, { useState } from "react";
+import React from "react";
+import { withAuthenticator } from "aws-amplify-react";
+import { withApollo } from "react-apollo";
 import { Auth } from "aws-amplify";
-import { withRouter } from "react-router-dom";
-import {
-  HeaderContainer,
-  HeaderMenuIcon,
-  HeaderProfileIcon,
-  HeaderMenu,
-  MenuItem
-} from "./header.style";
+import Styled from "styled-components";
+import { withRouter, Link } from "react-router-dom";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import withCurrentUser from "../withCurrentUser/withCurrentUser";
+import { HeaderContainer } from "./header.style";
+import NavigationButton from "./navigationButton";
+import ProfileButton from "./profileButton/profileButton";
+import SearchInput from "../../components/molecules/inputs/iconButtonInput/iconButtonInput";
 
-import Drawer from "../../components/organisms/drawer/drawer";
+const NavigationWrapper = Styled.section`
+  display: flex;
+  position: absolute;
+  right: ${props => (props.right ? "0px" : null)};
+  left: ${props => (props.left ? "0px" : null)};
+`;
 
-const Header = props => {
-  const [menuNavOpen, setMenuNavOpen] = useState(false);
-  const [menuProfileOpen, setProfileNavOpen] = useState(false);
+const HeaderLogo = Styled.img`
+  height: 55px;
+  width: 55px;
+`;
+
+const Header = ({ client, location, currentUserName }) => {
+  const redirect = location.pathname === "/" ? "catalogue" : "/";
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
   const handleLogout = () => {
+    client.cache.reset();
     Auth.signOut()
       .then(data => console.log(data))
       .catch(err => console.log(err));
   };
 
-  const { currentUser } = props;
-  const renderNavigationMenu = (
-    <HeaderMenu
-      open={menuNavOpen}
-      onClose={() => {
-        setMenuNavOpen(!menuNavOpen);
-      }}
-    >
-      <MenuItem onClick={handleLogout}>{currentUser}</MenuItem>
-      <MenuItem onClick={handleLogout}>Logout</MenuItem>
-    </HeaderMenu>
-  );
+  function handleClickListItem(event) {
+    setAnchorEl(event.currentTarget);
+  }
 
-  const renderProfileMenu = (
-    <HeaderMenu
-      open={menuProfileOpen}
-      onClose={() => {
-        setProfileNavOpen(!menuProfileOpen);
-      }}
-    >
-      <MenuItem onClick={handleLogout}>{currentUser}</MenuItem>
-      <MenuItem onClick={handleLogout}>Logout</MenuItem>
-    </HeaderMenu>
-  );
+  function handleMenuItemClick() {
+    setAnchorEl(null);
+  }
+
+  function handleClose() {
+    setAnchorEl(null);
+  }
+
+  function returnProfileName() {
+    if (currentUserName) {
+      return currentUserName[0];
+    }
+    return "";
+  }
+
+  const returnLeftHandSideNavigation = () => {
+    return (
+      <NavigationWrapper left>
+        <Link style={{ textDecoration: "none" }} to={redirect}>
+          <NavigationButton redirect={redirect} />
+        </Link>
+        <Link style={{ textDecoration: "none" }} to="/live">
+          <NavigationButton redirect="live" />
+        </Link>
+      </NavigationWrapper>
+    );
+  };
+
+  const returnRightHandSideNavigation = () => {
+    return (
+      <NavigationWrapper right>
+        <SearchInput />
+        <ProfileButton
+          profileName={returnProfileName()}
+          onClick={handleClickListItem}
+        />
+        <Menu
+          id="lock-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={() => handleMenuItemClick()}>Profile</MenuItem>
+          <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
+        </Menu>
+      </NavigationWrapper>
+    );
+  };
+
+  const returnNewbornLogo = () => {
+    return <HeaderLogo src="/images/newborn-logo.png" />;
+  };
 
   return (
     <HeaderContainer>
-      <HeaderMenuIcon
-        open={menuNavOpen}
-        onClick={() => {
-          setMenuNavOpen(!menuNavOpen);
-        }}
-      />
-      <HeaderProfileIcon
-        open={menuProfileOpen}
-        onClick={() => {
-          setProfileNavOpen(!menuProfileOpen);
-        }}
-      />
-      {renderProfileMenu}
-      {renderNavigationMenu}
-      <Drawer open={menuNavOpen} />
+      {returnLeftHandSideNavigation()}
+      {returnNewbornLogo()}
+      {returnRightHandSideNavigation()}
     </HeaderContainer>
   );
 };
@@ -70,4 +106,6 @@ Header.defaultProps = {
   currentUser: ""
 };
 
-export default withRouter(Header);
+export default withAuthenticator(
+  withCurrentUser(withApollo(withRouter(Header)))
+);

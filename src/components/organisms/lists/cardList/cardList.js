@@ -1,30 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 import { Grid } from "../../../../theme/layout/grid.style";
-import { colors } from "../../../../theme/theme";
+import { Theme } from "../../../../theme/theme";
 
 export const CardListWrapper = styled.div`
   position: relative;
-  border-bottom: 1px solid ${colors.dark.dark};
+  border-bottom: 1px solid ${Theme.palette.dark.dark};
 `;
 export const CardListGrid = styled(Grid)`
+  align-items: center;
   padding-bottom: 20px;
 `;
-
 export const ListTitle = styled.p`
-  position: absolute;
-  bottom: 15px;
-  left: 30px;
-  margin: 0;
+  margin: 25px;
 `;
 
-function CardList({ list, listTitle, id }) {
+function CardList({ list, title, id }) {
   return (
     <CardListWrapper>
+      <ListTitle>{title}</ListTitle>
       <CardListGrid columnNumber={list.length} data-testid={id} rowNumber={1}>
         {list}
       </CardListGrid>
-      <ListTitle>{listTitle}</ListTitle>
     </CardListWrapper>
   );
 }

@@ -1,33 +1,35 @@
 import styled from "styled-components";
+import { Theme } from "../../theme/theme";
 
 export const HeaderContainer = styled.section`
   position: relative;
-  border-bottom: 6px solid;
+  border-bottom: 6px solid ${Theme.palette.dark.main};
   height: 55px;
   align-items: center;
   display: flex;
   text-align: center;
-  justify-content: space-between;
+  justify-content: center;
+  padding: 7px;
 `;
 
 export const HeaderMenuIcon = styled.div`
-  border-right: 1px solid black;
   width: 55px;
+  border-radius: 5px;
   height: 100%;
-  background: ${props => (props.open ? "black" : "none")};
+  background: ${props => (props.open ? "black" : "lightgray")};
   &:hover {
-    background: ${props => (props.open ? "black" : "lightgray")};
+    background: ${props => (props.open ? "black" : "gray")};
     cursor: pointer;
   }
 `;
 
 export const HeaderProfileIcon = styled.div`
-  border-left: 1px solid black;
   width: 55px;
   height: 100%;
-  background: ${props => (props.open ? "black" : "none")};
+  border-radius: 50px;
+  background: ${props => (props.open ? "black" : "lightgray")};
   &:hover {
-    background: ${props => (props.open ? "black" : "lightgray")};
+    background: ${props => (props.open ? "black" : "gray")};
     cursor: pointer;
   }
 `;

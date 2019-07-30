@@ -15,7 +15,7 @@ import {
   InfoContent
 } from "./infos/info.style";
 import { Badge } from "../../../atoms/badges";
-import { Button } from "../../../molecules/buttons/buttons/button.style";
+import { Button } from "../../../molecules/buttons/button.style";
 import { FlexContainer } from "../../../../theme/layout/grid.style";
 
 function RecordHeader(props) {

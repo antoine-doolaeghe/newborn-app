@@ -11,6 +11,7 @@ import {
 } from "./newbornCard.style";
 import CardButton from "./button";
 import lineChartOptions from "./lineChartOptions";
+import NewbornCardLoader from "./loader/newbornCardLoader";
 
 function NewbornCard(props) {
   const {
@@ -19,7 +20,8 @@ function NewbornCard(props) {
     color,
     isPlaceholderCard,
     newbornInfo,
-    onClick
+    onClick,
+    loading
   } = props;
 
   const [hovered, setHovered] = useState(false);
@@ -32,18 +34,22 @@ function NewbornCard(props) {
             color="primary"
             onClick={onPartnerClick}
             iconLabel="p"
-            label="1"
+            label={newbornInfo.partners}
           />
           <CardButton
             color="secondary"
             onClick={onChildClick}
             iconLabel="c"
-            label="1"
+            label={newbornInfo.childs}
           />
         </CardButtonWrapper>
       );
     }
   };
+
+  if (loading) {
+    return <NewbornCardLoader />;
+  }
 
   return (
     <CardWrapper
@@ -60,6 +66,7 @@ function NewbornCard(props) {
           <CardHeader
             title={newbornInfo.title}
             subTitle={newbornInfo.dob}
+            displayBadge
             data-testid="newbornHeader"
           />
           <CardChartWrapper data-testid="newbornCardGraph">
