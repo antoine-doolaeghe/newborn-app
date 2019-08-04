@@ -25,20 +25,20 @@ type Newborn @model {
   bornPlace: String
   childs: [String]
   createdAt: String
-  generation: Generation! @connection(name: "GenerationNewborn")
   hexColor: String
   id: String!
   instanceId: String
-  models: [Model] @connection(name: "NewbornModel")
   name: String!
-  owner: User @connection(name: "NewbornOwner")
   parents: [String]
   partners: [String]
-  predictions: [Prediction] @connection(name: "NewbornPrediction")
   sex: String!
   steps: Int
   training: Boolean
   trainingStage: String
+  owner: User @connection(name: "NewbornOwner")
+  generation: Generation! @connection(name: "GenerationNewborn")
+  models: [Model] @connection(name: "NewbornModel")
+  predictions: [Prediction] @connection(name: "NewbornPrediction")
 }
 
 type Model @model {
