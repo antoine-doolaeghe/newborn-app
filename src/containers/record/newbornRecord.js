@@ -10,8 +10,8 @@ import * as queries from "../../graphql/queries";
 import { Flex } from "../../theme/layout/grid.style";
 import { ErrorDialog } from "../../components/molecules/snackbars/errorSnackBar/style/error.style";
 
-import RecordGraph from "../../components/organisms/recordGraph";
-import RecordHeader from "../../components/organisms/record/recordInfo/recordInfo";
+import RecordGraph from "../../components/organisms/record/recordGraph";
+import RecordInfo from "../../components/organisms/record/recordInfo/recordInfo";
 import Record3dModel from "../../components/organisms/3dModel/record3dModel/record3dModel";
 
 import { returnNewbornRecordInfo } from "./newbornRecordHelpers";
@@ -30,45 +30,48 @@ const NewBornRecord = ({ id, open, onClose, newbornModelInfo }) => {
       open={open}
       maxWidth="lg"
     >
-      <NewbornRecordWrapper>
-        <Query query={gql(queries.getNewborn)} variables={{ id }}>
-          {({ data, loading, error }) => {
-            if (error) {
-              return <ErrorDialog open message={error.message} />;
-            }
-            const newbornRecordInfo = returnNewbornRecordInfo(data.getNewborn);
-
-            return (
-              <Fragment>
-                <Flex direction="row" margin="10px">
-                  <RecordHeader
-                    loading={loading}
-                    newbornInfo={newbornRecordInfo}
-                    data-testid="newbornRecordHeader"
-                  />
-                  <RecordGraph
-                    loading={loading}
-                    data-testid="newbornRecordGraph"
-                    newbornModel={newbornRecordInfo.model}
-                  />
-                </Flex>
-                <Flex direction="column">
-                  <Record3dModel
-                    loading={loading}
-                    newbornModelInfo={newbornModelInfo}
-                    data-testid="newbornRecord3dModel"
-                  />
-                </Flex>
-              </Fragment>
-            );
-          }}
-        </Query>
-      </NewbornRecordWrapper>
+      {open && (
+        <NewbornRecordWrapper>
+          <Query query={gql(queries.getNewborn)} variables={{ id, limit: 2 }}>
+            {({ data, loading, error }) => {
+              if (error) {
+                return <ErrorDialog open message={error.message} />;
+              }
+              const newbornRecordInfo = returnNewbornRecordInfo(
+                data.getNewborn
+              );
+              return (
+                <Fragment>
+                  <Flex direction="row" margin="10px">
+                    <RecordInfo
+                      loading={loading}
+                      newbornInfo={newbornRecordInfo}
+                      data-testid="newbornRecordHeader"
+                    />
+                    <RecordGraph
+                      loading={loading}
+                      data-testid="newbornRecordGraph"
+                      modelId={newbornRecordInfo.modelId}
+                    />
+                  </Flex>
+                  <Flex direction="column">
+                    <Record3dModel
+                      loading={loading}
+                      newbornModelInfo={newbornModelInfo}
+                      data-testid="newbornRecord3dModel"
+                    />
+                  </Flex>
+                </Fragment>
+              );
+            }}
+          </Query>
+        </NewbornRecordWrapper>
+      )}
     </DefaultDialog>
   );
 };
 
-NewBornRecord.defaultPropTypes = defaultPropTypes;
+NewBornRecord.defaultProps = defaultPropTypes;
 
 NewBornRecord.propTypes = propTypes;
 

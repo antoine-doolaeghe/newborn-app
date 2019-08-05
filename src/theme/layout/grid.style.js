@@ -25,7 +25,6 @@ export const Container = styled.div`
 export const Flex = styled.div`
   align-content: center;
   align-items: ${props => props.align || null};
-  align-items: center;
   border: ${props => props.border || null};
   display: flex;
   flex-direction: ${props => props.direction || null};

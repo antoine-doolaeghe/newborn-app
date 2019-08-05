@@ -1,7 +1,7 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 
-const NewbornCardLoader = () => (
+const RecordInfoLoader = () => (
   <ContentLoader
     height={280}
     width={280}
@@ -14,4 +14,4 @@ const NewbornCardLoader = () => (
   </ContentLoader>
 );
 
-export default NewbornCardLoader;
+export default RecordInfoLoader;

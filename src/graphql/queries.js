@@ -116,7 +116,7 @@ export const listGenerations = `query ListGenerations(
   }
 }
 `;
-export const getNewborn = `query GetNewborn($id: ID!) {
+export const getNewborn = `query GetNewborn($id: ID!, $limit: Int) {
   getNewborn(id: $id) {
     bio
     bornPlace
@@ -134,7 +134,15 @@ export const getNewborn = `query GetNewborn($id: ID!) {
     models {
       items {
         id
-        cellPositions
+        episodes {
+          items {
+            steps(limit: $limit) {
+              items {
+                meanReward
+              }
+            }
+          }
+        }
       }
     }
     name
@@ -166,15 +174,12 @@ export const listNewborns = `query ListNewborns(
       }
       parents
       partners
-      predictions {
-        nextToken
-      }
     }
     nextToken
   }
 }
 `;
-export const getModel = `query GetModel($id: ID!) {
+export const getAllEpisodes = `query getAllEpisodes($id: ID!) {
   getModel(id: $id) {
     id
     cellInfos

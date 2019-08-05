@@ -14,6 +14,7 @@ export const StyledBadge = styled.div`
   font-weight: ${Theme.weight.normal};
   height: ${props => props.height};
   justify-content: center;
+  padding: 0px 7px;
   margin: ${Theme.spacing.small};
   width: ${props => props.width};
 `;
@@ -28,7 +29,7 @@ const Badge = ({ label, width, height }) => {
 
 Badge.defaultProps = {
   height: "25px",
-  width: "35px",
+  width: "auto",
   label: "--"
 };
 
