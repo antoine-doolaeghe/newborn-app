@@ -22,7 +22,7 @@ export const Container = styled.div`
   width: ${props => props.width || null};
 `;
 
-export const FlexContainer = styled.div`
+export const Flex = styled.div`
   align-content: center;
   align-items: ${props => props.align || null};
   align-items: center;

@@ -1,29 +1,30 @@
 import React, { Fragment } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
-import Dialog from "@material-ui/core/Dialog";
 import styled from "styled-components";
+import DefaultDialog from "../../components/organisms/dialogs/dialog";
 import { propTypes } from "./newbornRecord_propTypes";
 import { defaultPropTypes } from "./newbornRecord_defaultPropTypes";
 import * as queries from "../../graphql/queries";
-import { FlexContainer } from "../../theme/layout/grid.style";
+import { Flex } from "../../theme/layout/grid.style";
 import { ErrorDialog } from "../../components/molecules/snackbars/errorSnackBar/style/error.style";
 
 import RecordGraph from "../../components/organisms/recordGraph";
-import RecordHeader from "../../components/organisms/cards/recordHeaderCard/recordHeader";
+import RecordHeader from "../../components/organisms/record/recordInfo/recordInfo";
 import Record3dModel from "../../components/organisms/3dModel/record3dModel/record3dModel";
 
 import { returnNewbornRecordInfo } from "./newbornRecordHelpers";
 
 const NewbornRecordWrapper = styled.section`
   display: flex;
+  flex-direction: column;
+  width: 1000px;
 `;
 
 const NewBornRecord = ({ id, open, onClose, newbornModelInfo }) => {
   return (
-    <Dialog
+    <DefaultDialog
       transitionDuration={350}
       onClose={onClose}
       open={open}
@@ -35,52 +36,35 @@ const NewBornRecord = ({ id, open, onClose, newbornModelInfo }) => {
             if (error) {
               return <ErrorDialog open message={error.message} />;
             }
-
-            if (loading || !data.getNewborn) {
-              return (
-                <CircularProgress
-                  variant="indeterminate"
-                  data-testid="newbornListLoading"
-                />
-              );
-            }
-
             const newbornRecordInfo = returnNewbornRecordInfo(data.getNewborn);
 
             return (
               <Fragment>
-                <FlexContainer
-                  direction="column"
-                  width="500px"
-                  max-width="500px"
-                  margin="10px"
-                >
+                <Flex direction="row" margin="10px">
                   <RecordHeader
+                    loading={loading}
                     newbornInfo={newbornRecordInfo}
                     data-testid="newbornRecordHeader"
                   />
-                  <Record3dModel
-                    newbornModelInfo={newbornModelInfo}
-                    data-testid="newbornRecord3dModel"
-                  />
-                </FlexContainer>
-                <FlexContainer
-                  direction="column"
-                  width="500px"
-                  max-width="500px"
-                  margin="10px"
-                >
                   <RecordGraph
+                    loading={loading}
                     data-testid="newbornRecordGraph"
                     newbornModel={newbornRecordInfo.model}
                   />
-                </FlexContainer>
+                </Flex>
+                <Flex direction="column">
+                  <Record3dModel
+                    loading={loading}
+                    newbornModelInfo={newbornModelInfo}
+                    data-testid="newbornRecord3dModel"
+                  />
+                </Flex>
               </Fragment>
             );
           }}
         </Query>
       </NewbornRecordWrapper>
-    </Dialog>
+    </DefaultDialog>
   );
 };
 

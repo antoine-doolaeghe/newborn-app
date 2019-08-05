@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import * as mutations from "../../../../graphql/mutations";
 import { Button } from "../button.style";
-import { FlexContainer } from "../../../../theme/layout/grid.style";
+import { Flex } from "../../../../theme/layout/grid.style";
 
 const BuyButton = ({ id, currentUserId, newbornInfo }) => {
   const onClick = (event, buy) => {
@@ -31,12 +31,12 @@ const BuyButton = ({ id, currentUserId, newbornInfo }) => {
             data-testid="newbornOwnershipButton"
           >
             {loading && (
-              <FlexContainer>
+              <Flex>
                 <CircularProgress
                   variant="indeterminate"
                   data-testid="newbornListLoading"
                 />
-              </FlexContainer>
+              </Flex>
             )}
           </Button>
         );

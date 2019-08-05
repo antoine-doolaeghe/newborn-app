@@ -1,26 +1,24 @@
 import styled from "styled-components";
 
-export const HeaderContainer = styled.section`
+export const InfoWrapper = styled.section`
   font-size: 20px;
   height: 400px;
   width: 100%;
-  margin-top: 8px;
   display: flex;
   flex-direction: column;
   max-width: 500px;
+  margin: 10px;
 `;
 
-export const HeaderValueContainer = styled.section`
+export const ValueWrapper = styled.section`
   display: flex;
   flex: 1.5;
-  margin: 0px;
-  margin-left: 10px;
   justify-content: space-between;
   width: 61%;
   align-items: center;
 `;
 
-export const HeaderName = styled.h1`
+export const InfoTitle = styled.h1`
   margin: 0px;
   font-size: 18px;
   text-transform: uppercase;
