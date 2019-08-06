@@ -8,6 +8,7 @@ export const returnNewbornRecordInfo = info => {
       ? info.models.items[0].episodes.items[0].steps.items[0].meanReward
       : null;
     const currentIndex = currentMeanReward - previousMeanReward;
+
     newbornInfo = {
       name: info.name || "",
       id: info.id || "",
@@ -18,7 +19,9 @@ export const returnNewbornRecordInfo = info => {
       currentIndex: currentIndex || "--",
       currentStep: info.currentStep || "--",
       trainingStage: info.trainingStage || "--",
-      color: "black"
+      ownerUserName: info.owner ? info.owner.userName : "",
+      parents: info.parents ? info.parents : [],
+      childs: info.childs ? info.childs : []
     };
   }
   return newbornInfo;

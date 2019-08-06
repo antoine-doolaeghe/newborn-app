@@ -6,7 +6,7 @@ import GenerationListLoader from "./loader/generationListLoader";
 import NewbornList from "../../newborn/list/newbornList";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 
-import NewbornRecord from "../../record/newbornRecord";
+import NewbornRecord from "../../record/newbornRecord/newbornRecord";
 
 function GenerationList() {
   const [isRecordOpen, setIsRecordOpen] = useState(false);

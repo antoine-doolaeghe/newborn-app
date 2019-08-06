@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Build from "@material-ui/icons/Build";
 import TrainerCard from "../../../components/organisms/cards/trainerCard/trainerCard";
 import CardList from "../../../components/organisms/lists/cardList/cardList";

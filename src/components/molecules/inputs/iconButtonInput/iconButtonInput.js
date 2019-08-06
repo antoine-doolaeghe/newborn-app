@@ -18,7 +18,7 @@ const StyledIconButtoInput = Styled.div`
 export default function IconButtoInput() {
   return (
     <StyledIconButtoInput>
-      <InputBase placeholder="Search" />
+      <InputBase placeholder="Find..." />
       <IconButton height="40px" width="40px" color="dark">
         <SearchIcon />
       </IconButton>

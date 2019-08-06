@@ -1,47 +1,50 @@
+/* eslint-disable max-len */
 import React from "react";
-import { Mutation } from "react-apollo";
-import gql from "graphql-tag";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import * as mutations from "../../../../graphql/mutations";
-import { Button } from "../button.style";
-import { Flex } from "../../../../theme/layout/grid.style";
+import PropTypes from "prop-types";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/styles";
 
-const BuyButton = ({ id, currentUserId, newbornInfo }) => {
-  const onClick = (event, buy) => {
-    event.stopPropagation();
-    buy();
-  };
+const useStyles = makeStyles(({ palette, shadows }) => ({
+  root: {
+    position: "absolute",
+    bottom: 20,
+    right: 20,
+    paddingLeft: 16,
+    paddingRight: 16,
+    background: "linear-gradient(to right, #aea0d5, #eaafc8)",
+    boxShadow: "0 0 20px 0 #f5005780"
+  },
+  label: {
+    color: "white",
+    textTransform: "none",
+    fontSize: 15,
+    fontWeight: 700
+  },
+  contained: {
+    minHeight: 30,
+    boxShadow: 0,
+    "&:active": { boxShadow: 0 }
+  }
+}));
+
+const BuyButton = ({ className, ...props }) => {
+  const classes = useStyles(props);
   return (
-    <Mutation
-      mutation={gql(mutations.updateNewborn)}
-      variables={{
-        input: {
-          id,
-          newbornOwnerId: !newbornInfo.isOwnedByCurrentUser
-            ? currentUserId
-            : null
-        }
-      }}
+    <Button
+      disabled
+      className={`MuiButton--shinning ${className}`}
+      {...props}
+      classes={classes}
     >
-      {(buy, { loading }) => {
-        return (
-          <Button
-            color="primary"
-            onClick={event => onClick(event, buy)}
-            data-testid="newbornOwnershipButton"
-          >
-            {loading && (
-              <Flex>
-                <CircularProgress
-                  variant="indeterminate"
-                  data-testid="newbornListLoading"
-                />
-              </Flex>
-            )}
-          </Button>
-        );
-      }}
-    </Mutation>
+      Sunshine
+    </Button>
   );
 };
+BuyButton.propTypes = {
+  className: PropTypes.string
+};
+BuyButton.defaultProps = {
+  className: ""
+};
+
 export default BuyButton;

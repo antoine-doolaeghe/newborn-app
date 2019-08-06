@@ -75,8 +75,8 @@ const Theme = {
     xsmall: "0.75rem",
     small: "1rem",
     medium: "1.25rem",
-    large: "2rem",
-    xlarge: "2.75rem"
+    large: "1.5rem",
+    xlarge: "2rem"
   },
   fontFamily: "IBM Plex Sans",
   spacing: {

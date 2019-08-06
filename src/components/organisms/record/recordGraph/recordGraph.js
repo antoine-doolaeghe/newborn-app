@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { Fragment } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import Highcharts from "highcharts";
@@ -6,7 +6,6 @@ import HighchartsReact from "highcharts-react-official";
 import PropTypes from "prop-types";
 import { RecordGraphContainer } from "./recordGraph.style";
 import * as queries from "../../../../graphql/queries";
-import GraphRangeSelect from "./graphRangeSelect";
 import lineChartOptions from "./lineChartOptions";
 import { ErrorDialog } from "../../../molecules/snackbars/errorSnackBar/style/error.style";
 import RecordGraphLoader from "./loader/recordGraphLoader";
@@ -18,8 +17,6 @@ import {
 } from "../../../../utils/helpers/newbornGlobalHelpers";
 
 const RecordGraph = ({ loading, modelId }) => {
-  const [range, setRange] = useState(86400000);
-
   const returnNoEpisode = () => (
     <div data-testid="newbornCardEmptyGraph">No training episode</div>
   );
@@ -46,13 +43,11 @@ const RecordGraph = ({ loading, modelId }) => {
             const steps = returnSortedSteps(episodes, 0);
             return (
               <Fragment>
-                <GraphRangeSelect setRange={setRange} />
                 <HighchartsReact
                   highcharts={Highcharts}
                   options={lineChartOptions(
                     returnNewbornChartData(steps),
-                    "black",
-                    range
+                    "black"
                   )}
                 />
               </Fragment>

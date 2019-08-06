@@ -85,9 +85,6 @@ export const listGenerations = `query ListGenerations(
           sex
           parents
           partners
-          owner {
-            id
-          }
           models {
             items {
               id
@@ -128,7 +125,11 @@ export const getNewborn = `query GetNewborn($id: ID!, $limit: Int) {
         nextToken
       }
     }
+    parents 
     hexColor
+    owner {
+      userName
+    }
     id
     sex
     models {
@@ -149,6 +150,7 @@ export const getNewborn = `query GetNewborn($id: ID!, $limit: Int) {
   }
 }
 `;
+
 export const listNewborns = `query ListNewborns(
   $filter: ModelNewbornFilterInput
   $limit: Int
@@ -176,6 +178,29 @@ export const listNewborns = `query ListNewborns(
       partners
     }
     nextToken
+  }
+}
+`;
+export const listNewbornParents = `query ListNewbornParents(
+  $filter: ModelNewbornFilterInput
+  $limit: Int
+) {
+  listNewborns(filter: $filter, limit: $limit) {
+    items {
+      name
+    }
+  }
+}
+`;
+
+export const listNewbornChilds = `query ListNewbornChilds(
+  $filter: ModelNewbornFilterInput
+  $limit: Int
+) {
+  listNewborns(filter: $filter, limit: $limit) {
+    items {
+      name
+    }
   }
 }
 `;

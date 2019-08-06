@@ -2,19 +2,18 @@ import styled from "styled-components";
 
 export const InfoWrapper = styled.section`
   font-size: 20px;
-  height: 400px;
+  height: 250px;
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   max-width: 500px;
-  margin: 10px;
+  margin: 10px 20px;
 `;
 
 export const ValueWrapper = styled.section`
   display: flex;
-  flex: 1.5;
   justify-content: space-between;
-  width: 61%;
   align-items: center;
 `;
 

@@ -1,8 +1,8 @@
 import React from "react";
 import "jest-dom/extend-expect";
 import { cleanup } from "react-testing-library";
-import NewbornCard from "../newbornRecord";
-import { renderWithReduxAndRouter } from "../../../utils/tests/integrations";
+import NewbornCard from "../../newbornRecord";
+import { renderWithReduxAndRouter } from "../../../../utils/tests/integrations";
 
 describe("<NewbornRecord />", () => {
   afterEach(cleanup);
