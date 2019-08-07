@@ -9,7 +9,7 @@ import Chip from "../../../atoms/chips/chip";
 import Info from "../../../molecules/infos/info";
 import { Flex } from "../../../../theme/layout/grid.style";
 
-function RecordDetail({ loading, parents, childs }) {
+function RecordDetail({ loading, parents, childs, entropy, valueLoss, step }) {
   return (
     <DetailWrapper data-testid="newbornRecordHeader">
       {loading ? (
@@ -38,9 +38,9 @@ function RecordDetail({ loading, parents, childs }) {
             />
           </Flex>
           <Flex width="100%" flex={1}>
-            <Info label="Environment Statistics" value="10.3" />
-            <Info label="Policy Statistics" value="13.2" />
-            <Info label="Learning Loss" value="34" />
+            <Info label="Step" value={step} />
+            <Info label="Entropy" value={entropy} />
+            <Info label="Value Loss" value={valueLoss} />
           </Flex>
         </Flex>
       )}

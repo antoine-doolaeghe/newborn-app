@@ -4,11 +4,12 @@ export const RecordGraphContainer = styled.section`
   align-items: center;
   position: relative;
   display: flex;
-  height: 250px;
+  height: 300px;
   justify-content: center;
   flex-direction: column;
-  width: 100%;
-  margin: 10px;
+  /* flex: 1; */
+  width: 500px;
+  margin: 10px 20px;
 `;
 
 export const GraphRangeContainer = styled.section`

@@ -57,11 +57,13 @@ type Episode @model {
 }
 
 type Summary @model {
+  created: String!
+  entropy: Float
+  episode: Episode @connection(name: "EpisodeSummary")
   meanReward: Float
   standardReward: Float
   step: Int
-  created: String!
-  episode: Episode @connection(name: "EpisodeSummary")
+  valueLoss: Float
 }
 
 type Prediction @model {
@@ -69,14 +71,14 @@ type Prediction @model {
   newborn: Newborn @connection(name: "NewbornPrediction")
 }
 
-type Subscription {
-  onCreateSummarySet(summaryEpisodeId: String!): Summary
-    @aws_subscribe(mutations: ["createSummary"])
-}
-
 type Trainer @model {
   createdAt: String
   id: String!
   owner: User @connection(name: "TrainerOwner")
   data: String
+}
+
+type Subscription {
+  onCreateSummarySet(summaryEpisodeId: String!): Summary
+    @aws_subscribe(mutations: ["createSummary"])
 }

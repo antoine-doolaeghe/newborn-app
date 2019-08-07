@@ -1,16 +1,16 @@
 import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import Avatar from "@material-ui/core/Avatar";
-import FaceIcon from "@material-ui/icons/Face";
+
 import * as queries from "../../../graphql/queries";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
-import Chip from "../../../components/atoms/chips/chip";
+import NewbornChildsLoader from "./loader/newbornChildsLoader";
 import AvatarGroup from "../../../components/molecules/avatarGroup/avatarGroup";
+import { returnTextAbstract } from "../../../utils/helpers/newbornGlobalHelpers";
 
 const NewbornParents = ({ childs, loading }) => {
   if (loading) {
-    return "loading";
+    return <NewbornChildsLoader />;
   }
   const returnfilter = () => {
     const filter = [];
@@ -20,7 +20,7 @@ const NewbornParents = ({ childs, loading }) => {
     return filter;
   };
 
-  if (returnfilter().length === 0) {
+  if (childs.length === 0) {
     return "no child";
   }
 
@@ -41,11 +41,11 @@ const NewbornParents = ({ childs, loading }) => {
         }
 
         if (loading) {
-          return "";
+          return <NewbornChildsLoader />;
         }
 
-        data.listNewborns.items.forEach(parent => {
-          childs.push(parent.name);
+        data.listNewborns.items.forEach(child => {
+          childs.push(returnTextAbstract(child.name, 4));
         });
 
         return <AvatarGroup avatars={childs} />;

@@ -1,11 +1,21 @@
 export const returnNewbornRecordInfo = info => {
   let newbornInfo = {};
   if (info) {
+    console.log(info);
     const currentMeanReward = info.models
       ? info.models.items[0].episodes.items[0].steps.items[1].meanReward
       : null;
     const previousMeanReward = info.models
       ? info.models.items[0].episodes.items[0].steps.items[0].meanReward
+      : null;
+    const currentEntropy = info.models
+      ? info.models.items[0].episodes.items[0].steps.items[1].entropy
+      : null;
+    const currentValueLoss = info.models
+      ? info.models.items[0].episodes.items[0].steps.items[1].valueLoss
+      : null;
+    const currentStep = info.models
+      ? info.models.items[0].episodes.items[0].steps.items[1].step
       : null;
     const currentIndex = currentMeanReward - previousMeanReward;
 
@@ -16,8 +26,10 @@ export const returnNewbornRecordInfo = info => {
       bornPlace: info.bornPlace || "unknown region",
       modelId: info.models ? info.models.items[0].id : "",
       currentMeanReward: currentMeanReward || "--",
+      currentEntropy: currentEntropy || "--",
       currentIndex: currentIndex || "--",
-      currentStep: info.currentStep || "--",
+      currentValueLoss: currentValueLoss || "--",
+      currentStep: currentStep || "--",
       trainingStage: info.trainingStage || "--",
       ownerUserName: info.owner ? info.owner.userName : "",
       parents: info.parents ? info.parents : [],

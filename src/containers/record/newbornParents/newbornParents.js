@@ -3,14 +3,18 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import Avatar from "@material-ui/core/Avatar";
 import FaceIcon from "@material-ui/icons/Face";
+
 import * as queries from "../../../graphql/queries";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
+import NewbornParentsLoader from "./loader/newbornParentsLoader";
 import Chip from "../../../components/atoms/chips/chip";
+import { returnTextAbstract } from "../../../utils/helpers/newbornGlobalHelpers";
 
 const NewbornChilds = ({ parents, loading }) => {
   if (loading) {
-    return "loading";
+    return <NewbornParentsLoader />;
   }
+
   const returnfilter = () => {
     const filter = [];
     parents.forEach(parent => {
@@ -19,7 +23,7 @@ const NewbornChilds = ({ parents, loading }) => {
     return filter;
   };
 
-  if (returnfilter().length === 0) {
+  if (parents.length === 0) {
     return "no parent";
   }
 
@@ -40,14 +44,14 @@ const NewbornChilds = ({ parents, loading }) => {
         }
 
         if (loading) {
-          return "";
+          return <NewbornParentsLoader />;
         }
 
         data.listNewborns.items.forEach(parent => {
           parents.push(
             <Chip
               variant="outlined"
-              label={parent.name}
+              label={returnTextAbstract(parent.name, 10)}
               onClick={() => {
                 console.log("HERE");
               }}

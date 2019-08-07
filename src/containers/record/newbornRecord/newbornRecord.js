@@ -65,6 +65,9 @@ const NewBornRecord = ({ id, open, onClose, newbornModelInfo }) => {
                     />
                   </Flex>
                   <RecordDetail
+                    step={newbornRecordInfo.currentStep}
+                    valueLoss={newbornRecordInfo.currentValueLoss}
+                    entropy={newbornRecordInfo.currentEntropy}
                     parents={
                       <NewbornParents
                         loading={loading}

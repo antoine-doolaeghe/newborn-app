@@ -140,6 +140,9 @@ export const getNewborn = `query GetNewborn($id: ID!, $limit: Int) {
             steps(limit: $limit) {
               items {
                 meanReward
+                entropy
+                valueLoss
+                step
               }
             }
           }
@@ -216,9 +219,11 @@ export const getAllEpisodes = `query getAllEpisodes($id: ID!) {
         steps {
           items {
             created
+            entropy
             meanReward
             standardReward
             step
+            valueLoss
           }
         }
       }

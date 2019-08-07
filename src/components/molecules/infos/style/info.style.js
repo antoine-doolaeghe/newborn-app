@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const InfoElement = styled.section`
-  width: 100%;
+  width: 105px;
 `;
 
 export const InfoWrap = styled.div`

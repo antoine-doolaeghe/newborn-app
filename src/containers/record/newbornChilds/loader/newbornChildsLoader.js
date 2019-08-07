@@ -1,7 +1,7 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 
-const RecordHeaderLoader = () => (
+const NewbornParentsLoader = () => (
   <ContentLoader
     height={30}
     width={50}
@@ -13,4 +13,4 @@ const RecordHeaderLoader = () => (
   </ContentLoader>
 );
 
-export default RecordHeaderLoader;
+export default NewbornParentsLoader;

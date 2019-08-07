@@ -3,11 +3,12 @@ import styled from "styled-components";
 export const InfoWrapper = styled.section`
   font-size: 20px;
   height: 250px;
-  width: 100%;
+  /* flex: 1; */
+  width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  max-width: 500px;
+  /* max-width: 500px; */
   margin: 10px 20px;
 `;
 

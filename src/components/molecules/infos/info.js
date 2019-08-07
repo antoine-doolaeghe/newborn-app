@@ -10,7 +10,7 @@ export default function Info(props) {
           style={{
             margin: "10px 10px 10px 0px",
             width: 55,
-            height: 40,
+            height: 55,
             borderRadius: 40,
             backgroundColor: "black"
           }}
