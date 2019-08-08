@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import * as queries from "../../../graphql/queries";
@@ -6,7 +6,7 @@ import GenerationListLoader from "./loader/generationListLoader";
 import NewbornList from "../../newborn/list/newbornList";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 
-import NewbornRecord from "../../record/newbornRecord";
+import NewbornRecord from "../../record/newbornRecord/newbornRecord";
 
 function GenerationList() {
   const [isRecordOpen, setIsRecordOpen] = useState(false);
@@ -26,25 +26,29 @@ function GenerationList() {
 
           return data.listGenerations.items.map(generation => {
             return (
-              <div>
-                <NewbornRecord
-                  id={id}
-                  open={isRecordOpen}
-                  onClose={onRecordClose}
-                />
-                <NewbornList
-                  title={generation.id}
-                  items={generation.newborns.items}
-                  onRecordOpen={onRecordOpen}
-                />
-              </div>
+              <NewbornList
+                title={generation.id}
+                items={generation.newborns.items}
+                onRecordOpen={onRecordOpen}
+              />
             );
           });
         }}
       </Query>
     );
   };
-  return returnNewbornGeneration();
+
+  return (
+    <Fragment>
+      <NewbornRecord
+        setId={setId}
+        id={id}
+        open={isRecordOpen}
+        onClose={onRecordClose}
+      />
+      {returnNewbornGeneration()}
+    </Fragment>
+  );
 }
 
 export default GenerationList;

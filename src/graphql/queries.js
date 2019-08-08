@@ -85,9 +85,6 @@ export const listGenerations = `query ListGenerations(
           sex
           parents
           partners
-          owner {
-            id
-          }
           models {
             items {
               id
@@ -116,7 +113,7 @@ export const listGenerations = `query ListGenerations(
   }
 }
 `;
-export const getNewborn = `query GetNewborn($id: ID!) {
+export const getNewborn = `query GetNewborn($id: ID!, $limit: Int) {
   getNewborn(id: $id) {
     bio
     bornPlace
@@ -128,19 +125,37 @@ export const getNewborn = `query GetNewborn($id: ID!) {
         nextToken
       }
     }
+    parents 
+    partners
     hexColor
+    owner {
+      userName
+      profileImage
+    }
     id
     sex
     models {
       items {
         id
-        cellPositions
+        episodes {
+          items {
+            steps(limit: $limit) {
+              items {
+                meanReward
+                entropy
+                valueLoss
+                step
+              }
+            }
+          }
+        }
       }
     }
     name
   }
 }
 `;
+
 export const listNewborns = `query ListNewborns(
   $filter: ModelNewbornFilterInput
   $limit: Int
@@ -166,15 +181,37 @@ export const listNewborns = `query ListNewborns(
       }
       parents
       partners
-      predictions {
-        nextToken
-      }
     }
     nextToken
   }
 }
 `;
-export const getModel = `query GetModel($id: ID!) {
+export const listNewbornParents = `query ListNewbornParents(
+  $filter: ModelNewbornFilterInput
+  $limit: Int
+) {
+  listNewborns(filter: $filter, limit: $limit) {
+    items {
+      id
+      name
+    }
+  }
+}
+`;
+
+export const listNewbornChilds = `query ListNewbornChilds(
+  $filter: ModelNewbornFilterInput
+  $limit: Int
+) {
+  listNewborns(filter: $filter, limit: $limit) {
+    items {
+      id
+      name
+    }
+  }
+}
+`;
+export const getAllEpisodes = `query getAllEpisodes($id: ID!) {
   getModel(id: $id) {
     id
     cellInfos
@@ -186,9 +223,11 @@ export const getModel = `query GetModel($id: ID!) {
         steps {
           items {
             created
+            entropy
             meanReward
             standardReward
             step
+            valueLoss
           }
         }
       }

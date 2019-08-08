@@ -1,11 +1,11 @@
-export default (data, lineColor, range) => {
+export default (data, lineColor) => {
   return {
     chart: {
       backgroundColor: "transparent",
-      height: 300,
+      height: 250,
       width: 500,
       type: "line",
-      spacing: 0,
+      // spacing: 0,
       zoomType: "x"
     },
     credits: {
@@ -15,18 +15,18 @@ export default (data, lineColor, range) => {
       text: ""
     },
     tooltip: {
-      positioner() {
-        return { x: 80, y: 50 };
-      },
       shadow: false,
       borderWidth: 0,
-      backgroundColor: "white"
+      useHTML: true,
+      backgroundColor: "white",
+      style: { position: "absolute" }
     },
     legend: {
       enabled: false,
       spanGaps: false
     },
     xAxis: {
+      visible: false,
       type: "datetime",
       dateTimeLabelFormats: {
         month: "%e. %b",
@@ -35,16 +35,16 @@ export default (data, lineColor, range) => {
       title: {
         text: ""
       },
-      // range,
       lineColor: "black",
-      lineWidth: 2,
-      opposite: true
+      lineWidth: 2
+      // opposite: true
     },
     yAxis: {
+      // visible: false,
       title: {
         text: ""
-      },
-      opposite: true
+      }
+      // opposite: . true
     },
     plotOptions: {
       series: {

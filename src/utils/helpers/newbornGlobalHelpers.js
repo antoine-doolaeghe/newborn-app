@@ -32,3 +32,10 @@ export const returnSortedSteps = (episodes, key) => {
   }
   return steps;
 };
+
+export const returnTextAbstract = (text, length) => {
+  if (text.length > length) {
+    return `${text.substring(0, length)}...`;
+  }
+  return text;
+};

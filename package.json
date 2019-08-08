@@ -6,6 +6,7 @@
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
+    "@material-ui/lab": "^4.0.0-alpha.22",
     "@material-ui/styles": "^3.0.0-alpha.10",
     "@tensorflow/tfjs": "^1.0.4",
     "@types/jest": "^24.0.15",
@@ -43,6 +44,7 @@
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
+    "react-swipeable-views": "^0.13.3",
     "recompose": "^0.30.0",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",

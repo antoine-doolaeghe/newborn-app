@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { withRouter } from "react-router-dom";
 import { CardWrapper } from "../newbornCard/newbornCard.style";
 import CardHeader from "../newbornCard/header/cardHeader";

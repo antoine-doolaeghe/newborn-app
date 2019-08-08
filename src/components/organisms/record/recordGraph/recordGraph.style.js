@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export const RcordGraphContainer = styled.section`
+export const RecordGraphContainer = styled.section`
   align-items: center;
   position: relative;
   display: flex;
-  height: 440px;
   justify-content: center;
   flex-direction: column;
-  width: 100%;
+  width: 500px;
+  margin: 10px 20px;
 `;
 
 export const GraphRangeContainer = styled.section`

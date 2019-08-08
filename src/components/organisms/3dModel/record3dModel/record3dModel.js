@@ -1,9 +1,38 @@
 import React, { Component } from "react";
 import * as THREE from "three";
 import OrbitControls from "orbit-controls-es6";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import SwipeableViews from "react-swipeable-views";
+import Typography from "@material-ui/core/Typography";
+import { RecordBuilder } from "../../record";
 import { NewbornRecord3dModelContainer } from "./record3dModel.style";
 
 class Record3dModel extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0
+    };
+  }
+
+  handleChange = (event, newValue) => {
+    console.log(newValue);
+    console.log(event);
+    this.setState({ value: this.state.value === 0 ? 1 : 0 });
+  };
+
+  handleChangeIndex = index => {
+    this.setState({ value: index });
+  };
+
+  a11yProps = index => {
+    return {
+      id: `simple-tab-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`
+    };
+  };
+
   componentDidUpdate() {
     const { newbornModelInfo } = this.props;
     if (newbornModelInfo) {
@@ -117,12 +146,42 @@ class Record3dModel extends Component {
 
   render() {
     return (
-      <NewbornRecord3dModelContainer
-        data-testid="newbornRecord3dModel"
-        ref={mount => {
-          this.mount = mount;
-        }}
-      />
+      <NewbornRecord3dModelContainer>
+        <Tabs
+          value={this.state.value}
+          onChange={event => {
+            this.handleChange(event);
+          }}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="fullWidth"
+          aria-label="full width tabs example"
+        >
+          <Tab label="Model" {...this.a11yProps(0)} />
+          <Tab label="trainer" {...this.a11yProps(1)} />
+        </Tabs>
+        {this.state.value !== 1 ? (
+          <Typography
+            component="div"
+            role="tabpanel"
+            style={{ display: this.state.value !== 0 ? "block" : "none" }}
+            id={`simple-tabpanel-${0}`}
+            aria-labelledby={`simple-tab-${0}`}
+          >
+            1
+          </Typography>
+        ) : (
+          <Typography
+            component="div"
+            role="tabpanel"
+            hidden={{ display: this.state.value !== 1 ? "block" : "none" }}
+            id={`simple-tabpanel-${1}`}
+            aria-labelledby={`simple-tab-${1}`}
+          >
+            <RecordBuilder />
+          </Typography>
+        )}
+      </NewbornRecord3dModelContainer>
     );
   }
 }

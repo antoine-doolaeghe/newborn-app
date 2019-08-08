@@ -5,8 +5,9 @@ import { Theme } from "../../../theme/theme";
 
 export const StyledBadge = styled.div`
   align-items: center;
-  background-color: lightgreen;
+  background-color: ${Theme.palette.success};
   border-radius: ${Theme.radius.small};
+  color: white;
   display: flex;
   font-family: ${Theme.fontFamily};
   font-size: ${Theme.fontSize.small};
@@ -14,6 +15,7 @@ export const StyledBadge = styled.div`
   font-weight: ${Theme.weight.normal};
   height: ${props => props.height};
   justify-content: center;
+  padding: 0px ${Theme.spacing.small};
   margin: ${Theme.spacing.small};
   width: ${props => props.width};
 `;
@@ -28,7 +30,7 @@ const Badge = ({ label, width, height }) => {
 
 Badge.defaultProps = {
   height: "25px",
-  width: "35px",
+  width: "auto",
   label: "--"
 };
 
