@@ -1,4 +1,14 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
 
 export const InfoElement = styled.section`
   width: 105px;
@@ -40,6 +50,7 @@ export const InfoLabelAvatar = styled.div`
   margin: 10px 10px 10px 0px;
   width: 55px;
   height: 55px;
+  cursor: pointer;
   border-radius: 40px;
   font-size: 30px;
   color: white;
@@ -48,4 +59,17 @@ export const InfoLabelAvatar = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  /* border: 3px solid white; */
+`;
+
+export const InfoLabelAvatarBorder = styled.div`
+  border: 2px dashed black;
+  border-radius: 40px;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  &:hover {
+    border: 2px dashed red;
+    animation: ${rotate} 7s linear infinite;
+  }
 `;

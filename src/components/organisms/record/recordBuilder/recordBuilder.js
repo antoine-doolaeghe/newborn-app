@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { withAuthenticator } from "aws-amplify-react";
-import withHeader from "../../containers/header/withHeader";
+import withHeader from "../../../../containers/header/withHeader";
 
 function Builder() {
   const [instance, setInstance] = useState(null);
@@ -25,15 +25,7 @@ function Builder() {
     };
   }, [instance]);
 
-  return (
-    <div style={{ display: "flex" }}>
-      <div> Hello </div>
-      <div
-        id="gameContainer"
-        style={{ width: "50%", height: "100%", position: "absolute", right: 0 }}
-      />
-    </div>
-  );
+  return <div id="gameContainer" style={{ width: "980px", height: "300px" }} />;
 }
 
-export default withHeader(Builder);
+export default Builder;

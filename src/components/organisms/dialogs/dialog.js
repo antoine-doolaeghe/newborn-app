@@ -13,14 +13,6 @@ const DialogActionButton = styled(BuyButton)`
 `;
 
 const DefaultDialog = ({ onClose, open, children }) => {
-  const returnDialogButton = () => {
-    return (
-      <Fragment>
-        <DialogActionButton color="primary">Buy now</DialogActionButton>
-      </Fragment>
-    );
-  };
-
   return (
     <StyledDialog
       onClose={onClose}
@@ -29,7 +21,6 @@ const DefaultDialog = ({ onClose, open, children }) => {
       maxWidth="lg"
     >
       {children}
-      {returnDialogButton()}
     </StyledDialog>
   );
 };

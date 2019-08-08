@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const InfoWrapper = styled.section`
   font-size: 20px;
   height: 250px;
-  width: 500px;
+  width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

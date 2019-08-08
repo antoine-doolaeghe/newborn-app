@@ -126,6 +126,7 @@ export const getNewborn = `query GetNewborn($id: ID!, $limit: Int) {
       }
     }
     parents 
+    partners
     hexColor
     owner {
       userName

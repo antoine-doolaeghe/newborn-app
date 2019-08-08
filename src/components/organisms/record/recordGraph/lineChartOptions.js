@@ -43,8 +43,8 @@ export default (data, lineColor) => {
       // visible: false,
       title: {
         text: ""
-      },
-      opposite: true
+      }
+      // opposite: . true
     },
     plotOptions: {
       series: {

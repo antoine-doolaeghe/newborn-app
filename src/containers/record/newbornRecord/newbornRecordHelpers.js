@@ -33,6 +33,7 @@ export const returnNewbornRecordInfo = info => {
       ownerUserName: info.owner ? info.owner.userName : "",
       ownerProfileImage: info.owner ? info.owner.profileImage : "",
       parents: info.parents ? info.parents : [],
+      partners: info.partners ? info.partners : [],
       childs: info.childs ? info.childs : []
     };
   }

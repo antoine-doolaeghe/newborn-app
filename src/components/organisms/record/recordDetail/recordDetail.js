@@ -9,7 +9,15 @@ import Chip from "../../../atoms/chips/chip";
 import Info from "../../../molecules/infos/info";
 import { Flex } from "../../../../theme/layout/grid.style";
 
-function RecordDetail({ loading, parents, childs, entropy, valueLoss, step }) {
+function RecordDetail({
+  loading,
+  parents,
+  partners,
+  childs,
+  entropy,
+  valueLoss,
+  step
+}) {
   return (
     <DetailWrapper data-testid="newbornRecordHeader">
       {loading ? (
@@ -19,23 +27,7 @@ function RecordDetail({ loading, parents, childs, entropy, valueLoss, step }) {
           <Flex flex={1}>
             <Info label="Parents" value={parents} />
             <Info label="Childs" value={childs} />
-            <Info
-              label="Trainer"
-              value={
-                <Chip
-                  variant="outlined"
-                  label="Trainer"
-                  onClick={() => {
-                    console.log("Here");
-                  }}
-                  avatar={
-                    <Avatar>
-                      <FaceIcon />
-                    </Avatar>
-                  }
-                />
-              }
-            />
+            <Info label="Partners" value={partners} />
           </Flex>
           <Flex width="100%" flex={1}>
             <Info label="Step" value={step} />

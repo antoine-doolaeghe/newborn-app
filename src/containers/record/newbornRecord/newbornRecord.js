@@ -15,8 +15,9 @@ import {
   RecordInfo,
   RecordGraph
 } from "../../../components/organisms/record";
-import NewbornParents from "../newbornParents/newbornParents";
-import NewbornChilds from "../newbornChilds/newbornChilds";
+import NewbornParents from "../parents/newbornParents";
+import NewbornChilds from "../childs/newbornChilds";
+import NewbornPartners from "../partners/newbornPartners";
 import Record3dModel from "../../../components/organisms/3dModel/record3dModel/record3dModel";
 
 import { returnNewbornRecordInfo } from "./newbornRecordHelpers";
@@ -69,6 +70,13 @@ const NewBornRecord = ({ id, setId, open, onClose, newbornModelInfo }) => {
                     valueLoss={newbornRecordInfo.currentValueLoss}
                     entropy={newbornRecordInfo.currentEntropy}
                     setId={setId}
+                    partners={
+                      <NewbornPartners
+                        loading={loading}
+                        setId={setId}
+                        partners={newbornRecordInfo.partners}
+                      />
+                    }
                     parents={
                       <NewbornParents
                         loading={loading}
@@ -83,13 +91,11 @@ const NewBornRecord = ({ id, setId, open, onClose, newbornModelInfo }) => {
                       />
                     }
                   />
-                  <Flex direction="column">
-                    <Record3dModel
-                      data-testid="newbornRecord3dModel"
-                      loading={loading}
-                      newbornModelInfo={newbornModelInfo}
-                    />
-                  </Flex>
+                  <Record3dModel
+                    data-testid="newbornRecord3dModel"
+                    loading={loading}
+                    newbornModelInfo={newbornModelInfo}
+                  />
                 </Fragment>
               );
             }}

@@ -4,23 +4,23 @@ import gql from "graphql-tag";
 
 import * as queries from "../../../graphql/queries";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
-import NewbornChildsLoader from "./loader/newbornChildsLoader";
+import NewbornPartnersLoader from "./loader/newbornPartnersLoader";
 import AvatarGroup from "../../../components/molecules/avatarGroup/avatarGroup";
 
-const NewbornParents = ({ setId, childs, loading }) => {
+const NewbornPartners = ({ setId, partners, loading }) => {
   if (loading) {
-    return <NewbornChildsLoader />;
+    return <NewbornPartnersLoader />;
   }
   const returnfilter = () => {
     const filter = [];
-    childs.forEach(parent => {
+    partners.forEach(parent => {
       filter.push({ id: { eq: parent } });
     });
     return filter;
   };
 
-  if (childs.length === 0) {
-    return "no child";
+  if (partners.length === 0) {
+    return "No Partners";
   }
 
   return (
@@ -40,17 +40,17 @@ const NewbornParents = ({ setId, childs, loading }) => {
         }
 
         if (loading) {
-          return <NewbornChildsLoader />;
+          return <NewbornPartnersLoader />;
         }
 
         data.listNewborns.items.forEach(child => {
           childs.push(child.id);
         });
 
-        return <AvatarGroup avatars={childs} />;
+        return <AvatarGroup setId={setId} avatars={childs} />;
       }}
     </Query>
   );
 };
 
-export default NewbornParents;
+export default NewbornPartners;

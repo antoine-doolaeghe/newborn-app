@@ -5,6 +5,7 @@ import {
   InfoWrap,
   InfoLabelIcon,
   InfoLabelAvatar,
+  InfoLabelAvatarBorder,
   Label,
   Value
 } from "./style/info.style";
@@ -15,7 +16,11 @@ export default function Info({ label, size, value, icon, avatar }) {
       return <InfoLabelIcon>{icon}</InfoLabelIcon>;
     }
     if (avatar) {
-      return <InfoLabelAvatar avatar={avatar} />;
+      return (
+        <InfoLabelAvatar avatar={avatar}>
+          <InfoLabelAvatarBorder />
+        </InfoLabelAvatar>
+      );
     }
   };
   return (
