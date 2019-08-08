@@ -10,11 +10,7 @@ import NewbornParentsLoader from "./loader/newbornParentsLoader";
 import Chip from "../../../components/atoms/chips/chip";
 import { returnTextAbstract } from "../../../utils/helpers/newbornGlobalHelpers";
 
-const NewbornChilds = ({ parents, loading }) => {
-  if (loading) {
-    return <NewbornParentsLoader />;
-  }
-
+const NewbornChilds = ({ setId, parents, loading }) => {
   const returnfilter = () => {
     const filter = [];
     parents.forEach(parent => {
@@ -23,8 +19,12 @@ const NewbornChilds = ({ parents, loading }) => {
     return filter;
   };
 
+  if (loading) {
+    return <NewbornParentsLoader />;
+  }
+
   if (parents.length === 0) {
-    return "no parent";
+    return "No Parent";
   }
 
   return (
@@ -53,7 +53,7 @@ const NewbornChilds = ({ parents, loading }) => {
               variant="outlined"
               label={returnTextAbstract(parent.name, 10)}
               onClick={() => {
-                console.log("HERE");
+                setId(parent.id);
               }}
               avatar={
                 <Avatar>

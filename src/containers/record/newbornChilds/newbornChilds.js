@@ -6,9 +6,8 @@ import * as queries from "../../../graphql/queries";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 import NewbornChildsLoader from "./loader/newbornChildsLoader";
 import AvatarGroup from "../../../components/molecules/avatarGroup/avatarGroup";
-import { returnTextAbstract } from "../../../utils/helpers/newbornGlobalHelpers";
 
-const NewbornParents = ({ childs, loading }) => {
+const NewbornParents = ({ setId, childs, loading }) => {
   if (loading) {
     return <NewbornChildsLoader />;
   }
@@ -45,7 +44,7 @@ const NewbornParents = ({ childs, loading }) => {
         }
 
         data.listNewborns.items.forEach(child => {
-          childs.push(returnTextAbstract(child.name, 4));
+          childs.push(child.id);
         });
 
         return <AvatarGroup avatars={childs} />;

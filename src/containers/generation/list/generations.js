@@ -40,7 +40,12 @@ function GenerationList() {
 
   return (
     <Fragment>
-      <NewbornRecord id={id} open={isRecordOpen} onClose={onRecordClose} />
+      <NewbornRecord
+        setId={setId}
+        id={id}
+        open={isRecordOpen}
+        onClose={onRecordClose}
+      />
       {returnNewbornGeneration()}
     </Fragment>
   );

@@ -26,7 +26,7 @@ function RecordDetail({ loading, parents, childs, entropy, valueLoss, step }) {
                   variant="outlined"
                   label="Trainer"
                   onClick={() => {
-                    console.log("HERE");
+                    console.log("Here");
                   }}
                   avatar={
                     <Avatar>

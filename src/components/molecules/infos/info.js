@@ -1,24 +1,29 @@
 import React from "react";
 
-import { InfoElement, InfoWrap, Label, Value } from "./style/info.style";
+import {
+  InfoElement,
+  InfoWrap,
+  InfoLabelIcon,
+  InfoLabelAvatar,
+  Label,
+  Value
+} from "./style/info.style";
 
-export default function Info(props) {
+export default function Info({ label, size, value, icon, avatar }) {
+  const returnInfoLabelIconAvatar = () => {
+    if (icon) {
+      return <InfoLabelIcon>{icon}</InfoLabelIcon>;
+    }
+    if (avatar) {
+      return <InfoLabelAvatar avatar={avatar} />;
+    }
+  };
   return (
     <InfoWrap>
-      {props.withIcon && (
-        <div
-          style={{
-            margin: "10px 10px 10px 0px",
-            width: 55,
-            height: 55,
-            borderRadius: 40,
-            backgroundColor: "black"
-          }}
-        />
-      )}
+      {returnInfoLabelIconAvatar()}
       <InfoElement>
-        <Label>{props.label}</Label>
-        <Value fontSize={props.size}>{props.value}</Value>
+        <Label>{label}</Label>
+        <Value fontSize={size}>{value}</Value>
       </InfoElement>
     </InfoWrap>
   );

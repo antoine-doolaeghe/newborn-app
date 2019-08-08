@@ -5,7 +5,6 @@ export const InfoElement = styled.section`
 `;
 
 export const InfoWrap = styled.div`
-  /* border-top: 1px dotted grey; */
   display: flex;
   flex: 1;
   margin-right: 10px;
@@ -22,4 +21,31 @@ export const Value = styled.div`
   font-size: ${props => (props.fontSize ? props.fontSize : "18px")};
   font-weight: 600;
   text-transform: capitalize;
+`;
+
+export const InfoLabelIcon = styled.div`
+  margin: 10px 10px 10px 0px;
+  width: 55px;
+  height: 55px;
+  border-radius: 40px;
+  font-size: 30px;
+  color: white;
+  background-color: lightgreen;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const InfoLabelAvatar = styled.div`
+  margin: 10px 10px 10px 0px;
+  width: 55px;
+  height: 55px;
+  border-radius: 40px;
+  font-size: 30px;
+  color: white;
+  background-image: url(${props => props.avatar});
+  background-size: 125%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

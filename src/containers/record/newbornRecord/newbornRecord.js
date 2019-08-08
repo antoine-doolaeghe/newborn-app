@@ -26,7 +26,7 @@ const NewbornRecordWrapper = styled.section`
   flex-direction: column;
 `;
 
-const NewBornRecord = ({ id, open, onClose, newbornModelInfo }) => {
+const NewBornRecord = ({ id, setId, open, onClose, newbornModelInfo }) => {
   return (
     <DefaultDialog
       maxWidth="lg"
@@ -68,9 +68,11 @@ const NewBornRecord = ({ id, open, onClose, newbornModelInfo }) => {
                     step={newbornRecordInfo.currentStep}
                     valueLoss={newbornRecordInfo.currentValueLoss}
                     entropy={newbornRecordInfo.currentEntropy}
+                    setId={setId}
                     parents={
                       <NewbornParents
                         loading={loading}
+                        setId={setId}
                         parents={newbornRecordInfo.parents}
                       />
                     }

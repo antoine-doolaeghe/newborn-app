@@ -129,6 +129,7 @@ export const getNewborn = `query GetNewborn($id: ID!, $limit: Int) {
     hexColor
     owner {
       userName
+      profileImage
     }
     id
     sex
@@ -190,6 +191,7 @@ export const listNewbornParents = `query ListNewbornParents(
 ) {
   listNewborns(filter: $filter, limit: $limit) {
     items {
+      id
       name
     }
   }
@@ -202,6 +204,7 @@ export const listNewbornChilds = `query ListNewbornChilds(
 ) {
   listNewborns(filter: $filter, limit: $limit) {
     items {
+      id
       name
     }
   }

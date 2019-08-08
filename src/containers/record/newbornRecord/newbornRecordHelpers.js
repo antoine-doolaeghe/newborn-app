@@ -1,7 +1,6 @@
 export const returnNewbornRecordInfo = info => {
   let newbornInfo = {};
   if (info) {
-    console.log(info);
     const currentMeanReward = info.models
       ? info.models.items[0].episodes.items[0].steps.items[1].meanReward
       : null;
@@ -32,6 +31,7 @@ export const returnNewbornRecordInfo = info => {
       currentStep: currentStep || "--",
       trainingStage: info.trainingStage || "--",
       ownerUserName: info.owner ? info.owner.userName : "",
+      ownerProfileImage: info.owner ? info.owner.profileImage : "",
       parents: info.parents ? info.parents : [],
       childs: info.childs ? info.childs : []
     };

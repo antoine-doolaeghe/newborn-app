@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
+import CakeIcon from "@material-ui/icons/Cake";
 import RecordInfoLoader from "./loader/recordInfoLoader";
 import { InfoWrapper, ValueWrapper } from "./style/recordInfo.style";
 import Info from "../../../molecules/infos/info";
@@ -8,7 +9,13 @@ import { Flex } from "../../../../theme/layout/grid.style";
 
 function RecordInfo({
   loading,
-  newbornInfo: { currentMeanReward, currentIndex, ownerUserName, bornPlace }
+  newbornInfo: {
+    currentMeanReward,
+    currentIndex,
+    ownerUserName,
+    ownerProfileImage,
+    bornPlace
+  }
 }) {
   const index = currentIndex > 0 ? `+${currentIndex}%` : `${currentIndex}%`;
   return (
@@ -28,8 +35,16 @@ function RecordInfo({
             </Flex>
           </ValueWrapper>
           <Flex height="auto">
-            <Info label="Birthday" value={bornPlace} withIcon />
-            <Info label="Own by" value={ownerUserName} withIcon />
+            <Info
+              label="Birthday"
+              value={bornPlace}
+              icon={<CakeIcon fontSize="inherit" />}
+            />
+            <Info
+              label="Own by"
+              value={ownerUserName}
+              avatar={ownerProfileImage}
+            />
           </Flex>
         </Fragment>
       )}
