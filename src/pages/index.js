@@ -1,5 +1,5 @@
 import Catalogue from "./catalogue/catalogue";
 import Home from "./home/home";
-import Builder from "../components/organisms/record/recordBuilder/recordBuilder";
+import Builder from "./builder/builder";
 
 export { Catalogue, Home, Builder };

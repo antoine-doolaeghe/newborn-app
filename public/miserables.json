@@ -1,0 +1,19 @@
+{
+  "nodes": [
+    {
+      "id": "Myriel",
+      "group": 1
+    },
+    {
+      "id": "Brujon",
+      "group": 1
+    }
+  ],
+  "links": [
+    {
+      "source": "Myriel",
+      "target": "Brujon",
+      "value": 1
+    }
+  ]
+}
