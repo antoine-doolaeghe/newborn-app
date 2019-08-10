@@ -1,8 +1,18 @@
 import React from "react";
-import Build from "@material-ui/icons/Build";
+import gql from "graphql-tag";
+import { useMutation } from "@apollo/react-hooks";
+import { Mutation } from "react-apollo";
 import TrainerCard from "../../../components/organisms/cards/trainerCard/trainerCard";
 import CardList from "../../../components/organisms/lists/cardList/cardList";
-import IconButton from "../../../components/molecules/buttons/iconButton/iconButton";
+import { CreateTrainerCard } from "../../../components/organisms/cards/createTrainerCard";
+
+const CREATE_TRAINER = gql`
+  mutation CreateTrainer($id: ID!) {
+    createTrainer(input: { id: $id }) {
+      id
+    }
+  }
+`;
 
 function TrainerList(props) {
   const { items, title, loading } = props;
@@ -21,9 +31,9 @@ function TrainerList(props) {
 
   if (displayAddNewTrainerCard) {
     newbornCardList.push(
-      <IconButton width="220px" height="220px" color="light">
-        <Build />
-      </IconButton>
+      <Mutation mutation={CREATE_TRAINER}>
+        {(addTodo, { data }) => <CreateTrainerCard onCreateClick={addTodo} />}
+      </Mutation>
     );
   }
 

@@ -4,8 +4,15 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import StepContent from "@material-ui/core/StepContent";
 import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import Divider from "@material-ui/core/Divider";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MailIcon from "@material-ui/icons/Mail";
 import withHeader from "../../containers/header/withHeader";
 
 // the user can select some step of learning
@@ -96,60 +103,73 @@ export const Builder = () => {
   }, [instance]);
 
   return (
-    <div className={classes.root}>
-      <Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map((label, index) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-            <StepContent>
-              <Typography>{getStepContent(index)}</Typography>
-              <div className={classes.actionsContainer}>
-                <div>
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    className={classes.button}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                  </Button>
-                </div>
-              </div>
-            </StepContent>
-          </Step>
-        ))}
-      </Stepper>
-      <Button
-        onClick={() => {
-          setSteps([...steps, "HEHHEH"]);
-        }}
-        className={classes.button}
-      >
-        ADD
-      </Button>
-      <Button
-        onClick={() => {
-          setSteps(steps.slice(0, steps.length - 1));
-        }}
-        className={classes.button}
-      >
-        REMOVE
-      </Button>
+    <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", flex: 1 }}>
+        <List style={{ borderRight: "1px solid grey", textAlign: "center" }}>
+          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+            <ListItem button key={text}>
+              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            </ListItem>
+          ))}
+        </List>
+        <div>
+          <Stepper activeStep={activeStep} orientation="vertical">
+            {steps.map((label, index) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+                <StepContent>
+                  <Typography>{getStepContent(index)}</Typography>
+                  <div className={classes.actionsContainer}>
+                    <div>
+                      <Button
+                        disabled={activeStep === 0}
+                        onClick={handleBack}
+                        className={classes.button}
+                      >
+                        Back
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleNext}
+                        className={classes.button}
+                      >
+                        {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                      </Button>
+                    </div>
+                  </div>
+                </StepContent>
+              </Step>
+            ))}
+          </Stepper>
+
+          <Button
+            onClick={() => {
+              setSteps([...steps, "HEHHEH"]);
+            }}
+            className={classes.button}
+          >
+            ADD
+          </Button>
+          <Button
+            onClick={() => {
+              setSteps(steps.slice(0, steps.length - 1));
+            }}
+            className={classes.button}
+          >
+            REMOVE
+          </Button>
+        </div>
+      </div>
       <div
         id="gameContainer"
         style={{
-          position: "absolute",
-          right: 0,
-          top: 0,
-          width: "50vw",
-          height: "100vh"
+          flex: 1
+          // position: "absolute",
+          // right: 0,
+          // top: 0,
+          // width: "50vw",
+          // height: "100vh"
         }}
       />
     </div>
