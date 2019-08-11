@@ -59,6 +59,7 @@ export const getUserTrainers = `query GetUser($id: ID!) {
     trainers {
       items {
         id
+        title
       }
     }
   }

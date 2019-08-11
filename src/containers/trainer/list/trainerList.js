@@ -1,11 +1,21 @@
 import React from "react";
-import Build from "@material-ui/icons/Build";
+import gql from "graphql-tag";
+import { Mutation, Subscription } from "react-apollo";
+import { withRouter } from "react-router-dom";
 import TrainerCard from "../../../components/organisms/cards/trainerCard/trainerCard";
 import CardList from "../../../components/organisms/lists/cardList/cardList";
-import IconButton from "../../../components/molecules/buttons/iconButton/iconButton";
+import { CreateTrainerCard } from "../../../components/organisms/cards/createTrainerCard";
+
+const CREATE_TRAINER = gql`
+  mutation CreateTrainer($title: String!, $trainerOwnerId: ID!) {
+    createTrainer(input: { title: $title, trainerOwnerId: $trainerOwnerId }) {
+      title
+    }
+  }
+`;
 
 function TrainerList(props) {
-  const { items, title, loading } = props;
+  const { history, items, title, loading, currentUserId } = props;
   const displayAddNewTrainerCard = true;
   const newbornCardList = [];
 
@@ -14,16 +24,26 @@ function TrainerList(props) {
       newbornCardList.push(<TrainerCard loading={loading} />);
     }
   } else {
-    items.forEach(() => {
-      newbornCardList.push(<TrainerCard />);
+    items.forEach(item => {
+      newbornCardList.push(<TrainerCard title={item.title} />);
     });
   }
 
   if (displayAddNewTrainerCard) {
     newbornCardList.push(
-      <IconButton width="220px" height="220px" color="light">
-        <Build />
-      </IconButton>
+      <Mutation mutation={CREATE_TRAINER}>
+        {(createTrainer, { data, loading }) => {
+          if (data && data.createTrainer) {
+            history.push("./builder");
+          }
+          return (
+            <CreateTrainerCard
+              currentUserId={currentUserId}
+              onCreateClick={createTrainer}
+            />
+          );
+        }}
+      </Mutation>
     );
   }
 
@@ -32,4 +52,4 @@ function TrainerList(props) {
   );
 }
 
-export default TrainerList;
+export default withRouter(TrainerList);

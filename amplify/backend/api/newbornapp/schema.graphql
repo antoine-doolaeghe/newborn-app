@@ -72,6 +72,7 @@ type Prediction @model {
 }
 
 type Trainer @model {
+  title: String
   createdAt: String
   id: String!
   owner: User @connection(name: "TrainerOwner")
@@ -81,4 +82,5 @@ type Trainer @model {
 type Subscription {
   onCreateSummarySet(summaryEpisodeId: String!): Summary
     @aws_subscribe(mutations: ["createSummary"])
+  onCreateTrainer: Trainer @aws_subscribe(mutations: ["createTrainer"])
 }

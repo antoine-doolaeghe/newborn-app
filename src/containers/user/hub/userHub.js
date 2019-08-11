@@ -19,6 +19,7 @@ function UserHub({ currentUserId }) {
       <Query
         query={gql(queries.getUserTrainers)}
         variables={{ id: currentUserId }}
+        fetchPolicy="network-only"
       >
         {({ data, loading, error }) => {
           if (error) {
@@ -31,6 +32,7 @@ function UserHub({ currentUserId }) {
             return (
               <TrainerList
                 title={returnListTitle("My Trainers")}
+                currentUserId={currentUserId}
                 items={data.getUser.trainers.items}
                 loading={loading}
               />
