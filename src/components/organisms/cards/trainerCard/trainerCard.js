@@ -4,7 +4,7 @@ import { CardWrapper } from "../newbornCard/newbornCard.style";
 import CardHeader from "../newbornCard/header/cardHeader";
 import NewbornCardLoader from "./loader/trainerCardLoader";
 
-function TrainerCard({ history, loading }) {
+function TrainerCard({ history, loading, title }) {
   if (loading) {
     return <NewbornCardLoader />;
   }
@@ -14,7 +14,7 @@ function TrainerCard({ history, loading }) {
         history.push("./builder");
       }}
     >
-      <CardHeader title="Trainer" />
+      <CardHeader title={title} />
       <div
         style={{
           backgroundImage: "url('/images/builder.png')",

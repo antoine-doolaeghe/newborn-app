@@ -610,3 +610,10 @@ export const onDeletePrediction = `subscription OnDeletePrediction {
   }
 }
 `;
+
+export const onCreateTrainer = `subscription onCreateTrainer {
+  onCreateTrainer {
+   id
+  }
+}
+`;

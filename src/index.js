@@ -6,6 +6,7 @@ import Amplify from "aws-amplify";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import { InMemoryCache } from "apollo-cache-inmemory";
+import PubSub from "@aws-amplify/pubsub";
 import registerServiceWorker from "./registerServiceWorker";
 import aws_config from "./aws-exports";
 
@@ -20,6 +21,7 @@ const client = new ApolloClient({
   cache,
   resolvers: {}
 });
+PubSub.configure(aws_config);
 
 Amplify.configure(aws_config);
 

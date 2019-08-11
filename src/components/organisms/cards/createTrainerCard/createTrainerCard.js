@@ -11,8 +11,11 @@ import {
   CreateTrainerTitle
 } from "./style/createTrainerCard.style";
 
-function CreateTrainerCard({ onCreateClick }) {
+function CreateTrainerCard({ onCreateClick, currentUserId }) {
+  const [trainerTitle, setTrainerTitle] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [helperText, setHelperText] = useState("");
+  const [error, setError] = useState(error);
 
   return (
     <Fragment>
@@ -35,8 +38,12 @@ function CreateTrainerCard({ onCreateClick }) {
         ) : (
           <CardContent>
             <TrainerTitleInput
+              onChange={event => {
+                setTrainerTitle(event.target.value);
+              }}
               placeholder="Add trainer title"
-              helperText="Full width!"
+              helperText={helperText}
+              error={error}
             />
             <TrainerActionWrapper>
               <IconButton
@@ -51,11 +58,19 @@ function CreateTrainerCard({ onCreateClick }) {
               </IconButton>
               <CreateTrainerButton
                 onClick={() => {
-                  onCreateClick({
-                    variables: {
-                      id: "32f940f9-cd4a-420a-9ccf-60783a6c8d50"
-                    }
-                  });
+                  if (trainerTitle.length > 3) {
+                    onCreateClick({
+                      variables: {
+                        title: trainerTitle,
+                        trainerOwnerId: currentUserId
+                      }
+                    });
+                  } else {
+                    setHelperText(
+                      "Trainer title should be more than 3 characters"
+                    );
+                    setError(true);
+                  }
                 }}
                 color="primary"
               >

@@ -1,21 +1,21 @@
 import React from "react";
 import gql from "graphql-tag";
-import { useMutation } from "@apollo/react-hooks";
-import { Mutation } from "react-apollo";
+import { Mutation, Subscription } from "react-apollo";
+import { withRouter } from "react-router-dom";
 import TrainerCard from "../../../components/organisms/cards/trainerCard/trainerCard";
 import CardList from "../../../components/organisms/lists/cardList/cardList";
 import { CreateTrainerCard } from "../../../components/organisms/cards/createTrainerCard";
 
 const CREATE_TRAINER = gql`
-  mutation CreateTrainer($id: ID!) {
-    createTrainer(input: { id: $id }) {
-      id
+  mutation CreateTrainer($title: String!, $trainerOwnerId: ID!) {
+    createTrainer(input: { title: $title, trainerOwnerId: $trainerOwnerId }) {
+      title
     }
   }
 `;
 
 function TrainerList(props) {
-  const { items, title, loading } = props;
+  const { history, items, title, loading, currentUserId } = props;
   const displayAddNewTrainerCard = true;
   const newbornCardList = [];
 
@@ -24,15 +24,25 @@ function TrainerList(props) {
       newbornCardList.push(<TrainerCard loading={loading} />);
     }
   } else {
-    items.forEach(() => {
-      newbornCardList.push(<TrainerCard />);
+    items.forEach(item => {
+      newbornCardList.push(<TrainerCard title={item.title} />);
     });
   }
 
   if (displayAddNewTrainerCard) {
     newbornCardList.push(
       <Mutation mutation={CREATE_TRAINER}>
-        {(addTodo, { data }) => <CreateTrainerCard onCreateClick={addTodo} />}
+        {(createTrainer, { data, loading }) => {
+          if (data && data.createTrainer) {
+            history.push("./builder");
+          }
+          return (
+            <CreateTrainerCard
+              currentUserId={currentUserId}
+              onCreateClick={createTrainer}
+            />
+          );
+        }}
       </Mutation>
     );
   }
@@ -42,4 +52,4 @@ function TrainerList(props) {
   );
 }
 
-export default TrainerList;
+export default withRouter(TrainerList);
