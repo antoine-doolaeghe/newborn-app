@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
-import BuilderForm from "./builderForm/builderForm";
-import BuilderHeader from "./builderHeader/builderHeader";
-import BuilderGame from "./builderGame/builderGame";
-import withHeader from "../../containers/header/withHeader";
 
-export const Builder = () => {
+export const BuilderGame = () => {
   const [instance, setInstance] = useState(null);
-
   useEffect(() => {
     if (!instance) {
       setInstance(
@@ -27,15 +22,7 @@ export const Builder = () => {
     };
   }, [instance]);
 
-  return (
-    <div>
-      <BuilderHeader />
-      <div style={{ width: "100%", height: "100%", display: "flex" }}>
-        <BuilderForm />
-        <BuilderGame />
-      </div>
-    </div>
-  );
+  return <div style={{ flex: 1 }} id="gameContainer" />;
 };
 
-export default withHeader(Builder);
+export default BuilderGame;
