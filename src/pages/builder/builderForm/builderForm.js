@@ -8,13 +8,17 @@ import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import withHeader from "../../../containers/header/withHeader";
+import TransferList from "../builderNewbornSelect/builderNewbornSelect";
 import { Button } from "../../../components/molecules/buttons/button.style";
 import { Heading, SecondaryHeading } from "./style/builder.style";
 
 export const BuilderForm = () => {
   const classes = {};
-  const [steps, setSteps] = useState(["Spawning Agent"]);
+  const [steps, setSteps] = useState([
+    "Selected Newborn",
+    "Spawning Agent",
+    "Add a training level"
+  ]);
   const [activeStep, setActiveStep] = useState(0);
   const [trainerType, setTrainerType] = useState("static");
   const [movingTowardTarget, setMovingTowardTarget] = useState(false);
@@ -22,7 +26,7 @@ export const BuilderForm = () => {
   const [rewardFacingTarget, setRewardFacingTarget] = useState(false);
 
   function getStepContent(step) {
-    if (step === 0) {
+    if (step === 1) {
       return (
         <ExpansionPanelDetails>
           <p>The number of initial spawner/</p>
@@ -30,6 +34,9 @@ export const BuilderForm = () => {
           <p>If random </p>
         </ExpansionPanelDetails>
       );
+    }
+    if (step === 0) {
+      return <TransferList />;
     }
 
     return (
@@ -128,34 +135,62 @@ export const BuilderForm = () => {
     );
   }
 
+  function returnStepSummary(label, index) {
+    if (index === steps.length - 1) {
+      return (
+        <div
+          style={{
+            minHeight: 48,
+            display: "flex",
+            alignItems: "center",
+            cursor: "pointer"
+          }}
+          onClick={() => {
+            setSteps([
+              ...steps.slice(0, steps.length - 1),
+              `Target ${steps.length}`,
+              "Add a training level"
+            ]);
+            setActiveStep(steps.length);
+          }}
+        >
+          <Heading>{label}</Heading>
+        </div>
+      );
+    }
+    return (
+      <ExpansionPanelSummary
+        expandIcon={<ExpandMoreIcon />}
+        style={{
+          cursor: "pointer",
+          display: "flex",
+          flexDirection: "row"
+        }}
+        onClick={() => {
+          setActiveStep(index);
+        }}
+      >
+        <Heading>{label}</Heading>
+        <SecondaryHeading>{label}</SecondaryHeading>
+        <Button
+          color="primary"
+          onClick={() => {
+            steps.splice(index, 1);
+            setSteps(steps);
+          }}
+          className={classes.button}
+        >
+          delete
+        </Button>
+      </ExpansionPanelSummary>
+    );
+  }
+
   return (
     <div style={{ flex: 1 }}>
       {steps.map((label, index) => (
         <ExpansionPanel style={{ margin: 10 }} key={label}>
-          <ExpansionPanelSummary
-            expandIcon={<ExpandMoreIcon />}
-            style={{
-              cursor: "pointer",
-              display: "flex",
-              flexDirection: "row"
-            }}
-            onClick={() => {
-              setActiveStep(index);
-            }}
-          >
-            <Heading>{label}</Heading>
-            <SecondaryHeading>{label}</SecondaryHeading>
-            <Button
-              color="primary"
-              onClick={() => {
-                steps.splice(index, 1);
-                setSteps(steps);
-              }}
-              className={classes.button}
-            >
-              delete
-            </Button>
-          </ExpansionPanelSummary>
+          {returnStepSummary(label, index)}
           {getStepContent(index)}
         </ExpansionPanel>
       ))}

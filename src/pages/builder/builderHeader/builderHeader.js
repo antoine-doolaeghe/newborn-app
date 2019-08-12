@@ -14,6 +14,7 @@ export const BuilderHeader = () => {
     <AppBar position="static" color="default">
       <Toolbar>
         <TextField
+          style={{ fontSize: 35, fontWeight: 700 }}
           id="standard-name"
           value={trainerTitle}
           onChange={event => {
@@ -21,24 +22,6 @@ export const BuilderHeader = () => {
           }}
           margin="normal"
         />
-        <Select
-          inputProps={{
-            name: "age",
-            id: "age-native-simple"
-          }}
-        >
-          <option value="static">Static Target</option>
-          <option value="dynamic">Dynamic Target</option>
-        </Select>
-        <Button
-          color="primary"
-          onClick={() => {
-            setSteps([...steps, `Target ${steps.length}`]);
-            setActiveStep(steps.length);
-          }}
-        >
-          Add
-        </Button>
         <Button
           color="primary"
           onClick={() => {
