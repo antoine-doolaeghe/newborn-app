@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
-import withHeader from "../../../containers/header/withHeader";
+import BuilderProgress from "../builderProgress/builderProgress";
 import { Button } from "../../../components/molecules/buttons/button.style";
 
 export const BuilderHeader = () => {
@@ -22,6 +21,8 @@ export const BuilderHeader = () => {
           }}
           margin="normal"
         />
+        0 step / 200 step
+        <BuilderProgress />
         <Button
           color="primary"
           onClick={() => {

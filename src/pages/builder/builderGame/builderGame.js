@@ -22,7 +22,7 @@ export const BuilderGame = () => {
   //   };
   // }, [instance]);
 
-  return <div style={{ background: "black", flex: 1 }} id="gameContainer" />;
+  return <div style={{ height: "calc(100vh - 150px)",background: "black", flex: 1 }} id="gameContainer" />;
 };
 
 export default BuilderGame;

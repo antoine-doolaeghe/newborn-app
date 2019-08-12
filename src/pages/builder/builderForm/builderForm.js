@@ -187,7 +187,9 @@ export const BuilderForm = () => {
   }
 
   return (
-    <div style={{ flex: 1 }}>
+    <div
+      style={{ flex: 1, maxHeight: "calc(100vh - 150px)", overflowY: "scroll" }}
+    >
       {steps.map((label, index) => (
         <ExpansionPanel style={{ margin: 10 }} key={label}>
           {returnStepSummary(label, index)}
