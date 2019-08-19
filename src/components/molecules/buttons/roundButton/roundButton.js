@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Button } from "../button.style";
+import DefaultButton from "../defaultButton/defaultButton";
 import { Theme } from "../../../../theme/theme";
 
-const StyledRoundButton = styled(Button)`
+const StyledRoundButton = styled(DefaultButton)`
   height: ${props => props.size};
   border-radius: ${props => props.size};
   width: ${props => props.size};
@@ -23,7 +23,7 @@ const RoundButton = ({ children, onClick, color, size }) => {
 
 RoundButton.defaultProps = {
   children: "",
-  size: "55px"
+  size: Theme.spacing.xxlarge
 };
 
 RoundButton.propTypes = {

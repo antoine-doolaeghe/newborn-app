@@ -1,6 +1,6 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
+import { Input } from "./style/input.style";
 
 export default function TextInput(props) {
-  return <TextField {...props} />;
+  return <Input {...props} />;
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
@@ -13,7 +14,23 @@ const GET_SELECTED_NEWBORN = gql`
   }
 `;
 
-function NewbornList({ title, items, loading, onRecordOpen }) {
+function NewbornList({ title, newborns, loading, onRecordOpen }) {
+  const partnerClick = (event, client, id) => {
+    event.stopPropagation();
+    client.writeData({
+      data: {
+        selectedPartner: id
+      }
+    });
+  };
+  const childClick = (event, client, id) => {
+    event.stopPropagation();
+    client.writeData({
+      data: {
+        selectedChild: id
+      }
+    });
+  };
   return (
     <Query query={GET_SELECTED_NEWBORN}>
       {({ data: { selectedChild, selectedPartner }, client, error }) => {
@@ -26,7 +43,7 @@ function NewbornList({ title, items, loading, onRecordOpen }) {
             newbornCardList.push(<NewbornCard loading={loading} />);
           }
         } else {
-          items.forEach(newborn => {
+          newborns.forEach(newborn => {
             const newbornInfo = returnNewbornCardInfo(
               newborn,
               selectedPartner,
@@ -36,24 +53,13 @@ function NewbornList({ title, items, loading, onRecordOpen }) {
             newbornCardList.push(
               <NewbornCard
                 newbornInfo={newbornInfo}
-                color={newbornInfo.color}
                 onClick={onRecordOpen}
-                onPartnerClick={event => {
-                  event.stopPropagation();
-                  client.writeData({
-                    data: {
-                      selectedPartner: newbornInfo.id
-                    }
-                  });
-                }}
-                onChildClick={event => {
-                  event.stopPropagation();
-                  client.writeData({
-                    data: {
-                      selectedChild: newbornInfo.id
-                    }
-                  });
-                }}
+                onPartnerClick={event =>
+                  partnerClick(event, client, newbornInfo.id)
+                }
+                onChildClick={event =>
+                  childClick(event, client, newbornInfo.id)
+                }
                 partners={[]}
               />
             );
@@ -71,5 +77,12 @@ function NewbornList({ title, items, loading, onRecordOpen }) {
     </Query>
   );
 }
+
+NewbornList.propTypes = {
+  title: PropTypes.string.isRequired,
+  newborns: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  onRecordOpen: PropTypes.func.isRequired
+};
 
 export default withRouter(NewbornList);

@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { withAuthenticator } from "aws-amplify-react";
-import withHeader from "../../../../containers/header/withHeader";
+import styled from "styled-components";
+
+const Wrapper = styled.section`
+  width: 980px;
+  height: 300px;
+`;
 
 function Builder() {
   const [instance, setInstance] = useState(null);
@@ -25,7 +29,7 @@ function Builder() {
     };
   }, [instance]);
 
-  return <div id="gameContainer" style={{ width: "980px", height: "300px" }} />;
+  return <Wrapper id="gameContainer" />;
 }
 
 export default Builder;

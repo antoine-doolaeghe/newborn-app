@@ -87,7 +87,7 @@ const Theme = {
     medium: "20px",
     large: "32px",
     xlarge: "40px",
-    xxlarge: "48px"
+    xxlarge: "55px"
   },
   typography: {
     useNextVariants: true

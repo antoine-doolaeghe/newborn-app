@@ -1,28 +1,16 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { withAuthenticator } from "aws-amplify-react";
 import { withApollo } from "react-apollo";
 import { Auth } from "aws-amplify";
-import Styled from "styled-components";
 import { withRouter, Link } from "react-router-dom";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import withCurrentUser from "../withCurrentUser/withCurrentUser";
-import { HeaderContainer } from "./header.style";
+import { withCurrentUser } from "../hoc";
 import NavigationButton from "./navigationButton";
-import ProfileButton from "./profileButton/profileButton";
+import ProfileButton from "./profileButton";
 import SearchInput from "../../components/molecules/inputs/iconButtonInput/iconButtonInput";
-
-const NavigationWrapper = Styled.section`
-  display: flex;
-  position: absolute;
-  right: ${props => (props.right ? "0px" : null)};
-  left: ${props => (props.left ? "0px" : null)};
-`;
-
-const HeaderLogo = Styled.img`
-  height: 55px;
-  width: 55px;
-`;
+import { HeaderContainer, NavigationWrapper, HeaderLogo } from "./header.style";
 
 const Header = ({ client, location, currentUserName }) => {
   const redirect = location.pathname === "/" ? "catalogue" : "/";
@@ -76,7 +64,6 @@ const Header = ({ client, location, currentUserName }) => {
           onClick={handleClickListItem}
         />
         <Menu
-          id="lock-menu"
           anchorEl={anchorEl}
           keepMounted
           open={Boolean(anchorEl)}
@@ -103,7 +90,19 @@ const Header = ({ client, location, currentUserName }) => {
 };
 
 Header.defaultProps = {
-  currentUser: ""
+  currentUserName: ""
+};
+
+Header.propTypes = {
+  client: PropTypes.shape({
+    cache: PropTypes.shape({
+      reset: PropTypes.func.isRequired
+    })
+  }).isRequired,
+  currentUserName: PropTypes.string,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired
+  }).isRequired
 };
 
 export default withAuthenticator(

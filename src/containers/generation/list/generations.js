@@ -1,12 +1,12 @@
 import React, { Fragment, useState } from "react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+
 import * as queries from "../../../graphql/queries";
 import GenerationListLoader from "./loader/generationListLoader";
 import NewbornList from "../../newborn/list/newbornList";
+import NewbornRecord from "../../record/newbornRecord";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
-
-import NewbornRecord from "../../record/newbornRecord/newbornRecord";
 
 function GenerationList() {
   const [isRecordOpen, setIsRecordOpen] = useState(false);
@@ -28,7 +28,7 @@ function GenerationList() {
             return (
               <NewbornList
                 title={generation.id}
-                items={generation.newborns.items}
+                newborns={generation.newborns.items}
                 onRecordOpen={onRecordOpen}
               />
             );

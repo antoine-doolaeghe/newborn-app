@@ -1,3 +1,1 @@
-import NavigationButton from "./navigationButton";
-
-export default NavigationButton;
+export { default } from "./navigationButton";

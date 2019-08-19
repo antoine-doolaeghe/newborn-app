@@ -8,14 +8,14 @@ import { Theme } from "../../../../theme/theme";
 const StyledIconButtoInput = Styled.div`
   align-items: center;
   display: flex;
-  height: "55px";
+  height: ${Theme.spacing.xxlarge};
   border: 1px solid;
   border-radius: ${Theme.radius.small};
-  padding: 0 10px;
+  padding: 0 ${Theme.spacing.small};
   margin: ${Theme.spacing.small};
 `;
 
-export default function IconButtoInput() {
+export default function IconButtonInput() {
   return (
     <StyledIconButtoInput>
       <InputBase placeholder="Find..." />

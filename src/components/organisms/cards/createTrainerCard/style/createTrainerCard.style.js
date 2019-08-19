@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import TextInput from "../../../../molecules/inputs/textInput/textInput";
-import { Button } from "../../../../molecules/buttons/button.style";
+import DefaultButton from "../../../../molecules/buttons/defaultButton/defaultButton";
 
 // should be an atom
 export const CardWrapper = styled.section`
@@ -43,7 +43,7 @@ export const TrainerActionWrapper = styled.div`
   width: 100%;
 `;
 
-export const CreateTrainerButton = styled(Button)`
+export const CreateTrainerButton = styled(DefaultButton)`
   flex: "auto";
   margin-left: 0;
   width: 100%;

@@ -1,12 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Avatar from "@material-ui/core/Avatar";
 
-import FaceIcon from "@material-ui/icons/Face";
 import RecordDetailLoader from "./loader/recordDetailLoader";
-import { DetailWrapper } from "./style/recordDetail.style";
-import Chip from "../../../atoms/chips/chip";
 import Info from "../../../molecules/infos/info";
+import { DetailWrapper } from "./style/recordDetail.style";
 import { Flex } from "../../../../theme/layout/grid.style";
 
 function RecordDetail({
@@ -41,7 +38,13 @@ function RecordDetail({
 }
 
 RecordDetail.propTypes = {
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
+  parents: PropTypes.node.isRequired,
+  childs: PropTypes.node.isRequired,
+  partners: PropTypes.node.isRequired,
+  step: PropTypes.node.isRequired,
+  entropy: PropTypes.node.isRequired,
+  valueLoss: PropTypes.node.isRequired
 };
 
 export default RecordDetail;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Theme } from "../../../theme/theme";
+import { Theme } from "../../../../theme/theme";
 
-export const Button = styled.button`
+const DefaultButton = styled.button`
   align-items: center;
   background: ${props => Theme.palette[props.color].main};
   border-radius: ${Theme.radius.small};
@@ -21,3 +21,5 @@ export const Button = styled.button`
     background: ${props => Theme.palette[props.color].dark};
   }
 `;
+
+export default DefaultButton;

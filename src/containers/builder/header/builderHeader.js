@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import TextField from "@material-ui/core/TextField";
-import BuilderProgress from "../builderProgress/builderProgress";
-import { Button } from "../../../components/molecules/buttons/button.style";
+import BuilderProgress from "./progress/builderProgress";
+import DefaultButton from "../../../components/molecules/buttons/defaultButton/defaultButton";
 
 export const BuilderHeader = () => {
   const [trainerTitle, setTrainerTitle] = useState(["Trainer title"]);
@@ -23,7 +23,7 @@ export const BuilderHeader = () => {
         />
         0 step / 200 step
         <BuilderProgress />
-        <Button
+        <DefaultButton
           color="primary"
           onClick={() => {
             setSteps([...steps, `Target ${steps.length}`]);
@@ -31,7 +31,7 @@ export const BuilderHeader = () => {
           }}
         >
           Train
-        </Button>
+        </DefaultButton>
       </Toolbar>
     </AppBar>
   );
