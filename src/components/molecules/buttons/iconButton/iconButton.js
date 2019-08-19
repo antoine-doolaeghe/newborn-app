@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Button } from "../button.style";
+import DefaultButton from "../defaultButton/defaultButton";
 import { Theme } from "../../../../theme/theme";
 
-const StyledIconButton = styled(Button)`
+const StyledIconButton = styled(DefaultButton)`
   height: ${props => props.height};
   width: ${props => props.width};
   display: flex;
@@ -28,8 +28,8 @@ const IconButton = ({ children, onClick, color, width, height }) => {
 
 IconButton.defaultProps = {
   children: "",
-  height: "55px",
-  width: "55px"
+  height: Theme.spacing.xxlarge,
+  width: Theme.spacing.xxlarge
 };
 
 IconButton.propTypes = {

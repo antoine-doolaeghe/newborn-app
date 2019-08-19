@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Theme } from "../../../../theme/theme";
-import { Button } from "../button.style";
+import DefaultButton from "../defaultButton/defaultButton";
 
-export const StyledBadgeButton = styled(Button)`
+export const StyledBadgeButton = styled(DefaultButton)`
   align-items: center;
   background: ${props => Theme.palette[props.color].main};
   border-radius: ${Theme.radius.small};

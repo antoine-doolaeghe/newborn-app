@@ -17,7 +17,6 @@ function NewbornCard(props) {
   const {
     onPartnerClick,
     onChildClick,
-    color,
     isPlaceholderCard,
     newbornInfo,
     onClick,
@@ -53,7 +52,7 @@ function NewbornCard(props) {
 
   return (
     <CardWrapper
-      color={color}
+      color={newbornInfo.color}
       data-newbornid={newbornInfo.id}
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
@@ -88,7 +87,11 @@ function NewbornCard(props) {
 
 NewbornCard.propTypes = {
   isPlaceholderCard: PropTypes.bool.isRequired,
-  newbornInfo: PropTypes.object.isRequired
+  newbornInfo: PropTypes.object.isRequired,
+  onChildClick: PropTypes.func.isRequired,
+  onPartnerClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
 export default NewbornCard;

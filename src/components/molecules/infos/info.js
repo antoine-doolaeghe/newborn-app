@@ -1,11 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import {
   InfoElement,
-  InfoWrap,
-  InfoLabelIcon,
-  InfoLabelAvatar,
-  InfoLabelAvatarBorder,
+  Wrapper,
+  LabelIcon,
+  LabelAvatar,
+  LabelAvatarBorder,
   Label,
   Value
 } from "./style/info.style";
@@ -13,23 +14,38 @@ import {
 export default function Info({ label, size, value, icon, avatar }) {
   const returnInfoLabelIconAvatar = () => {
     if (icon) {
-      return <InfoLabelIcon>{icon}</InfoLabelIcon>;
+      return <LabelIcon>{icon}</LabelIcon>;
     }
     if (avatar) {
       return (
-        <InfoLabelAvatar avatar={avatar}>
-          <InfoLabelAvatarBorder />
-        </InfoLabelAvatar>
+        <LabelAvatar avatar={avatar}>
+          <LabelAvatarBorder />
+        </LabelAvatar>
       );
     }
   };
   return (
-    <InfoWrap>
+    <Wrapper>
       {returnInfoLabelIconAvatar()}
       <InfoElement>
         <Label>{label}</Label>
         <Value fontSize={size}>{value}</Value>
       </InfoElement>
-    </InfoWrap>
+    </Wrapper>
   );
 }
+
+Info.defaultProps = {
+  avatar: null,
+  icon: null,
+  size: "small",
+  value: null
+};
+
+Info.propTypes = {
+  avatar: PropTypes.node,
+  icon: PropTypes.node,
+  label: PropTypes.string.isRequired,
+  size: PropTypes.oneOf(["x-small", "small", "medium", "large", "x-large"]),
+  value: PropTypes.node
+};

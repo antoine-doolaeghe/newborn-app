@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { Theme } from "../../../../theme/theme";
 
 const rotate = keyframes`
   from {
@@ -14,60 +15,59 @@ export const InfoElement = styled.section`
   width: 105px;
 `;
 
-export const InfoWrap = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   flex: 1;
-  margin-right: 10px;
+  margin-right: ${Theme.spacing.standard};
 `;
 
 export const Label = styled.div`
   font-size: 12px;
-  font-weight: 300;
-  margin-top: 5px;
+  font-weight: ${Theme.weight.normal};
+  margin-top: ${Theme.spacing.small};
   text-transform: uppercase;
 `;
 
 export const Value = styled.div`
-  font-size: ${props => (props.fontSize ? props.fontSize : "18px")};
-  font-weight: 600;
+  font-size: ${props => Theme.fontSize[props.fontSize]};
+  font-weight: ${Theme.weight.bold};
   text-transform: capitalize;
 `;
 
-export const InfoLabelIcon = styled.div`
-  margin: 10px 10px 10px 0px;
-  width: 55px;
-  height: 55px;
-  border-radius: 40px;
-  font-size: 30px;
-  color: white;
-  background-color: lightgreen;
-  display: flex;
-  justify-content: center;
+export const LabelIcon = styled.div`
   align-items: center;
+  background-color: lightgreen;
+  border-radius: 40px;
+  color: white;
+  display: flex;
+  font-size: 30px;
+  height: ${Theme.spacing.xxlarge};
+  justify-content: center;
+  margin: 10px 10px 10px 0px;
+  width: ${Theme.spacing.xxlarge};
 `;
 
-export const InfoLabelAvatar = styled.div`
-  margin: 10px 10px 10px 0px;
-  width: 55px;
-  height: 55px;
-  cursor: pointer;
-  border-radius: 40px;
-  font-size: 30px;
-  color: white;
+export const LabelAvatar = styled.div`
+  align-items: center;
   background-image: url(${props => props.avatar});
   background-size: 125%;
+  border-radius: ${Theme.spacing.xlarge};
+  color: white;
+  cursor: pointer;
   display: flex;
+  font-size: 30px;
+  height: ${Theme.spacing.xxlarge};
   justify-content: center;
-  align-items: center;
-  /* border: 3px solid white; */
+  margin: 10px 10px 10px 0px;
+  width: ${Theme.spacing.xxlarge};
 `;
 
-export const InfoLabelAvatarBorder = styled.div`
+export const LabelAvatarBorder = styled.div`
+  border-radius: ${Theme.spacing.xlarge};
   border: 2px dashed black;
-  border-radius: 40px;
+  height: 64px;
   position: absolute;
   width: 64px;
-  height: 64px;
   &:hover {
     border: 2px dashed red;
     animation: ${rotate} 7s linear infinite;

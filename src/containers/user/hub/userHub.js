@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import * as queries from "../../../graphql/queries";
@@ -33,7 +34,7 @@ function UserHub({ currentUserId }) {
               <TrainerList
                 title={returnListTitle("My Trainers")}
                 currentUserId={currentUserId}
-                items={data.getUser.trainers.items}
+                trainers={data.getUser.trainers.items}
                 loading={loading}
               />
             );
@@ -55,13 +56,13 @@ function UserHub({ currentUserId }) {
             return <ErrorDialog open message={error.message} />;
           }
           if (loading) {
-            return <NewbornList items={[]} isLoading={loading} />;
+            return <NewbornList newborns={[]} isLoading={loading} />;
           }
           if (data.getUser) {
             return (
               <NewbornList
                 title={returnListTitle("My Newborns")}
-                items={data.getUser.newborns.items}
+                newborns={data.getUser.newborns.items}
                 loading={loading}
               />
             );
@@ -82,5 +83,9 @@ function UserHub({ currentUserId }) {
   }
   return null;
 }
+
+UserHub.propTypes = {
+  currentUserId: PropTypes.string.isRequired
+};
 
 export default UserHub;

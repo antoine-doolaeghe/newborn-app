@@ -1,25 +1,26 @@
 import React, { Fragment } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-
 import styled from "styled-components";
-import DefaultDialog from "../../../components/organisms/dialogs/dialog";
-import { propTypes } from "./newbornRecord_propTypes";
-import { defaultPropTypes } from "./newbornRecord_defaultPropTypes";
-import * as queries from "../../../graphql/queries";
-import { Flex } from "../../../theme/layout/grid.style";
-import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
+
+import DefaultDialog from "../../components/organisms/dialogs/dialog";
+import * as queries from "../../graphql/queries";
+import Record3dModel from "../../components/organisms/3dModel/record3dModel/record3dModel";
+import { propTypes } from "./propTypes/newbornRecord_propTypes";
+import { defaultPropTypes } from "./propTypes/newbornRecord_defaultPropTypes";
+import { Flex } from "../../theme/layout/grid.style";
+import { ErrorDialog } from "../../components/molecules/snackbars/errorSnackBar/style/error.style";
 import {
   RecordHeader,
   RecordDetail,
-  RecordInfo,
-  RecordGraph
-} from "../../../components/organisms/record";
-import NewbornParents from "../parents/newbornParents";
-import NewbornChilds from "../childs/newbornChilds";
-import NewbornPartners from "../partners/newbornPartners";
-import Record3dModel from "../../../components/organisms/3dModel/record3dModel/record3dModel";
-
+  RecordInfo
+} from "../../components/organisms/record";
+import {
+  RecordGraph,
+  NewbornParents,
+  NewbornChilds,
+  NewbornPartners
+} from "./index";
 import { returnNewbornRecordInfo } from "./newbornRecordHelpers";
 
 const NewbornRecordWrapper = styled.section`
@@ -46,6 +47,29 @@ const NewBornRecord = ({ id, setId, open, onClose, newbornModelInfo }) => {
                 data.getNewborn
               );
 
+              const returnParents = () => (
+                <NewbornParents
+                  loading={loading}
+                  setId={setId}
+                  parents={newbornRecordInfo.parents}
+                />
+              );
+
+              const returnPartners = () => (
+                <NewbornPartners
+                  loading={loading}
+                  setId={setId}
+                  partners={newbornRecordInfo.partners}
+                />
+              );
+
+              const returnChilds = () => (
+                <NewbornChilds
+                  loading={loading}
+                  childs={newbornRecordInfo.childs}
+                />
+              );
+
               return (
                 <Fragment>
                   <RecordHeader
@@ -70,26 +94,9 @@ const NewBornRecord = ({ id, setId, open, onClose, newbornModelInfo }) => {
                     valueLoss={newbornRecordInfo.currentValueLoss}
                     entropy={newbornRecordInfo.currentEntropy}
                     setId={setId}
-                    partners={
-                      <NewbornPartners
-                        loading={loading}
-                        setId={setId}
-                        partners={newbornRecordInfo.partners}
-                      />
-                    }
-                    parents={
-                      <NewbornParents
-                        loading={loading}
-                        setId={setId}
-                        parents={newbornRecordInfo.parents}
-                      />
-                    }
-                    childs={
-                      <NewbornChilds
-                        loading={loading}
-                        childs={newbornRecordInfo.childs}
-                      />
-                    }
+                    partners={returnPartners()}
+                    parents={returnParents()}
+                    childs={returnChilds()}
                   />
                   <Record3dModel
                     data-testid="newbornRecord3dModel"

@@ -1,7 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 import gql from "graphql-tag";
-import { Mutation, Subscription } from "react-apollo";
+import { Mutation } from "react-apollo";
 import { withRouter } from "react-router-dom";
+
 import TrainerCard from "../../../components/organisms/cards/trainerCard/trainerCard";
 import CardList from "../../../components/organisms/lists/cardList/cardList";
 import { CreateTrainerCard } from "../../../components/organisms/cards/createTrainerCard";
@@ -14,42 +16,50 @@ const CREATE_TRAINER = gql`
   }
 `;
 
-function TrainerList(props) {
-  const { history, items, title, loading, currentUserId } = props;
-  const displayAddNewTrainerCard = true;
-  const newbornCardList = [];
-
+function TrainerList({ history, trainers, title, loading, currentUserId }) {
+  let newbornCardList = [];
   if (loading) {
     for (let i = 0; i < 9; i++) {
-      newbornCardList.push(<TrainerCard loading={loading} />);
+      newbornCardList = [
+        { ...newbornCardList },
+        <TrainerCard loading={loading} />
+      ];
     }
   } else {
-    items.forEach(item => {
-      newbornCardList.push(<TrainerCard title={item.title} />);
+    newbornCardList = trainers.map(trainer => {
+      return <TrainerCard title={trainer.title} />;
     });
   }
 
-  if (displayAddNewTrainerCard) {
-    newbornCardList.push(
-      <Mutation mutation={CREATE_TRAINER}>
-        {(createTrainer, { data, loading }) => {
-          if (data && data.createTrainer) {
-            history.push("./builder");
-          }
-          return (
-            <CreateTrainerCard
-              currentUserId={currentUserId}
-              onCreateClick={createTrainer}
-            />
-          );
-        }}
-      </Mutation>
-    );
-  }
+  newbornCardList.push(
+    <Mutation mutation={CREATE_TRAINER}>
+      {(createTrainer, { data }) => {
+        if (data && data.createTrainer) {
+          history.push("./builder");
+        }
+        return (
+          <CreateTrainerCard
+            currentUserId={currentUserId}
+            onCreateClick={createTrainer}
+          />
+        );
+      }}
+    </Mutation>
+  );
 
   return (
     <CardList title={title} list={newbornCardList} id="newborn-card-list" />
   );
 }
+
+TrainerList.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
+  currentUserId: PropTypes.string.isRequired,
+  trainers: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired
+};
 
 export default withRouter(TrainerList);
