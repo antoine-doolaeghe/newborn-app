@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import BuilderForm from "../../containers/builder/form/builderForm";
 import BuilderHeader from "../../containers/builder/header/builderHeader";
 import BuilderGame from "../../containers/builder/game/builderGame";
-import withHeader from "../../containers/header/withHeader";
+import withHeader from "../../containers/hoc/withHeader";
 
 export const Builder = () => {
   return (
