@@ -8,16 +8,25 @@ const StyledExpansionPanel = styled(ExpansionPanel)`
   margin: 10;
 `;
 
-export const FormPanel = ({ step, index, setActiveStep, setSteps }) => {
+export const FormPanel = ({
+  step,
+  steps,
+  activeStep,
+  index,
+  setActiveStep,
+  setSteps
+}) => {
   return (
-    <StyledExpansionPanel>
+    <StyledExpansionPanel expanded={index === activeStep}>
       <FormaPanelSummary
         index={index}
+        activeStep={activeStep}
         setActiveStep={setActiveStep}
         setSteps={setSteps}
+        steps={steps}
         step={step}
       />
-      <FormaPanelContent step={step} />
+      <FormaPanelContent index={index} />
     </StyledExpansionPanel>
   );
 };

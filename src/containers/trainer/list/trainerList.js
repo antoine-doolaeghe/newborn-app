@@ -20,14 +20,11 @@ function TrainerList({ history, trainers, title, loading, currentUserId }) {
   let newbornCardList = [];
   if (loading) {
     for (let i = 0; i < 9; i++) {
-      newbornCardList = [
-        { ...newbornCardList },
-        <TrainerCard loading={loading} />
-      ];
+      newbornCardList = [...newbornCardList, <TrainerCard loading={loading} />];
     }
   } else {
     newbornCardList = trainers.map(trainer => {
-      return <TrainerCard title={trainer.title} />;
+      return <TrainerCard title={trainer.title} id={trainer.id} />;
     });
   }
 

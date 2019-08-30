@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 export const BuilderGame = () => {
-  const [instance, setInstance] = useState(null);
+  // const [instance, setInstance] = useState(null);
   // useEffect(() => {
   //   if (!instance) {
   //     setInstance(
@@ -22,7 +22,12 @@ export const BuilderGame = () => {
   //   };
   // }, [instance]);
 
-  return <div style={{ height: "calc(100vh - 150px)",background: "black", flex: 1 }} id="gameContainer" />;
+  return (
+    <div
+      style={{ height: "calc(100vh - 150px)", background: "black", flex: 1 }}
+      id="gameContainer"
+    />
+  );
 };
 
 export default BuilderGame;

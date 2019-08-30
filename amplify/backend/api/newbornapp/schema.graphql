@@ -1,9 +1,9 @@
 type Query {
   buy(newbornId: String): String
-  start(newbornId: String): String
+  start(newbornId: String, trainerId: String): String
   terminate(instanceId: String): String
-  updateTrainer(trainerKey: String, trainerData: String): String
-  downloadTrainer(trainerKey: String): String
+  updateTrainer(trainerId: String, trainerData: String): String
+  downloadTrainer(trainerId: String): String
 }
 
 type User @model {
@@ -33,6 +33,7 @@ type Newborn @model {
   partners: [String]
   sex: String!
   steps: Int
+  step: Int
   training: Boolean
   trainingStage: String
   owner: User @connection(name: "NewbornOwner")
@@ -45,6 +46,7 @@ type Model @model {
   id: String!
   cellInfos: [Float]
   cellPositions: [[Float]]
+  cellPaths: [String]
   newborn: Newborn @connection(name: "NewbornModel")
   episodes: [Episode] @connection(name: "ModelEpisode")
 }
@@ -82,5 +84,4 @@ type Trainer @model {
 type Subscription {
   onCreateSummarySet(summaryEpisodeId: String!): Summary
     @aws_subscribe(mutations: ["createSummary"])
-  onCreateTrainer: Trainer @aws_subscribe(mutations: ["createTrainer"])
 }

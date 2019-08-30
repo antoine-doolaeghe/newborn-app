@@ -60,7 +60,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "newborn-app-20190515080104-deployment",
-					"S3Key": "amplify-builds/ec2start-1558884703-latest-build.zip"
+					"S3Key": "amplify-builds/ec2start-1567180509-latest-build.zip"
 				}
 			}
 		},

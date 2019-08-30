@@ -52,6 +52,7 @@ function NewbornList({ title, newborns, loading, onRecordOpen }) {
 
             newbornCardList.push(
               <NewbornCard
+                key={newbornInfo.id}
                 newbornInfo={newbornInfo}
                 onClick={onRecordOpen}
                 onPartnerClick={event =>
@@ -65,7 +66,6 @@ function NewbornList({ title, newborns, loading, onRecordOpen }) {
             );
           });
         }
-
         return (
           <CardList
             list={newbornCardList}

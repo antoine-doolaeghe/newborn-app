@@ -20,8 +20,8 @@ export default function LinearBuffer() {
         setCompleted(0);
         setBuffer(10);
       } else {
-        const diff = Math.random() * 10;
-        const diff2 = Math.random() * 10;
+        // const diff = Math.random() * 10;
+        // const diff2 = Math.random() * 10;
         setCompleted(0);
         setBuffer(0);
       }
