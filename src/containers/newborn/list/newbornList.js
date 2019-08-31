@@ -34,13 +34,13 @@ function NewbornList({ title, newborns, loading, onRecordOpen }) {
   return (
     <Query query={GET_SELECTED_NEWBORN}>
       {({ data: { selectedChild, selectedPartner }, client, error }) => {
-        const newbornCardList = [];
+        const cardList = [];
         if (error) {
           return "error";
         }
         if (loading) {
           for (let i = 0; i < 9; i++) {
-            newbornCardList.push(<NewbornCard loading={loading} />);
+            cardList.push(<NewbornCard loading={loading} />);
           }
         } else {
           newborns.forEach(newborn => {
@@ -50,7 +50,7 @@ function NewbornList({ title, newborns, loading, onRecordOpen }) {
               selectedChild
             );
 
-            newbornCardList.push(
+            cardList.push(
               <NewbornCard
                 key={newbornInfo.id}
                 newbornInfo={newbornInfo}
@@ -67,11 +67,7 @@ function NewbornList({ title, newborns, loading, onRecordOpen }) {
           });
         }
         return (
-          <CardList
-            list={newbornCardList}
-            title={title}
-            id="newborn-card-list"
-          />
+          <CardList list={cardList} title={title} id="newborn-card-list" />
         );
       }}
     </Query>
