@@ -15,8 +15,7 @@ function CreateTrainerCard({ onCreateClick, currentUserId }) {
   const [trainerTitle, setTrainerTitle] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [helperText, setHelperText] = useState("");
-  const [error, setError] = useState(error);
-
+  const [error, setError] = useState(null);
   return (
     <Fragment>
       {isFormOpen && (

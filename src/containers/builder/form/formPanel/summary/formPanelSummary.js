@@ -4,29 +4,14 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Heading, SecondaryHeading } from "./style/formPanelSummary.style";
 import DefaultButton from "../../../../../components/molecules/buttons/defaultButton/defaultButton";
 
-export const FormPanelSummary = ({ index, step, setSteps, setActiveStep }) => {
-  if (index === step.length - 1) {
-    return (
-      <div
-        style={{
-          minHeight: 48,
-          display: "flex",
-          alignItems: "center",
-          cursor: "pointer"
-        }}
-        onClick={() => {
-          setSteps([
-            ...step.slice(0, step.length - 1),
-            `Target ${step.length}`,
-            "Add a training level"
-          ]);
-          setActiveStep(step.length);
-        }}
-      >
-        <Heading>{step}</Heading>
-      </div>
-    );
-  }
+export const FormPanelSummary = ({
+  index,
+  step,
+  steps,
+  activeStep,
+  setSteps,
+  setActiveStep
+}) => {
   return (
     <ExpansionPanelSummary
       expandIcon={<ExpandMoreIcon />}
@@ -36,7 +21,11 @@ export const FormPanelSummary = ({ index, step, setSteps, setActiveStep }) => {
         flexDirection: "row"
       }}
       onClick={() => {
-        setActiveStep(index);
+        if (activeStep === index) {
+          setActiveStep(null);
+        } else {
+          setActiveStep(index);
+        }
       }}
     >
       <Heading>{step}</Heading>
@@ -44,8 +33,7 @@ export const FormPanelSummary = ({ index, step, setSteps, setActiveStep }) => {
       <DefaultButton
         color="primary"
         onClick={() => {
-          step.splice(index, 1);
-          setSteps(step);
+          setSteps([...steps.splice(index, index + 1)]);
         }}
       >
         delete

@@ -5,7 +5,8 @@ import { Theme } from "../../../../theme/theme";
 
 export const CardListWrapper = styled.div`
   position: relative;
-  border-bottom: 1px solid ${Theme.palette.dark.dark};
+  border-bottom: 25px solid white;
+  border-top: 2px solid ${Theme.palette.dark.light};
 `;
 export const CardListGrid = styled(Grid)`
   align-items: center;

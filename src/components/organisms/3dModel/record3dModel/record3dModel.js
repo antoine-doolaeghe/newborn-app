@@ -3,7 +3,6 @@ import * as THREE from "three";
 import OrbitControls from "orbit-controls-es6";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import SwipeableViews from "react-swipeable-views";
 import Typography from "@material-ui/core/Typography";
 import { RecordBuilder } from "../../record";
 import { NewbornRecord3dModelContainer } from "./record3dModel.style";

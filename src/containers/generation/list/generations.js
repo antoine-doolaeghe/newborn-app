@@ -6,6 +6,7 @@ import * as queries from "../../../graphql/queries";
 import GenerationListLoader from "./loader/generationListLoader";
 import NewbornList from "../../newborn/list/newbornList";
 import NewbornRecord from "../../record/newbornRecord";
+import GenerationTitle from "./title/generationTitle";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 
 function GenerationList() {
@@ -24,10 +25,10 @@ function GenerationList() {
 
           if (loading) return <GenerationListLoader />;
 
-          return data.listGenerations.items.map(generation => {
+          return data.listGenerations.items.map((generation, index) => {
             return (
               <NewbornList
-                title={generation.id}
+                title={<GenerationTitle title={index} />}
                 newborns={generation.newborns.items}
                 onRecordOpen={onRecordOpen}
               />

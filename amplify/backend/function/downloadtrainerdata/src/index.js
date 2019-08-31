@@ -9,13 +9,14 @@ exports.handler = async event => {
 
     var params = {
       Bucket: "newborn-trainer-data",
-      Key: event.key + ".txt"
+      Key: event.arguments.trainerId + ".txt"
     };
 
     const response = await s3.getObject(params).promise();
+
     const responseBody = response.Body.toString().replace(/'/g, '"');
 
-    return JSON.parse(responseBody);
+    return responseBody;
   } catch (err) {
     return err;
   }

@@ -8,13 +8,12 @@ exports.handler = async event => {
     });
     var params = {
       Bucket: "newborn-trainer-data",
-      Key: event.key + ".txt",
-      Body: event.data
+      Key: event.arguments.trainerId + ".txt",
+      Body: event.arguments.trainerData
     };
     let s3Response = await s3.upload(params).promise();
     return s3Response.Location;
   } catch (err) {
-    console.error(err);
     return err;
   }
 };

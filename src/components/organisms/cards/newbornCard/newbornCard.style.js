@@ -3,13 +3,14 @@ import styled from "styled-components";
 export const CardWrapper = styled.section`
   border: ${props => (props.color ? `2px solid ${props.color.main}` : null)};
   background: ${props => (props.color ? props.color.light : null)};
-  border-radius: 5px;
+  border-radius: 8px;
   height: 220px;
   margin-left: 30px;
   position: relative;
   width: 220px;
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.19), 0 10px 10px rgba(0, 0, 0, 0.13);
   &:hover {
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.29), 0 10px 10px rgba(0, 0, 0, 0.23);
     border: ${props => (props.color ? `2px solid ${props.color.dark}` : null)};
     cursor: pointer;
   }

@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import TextField from "@material-ui/core/TextField";
 import BuilderProgress from "./progress/builderProgress";
 import DefaultButton from "../../../components/molecules/buttons/defaultButton/defaultButton";
 
-export const BuilderHeader = () => {
-  const [trainerTitle, setTrainerTitle] = useState(["Trainer title"]);
+export const BuilderHeader = ({ title }) => {
+  const [trainerTitle, setTrainerTitle] = useState([title]);
   const [steps, setSteps] = useState(["Spawning Agent"]);
-  const [activeStep, setActiveStep] = useState(0);
+  // const [activeStep, setActiveStep] = useState(0);
   return (
     <AppBar position="static" color="default">
       <Toolbar>
@@ -27,7 +27,7 @@ export const BuilderHeader = () => {
           color="primary"
           onClick={() => {
             setSteps([...steps, `Target ${steps.length}`]);
-            setActiveStep(steps.length);
+            // setActiveStep(steps.length);
           }}
         >
           Train

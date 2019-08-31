@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   flex: 1;
-  max-height: calc(100vh - 150px);
-  overflow-y: scroll;
+  margin: 20px;
 `;
 
 export const Heading = styled.div`

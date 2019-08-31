@@ -236,3 +236,17 @@ export const getAllEpisodes = `query getAllEpisodes($id: ID!) {
   }
 }
 `;
+
+export const getTrainer = `query getTrainer($id: ID!) {
+  getTrainer(id: $id) {
+    title
+    createdAt
+    data
+  }
+}
+`;
+
+export const trainNewborn = `query start($newbornId: String!, $trainerId: String!) {
+  start(newbornId: $newbornId, trainerId: $trainerId)
+}
+`;

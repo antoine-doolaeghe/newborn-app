@@ -7,12 +7,12 @@ import NewbornSelect from "../../../newbornSelect/builderNewbornSelect";
 import Checkbox from "../../../../../components/atoms/checkboxes";
 import Slider from "../../../../../components/atoms/slider";
 
-export const FormPanelContent = ({ step }) => {
+export const FormPanelContent = ({ index }) => {
   const [trainerType, setTrainerType] = useState("static");
   const [movingTowardTarget, setMovingTowardTarget] = useState(false);
   const [rewardSpeed, setRewardSpeed] = useState(false);
   const [rewardFacingTarget, setRewardFacingTarget] = useState(false);
-  if (step === 1) {
+  if (index === 1) {
     return (
       <ExpansionPanelDetails>
         <p>The number of initial spawner/</p>
@@ -22,7 +22,7 @@ export const FormPanelContent = ({ step }) => {
     );
   }
 
-  if (step === 0) {
+  if (index === 0) {
     return <NewbornSelect />;
   }
 
