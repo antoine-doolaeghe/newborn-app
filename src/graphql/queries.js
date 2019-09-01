@@ -78,6 +78,7 @@ export const listGenerations = `query ListGenerations(
         items {
           bio
           bornPlace
+          birthDate
           childs
           createdAt
           hexColor
