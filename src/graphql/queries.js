@@ -74,7 +74,7 @@ export const listGenerations = `query ListGenerations(
   listGenerations(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      newborns {
+      newborns(limit: $limit) {
         items {
           bio
           bornPlace

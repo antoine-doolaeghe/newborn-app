@@ -5,7 +5,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { IconButton } from "../../buttons";
 import { Theme } from "../../../../theme/theme";
 
-const StyledIconButtoInput = Styled.div`
+const StyledIconButtonInput = Styled.div`
   align-items: center;
   display: flex;
   height: ${Theme.spacing.xxlarge};
@@ -17,11 +17,11 @@ const StyledIconButtoInput = Styled.div`
 
 export default function IconButtonInput() {
   return (
-    <StyledIconButtoInput>
+    <StyledIconButtonInput>
       <InputBase placeholder="Find..." />
       <IconButton height="40px" width="40px" color="dark">
         <SearchIcon />
       </IconButton>
-    </StyledIconButtoInput>
+    </StyledIconButtonInput>
   );
 }

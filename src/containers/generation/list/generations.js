@@ -6,8 +6,8 @@ import * as queries from "../../../graphql/queries";
 import GenerationListLoader from "./loader/generationListLoader";
 import NewbornList from "../../newborn/list/newbornList";
 import NewbornRecord from "../../record/newbornRecord";
-import GenerationTitle from "./title/generationTitle";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
+import GenerationSearch from "./search/generationsSearch";
 
 function GenerationList() {
   const [isRecordOpen, setIsRecordOpen] = useState(false);
@@ -19,7 +19,7 @@ function GenerationList() {
   };
   const returnNewbornGeneration = () => {
     return (
-      <Query query={gql(queries.listGenerations)}>
+      <Query query={gql(queries.listGenerations)} variables={{ limit: 1000 }}>
         {({ data, loading, error }) => {
           if (error) return <ErrorDialog open message={error.message} />;
 
@@ -28,7 +28,7 @@ function GenerationList() {
           return data.listGenerations.items.map((generation, index) => {
             return (
               <NewbornList
-                title={<GenerationTitle title={index} />}
+                index={index + 1}
                 newborns={generation.newborns.items}
                 onRecordOpen={onRecordOpen}
               />
@@ -41,6 +41,8 @@ function GenerationList() {
 
   return (
     <Fragment>
+      <h1>Newborn List</h1>
+      <GenerationSearch />
       <NewbornRecord
         setId={setId}
         id={id}
