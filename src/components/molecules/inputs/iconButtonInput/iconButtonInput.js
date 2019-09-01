@@ -9,17 +9,22 @@ const StyledIconButtonInput = Styled.div`
   align-items: center;
   display: flex;
   height: ${Theme.spacing.xxlarge};
-  border: 1px solid;
+  background-color: #faf2ed;
   border-radius: ${Theme.radius.small};
-  padding: 0 ${Theme.spacing.small};
+  justify-content: space-between;
+  padding: ${Theme.spacing.medium} ${Theme.spacing.large};
   margin: ${Theme.spacing.small};
+`;
+
+const StyledInputBase = Styled(InputBase)`
+  font-size: 24px !important;
 `;
 
 export default function IconButtonInput() {
   return (
     <StyledIconButtonInput>
-      <InputBase placeholder="Find..." />
-      <IconButton height="40px" width="40px" color="dark">
+      <StyledInputBase autoFocus fullWidth placeholder="Find..." />
+      <IconButton height="40px" width="40px" color="default">
         <SearchIcon />
       </IconButton>
     </StyledIconButtonInput>

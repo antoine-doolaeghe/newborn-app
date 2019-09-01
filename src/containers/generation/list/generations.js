@@ -41,8 +41,9 @@ function GenerationList() {
 
   return (
     <Fragment>
-      <h1>Newborn List</h1>
-      <GenerationSearch />
+      <div>
+        <GenerationSearch />
+      </div>
       <NewbornRecord
         setId={setId}
         id={id}

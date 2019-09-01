@@ -5,12 +5,13 @@ import DefaultButton from "../defaultButton/defaultButton";
 import { Theme } from "../../../../theme/theme";
 
 const StyledIconButton = styled(DefaultButton)`
-  height: ${props => props.height};
-  width: ${props => props.width};
   display: flex;
-  justify-content: space-around;
   font-size: ${Theme.fontSize.medium};
+  height: ${props => props.height};
+  justify-content: space-around;
+  padding: 0;
   text-decoration: none;
+  width: ${props => props.width};
 `;
 
 const IconButton = ({ children, onClick, color, width, height }) => {
