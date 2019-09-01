@@ -74,10 +74,11 @@ export const listGenerations = `query ListGenerations(
   listGenerations(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      newborns {
+      newborns(limit: $limit) {
         items {
           bio
           bornPlace
+          birthDate
           childs
           createdAt
           hexColor
@@ -95,7 +96,7 @@ export const listGenerations = `query ListGenerations(
                 items {
                   id
                   created
-                  steps {
+                  steps(limit: 1000) {
                     items {
                       created
                       meanReward
@@ -118,6 +119,7 @@ export const getNewborn = `query GetNewborn($id: ID!, $limit: Int) {
   getNewborn(id: $id) {
     bio
     bornPlace
+    birthDate
     childs
     trainingStage
     generation {

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const CardWrapper = styled.section`
   border: ${props => (props.color ? `2px solid ${props.color.main}` : null)};
   background: ${props => (props.color ? props.color.light : null)};
-  border-radius: 8px;
+  border-radius: 8px 8px 0px 0px;
   height: 220px;
   margin-left: 30px;
   position: relative;

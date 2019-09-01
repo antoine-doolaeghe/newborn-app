@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Collapse from "@material-ui/core/Collapse";
 import { Grid } from "../../../../theme/layout/grid.style";
 import { Theme } from "../../../../theme/theme";
 
@@ -12,17 +13,19 @@ export const CardListGrid = styled(Grid)`
   align-items: center;
   padding-bottom: 20px;
 `;
-export const ListTitle = styled.p`
-  margin: 25px;
+export const ListTitle = styled.div`
+  margin: 15px 25px;
 `;
 
-function CardList({ list, title, id }) {
+function CardList({ list, expanded, title, id }) {
   return (
     <CardListWrapper>
       <ListTitle>{title}</ListTitle>
-      <CardListGrid columnNumber={list.length} data-testid={id} rowNumber={1}>
-        {list}
-      </CardListGrid>
+      <Collapse in={expanded}>
+        <CardListGrid columnNumber={list.length} data-testid={id} rowNumber={1}>
+          {list}
+        </CardListGrid>
+      </Collapse>
     </CardListWrapper>
   );
 }

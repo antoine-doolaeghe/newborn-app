@@ -23,6 +23,7 @@ export const returnNewbornRecordInfo = info => {
       id: info.id || "",
       developmentStage: info.developmentStage || "",
       bornPlace: info.bornPlace || "unknown region",
+      birthDate: info.birthDate || "--",
       modelId: info.models ? info.models.items[0].id : "",
       currentMeanReward: currentMeanReward || "--",
       currentEntropy: currentEntropy || "--",

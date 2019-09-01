@@ -7,7 +7,8 @@ export default (data, lineColor, range) => {
       type: "areaspline",
       margin: 0,
       padding: 0,
-      spacing: 0
+      spacing: 0,
+      animation: false
     },
     title: {
       text: ""

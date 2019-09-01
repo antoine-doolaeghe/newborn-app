@@ -22,6 +22,7 @@ type Generation @model {
 
 type Newborn @model {
   bio: String
+  birthDate: String
   bornPlace: String
   childs: [String]
   createdAt: String

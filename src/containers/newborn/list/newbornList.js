@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import NewbornListHeader from "./title/newbornListHeader";
 import { returnNewbornCardInfo } from "./utils/newbornList_helpers";
 import { CardList } from "../../../components/organisms/lists";
 import { NewbornCard } from "../../../components/organisms/cards";
@@ -14,7 +15,8 @@ const GET_SELECTED_NEWBORN = gql`
   }
 `;
 
-function NewbornList({ title, newborns, loading, onRecordOpen }) {
+function NewbornList({ newborns, index, loading, onRecordOpen }) {
+  const [expanded, setExpanded] = useState(true);
   const partnerClick = (event, client, id) => {
     event.stopPropagation();
     client.writeData({
@@ -67,16 +69,31 @@ function NewbornList({ title, newborns, loading, onRecordOpen }) {
           });
         }
         return (
-          <CardList list={cardList} title={title} id="newborn-card-list" />
+          <CardList
+            expanded={expanded}
+            list={cardList}
+            title={
+              <NewbornListHeader
+                generationNumber={index}
+                newbornNumber={newborns.length}
+                expanded={expanded}
+                setExpanded={setExpanded}
+              />
+            }
+            id="newborn-card-list"
+          />
         );
       }}
     </Query>
   );
 }
 
+NewbornList.defaultProps = {
+  newborns: []
+};
+
 NewbornList.propTypes = {
-  title: PropTypes.string.isRequired,
-  newborns: PropTypes.array.isRequired,
+  newborns: PropTypes.array,
   loading: PropTypes.bool.isRequired,
   onRecordOpen: PropTypes.func.isRequired
 };

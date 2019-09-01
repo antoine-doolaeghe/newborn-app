@@ -1,8 +1,8 @@
-import dayjs from "dayjs";
 import { returnNewbornChartData } from "../../../../utils/helpers/newbornChartHelpers";
 import {
   returnSortedEpisodes,
-  returnSortedSteps
+  returnSortedSteps,
+  returnFormattedTime
 } from "../../../../utils/helpers/newbornGlobalHelpers";
 
 import { Theme } from "../../../../theme/theme";
@@ -37,8 +37,7 @@ export const returnNewbornCardInfo = (info, selectedPartner, selectedChild) => {
     : Theme.palette.light;
 
   const steps = returnSortedSteps(episodes, 0);
-  const dayJsDob = dayjs(info.createdAt);
-  const dob = `${dayJsDob.year()}-${dayJsDob.month()}-${dayJsDob.date()}`;
+  const dob = returnFormattedTime(info.birthDate);
 
   const newbornInfo = {
     title: info.id.substring(info.id.length - 3, info.id.length),

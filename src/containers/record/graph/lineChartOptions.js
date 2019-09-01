@@ -6,6 +6,7 @@ export default (data, lineColor) => {
       width: 500,
       type: "line",
       // spacing: 0,
+      animation: false,
       zoomType: "x"
     },
     credits: {

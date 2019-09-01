@@ -49,7 +49,7 @@ function NewbornCard(props) {
   if (loading) {
     return <NewbornCardLoader />;
   }
-
+  const hadSummaryData = newbornInfo.summaries.datasets[0].data.length > 0;
   return (
     <CardWrapper
       color={newbornInfo.color}
@@ -68,16 +68,30 @@ function NewbornCard(props) {
             displayBadge
             data-testid="newbornHeader"
           />
-          <CardChartWrapper data-testid="newbornCardGraph">
-            <HighchartsReact
-              highcharts={Highcharts}
-              options={lineChartOptions(
-                newbornInfo.summaries,
-                newbornInfo.color.dark,
-                86400000
-              )}
-            />
-          </CardChartWrapper>
+          {hadSummaryData ? (
+            <CardChartWrapper data-testid="newbornCardGraph">
+              <HighchartsReact
+                highcharts={Highcharts}
+                options={lineChartOptions(
+                  newbornInfo.summaries,
+                  newbornInfo.color.dark,
+                  9309200000
+                )}
+              />
+            </CardChartWrapper>
+          ) : (
+            <div
+              style={{
+                width: "100%",
+                justifyContent: "center",
+                height: "calc(100% - 100px)",
+                alignItems: "center",
+                display: "flex"
+              }}
+            >
+              NO DATA PLACEHOLDER
+            </div>
+          )}
           {returnCardButton()}
         </Fragment>
       )}

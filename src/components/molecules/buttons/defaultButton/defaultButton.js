@@ -6,7 +6,7 @@ const DefaultButton = styled.button`
   background: ${props => Theme.palette[props.color].main};
   border-radius: ${Theme.radius.small};
   border: none;
-  color: ${Theme.font.light};
+  color: ${props => Theme.palette[props.color].contrastText};
   display: flex;
   font-family: ${Theme.fontFamily};
   font-size: ${Theme.fontSize.small};

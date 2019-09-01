@@ -6,8 +6,10 @@ import * as queries from "../../../graphql/queries";
 import GenerationListLoader from "./loader/generationListLoader";
 import NewbornList from "../../newborn/list/newbornList";
 import NewbornRecord from "../../record/newbornRecord";
-import GenerationTitle from "./title/generationTitle";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
+import GenerationSearch from "./search/generationsSearch";
+
+const limit = 1000;
 
 function GenerationList() {
   const [isRecordOpen, setIsRecordOpen] = useState(false);
@@ -17,23 +19,40 @@ function GenerationList() {
     setId(event.target.closest("section").dataset.newbornid);
     setIsRecordOpen(true);
   };
+  let newbornCount = 0;
   const returnNewbornGeneration = () => {
     return (
-      <Query query={gql(queries.listGenerations)}>
+      <Query query={gql(queries.listGenerations)} variables={{ limit }}>
         {({ data, loading, error }) => {
           if (error) return <ErrorDialog open message={error.message} />;
 
-          if (loading) return <GenerationListLoader />;
-
-          return data.listGenerations.items.map((generation, index) => {
+          if (loading)
             return (
-              <NewbornList
-                title={<GenerationTitle title={index} />}
-                newborns={generation.newborns.items}
-                onRecordOpen={onRecordOpen}
-              />
+              <Fragment>
+                <GenerationSearch disabled newbornCount={newbornCount} />
+                <GenerationListLoader />
+              </Fragment>
             );
-          });
+
+          const newbornLists = data.listGenerations.items.map(
+            (generation, index) => {
+              newbornCount += generation.newborns.items.length;
+              return (
+                <NewbornList
+                  index={index + 1}
+                  newborns={generation.newborns.items}
+                  onRecordOpen={onRecordOpen}
+                />
+              );
+            }
+          );
+
+          return (
+            <Fragment>
+              <GenerationSearch newbornCount={newbornCount} />
+              {newbornLists}
+            </Fragment>
+          );
         }}
       </Query>
     );

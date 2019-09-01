@@ -2,14 +2,23 @@ import styled from "styled-components";
 import { Theme } from "../../theme/theme";
 
 export const HeaderContainer = styled.section`
-  position: relative;
-  border-bottom: 6px solid ${Theme.palette.dark.main};
-  height: ${Theme.spacing.xxlarge};
   align-items: center;
+  background-color: white;
+  border-bottom: 6px solid ${Theme.palette.dark.main};
   display: flex;
-  text-align: center;
+  height: ${Theme.spacing.xxlarge};
   justify-content: center;
-  padding: 7px;
+  padding: ${Theme.spacing.standard};
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: calc(100% - 20px);
+  z-index: ${Theme.zIndex.high};
+`;
+
+export const HeaderSpacer = styled.div`
+  position: relative;
+  height: 75px;
 `;
 
 export const NavigationWrapper = styled.section`

@@ -5,23 +5,33 @@ import SearchIcon from "@material-ui/icons/Search";
 import { IconButton } from "../../buttons";
 import { Theme } from "../../../../theme/theme";
 
-const StyledIconButtoInput = Styled.div`
+const StyledIconButtonInput = Styled.div`
   align-items: center;
   display: flex;
   height: ${Theme.spacing.xxlarge};
-  border: 1px solid;
+  background-color: #faf2ed;
   border-radius: ${Theme.radius.small};
-  padding: 0 ${Theme.spacing.small};
+  justify-content: space-between;
+  padding: ${Theme.spacing.small} ${Theme.spacing.medium};
   margin: ${Theme.spacing.small};
 `;
 
-export default function IconButtonInput() {
+const StyledInputBase = Styled(InputBase)`
+  font-size: 24px !important;
+`;
+
+export default function IconButtonInput({ disabled }) {
   return (
-    <StyledIconButtoInput>
-      <InputBase placeholder="Find..." />
-      <IconButton height="40px" width="40px" color="dark">
+    <StyledIconButtonInput>
+      <StyledInputBase
+        disabled={disabled}
+        autoFocus
+        fullWidth
+        placeholder="Find..."
+      />
+      <IconButton height="40px" width="40px" color="default">
         <SearchIcon />
       </IconButton>
-    </StyledIconButtoInput>
+    </StyledIconButtonInput>
   );
 }

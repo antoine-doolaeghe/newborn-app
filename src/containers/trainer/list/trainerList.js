@@ -45,7 +45,12 @@ function TrainerList({ history, trainers, title, loading, currentUserId }) {
   );
 
   return (
-    <CardList title={title} list={newbornCardList} id="newborn-card-list" />
+    <CardList
+      title={title}
+      expanded
+      list={newbornCardList}
+      id="newborn-card-list"
+    />
   );
 }
 
