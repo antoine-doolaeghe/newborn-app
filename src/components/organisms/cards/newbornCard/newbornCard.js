@@ -74,7 +74,7 @@ function NewbornCard(props) {
               options={lineChartOptions(
                 newbornInfo.summaries,
                 newbornInfo.color.dark,
-                86400000
+                9309200000
               )}
             />
           </CardChartWrapper>

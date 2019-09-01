@@ -6,15 +6,16 @@ import { InfoWrapper, ValueWrapper } from "./style/recordInfo.style";
 import Info from "../../../molecules/infos/info";
 import { Badge } from "../../../atoms/badges";
 import { Flex } from "../../../../theme/layout/grid.style";
+import { returnFormattedTime } from "../../../../utils/helpers/newbornGlobalHelpers";
 
 function RecordInfo({
   loading,
   newbornInfo: {
+    birthDate,
     currentMeanReward,
     currentIndex,
     ownerUserName,
-    ownerProfileImage,
-    bornPlace
+    ownerProfileImage
   }
 }) {
   const index = currentIndex > 0 ? `+${currentIndex}%` : `${currentIndex}%`;
@@ -37,7 +38,7 @@ function RecordInfo({
           <Flex height="auto">
             <Info
               label="Birthday"
-              value={bornPlace}
+              value={returnFormattedTime(birthDate)}
               icon={<CakeIcon fontSize="inherit" />}
             />
             <Info

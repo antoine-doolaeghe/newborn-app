@@ -11,6 +11,10 @@ export const returnUtcTime = time => {
   );
 };
 
+export const returnFormattedTime = time => {
+  return dayjs(time).format("YYYY/MM/DD");
+};
+
 export const sortByDate = episodes => {
   return episodes.sort((a, b) => {
     return new Date(a.created) - new Date(b.created);

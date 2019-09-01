@@ -4,7 +4,7 @@ export const NewbornCardHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 5px 0px;
-  margin: 0px 5px;
+  margin: 2px 5px;
   text-transform: capitalize;
   z-index: 90;
   &:hover {

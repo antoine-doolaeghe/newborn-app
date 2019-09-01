@@ -16,9 +16,9 @@ function NewbornListHeader({ title, newbornNumber, collapsed, setCollapsed }) {
         <ExpandMoreIcon />
       </IconButton>
       <Badge height="25px" width="25px" label={title} />
-      <span>
+      <div style={{ marginLeft: 8 }}>
         <b>{newbornNumber}</b> Newborns
-      </span>
+      </div>
     </div>
   );
 }

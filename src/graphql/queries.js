@@ -95,7 +95,7 @@ export const listGenerations = `query ListGenerations(
                 items {
                   id
                   created
-                  steps {
+                  steps(limit: 1000) {
                     items {
                       created
                       meanReward
@@ -118,6 +118,7 @@ export const getNewborn = `query GetNewborn($id: ID!, $limit: Int) {
   getNewborn(id: $id) {
     bio
     bornPlace
+    birthDate
     childs
     trainingStage
     generation {

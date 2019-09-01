@@ -17,12 +17,13 @@ export const returnNewbornRecordInfo = info => {
       ? info.models.items[0].episodes.items[0].steps.items[1].step
       : null;
     const currentIndex = currentMeanReward - previousMeanReward;
-
+    console.log(info);
     newbornInfo = {
       name: info.name || "",
       id: info.id || "",
       developmentStage: info.developmentStage || "",
       bornPlace: info.bornPlace || "unknown region",
+      birthDate: info.birthDate || "--",
       modelId: info.models ? info.models.items[0].id : "",
       currentMeanReward: currentMeanReward || "--",
       currentEntropy: currentEntropy || "--",
