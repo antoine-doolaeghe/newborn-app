@@ -12,7 +12,7 @@ const StyledIconButtonInput = Styled.div`
   background-color: #faf2ed;
   border-radius: ${Theme.radius.small};
   justify-content: space-between;
-  padding: ${Theme.spacing.medium} ${Theme.spacing.large};
+  padding: ${Theme.spacing.small} ${Theme.spacing.medium};
   margin: ${Theme.spacing.small};
 `;
 

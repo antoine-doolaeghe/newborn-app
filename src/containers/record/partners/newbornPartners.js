@@ -12,11 +12,9 @@ const NewbornPartners = ({ setId, partners, loading }) => {
     return <NewbornPartnersLoader />;
   }
   const returnfilter = () => {
-    const filter = [];
-    partners.forEach(parent => {
-      filter.push({ id: { eq: parent } });
+    return partners.map(parent => {
+      return { id: { eq: parent } };
     });
-    return filter;
   };
 
   if (partners.length === 0) {
