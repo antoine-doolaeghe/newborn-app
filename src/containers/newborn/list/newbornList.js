@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
-import NewbornListTitle from "./title/newbornListHeader";
+import NewbornListHeader from "./title/newbornListHeader";
 import { returnNewbornCardInfo } from "./utils/newbornList_helpers";
 import { CardList } from "../../../components/organisms/lists";
 import { NewbornCard } from "../../../components/organisms/cards";
@@ -73,12 +73,8 @@ function NewbornList({ newborns, index, loading, onRecordOpen }) {
             collapsed={collapsed}
             list={cardList}
             title={
-              <NewbornListTitle
-                title={
-                  <span>
-                    Generation index: <span>{index}</span>
-                  </span>
-                }
+              <NewbornListHeader
+                title={index}
                 newbornNumber={newborns.length}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}

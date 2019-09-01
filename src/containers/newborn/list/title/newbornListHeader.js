@@ -1,39 +1,24 @@
-import React, { Fragment } from "react";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import React from "react";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { IconButton } from "../../../../components/molecules/buttons";
+import { Badge } from "../../../../components/atoms/badges";
 
 function NewbornListHeader({ title, newbornNumber, collapsed, setCollapsed }) {
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
       <IconButton
-        height={15}
-        width={15}
+        height="25px"
+        width="25px"
         style={{ position: "absolute", left: 0 }}
         color="primary"
         onClick={() => setCollapsed(!collapsed)}
       >
         <ExpandMoreIcon />
       </IconButton>
-      {title}
-      <span>{newbornNumber} newborns</span>
-      {collapsed && (
-        <Fragment>
-          <FormControlLabel
-            control={<Checkbox checked value="gilad" />}
-            label="Gilad Gray"
-          />
-          <FormControlLabel
-            control={<Checkbox checked value="jason" />}
-            label="Jason Killian"
-          />
-          <FormControlLabel
-            control={<Checkbox checked value="antoine" />}
-            label="Antoine Llorca"
-          />
-        </Fragment>
-      )}
+      <Badge height="25px" width="25px" label={title} />
+      <span>
+        <b>{newbornNumber}</b> Newborns
+      </span>
     </div>
   );
 }

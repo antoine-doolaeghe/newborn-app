@@ -13,8 +13,8 @@ export const CardListGrid = styled(Grid)`
   align-items: center;
   padding-bottom: 20px;
 `;
-export const ListTitle = styled.p`
-  margin: 25px;
+export const ListTitle = styled.div`
+  margin: 15px 25px;
 `;
 
 function CardList({ list, collapsed, title, id }) {

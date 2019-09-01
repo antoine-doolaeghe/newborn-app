@@ -17,23 +17,42 @@ function GenerationList() {
     setId(event.target.closest("section").dataset.newbornid);
     setIsRecordOpen(true);
   };
+  let newbornCount = 0;
   const returnNewbornGeneration = () => {
     return (
       <Query query={gql(queries.listGenerations)} variables={{ limit: 1000 }}>
         {({ data, loading, error }) => {
           if (error) return <ErrorDialog open message={error.message} />;
 
-          if (loading) return <GenerationListLoader />;
-
-          return data.listGenerations.items.map((generation, index) => {
+          if (loading)
             return (
-              <NewbornList
-                index={index + 1}
-                newborns={generation.newborns.items}
-                onRecordOpen={onRecordOpen}
-              />
+              <Fragment>
+                <GenerationSearch disabled newbornCount={newbornCount} />
+                <GenerationListLoader />
+              </Fragment>
             );
-          });
+
+          const newbornLists = data.listGenerations.items.map(
+            (generation, index) => {
+              newbornCount += generation.newborns.items.length;
+              return (
+                <NewbornList
+                  index={index + 1}
+                  newborns={generation.newborns.items}
+                  onRecordOpen={onRecordOpen}
+                />
+              );
+            }
+          );
+
+          return (
+            <Fragment>
+              <div>
+                <GenerationSearch newbornCount={newbornCount} />
+                {newbornLists}
+              </div>
+            </Fragment>
+          );
         }}
       </Query>
     );
@@ -41,9 +60,6 @@ function GenerationList() {
 
   return (
     <Fragment>
-      <div>
-        <GenerationSearch />
-      </div>
       <NewbornRecord
         setId={setId}
         id={id}

@@ -20,10 +20,15 @@ const StyledInputBase = Styled(InputBase)`
   font-size: 24px !important;
 `;
 
-export default function IconButtonInput() {
+export default function IconButtonInput({ disabled }) {
   return (
     <StyledIconButtonInput>
-      <StyledInputBase autoFocus fullWidth placeholder="Find..." />
+      <StyledInputBase
+        disabled={disabled}
+        autoFocus
+        fullWidth
+        placeholder="Find..."
+      />
       <IconButton height="40px" width="40px" color="default">
         <SearchIcon />
       </IconButton>

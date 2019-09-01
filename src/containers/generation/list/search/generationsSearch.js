@@ -5,7 +5,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import SearchInput from "../../../../components/molecules/inputs/iconButtonInput/iconButtonInput";
 
-function GenerationSearch() {
+function GenerationSearch({ newbornCount, disabled }) {
   return (
     <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
       <div
@@ -17,21 +17,23 @@ function GenerationSearch() {
           flexDirection: "column"
         }}
       >
-        <SearchInput />
+        <SearchInput disabled={disabled} />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ display: "flex" }}>
-            <p>1000+ newborns</p>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <p style={{ marginRight: 15 }}>
+              <b>{newbornCount}</b> newborns
+            </p>
             <FormControlLabel
               control={<Checkbox checked value="gilad" />}
-              label="buy"
+              label="To Buy"
             />
             <FormControlLabel
               control={<Checkbox checked value="jason" />}
-              label="training"
+              label="Training"
             />
             <FormControlLabel
               control={<Checkbox checked value="antoine" />}
-              label="other"
+              label="Other"
             />
           </div>
           <div>
