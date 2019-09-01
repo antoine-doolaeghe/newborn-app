@@ -47,7 +47,7 @@ function TrainerList({ history, trainers, title, loading, currentUserId }) {
   return (
     <CardList
       title={title}
-      collapsed
+      expanded
       list={newbornCardList}
       id="newborn-card-list"
     />

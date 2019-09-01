@@ -3,7 +3,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { IconButton } from "../../../../components/molecules/buttons";
 import { Badge } from "../../../../components/atoms/badges";
 
-function NewbornListHeader({ title, newbornNumber, collapsed, setCollapsed }) {
+function NewbornListHeader({ title, newbornNumber, expanded, setExpanded }) {
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
       <IconButton
@@ -11,7 +11,7 @@ function NewbornListHeader({ title, newbornNumber, collapsed, setCollapsed }) {
         width="25px"
         style={{ position: "absolute", left: 0 }}
         color="primary"
-        onClick={() => setCollapsed(!collapsed)}
+        onClick={() => setExpanded(!expanded)}
       >
         <ExpandMoreIcon />
       </IconButton>

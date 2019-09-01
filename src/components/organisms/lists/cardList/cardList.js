@@ -17,11 +17,11 @@ export const ListTitle = styled.div`
   margin: 15px 25px;
 `;
 
-function CardList({ list, collapsed, title, id }) {
+function CardList({ list, expanded, title, id }) {
   return (
     <CardListWrapper>
       <ListTitle>{title}</ListTitle>
-      <Collapse in={collapsed}>
+      <Collapse in={expanded}>
         <CardListGrid columnNumber={list.length} data-testid={id} rowNumber={1}>
           {list}
         </CardListGrid>

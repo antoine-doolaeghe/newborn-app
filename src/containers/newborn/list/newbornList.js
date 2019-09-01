@@ -16,7 +16,7 @@ const GET_SELECTED_NEWBORN = gql`
 `;
 
 function NewbornList({ newborns, index, loading, onRecordOpen }) {
-  const [collapsed, setCollapsed] = useState(true);
+  const [expanded, setExpanded] = useState(true);
   const partnerClick = (event, client, id) => {
     event.stopPropagation();
     client.writeData({
@@ -70,14 +70,14 @@ function NewbornList({ newborns, index, loading, onRecordOpen }) {
         }
         return (
           <CardList
-            collapsed={collapsed}
+            expanded={expanded}
             list={cardList}
             title={
               <NewbornListHeader
                 title={index}
                 newbornNumber={newborns.length}
-                collapsed={collapsed}
-                setCollapsed={setCollapsed}
+                expanded={expanded}
+                setExpanded={setExpanded}
               />
             }
             id="newborn-card-list"
