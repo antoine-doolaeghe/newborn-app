@@ -4,22 +4,20 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import SearchInput from "../../../../components/molecules/inputs/iconButtonInput/iconButtonInput";
+import {
+  Wrapper,
+  SearchParameters,
+  SearchFilters,
+  SearchContainer
+} from "./generationSearch.style";
 
 function GenerationSearch({ newbornCount, disabled }) {
   return (
-    <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
-      <div
-        style={{
-          width: "70%",
-          margin: 30,
-          marginTop: 60,
-          display: "flex",
-          flexDirection: "column"
-        }}
-      >
+    <Wrapper>
+      <SearchContainer>
         <SearchInput disabled={disabled} />
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
+        <SearchParameters>
+          <SearchFilters>
             <p style={{ marginRight: 15 }}>
               <b>{newbornCount}</b> newborns
             </p>
@@ -35,7 +33,7 @@ function GenerationSearch({ newbornCount, disabled }) {
               control={<Checkbox checked value="antoine" />}
               label="Other"
             />
-          </div>
+          </SearchFilters>
           <div>
             <FormControlLabel
               control={
@@ -62,9 +60,9 @@ function GenerationSearch({ newbornCount, disabled }) {
               label="other"
             />
           </div>
-        </div>
-      </div>
-    </div>
+        </SearchParameters>
+      </SearchContainer>
+    </Wrapper>
   );
 }
 

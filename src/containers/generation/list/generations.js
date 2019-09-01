@@ -9,6 +9,8 @@ import NewbornRecord from "../../record/newbornRecord";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 import GenerationSearch from "./search/generationsSearch";
 
+const limit = 1000;
+
 function GenerationList() {
   const [isRecordOpen, setIsRecordOpen] = useState(false);
   const [id, setId] = useState("");
@@ -20,7 +22,7 @@ function GenerationList() {
   let newbornCount = 0;
   const returnNewbornGeneration = () => {
     return (
-      <Query query={gql(queries.listGenerations)} variables={{ limit: 1000 }}>
+      <Query query={gql(queries.listGenerations)} variables={{ limit }}>
         {({ data, loading, error }) => {
           if (error) return <ErrorDialog open message={error.message} />;
 
@@ -47,10 +49,8 @@ function GenerationList() {
 
           return (
             <Fragment>
-              <div>
-                <GenerationSearch newbornCount={newbornCount} />
-                {newbornLists}
-              </div>
+              <GenerationSearch newbornCount={newbornCount} />
+              {newbornLists}
             </Fragment>
           );
         }}
