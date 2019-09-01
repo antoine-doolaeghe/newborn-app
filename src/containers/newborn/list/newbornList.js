@@ -74,7 +74,7 @@ function NewbornList({ newborns, index, loading, onRecordOpen }) {
             list={cardList}
             title={
               <NewbornListHeader
-                title={index}
+                generationNumber={index}
                 newbornNumber={newborns.length}
                 expanded={expanded}
                 setExpanded={setExpanded}

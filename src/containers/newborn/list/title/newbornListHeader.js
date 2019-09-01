@@ -2,24 +2,34 @@ import React from "react";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { IconButton } from "../../../../components/molecules/buttons";
 import { Badge } from "../../../../components/atoms/badges";
+import { Wrapper, NewbornInfoTitle } from "./newbornListHeader.style";
 
-function NewbornListHeader({ title, newbornNumber, expanded, setExpanded }) {
+function NewbornListHeader({
+  generationNumber,
+  newbornNumber,
+  expanded,
+  setExpanded
+}) {
+  const IconBadgeSize = "25px";
   return (
-    <div style={{ display: "flex", alignItems: "center" }}>
+    <Wrapper>
       <IconButton
-        height="25px"
-        width="25px"
-        style={{ position: "absolute", left: 0 }}
+        height={IconBadgeSize}
+        width={IconBadgeSize}
         color="primary"
         onClick={() => setExpanded(!expanded)}
       >
         <ExpandMoreIcon />
       </IconButton>
-      <Badge height="25px" width="25px" label={title} />
-      <div style={{ marginLeft: 8 }}>
+      <Badge
+        height={IconBadgeSize}
+        width={IconBadgeSize}
+        label={generationNumber}
+      />
+      <NewbornInfoTitle>
         <b>{newbornNumber}</b> Newborns
-      </div>
-    </div>
+      </NewbornInfoTitle>
+    </Wrapper>
   );
 }
 

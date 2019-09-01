@@ -17,7 +17,7 @@ export const returnNewbornRecordInfo = info => {
       ? info.models.items[0].episodes.items[0].steps.items[1].step
       : null;
     const currentIndex = currentMeanReward - previousMeanReward;
-    console.log(info);
+
     newbornInfo = {
       name: info.name || "",
       id: info.id || "",

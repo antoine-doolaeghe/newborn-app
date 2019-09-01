@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { withAuthenticator } from "aws-amplify-react";
 import { withApollo } from "react-apollo";
@@ -9,7 +9,12 @@ import Menu from "@material-ui/core/Menu";
 import { withCurrentUser } from "../hoc";
 import NavigationButton from "./navigationButton";
 import ProfileButton from "./profileButton";
-import { HeaderContainer, NavigationWrapper, HeaderLogo } from "./header.style";
+import {
+  HeaderContainer,
+  HeaderSpacer,
+  NavigationWrapper,
+  HeaderLogo
+} from "./header.style";
 
 const Header = ({ client, location, currentUserName }) => {
   const redirect = location.pathname === "/" ? "catalogue" : "/";
@@ -78,14 +83,14 @@ const Header = ({ client, location, currentUserName }) => {
     return <HeaderLogo src="/images/newborn-logo.png" />;
   };
   return (
-    <>
-      <div style={{ position: "relative", height: 75 }} />
+    <Fragment>
+      <HeaderSpacer />
       <HeaderContainer>
         {returnLeftHandSideNavigation()}
         {returnNewbornLogo()}
         {returnRightHandSideNavigation()}
       </HeaderContainer>
-    </>
+    </Fragment>
   );
 };
 
