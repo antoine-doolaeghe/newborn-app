@@ -4,6 +4,7 @@ AWS.config.update({ region: "eu-west-1" });
 
 exports.handler = function(event, context, callback) {
   const newbornId = event.arguments.newbornId;
+  const trainerId = event.arguments.trainerId;
 
   const commands = [
     ...config.initEc2User,
@@ -13,7 +14,7 @@ exports.handler = function(event, context, callback) {
     config.initPython3,
     ...config.installProjectDependency,
     config.authorizeBuild,
-    config.initTraining(newbornId)
+    config.initTraining(newbornId, trainerId)
   ];
 
   const userData = new Buffer(commands.join("\n")).toString("base64");

@@ -23,8 +23,8 @@ module.exports = {
     "pip install -e ./",
     "cd .."
   ],
-  initTraining: function(newbornId) {
-    return `/home/ubuntu/anaconda3/envs/python3/bin/mlagents-learn unity-volume/config/trainer_config.yaml --env=./newborn --train --newborn-id=${newbornId} --no-graphics --api-connection`;
+  initTraining: function(newbornId, trainerId) {
+    return `/home/ubuntu/anaconda3/envs/python3/bin/mlagents-learn unity-volume/config/trainer_config.yaml --env=./newborn --train --newborn-id=${newbornId} --trainer-id=${trainerId} --no-graphics --api-connection`;
   },
   instanceParams: function(userData) {
     return {
