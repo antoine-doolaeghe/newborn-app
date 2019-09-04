@@ -43,6 +43,9 @@ const NewBornRecord = ({ id, setId, open, onClose, newbornModelInfo }) => {
               if (error) {
                 return <ErrorDialog open message={error.message} />;
               }
+              if (loading) {
+                return "loadin";
+              }
               const newbornRecordInfo = returnNewbornRecordInfo(
                 data.getNewborn
               );

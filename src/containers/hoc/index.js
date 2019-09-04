@@ -1,4 +1,5 @@
 import withCurrentUser from "./withCurrentUser";
 import withHeader from "./withHeader";
+import withRecord from "./withRecord";
 
-export { withCurrentUser, withHeader };
+export { withRecord, withCurrentUser, withHeader };
