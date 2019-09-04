@@ -29,8 +29,8 @@ export const CreateTrainerTitle = styled.section`
 export const CardContent = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100%;
+  justify-content: space-between;
 `;
 
 export const TrainerTitleInput = styled(TextInput)`
@@ -45,6 +45,6 @@ export const TrainerActionWrapper = styled.div`
 
 export const CreateTrainerButton = styled(DefaultButton)`
   flex: "auto";
-  margin-left: 0;
+  margin: 0px 5px 5px 5px;
   width: 100%;
 `;

@@ -1,85 +1,50 @@
-import React, { Fragment, useState } from "react";
-import ClearIcon from "@material-ui/icons/Clear";
-import Backdrop from "@material-ui/core/Backdrop";
-import { IconButton } from "../../../molecules/buttons";
+import React from "react";
 import {
   CardWrapper,
   CardContent,
-  TrainerTitleInput,
+  // TrainerTitleInput,
   TrainerActionWrapper,
-  CreateTrainerButton,
-  CreateTrainerTitle
+  CreateTrainerButton
 } from "./style/createTrainerCard.style";
+import TrainerTemplate from "./trainerTemplate/trainerTemplate";
 
-function CreateTrainerCard({ onCreateClick, currentUserId }) {
-  const [trainerTitle, setTrainerTitle] = useState(false);
-  const [isFormOpen, setIsFormOpen] = useState(false);
-  const [helperText, setHelperText] = useState("");
-  const [error, setError] = useState(null);
+function CreateTrainerCard() {
+  // const [trainerTitle, setTrainerTitle] = useState(false);
+  // const [helperText, setHelperText] = useState("");
+  // const [error, setError] = useState(null);
   return (
-    <Fragment>
-      {isFormOpen && (
-        <Backdrop
-          style={{ zIndex: isFormOpen ? 1 : -1 }}
-          invisible={false}
-          open={isFormOpen}
-        />
-      )}
-      <CardWrapper style={{ background: "white", zIndex: isFormOpen ? 2 : 0 }}>
-        {!isFormOpen ? (
-          <CreateTrainerTitle
-            onClick={() => {
-              setIsFormOpen(true);
-            }}
+    <CardWrapper
+      style={{
+        background: "white",
+        border: "1px solid orange"
+      }}
+    >
+      <CardContent>
+        <div>
+          <TrainerTemplate />
+        </div>
+        <TrainerActionWrapper>
+          <CreateTrainerButton
+            // onClick={() => {
+            //   if (trainerTitle.length > 3) {
+            //     onCreateClick({
+            //       variables: {
+            //         title: trainerTitle,
+            //         trainerOwnerId: currentUserId
+            //       }
+            //     });
+            //   } else {
+            //     setHelperText("Trainer title should be more than 3 characters");
+            //     setError(true);
+            //   }
+            // }}
+            color="primary"
           >
-            Create a Trainer
-          </CreateTrainerTitle>
-        ) : (
-          <CardContent>
-            <TrainerTitleInput
-              onChange={event => {
-                setTrainerTitle(event.target.value);
-              }}
-              placeholder="Add trainer title"
-              helperText={helperText}
-              error={error}
-            />
-            <TrainerActionWrapper>
-              <IconButton
-                width="30px"
-                height="30px"
-                color="light"
-                onClick={() => {
-                  setIsFormOpen(false);
-                }}
-              >
-                <ClearIcon />
-              </IconButton>
-              <CreateTrainerButton
-                onClick={() => {
-                  if (trainerTitle.length > 3) {
-                    onCreateClick({
-                      variables: {
-                        title: trainerTitle,
-                        trainerOwnerId: currentUserId
-                      }
-                    });
-                  } else {
-                    setHelperText(
-                      "Trainer title should be more than 3 characters"
-                    );
-                    setError(true);
-                  }
-                }}
-                color="primary"
-              >
-                Create Trainer
-              </CreateTrainerButton>
-            </TrainerActionWrapper>
-          </CardContent>
-        )}
-      </CardWrapper>
-    </Fragment>
+            Create Trainer
+          </CreateTrainerButton>
+        </TrainerActionWrapper>
+      </CardContent>
+    </CardWrapper>
   );
 }
 
