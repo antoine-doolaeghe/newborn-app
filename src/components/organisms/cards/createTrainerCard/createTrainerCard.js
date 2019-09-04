@@ -1,43 +1,26 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
   CardWrapper,
   CardContent,
-  // TrainerTitleInput,
   TrainerActionWrapper,
   CreateTrainerButton
 } from "./style/createTrainerCard.style";
 import TrainerTemplate from "./trainerTemplate/trainerTemplate";
 
-function CreateTrainerCard() {
-  // const [trainerTitle, setTrainerTitle] = useState(false);
-  // const [helperText, setHelperText] = useState("");
-  // const [error, setError] = useState(null);
+function CreateTrainerCard({ history }) {
   return (
-    <CardWrapper
-      style={{
-        background: "white",
-        border: "1px solid orange"
-      }}
-    >
+    <CardWrapper>
       <CardContent>
         <div>
           <TrainerTemplate />
         </div>
         <TrainerActionWrapper>
           <CreateTrainerButton
-            // onClick={() => {
-            //   if (trainerTitle.length > 3) {
-            //     onCreateClick({
-            //       variables: {
-            //         title: trainerTitle,
-            //         trainerOwnerId: currentUserId
-            //       }
-            //     });
-            //   } else {
-            //     setHelperText("Trainer title should be more than 3 characters");
-            //     setError(true);
-            //   }
-            // }}
+            onClick={() => {
+              history.push("./builder/bf85eeb2-b77b-4e1d-aedf-a8689e5dad9a");
+            }}
             color="primary"
           >
             Create Trainer
@@ -48,6 +31,10 @@ function CreateTrainerCard() {
   );
 }
 
-CreateTrainerCard.propTypes = {};
+CreateTrainerCard.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired
+};
 
-export default CreateTrainerCard;
+export default withRouter(CreateTrainerCard);
