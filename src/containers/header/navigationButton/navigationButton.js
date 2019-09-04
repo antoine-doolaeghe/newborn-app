@@ -2,6 +2,7 @@ import React from "react";
 import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
 import ViewList from "@material-ui/icons/ViewList";
 import Home from "@material-ui/icons/Home";
+import PropTypes from "prop-types";
 import { IconButton } from "../../../components/molecules/buttons";
 
 const NavigationButton = ({ redirect }) => {
@@ -9,7 +10,7 @@ const NavigationButton = ({ redirect }) => {
     switch (redirect) {
       case "live":
         return <PlayCircleOutline />;
-      case "/catalogue/newborn":
+      case "catalogue":
         return <ViewList />;
       case "/":
         return <Home />;
@@ -17,16 +18,18 @@ const NavigationButton = ({ redirect }) => {
         return "";
     }
   };
+
   const returnNavigationText = () => {
     switch (redirect) {
       case "live":
         return "Live";
-      case "/catalogue/newborn":
+      case "catalaogue":
         return "";
       default:
         return "";
     }
   };
+
   const returnWidth = () => {
     if (redirect === "live") {
       return "100px";
@@ -39,6 +42,10 @@ const NavigationButton = ({ redirect }) => {
       {returnNavigationText()}
     </IconButton>
   );
+};
+
+NavigationButton.propTypes = {
+  redirect: PropTypes.oneOf(["live", "catalogue", "/"])
 };
 
 export default NavigationButton;

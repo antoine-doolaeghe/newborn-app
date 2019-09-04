@@ -26,7 +26,7 @@ render(
     <Router>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/catalogue/newborn" component={Catalogue} />
+        <Route exact path="/catalogue" component={Catalogue} />
         <Route exact path="/builder/:id" component={Builder} />
       </Switch>
     </Router>
