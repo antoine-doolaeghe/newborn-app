@@ -9,7 +9,7 @@ const NavigationButton = ({ redirect }) => {
     switch (redirect) {
       case "live":
         return <PlayCircleOutline />;
-      case "catalogue":
+      case "/catalogue/newborn":
         return <ViewList />;
       case "/":
         return <Home />;
@@ -21,7 +21,7 @@ const NavigationButton = ({ redirect }) => {
     switch (redirect) {
       case "live":
         return "Live";
-      case "catalogue":
+      case "/catalogue/newborn":
         return "";
       default:
         return "";

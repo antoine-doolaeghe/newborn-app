@@ -17,7 +17,7 @@ import {
 } from "./header.style";
 
 const Header = ({ client, location, currentUserName }) => {
-  const redirect = location.pathname === "/" ? "catalogue" : "/";
+  const redirect = location.pathname === "/" ? "/catalogue/newborn" : "/";
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleLogout = () => {
