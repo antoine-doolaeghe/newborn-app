@@ -10,6 +10,7 @@ import {
 import TrainerTemplate from "./trainerTemplate/trainerTemplate";
 
 function CreateTrainerCard({ history }) {
+  const temporaryBuilderPath = "./builder/bf85eeb2-b77b-4e1d-aedf-a8689e5dad9a"; // TODO: Temporary path (use persisted builde ids)
   return (
     <CardWrapper>
       <CardContent>
@@ -19,7 +20,7 @@ function CreateTrainerCard({ history }) {
         <TrainerActionWrapper>
           <CreateTrainerButton
             onClick={() => {
-              history.push("./builder/bf85eeb2-b77b-4e1d-aedf-a8689e5dad9a");
+              history.push(temporaryBuilderPath);
             }}
             color="primary"
           >

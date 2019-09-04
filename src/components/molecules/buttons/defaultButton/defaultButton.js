@@ -15,7 +15,7 @@ const DefaultButton = styled.button`
   margin: ${Theme.spacing.small};
   outline: none;
   padding: 3px 7px;
-  will-change: box-shadow, transform;
+  will-change: background;
   &:hover {
     cursor: pointer;
     background: ${props => Theme.palette[props.color].dark};
