@@ -10,11 +10,11 @@ import lineChartOptions from "./lineChartOptions";
 import RecordGraphLoader from "./loader/recordGraphLoader";
 import { RecordGraphContainer } from "./recordGraph.style";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
-import { returnNewbornChartData } from "../../../utils/helpers/newbornChartHelpers";
+import { returnNewbornChartData } from "../../../utils/helpers/chartHelpers";
 import {
   returnSortedEpisodes,
   returnSortedSteps
-} from "../../../utils/helpers/newbornGlobalHelpers";
+} from "../../../utils/helpers/globalHelpers";
 
 const RecordGraph = ({ loading, modelId }) => {
   const returnNoEpisode = () => (

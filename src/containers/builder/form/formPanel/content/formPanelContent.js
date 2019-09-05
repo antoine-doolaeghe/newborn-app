@@ -3,9 +3,11 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import PropTypes from "prop-types";
 import NewbornSelect from "../../../newbornSelect/builderNewbornSelect";
 import Checkbox from "../../../../../components/atoms/checkboxes";
 import Slider from "../../../../../components/atoms/slider";
+import { Text } from "../../../../../components/atoms/text";
 
 export const FormPanelContent = ({ index }) => {
   const [trainerType, setTrainerType] = useState("static");
@@ -15,9 +17,9 @@ export const FormPanelContent = ({ index }) => {
   if (index === 1) {
     return (
       <ExpansionPanelDetails>
-        <p>The number of initial spawner/</p>
-        <p>Is static or area ?</p>
-        <p>If random </p>
+        <Text>The number of initial spawner</Text>
+        <Text>Is static or area ?</Text>
+        <Text>If random </Text>
       </ExpansionPanelDetails>
     );
   }
@@ -46,7 +48,7 @@ export const FormPanelContent = ({ index }) => {
       </Select>
       {trainerType === "dynamic" && (
         <div>
-          <p>Spawning area radius</p>
+          <Text>Spawning area radius</Text>
           <Slider
             defaultValue={30}
             aria-labelledby="discrete-slider"
@@ -92,7 +94,7 @@ export const FormPanelContent = ({ index }) => {
         label="Reward agent facing the target"
       />
       <div>
-        <p>Minimum time to reach target</p>
+        <Text>Minimum time to reach target</Text>
         <Slider
           defaultValue={30}
           aria-labelledby="discrete-slider"
@@ -104,7 +106,7 @@ export const FormPanelContent = ({ index }) => {
         />
       </div>
       <div>
-        <p>Number of time that it should reach before next step</p>
+        <Text>Number of time that it should reach before next step</Text>
         <Slider
           defaultValue={30}
           aria-labelledby="discrete-slider"
@@ -117,6 +119,10 @@ export const FormPanelContent = ({ index }) => {
       </div>
     </ExpansionPanelDetails>
   );
+};
+
+FormPanelContent.propTypes = {
+  index: PropTypes.number.isRequired
 };
 
 export default FormPanelContent;
