@@ -135,7 +135,6 @@ export const getNewborn = `query GetNewborn($id: ID!, $limit: Int) {
       userName
       profileImage
     }
-    id
     sex
     models {
       items {

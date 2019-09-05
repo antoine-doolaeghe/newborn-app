@@ -43,6 +43,9 @@ const NewBornRecord = ({ id, setId, open, onClose, newbornModelInfo }) => {
               if (error) {
                 return <ErrorDialog open message={error.message} />;
               }
+              if (loading) {
+                return "loadin";
+              }
               const newbornRecordInfo = returnNewbornRecordInfo(
                 data.getNewborn
               );
@@ -90,9 +93,9 @@ const NewBornRecord = ({ id, setId, open, onClose, newbornModelInfo }) => {
                     />
                   </Flex>
                   <RecordDetail
-                    step={newbornRecordInfo.currentStep}
-                    valueLoss={newbornRecordInfo.currentValueLoss}
-                    entropy={newbornRecordInfo.currentEntropy}
+                    step={newbornRecordInfo.step}
+                    valueLoss={newbornRecordInfo.valueLoss}
+                    entropy={newbornRecordInfo.entropy}
                     setId={setId}
                     partners={returnPartners()}
                     parents={returnParents()}

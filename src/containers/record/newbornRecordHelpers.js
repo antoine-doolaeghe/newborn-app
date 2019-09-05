@@ -1,42 +1,42 @@
 export const returnNewbornRecordInfo = info => {
-  let newbornInfo = {};
-  if (info) {
-    const currentMeanReward = info.models
-      ? info.models.items[0].episodes.items[0].steps.items[1].meanReward
-      : null;
-    const previousMeanReward = info.models
-      ? info.models.items[0].episodes.items[0].steps.items[0].meanReward
-      : null;
-    const currentEntropy = info.models
-      ? info.models.items[0].episodes.items[0].steps.items[1].entropy
-      : null;
-    const currentValueLoss = info.models
-      ? info.models.items[0].episodes.items[0].steps.items[1].valueLoss
-      : null;
-    const currentStep = info.models
-      ? info.models.items[0].episodes.items[0].steps.items[1].step
-      : null;
-    const currentIndex = currentMeanReward - previousMeanReward;
+  const { items } = info.models.items[0].episodes.items[0].steps;
+  let previousMeanReward = "--";
+  let meanReward = "--";
+  let entropy = "--";
+  let valueLoss = "--";
+  let step = "--";
+  let currentIndex = "--";
 
-    newbornInfo = {
-      name: info.name || "",
-      id: info.id || "",
-      developmentStage: info.developmentStage || "",
-      bornPlace: info.bornPlace || "unknown region",
-      birthDate: info.birthDate || "--",
-      modelId: info.models ? info.models.items[0].id : "",
-      currentMeanReward: currentMeanReward || "--",
-      currentEntropy: currentEntropy || "--",
-      currentIndex: currentIndex || "--",
-      currentValueLoss: currentValueLoss || "--",
-      currentStep: currentStep || "--",
-      trainingStage: info.trainingStage || "--",
-      ownerUserName: info.owner ? info.owner.userName : "",
-      ownerProfileImage: info.owner ? info.owner.profileImage : "",
-      parents: info.parents ? info.parents : [],
-      partners: info.partners ? info.partners : [],
-      childs: info.childs ? info.childs : []
-    };
+  if (items[0]) {
+    previousMeanReward = items[0].meanReward;
   }
-  return newbornInfo;
+
+  if (items[1]) {
+    ({ meanReward } = items[1]);
+    ({ entropy } = items[1]);
+    ({ valueLoss } = items[1]);
+    ({ step } = items[1]);
+  }
+
+  currentIndex = meanReward - previousMeanReward;
+
+  return {
+    name: info.name || "",
+    id: info.id || "",
+    developmentStage: info.developmentStage || "",
+    bornPlace: info.bornPlace || "unknown region",
+    birthDate: info.birthDate || "--",
+    modelId: info.models ? info.models.items[0].id : "",
+    meanReward,
+    entropy,
+    currentIndex,
+    valueLoss,
+    step,
+    trainingStage: info.trainingStage || "--",
+    ownerUserName: info.owner ? info.owner.userName : "",
+    ownerProfileImage: info.owner ? info.owner.profileImage : "",
+    parents: info.parents ? info.parents : [],
+    partners: info.partners ? info.partners : [],
+    childs: info.childs ? info.childs : []
+  };
 };

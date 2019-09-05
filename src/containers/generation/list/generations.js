@@ -1,24 +1,17 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
-
+import PropTypes from "prop-types";
 import * as queries from "../../../graphql/queries";
 import GenerationListLoader from "./loader/generationListLoader";
 import NewbornList from "../../newborn/list/newbornList";
-import NewbornRecord from "../../record/newbornRecord";
+import { withRecord } from "../../hoc";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 import GenerationSearch from "./search/generationsSearch";
 
 const limit = 1000;
 
-function GenerationList() {
-  const [isRecordOpen, setIsRecordOpen] = useState(false);
-  const [id, setId] = useState("");
-  const onRecordClose = () => setIsRecordOpen(false);
-  const onRecordOpen = event => {
-    setId(event.target.closest("section").dataset.newbornid);
-    setIsRecordOpen(true);
-  };
+function GenerationList({ onRecordOpen }) {
   let newbornCount = 0;
   const returnNewbornGeneration = () => {
     return (
@@ -58,17 +51,12 @@ function GenerationList() {
     );
   };
 
-  return (
-    <Fragment>
-      <NewbornRecord
-        setId={setId}
-        id={id}
-        open={isRecordOpen}
-        onClose={onRecordClose}
-      />
-      {returnNewbornGeneration()}
-    </Fragment>
-  );
+  return returnNewbornGeneration();
 }
 
-export default GenerationList;
+GenerationList.propTypes = {
+  currentUserId: PropTypes.string.isRequired,
+  onRecordOpen: PropTypes.func.isRequired
+};
+
+export default withRecord(GenerationList);

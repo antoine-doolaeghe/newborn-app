@@ -1,33 +1,15 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import { withRouter } from "react-router-dom";
 import * as queries from "../../../graphql/queries";
+import { withRecord } from "../../hoc";
 import NewbornList from "../../newborn/list/newbornList";
 import TrainerList from "../../trainer/list/trainerList";
-import Text from "../../../components/atoms/text/text";
-
-import { Button } from "../../../components/molecules/buttons";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 
-function UserHub({ history, currentUserId }) {
-  const returnListTitle = title => (
-    <div style={{ display: "flex" }}>
-      <Text size="large" weight="bold">
-        {title}
-      </Text>
-      <Button
-        color="secondary"
-        onClick={() => {
-          history.push("./");
-        }}
-      >
-        Browse trainer
-      </Button>
-    </div>
-  );
-
+function UserHub({ currentUserId, onRecordOpen }) {
   const returnUserTrainers = () => {
     return (
       <Query
@@ -45,7 +27,6 @@ function UserHub({ history, currentUserId }) {
           if (data.getUser) {
             return (
               <TrainerList
-                title={returnListTitle("My Trainers")}
                 currentUserId={currentUserId}
                 trainers={data.getUser.trainers.items}
                 loading={loading}
@@ -74,9 +55,9 @@ function UserHub({ history, currentUserId }) {
           if (data.getUser) {
             return (
               <NewbornList
-                title={returnListTitle("My Newborns")}
                 newborns={data.getUser.newborns.items}
                 loading={loading}
+                onRecordOpen={onRecordOpen}
               />
             );
           }
@@ -88,17 +69,18 @@ function UserHub({ history, currentUserId }) {
 
   if (currentUserId) {
     return (
-      <div>
+      <Fragment>
         {returnUserTrainers()}
         {returnUserNewborns()}
-      </div>
+      </Fragment>
     );
   }
   return null;
 }
 
 UserHub.propTypes = {
-  currentUserId: PropTypes.string.isRequired
+  currentUserId: PropTypes.string.isRequired,
+  onRecordOpen: PropTypes.func.isRequired
 };
 
-export default withRouter(UserHub);
+export default withRecord(withRouter(UserHub));
