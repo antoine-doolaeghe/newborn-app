@@ -12,7 +12,7 @@ function RecordInfo({
   loading,
   newbornInfo: {
     birthDate,
-    currentMeanReward,
+    meanReward,
     currentIndex,
     ownerUserName,
     ownerProfileImage
@@ -27,11 +27,7 @@ function RecordInfo({
         <Fragment>
           <ValueWrapper>
             <Flex align="center">
-              <Info
-                label="Current Reward"
-                value={currentMeanReward}
-                size="80px"
-              />
+              <Info label="Current Reward" value={meanReward} size="80px" />
               <Badge label={index} />
             </Flex>
           </ValueWrapper>

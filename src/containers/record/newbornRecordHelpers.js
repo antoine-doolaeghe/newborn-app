@@ -1,11 +1,24 @@
 export const returnNewbornRecordInfo = info => {
-  const { steps } = info.models.items[0].episodes.items[0].steps;
-  const currentMeanReward = steps ? steps.items[1].meanReward : null;
-  const previousMeanReward = steps.items[0] ? steps.items[0].meanReward : null;
-  const currentEntropy = steps.items[1] ? steps.items[1].entropy : null;
-  const currentValueLoss = steps.items[1] ? steps.items[1].valueLoss : null;
-  const currentStep = steps.items[1] ? steps.items[1].step : null;
-  const currentIndex = currentMeanReward - previousMeanReward;
+  const { items } = info.models.items[0].episodes.items[0].steps;
+  let previousMeanReward = "--";
+  let meanReward = "--";
+  let entropy = "--";
+  let valueLoss = "--";
+  let step = "--";
+  let currentIndex = "--";
+
+  if (items[0]) {
+    previousMeanReward = items[0].meanReward;
+  }
+
+  if (items[1]) {
+    ({ meanReward } = items[1]);
+    ({ entropy } = items[1]);
+    ({ valueLoss } = items[1]);
+    ({ step } = items[1]);
+  }
+
+  currentIndex = meanReward - previousMeanReward;
 
   return {
     name: info.name || "",
@@ -14,11 +27,11 @@ export const returnNewbornRecordInfo = info => {
     bornPlace: info.bornPlace || "unknown region",
     birthDate: info.birthDate || "--",
     modelId: info.models ? info.models.items[0].id : "",
-    currentMeanReward: currentMeanReward || "--",
-    currentEntropy: currentEntropy || "--",
-    currentIndex: currentIndex || "--",
-    currentValueLoss: currentValueLoss || "--",
-    currentStep: currentStep || "--",
+    meanReward,
+    entropy,
+    currentIndex,
+    valueLoss,
+    step,
     trainingStage: info.trainingStage || "--",
     ownerUserName: info.owner ? info.owner.userName : "",
     ownerProfileImage: info.owner ? info.owner.profileImage : "",
