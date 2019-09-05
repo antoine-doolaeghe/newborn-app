@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
+import gql from "graphql-tag";
 import { withRouter } from "react-router-dom";
-
 import TrainerCard from "../../../components/organisms/cards/trainerCard/trainerCard";
 import CardList from "../../../components/organisms/lists/cardList/cardList";
 import { CreateTrainerCard } from "../../../components/organisms/cards/createTrainerCard";
@@ -18,16 +17,6 @@ const CREATE_TRAINER = gql`
 
 function TrainerList({ history, trainers, title, loading, currentUserId }) {
   let newbornCardList = [];
-  if (loading) {
-    for (let i = 0; i < 9; i++) {
-      newbornCardList = [...newbornCardList, <TrainerCard loading={loading} />];
-    }
-  } else {
-    newbornCardList = trainers.map(trainer => {
-      return <TrainerCard title={trainer.title} id={trainer.id} />;
-    });
-  }
-
   newbornCardList.push(
     <Mutation mutation={CREATE_TRAINER}>
       {(createTrainer, { data }) => {
@@ -44,6 +33,17 @@ function TrainerList({ history, trainers, title, loading, currentUserId }) {
     </Mutation>
   );
 
+  if (loading) {
+    for (let i = 0; i < 9; i++) {
+      newbornCardList = [...newbornCardList, <TrainerCard loading={loading} />];
+    }
+  } else {
+    const trainerList = trainers.map(trainer => {
+      return <TrainerCard title={trainer.title} id={trainer.id} />;
+    });
+    newbornCardList = [...newbornCardList, ...trainerList];
+  }
+
   return (
     <CardList
       title={title}
@@ -58,7 +58,6 @@ TrainerList.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
-  currentUserId: PropTypes.string.isRequired,
   trainers: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired

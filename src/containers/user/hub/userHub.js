@@ -2,17 +2,30 @@ import React from "react";
 import PropTypes from "prop-types";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import { withRouter } from "react-router-dom";
 import * as queries from "../../../graphql/queries";
 import NewbornList from "../../newborn/list/newbornList";
 import TrainerList from "../../trainer/list/trainerList";
 import Text from "../../../components/atoms/text/text";
+
+import { Button } from "../../../components/molecules/buttons";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 
-function UserHub({ currentUserId }) {
+function UserHub({ history, currentUserId }) {
   const returnListTitle = title => (
-    <Text size="large" weight="bold">
-      {title}
-    </Text>
+    <div style={{ display: "flex" }}>
+      <Text size="large" weight="bold">
+        {title}
+      </Text>
+      <Button
+        color="secondary"
+        onClick={() => {
+          history.push("./");
+        }}
+      >
+        Browse trainer
+      </Button>
+    </div>
   );
 
   const returnUserTrainers = () => {
@@ -88,4 +101,4 @@ UserHub.propTypes = {
   currentUserId: PropTypes.string.isRequired
 };
 
-export default UserHub;
+export default withRouter(UserHub);
