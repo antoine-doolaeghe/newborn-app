@@ -8,7 +8,7 @@ import * as queries from "../../../graphql/queries";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 import NewbornParentsLoader from "./loader/newbornParentsLoader";
 import Chip from "../../../components/atoms/chips/chip";
-import { returnTextAbstract } from "../../../utils/helpers/newbornGlobalHelpers";
+import { returnTextAbstract } from "../../../utils/helpers/globalHelpers";
 
 const NewbornChilds = ({ setId, parents, loading }) => {
   const returnfilter = () => {

@@ -1,10 +1,8 @@
 import styled from "styled-components";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 
-export const StyledExpansionPanelSummary = styled(ExpansionPanelSummary)`
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
+export const Wrapper = styled.div`
+  flex: 1;
+  margin: 20px;
 `;
 
 export const Heading = styled.div`

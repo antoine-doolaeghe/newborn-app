@@ -1,8 +1,13 @@
 import React from "react";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import PropTypes from "prop-types";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { Heading, SecondaryHeading } from "./style/formPanelSummary.style";
+import {
+  Heading,
+  SecondaryHeading,
+  StyledExpansionPanelSummary
+} from "./style/formPanelSummary.style";
 import DefaultButton from "../../../../../components/molecules/buttons/defaultButton/defaultButton";
+import { Text } from "../../../../../components/atoms/text";
 
 export const FormPanelSummary = ({
   index,
@@ -12,34 +17,43 @@ export const FormPanelSummary = ({
   setSteps,
   setActiveStep
 }) => {
+  const handlePanelOnclick = () => {
+    if (activeStep === index) {
+      setActiveStep(null);
+    } else {
+      setActiveStep(index);
+    }
+  };
   return (
-    <ExpansionPanelSummary
+    <StyledExpansionPanelSummary
       expandIcon={<ExpandMoreIcon />}
-      style={{
-        cursor: "pointer",
-        display: "flex",
-        flexDirection: "row"
-      }}
-      onClick={() => {
-        if (activeStep === index) {
-          setActiveStep(null);
-        } else {
-          setActiveStep(index);
-        }
-      }}
+      onClick={handlePanelOnclick}
     >
-      <Heading>{step}</Heading>
-      <SecondaryHeading>{step}</SecondaryHeading>
+      <Heading>
+        <Text>{step}</Text>
+      </Heading>
+      <SecondaryHeading>
+        <Text>{step}</Text>
+      </SecondaryHeading>
       <DefaultButton
         color="primary"
         onClick={() => {
           setSteps([...steps.splice(index, index + 1)]);
         }}
       >
-        delete
+        <Text>Delete</Text>
       </DefaultButton>
-    </ExpansionPanelSummary>
+    </StyledExpansionPanelSummary>
   );
+};
+
+FormPanelSummary.propTypes = {
+  index: PropTypes.number.isRequired,
+  step: PropTypes.string.isRequired,
+  steps: PropTypes.array.isRequired,
+  activeStep: PropTypes.number.isRequired,
+  setActiveStep: PropTypes.func.isRequired,
+  setSteps: PropTypes.func.isRequired
 };
 
 export default FormPanelSummary;

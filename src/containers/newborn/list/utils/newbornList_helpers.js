@@ -1,9 +1,9 @@
-import { returnNewbornChartData } from "../../../../utils/helpers/newbornChartHelpers";
+import { returnNewbornChartData } from "../../../../utils/helpers/chartHelpers";
 import {
   returnSortedEpisodes,
   returnSortedSteps,
   returnFormattedTime
-} from "../../../../utils/helpers/newbornGlobalHelpers";
+} from "../../../../utils/helpers/globalHelpers";
 
 import { Theme } from "../../../../theme/theme";
 

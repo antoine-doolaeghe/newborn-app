@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import FormPanel from "./formPanel/formPanel";
 import NewStepButton from "./formPanel/newStepButton/newStepButton";
 import TrainButton from "./formPanel/trainButton/trainButton";
@@ -34,6 +35,10 @@ export const BuilderForm = ({ trainerId }) => {
       />
     </Wrapper>
   );
+};
+
+BuilderForm.propTypes = {
+  trainerId: PropTypes.string.isRequired
 };
 
 export default BuilderForm;

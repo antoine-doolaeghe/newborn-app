@@ -22,9 +22,7 @@ function Builder() {
   useEffect(() => {
     return () => {
       if (instance) {
-        instance.Quit(() => {
-          console.log("done!");
-        });
+        instance.Quit();
       }
     };
   }, [instance]);

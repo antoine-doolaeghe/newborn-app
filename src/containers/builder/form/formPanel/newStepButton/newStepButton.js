@@ -1,35 +1,29 @@
 import React from "react";
-import styled from "styled-components";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-
-export const Heading = styled.div`
-  font-size: 20px;
-  flex-basis: 33.33%;
-  flex-shrink: 0;
-  height: 50px;
-`;
+import PropTypes from "prop-types";
+import { Heading, StyledExpansionPanel } from "./style/newStepButton.style";
+import { Text } from "../../../../../components/atoms/text";
 
 export const NewStepButton = ({ steps, step, setSteps }) => {
   return (
-    <ExpansionPanel
-      style={{
-        minHeight: 48,
-        display: "flex",
-        alignItems: "center",
-        cursor: "pointer"
-      }}
+    <StyledExpansionPanel
       onClick={() => {
-        console.log(steps.slice(0, steps.length - 2));
         setSteps([
           ...steps.slice(0, steps.length - 1),
-          `Target ${step.length}`,
-          "Add a training level"
+          `Target ${step.length}`
         ]);
       }}
     >
-      <Heading>{step}</Heading>
-    </ExpansionPanel>
+      <Heading>
+        <Text>{step}</Text>
+      </Heading>
+    </StyledExpansionPanel>
   );
+};
+
+NewStepButton.propTypes = {
+  steps: PropTypes.array.isRequired,
+  step: PropTypes.number.isRequired,
+  setSteps: PropTypes.func.isRequired
 };
 
 export default NewStepButton;

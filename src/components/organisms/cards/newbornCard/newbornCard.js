@@ -8,7 +8,7 @@ import {
   CardWrapper,
   CardButtonWrapper,
   CardChartWrapper
-} from "./newbornCard.style";
+} from "./style/newbornCard.style";
 import CardButton from "./button";
 import lineChartOptions from "./lineChartOptions";
 import NewbornCardLoader from "./loader/newbornCardLoader";

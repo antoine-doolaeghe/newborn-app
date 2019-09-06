@@ -1,10 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-import Chip from "@material-ui/core/Chip";
-
-export const StyledChip = styled(Chip)`
-  margin: 5px 0px;
-`;
+import { StyledChip } from "./style/chip.style";
 
 const DefaultChip = props => {
   return <StyledChip {...props} />;

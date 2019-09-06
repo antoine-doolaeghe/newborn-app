@@ -6,7 +6,7 @@ import { InfoWrapper, ValueWrapper } from "./style/recordInfo.style";
 import Info from "../../../molecules/infos/info";
 import { Badge } from "../../../atoms/badges";
 import { Flex } from "../../../../theme/layout/grid.style";
-import { returnFormattedTime } from "../../../../utils/helpers/newbornGlobalHelpers";
+import { returnFormattedTime } from "../../../../utils/helpers/globalHelpers";
 
 function RecordInfo({
   loading,

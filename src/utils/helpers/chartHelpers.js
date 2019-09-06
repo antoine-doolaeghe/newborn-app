@@ -1,4 +1,4 @@
-import { returnUtcTime, sortByDate } from "./newbornGlobalHelpers";
+import { returnUtcTime, sortByDate } from "./globalHelpers";
 
 export const returnSortedEpisodes = info => {
   let episodes = [];

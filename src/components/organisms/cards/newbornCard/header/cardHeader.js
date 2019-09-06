@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   NewbornCardHeaderContainer,
   Title,
@@ -17,5 +18,11 @@ function CardHeader({ title, subTitle, displayBadge }) {
     </NewbornCardHeaderContainer>
   );
 }
+
+CardHeader.propTypes = {
+  title: PropTypes.string.isRequired,
+  subTitle: PropTypes.string.isRequired,
+  displayBadge: PropTypes.bool.isRequired
+};
 
 export default CardHeader;

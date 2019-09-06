@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
+import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import * as queries from "../../graphql/queries";
 import BuilderForm from "../../containers/builder/form/builderForm";
@@ -35,6 +36,12 @@ export const Builder = ({ match }) => {
       }}
     </Query>
   );
+};
+
+Builder.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.string.isRequired
+  }).isRequired
 };
 
 export default withRouter(withHeader(Builder));

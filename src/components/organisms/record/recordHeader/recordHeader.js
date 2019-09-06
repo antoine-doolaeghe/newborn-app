@@ -4,11 +4,12 @@ import ClearIcon from "@material-ui/icons/Clear";
 import { IconButton } from "../../../molecules/buttons";
 import { RecordHeaderWrapper } from "./style/recordHeader.style";
 import RecordHeaderLoader from "./loader/recordHeaderLoader";
+import { Text } from "../../../atoms/text";
 
 function RecordHeader({ loading, onClose, title }) {
   return (
     <RecordHeaderWrapper>
-      {loading ? <RecordHeaderLoader /> : <p>{title}</p>}
+      {loading ? <RecordHeaderLoader /> : <Text>{title}</Text>}
       <IconButton width="30px" height="30px" color="light" onClick={onClose}>
         <ClearIcon />
       </IconButton>
