@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter, Link } from "react-router-dom";
-import { CardWrapper } from "../newbornCard/newbornCard.style";
+import { CardWrapper } from "../newbornCard/style/newbornCard.style";
 import CardHeader from "../newbornCard/header/cardHeader";
 import NewbornCardLoader from "./loader/trainerCardLoader";
 

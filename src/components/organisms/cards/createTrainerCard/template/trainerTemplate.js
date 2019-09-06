@@ -26,7 +26,7 @@ function SwipeableTextMobileStepper() {
   }
 
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <SwipeableViews
         index={activeStep}
         onChangeIndex={handleStepChange}
