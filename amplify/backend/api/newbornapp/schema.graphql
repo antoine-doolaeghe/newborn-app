@@ -37,6 +37,7 @@ type Newborn @model {
   step: Int
   training: Boolean
   trainingStage: String
+  trainer: Trainer @connection(name: "NewbornTrainer")
   owner: User @connection(name: "NewbornOwner")
   generation: Generation! @connection(name: "GenerationNewborn")
   models: [Model] @connection(name: "NewbornModel")
@@ -79,6 +80,7 @@ type Trainer @model {
   createdAt: String
   id: String!
   owner: User @connection(name: "TrainerOwner")
+  newborns: [Newborn] @connection(name: "NewbornTrainer")
   data: String
 }
 

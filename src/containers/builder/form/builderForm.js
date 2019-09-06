@@ -22,17 +22,10 @@ export const BuilderForm = ({ trainerId }) => {
           />
         );
       })}
-      <NewStepButton
-        step="Add a new trainer"
-        steps={steps}
-        setSteps={setSteps}
-      />
-      <TrainButton
-        step="Train"
-        trainerId={trainerId}
-        steps={steps}
-        setSteps={setSteps}
-      />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <NewStepButton steps={steps} setSteps={setSteps} />
+        <TrainButton trainerId={trainerId} steps={steps} setSteps={setSteps} />
+      </div>
     </Wrapper>
   );
 };

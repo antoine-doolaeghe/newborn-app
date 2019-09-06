@@ -27,7 +27,7 @@ export const Builder = ({ match }) => {
         return (
           <Fragment>
             <BuilderHeader title={title} />
-            <div style={{ width: "100%", height: "100%", display: "flex" }}>
+            <div style={{ display: "flex" }}>
               <BuilderForm trainerId={id} />
               <BuilderGame />
             </div>

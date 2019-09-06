@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import {
   Heading,
-  SecondaryHeading,
   StyledExpansionPanelSummary
 } from "./style/formPanelSummary.style";
 import DefaultButton from "../../../../../components/molecules/buttons/defaultButton/defaultButton";
@@ -11,7 +10,7 @@ import { Text } from "../../../../../components/atoms/text";
 
 export const FormPanelSummary = ({
   index,
-  step,
+  label,
   steps,
   activeStep,
   setSteps,
@@ -29,27 +28,32 @@ export const FormPanelSummary = ({
       expandIcon={<ExpandMoreIcon />}
       onClick={handlePanelOnclick}
     >
-      <Heading>
-        <Text>{step}</Text>
-      </Heading>
-      <SecondaryHeading>
-        <Text>{step}</Text>
-      </SecondaryHeading>
-      <DefaultButton
-        color="primary"
-        onClick={() => {
-          setSteps([...steps.splice(index, index + 1)]);
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          width: "100%"
         }}
       >
-        <Text>Delete</Text>
-      </DefaultButton>
+        <Heading>
+          <Text>{label}</Text>
+        </Heading>
+        <DefaultButton
+          color="primary"
+          onClick={() => {
+            const array = steps.filter((_, i) => index !== i);
+            setSteps(array);
+          }}
+        >
+          <Text>Delete</Text>
+        </DefaultButton>
+      </div>
     </StyledExpansionPanelSummary>
   );
 };
 
 FormPanelSummary.propTypes = {
   index: PropTypes.number.isRequired,
-  step: PropTypes.string.isRequired,
   steps: PropTypes.array.isRequired,
   activeStep: PropTypes.number.isRequired,
   setActiveStep: PropTypes.func.isRequired,

@@ -24,7 +24,7 @@ export const FormPanel = ({
         setActiveStep={setActiveStep}
         setSteps={setSteps}
         steps={steps}
-        step={step}
+        label={step}
       />
       <FormaPanelContent index={index} />
     </StyledExpansionPanel>
