@@ -23,6 +23,7 @@ export const FormPanelSummary = ({
       setActiveStep(index);
     }
   };
+  const hasCancelButton = index !== 0 && index !== 1;
   return (
     <StyledExpansionPanelSummary
       expandIcon={<ExpandMoreIcon />}
@@ -38,15 +39,17 @@ export const FormPanelSummary = ({
         <Heading>
           <Text>{label}</Text>
         </Heading>
-        <DefaultButton
-          color="primary"
-          onClick={() => {
-            const array = steps.filter((_, i) => index !== i);
-            setSteps(array);
-          }}
-        >
-          <Text>Delete</Text>
-        </DefaultButton>
+        {hasCancelButton && (
+          <DefaultButton
+            color="primary"
+            onClick={() => {
+              const array = steps.filter((_, i) => index !== i);
+              setSteps(array);
+            }}
+          >
+            <Text>Delete</Text>
+          </DefaultButton>
+        )}
       </div>
     </StyledExpansionPanelSummary>
   );

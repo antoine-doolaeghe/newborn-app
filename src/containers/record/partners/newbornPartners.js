@@ -1,11 +1,12 @@
 import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-
+import PropTypes from "prop-types";
 import * as queries from "../../../graphql/queries";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 import NewbornPartnersLoader from "./loader/newbornPartnersLoader";
 import AvatarGroup from "../../../components/molecules/avatarGroup/avatarGroup";
+import { Text } from "../../../components/atoms/text";
 
 const NewbornPartners = ({ setId, partners, loading }) => {
   if (loading) {
@@ -18,7 +19,7 @@ const NewbornPartners = ({ setId, partners, loading }) => {
   };
 
   if (partners.length === 0) {
-    return "No Partners";
+    return <Text>No Partners</Text>;
   }
 
   return (
@@ -49,6 +50,12 @@ const NewbornPartners = ({ setId, partners, loading }) => {
       }}
     </Query>
   );
+};
+
+NewbornPartners.propTypes = {
+  setId: PropTypes.func.isRequired,
+  partners: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
 export default NewbornPartners;

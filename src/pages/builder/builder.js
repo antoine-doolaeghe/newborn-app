@@ -8,8 +8,10 @@ import BuilderForm from "../../containers/builder/form/builderForm";
 import BuilderHeader from "../../containers/builder/header/builderHeader";
 import BuilderGame from "../../containers/builder/game/builderGame";
 import withHeader from "../../containers/hoc/withHeader";
+import { Text } from "../../components/atoms/text";
+import withCurrentUser from "../../containers/hoc/withCurrentUser";
 
-export const Builder = ({ match }) => {
+export const Builder = ({ match, currentUserNewborns }) => {
   return (
     <Query
       query={gql(queries.getTrainer)}
@@ -19,16 +21,20 @@ export const Builder = ({ match }) => {
     >
       {({ loading, data }) => {
         if (loading || !data) {
-          return "loading";
+          return <Text>loading</Text>;
         }
         const {
-          getTrainer: { title, id }
+          getTrainer: { title, id, newborns }
         } = data;
         return (
           <Fragment>
             <BuilderHeader title={title} />
             <div style={{ display: "flex" }}>
-              <BuilderForm trainerId={id} />
+              <BuilderForm
+                trainerId={id}
+                trainerNewborns={newborns}
+                userNewborns={currentUserNewborns}
+              />
               <BuilderGame />
             </div>
           </Fragment>
@@ -44,4 +50,4 @@ Builder.propTypes = {
   }).isRequired
 };
 
-export default withRouter(withHeader(Builder));
+export default withRouter(withHeader(withCurrentUser(Builder)));

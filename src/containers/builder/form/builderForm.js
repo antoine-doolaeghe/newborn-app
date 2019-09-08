@@ -1,25 +1,47 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import FormPanel from "./formPanel/formPanel";
 import NewStepButton from "./formPanel/newStepButton/newStepButton";
 import TrainButton from "./formPanel/trainButton/trainButton";
-import { Wrapper } from "./style/builder.style";
+import { Wrapper, StyledExpansionPanel } from "./style/builder.style";
+import FormPanelSummary from "./formPanel/summary/formPanelSummary";
+import FormPanelContent from "./formPanel/content/formPanelContent";
+import NewbornSelect from "../newbornSelect/newbornSelect";
 
-export const BuilderForm = ({ trainerId }) => {
+export const BuilderForm = ({ trainerId, trainerNewborns, userNewborns }) => {
+  const [newborns, setNewborns] = useState(trainerNewborns);
   const [steps, setSteps] = useState(["Selected Newborn", "Spawning Agent"]);
   const [activeStep, setActiveStep] = useState(0);
+  const returnFormPanelContent = index => {
+    switch (index) {
+      case 0:
+        return (
+          <NewbornSelect
+            setNewborns={setNewborns}
+            newborns={newborns}
+            userNewborns={userNewborns}
+          />
+        );
+      default:
+        return <FormPanelContent index={index} />;
+    }
+  };
+
   return (
     <Wrapper>
       {steps.map((step, index) => {
+        const isActive = index === activeStep || index === 0 || index === 0;
         return (
-          <FormPanel
-            activeStep={activeStep}
-            step={step}
-            steps={steps}
-            index={index}
-            setSteps={setSteps}
-            setActiveStep={setActiveStep}
-          />
+          <StyledExpansionPanel expanded={isActive}>
+            <FormPanelSummary
+              index={index}
+              activeStep={activeStep}
+              setActiveStep={setActiveStep}
+              setSteps={setSteps}
+              steps={steps}
+              label={step}
+            />
+            {returnFormPanelContent(index)}
+          </StyledExpansionPanel>
         );
       })}
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -31,7 +53,9 @@ export const BuilderForm = ({ trainerId }) => {
 };
 
 BuilderForm.propTypes = {
-  trainerId: PropTypes.string.isRequired
+  trainerId: PropTypes.string.isRequired,
+  trainerNewborns: PropTypes.array.isRequired,
+  userNewborns: PropTypes.array.isRequired
 };
 
 export default BuilderForm;

@@ -16,8 +16,9 @@ export const FormPanel = ({
   setActiveStep,
   setSteps
 }) => {
+  const isActive = index === activeStep || index === 0 || index === 0;
   return (
-    <StyledExpansionPanel expanded={index === activeStep}>
+    <StyledExpansionPanel expanded={isActive}>
       <FormaPanelSummary
         index={index}
         activeStep={activeStep}

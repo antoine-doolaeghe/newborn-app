@@ -70,11 +70,13 @@ type Summary @model {
   valueLoss: Float
 }
 
+# TODO REMOVE THE PREDICTION TYPE
 type Prediction @model {
   meanReward: Float
   newborn: Newborn @connection(name: "NewbornPrediction")
 }
 
+# TODO YOU NEED TO LEARN ABOUT THE SCHEMA STITCHING
 type Trainer @model {
   title: String
   createdAt: String
@@ -82,6 +84,11 @@ type Trainer @model {
   owner: User @connection(name: "TrainerOwner")
   newborns: [Newborn] @connection(name: "NewbornTrainer")
   data: String
+}
+
+type TrainerStep @model {
+  target: Bool
+  position: String
 }
 
 type Subscription {
