@@ -6,15 +6,13 @@ const { spacing } = Theme;
 const cardSize = "220px";
 
 export const CardWrapper = styled.section(props => {
-  const { color, size } = props;
+  const { color } = props;
   const { spacing } = Theme;
   return `
   border: ${color ? `2px solid ${color.main}` : null};
   background: ${color ? color.light : null};
-  border-radius: ${
-    size === "large" ? `${spacing.medium} ${spacing.medium} 0px 0px` : "10px"
-  };
-  height: ${size === "large" ? "220px" : "50px"};
+  border-radius: ${spacing.medium} ${spacing.medium} 0px 0px;
+  height: 220px;
   margin-left: 30px;
   position: relative;
   width: ${props.size === "small" ? `100px` : cardSize};

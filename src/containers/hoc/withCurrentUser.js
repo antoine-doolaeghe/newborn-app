@@ -25,10 +25,9 @@ export default function withCurrentUser(Component) {
               });
             }
           });
-          const { newborns, currentUserName, currentUserId } = data;
+          const { currentUserName, currentUserId } = data;
           return (
             <Component
-              currentUserNewborns={newborns}
               currentUserName={currentUserName}
               currentUserId={currentUserId}
             />

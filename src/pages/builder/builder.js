@@ -11,7 +11,7 @@ import withHeader from "../../containers/hoc/withHeader";
 import { Text } from "../../components/atoms/text";
 import withCurrentUser from "../../containers/hoc/withCurrentUser";
 
-export const Builder = ({ match, currentUserNewborns }) => {
+export const Builder = ({ match }) => {
   return (
     <Query
       query={gql(queries.getTrainer)}
@@ -24,8 +24,11 @@ export const Builder = ({ match, currentUserNewborns }) => {
           return <Text>loading</Text>;
         }
         const {
-          getTrainer: { title, id, newborns }
+          getTrainer: { title, id, owner }
         } = data;
+        const newborns = data.getTrainer.newborns.items;
+        const currentUserNewborns = owner.newborns.items;
+        console.log(currentUserNewborns);
         return (
           <Fragment>
             <BuilderHeader title={title} />
@@ -50,4 +53,4 @@ Builder.propTypes = {
   }).isRequired
 };
 
-export default withRouter(withHeader(withCurrentUser(Builder)));
+export default withHeader(withCurrentUser(withRouter(Builder)));

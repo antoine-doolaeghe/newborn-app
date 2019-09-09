@@ -41,7 +41,6 @@ type Newborn @model {
   owner: User @connection(name: "NewbornOwner")
   generation: Generation! @connection(name: "GenerationNewborn")
   models: [Model] @connection(name: "NewbornModel")
-  predictions: [Prediction] @connection(name: "NewbornPrediction")
 }
 
 type Model @model {
@@ -70,12 +69,6 @@ type Summary @model {
   valueLoss: Float
 }
 
-# TODO REMOVE THE PREDICTION TYPE
-type Prediction @model {
-  meanReward: Float
-  newborn: Newborn @connection(name: "NewbornPrediction")
-}
-
 # TODO YOU NEED TO LEARN ABOUT THE SCHEMA STITCHING
 type Trainer @model {
   title: String
@@ -83,12 +76,14 @@ type Trainer @model {
   id: String!
   owner: User @connection(name: "TrainerOwner")
   newborns: [Newborn] @connection(name: "NewbornTrainer")
+  trainingStage: [TrainingStage] @connection(name: "TrainerStages")
   data: String
 }
 
-type TrainerStep @model {
-  target: Bool
+type TrainingStage @model {
+  target: Boolean
   position: String
+  trainer: Trainer @connection(name: "TrainerStages")
 }
 
 type Subscription {
