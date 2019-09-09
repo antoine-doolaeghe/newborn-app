@@ -176,6 +176,9 @@ export const updateNewborn = `mutation UpdateNewborn($input: UpdateNewbornInput!
     owner {
       id
     }
+    trainer {
+      id
+    }
     models {
       items {
         id

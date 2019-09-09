@@ -246,8 +246,10 @@ export const getTrainer = `query getTrainer($id: ID!) {
     newborns {
       items {
         id
+        name
       }
     }
+    id
     owner {
       newborns { 
         items {

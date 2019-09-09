@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { NativeSelect } from "@material-ui/core";
 import PropTypes from "prop-types";
 import DefaultChip from "../../../components/atoms/chips/chip";
@@ -6,7 +6,12 @@ import DefaultChip from "../../../components/atoms/chips/chip";
 import { NewbornListWrapper, Wrapper } from "./style/newbornSelect.style";
 import { Button } from "../../../components/molecules/buttons";
 
-export default function NewbornSelect({ newborns, userNewborns, setNewborns }) {
+export default function NewbornSelect({
+  newborns,
+  userNewborns,
+  setNewborns,
+  removeNewborns
+}) {
   const [selectedNewborn, setSelectedNewborn] = useState(
     userNewborns.filter(newborn => !newborns.includes(newborn))[0].name
   );
@@ -21,36 +26,34 @@ export default function NewbornSelect({ newborns, userNewborns, setNewborns }) {
   }, [newborns, userNewborns]);
 
   const handleDelete = chip => () => {
-    setNewborns(newborns.filter(newborn => chip !== newborn));
+    removeNewborns(chip);
   };
 
   const handleChange = event => {
-    setSelectedNewborn(event.target.value);
+    setSelectedNewborn(userNewborns[event.target.value]);
   };
 
   const handleAddSelectedNewborn = () => {
-    setNewborns([...newborns, selectedNewborn]);
+    setNewborns(selectedNewborn);
   };
 
   const returnNewbornChips = () =>
     newborns.map((data, index) => {
       let icon;
       return (
-        <Fragment>
-          <DefaultChip
-            key={index}
-            icon={icon}
-            label={data}
-            onDelete={handleDelete(data)}
-          />
-        </Fragment>
+        <DefaultChip
+          key={index}
+          icon={icon}
+          label={data.name}
+          onDelete={handleDelete(data)}
+        />
       );
     });
 
   const returnNewbornOption = () =>
-    userNewborns.map(option => {
-      if (!newborns.includes(option.name)) {
-        return <option>{option.name}</option>;
+    userNewborns.map((option, index) => {
+      if (!newborns.includes(option.id)) {
+        return <option value={index}>{option.name}</option>;
       }
       return null;
     });

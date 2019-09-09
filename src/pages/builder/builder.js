@@ -19,7 +19,7 @@ export const Builder = ({ match }) => {
         id: match.params.id
       }}
     >
-      {({ loading, data }) => {
+      {({ loading, data, refetch }) => {
         if (loading || !data) {
           return <Text>loading</Text>;
         }
@@ -28,12 +28,12 @@ export const Builder = ({ match }) => {
         } = data;
         const newborns = data.getTrainer.newborns.items;
         const currentUserNewborns = owner.newborns.items;
-        console.log(currentUserNewborns);
         return (
           <Fragment>
             <BuilderHeader title={title} />
             <div style={{ display: "flex" }}>
               <BuilderForm
+                refetch={refetch}
                 trainerId={id}
                 trainerNewborns={newborns}
                 userNewborns={currentUserNewborns}
