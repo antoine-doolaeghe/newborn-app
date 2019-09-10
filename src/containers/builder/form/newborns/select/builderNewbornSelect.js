@@ -1,9 +1,10 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { NativeSelect } from "@material-ui/core";
 import PropTypes from "prop-types";
+import { Wrapper } from "./style/builderNewbornSelect.style";
 import { Button } from "../../../../../components/molecules/buttons";
 
-export default function BuilderNewbornSelect({ newborns, add }) {
+export default function BuilderNewbornSelect({ newborns, add, loading }) {
   const [selectedNewborn, setSelectedNewborn] = useState(newborns[0].name);
 
   useEffect(() => {
@@ -41,8 +42,12 @@ export default function BuilderNewbornSelect({ newborns, add }) {
     });
 
   return (
-    <Fragment>
-      <NativeSelect style={{ width: "100%" }} onChange={handleChange}>
+    <Wrapper>
+      <NativeSelect
+        data-testid="builder_newborn_select"
+        style={{ width: "100%" }}
+        onChange={handleChange}
+      >
         {returnNewbornOption()}
       </NativeSelect>
       <Button
@@ -50,9 +55,9 @@ export default function BuilderNewbornSelect({ newborns, add }) {
         color="primary"
         onClick={handleAddSelectedNewborn}
       >
-        add
+        {loading ? "loading" : "add"}
       </Button>
-    </Fragment>
+    </Wrapper>
   );
 }
 
@@ -61,6 +66,7 @@ BuilderNewbornSelect.defaultProps = {
 };
 
 BuilderNewbornSelect.propTypes = {
+  loading: PropTypes.bool.isRequired,
   newborns: PropTypes.array,
   add: PropTypes.func.isRequired
 };

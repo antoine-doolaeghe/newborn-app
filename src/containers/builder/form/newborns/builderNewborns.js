@@ -6,6 +6,7 @@ import { updateNewborn } from "../../../../graphql/mutations";
 import BuilderNewbornSelect from "./select/builderNewbornSelect";
 import BuilderNewbornList from "./list/builderNewbornList";
 import { Wrapper } from "./style/builderNewborns.style";
+import { ErrorDialog } from "../../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 
 export default function BuilderNewborns({
   trainerNewborns,
@@ -15,7 +16,7 @@ export default function BuilderNewborns({
 }) {
   return (
     <Mutation mutation={gql(updateNewborn)}>
-      {updateNewborn => {
+      {(updateNewborn, { loading, error }) => {
         const handleAddNewborn = selectedNewborn => {
           updateNewborn({
             variables: {
@@ -42,11 +43,13 @@ export default function BuilderNewborns({
             <BuilderNewbornSelect
               newborns={userNewborns}
               add={handleAddNewborn}
+              loading={loading}
             />
             <BuilderNewbornList
               newborns={trainerNewborns}
               remove={handleRemoveNewborn}
             />
+            {error && <ErrorDialog open message={error.message} />}
           </Wrapper>
         );
       }}

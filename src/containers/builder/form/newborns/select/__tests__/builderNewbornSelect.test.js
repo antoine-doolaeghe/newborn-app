@@ -25,14 +25,12 @@ describe("Builder Newborn Select Component", () => {
 
   it("should render the list of newborns", () => {
     const { getByText } = render(<BuilderNewbornSelect {...props} />);
-    getByText("newborn1");
-    getByText("newborn2");
+    expect(getByText("newborn1")).toBeTruthy();
+    expect(getByText("newborn2")).toBeTruthy();
   });
 
   it("should render the add newborn button", () => {
-    const { getByTestId } = render(
-      <BuilderNewbornSelect {...props} />
-    );
-    getByTestId("builder_newborn_select_button");
+    const { getByTestId } = render(<BuilderNewbornSelect {...props} />);
+    expect(getByTestId("builder_newborn_select_button")).toBeTruthy();
   });
 });
