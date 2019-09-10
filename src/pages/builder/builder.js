@@ -30,7 +30,7 @@ export const Builder = ({ match }) => {
         const currentUserNewborns = owner.newborns.items;
         return (
           <Fragment>
-            <BuilderHeader title={title} />
+            <BuilderHeader id={id} title={title} />
             <div style={{ display: "flex" }}>
               <BuilderForm
                 refetch={refetch}

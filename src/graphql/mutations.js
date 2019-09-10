@@ -600,3 +600,10 @@ export const deletePrediction = `mutation DeletePrediction($input: DeletePredict
   }
 }
 `;
+export const updateTrainer = `mutation UpdateTrainer($input: UpdateTrainerInput!) {
+  updateTrainer(input: $input) {
+    id
+    title
+  }
+}
+`;

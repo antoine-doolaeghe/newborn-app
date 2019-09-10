@@ -27,7 +27,6 @@ export const BuilderForm = ({
             {(updateNewborn, { data }) => {
               console.log(data);
               const handleNewbornSet = selectedNewborn => {
-                console.log(selectedNewborn);
                 updateNewborn({
                   variables: {
                     input: {
