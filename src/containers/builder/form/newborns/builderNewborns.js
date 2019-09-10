@@ -4,7 +4,7 @@ import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import { updateNewborn } from "../../../../graphql/mutations";
 import BuilderNewbornSelect from "./select/builderNewbornSelect";
-import BuilderNewbornList from "./list/newbornList";
+import BuilderNewbornList from "./list/builderNewbornList";
 import { Wrapper } from "./style/builderNewborns.style";
 
 export default function BuilderNewborns({

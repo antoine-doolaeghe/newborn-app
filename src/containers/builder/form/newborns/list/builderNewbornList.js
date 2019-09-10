@@ -9,12 +9,11 @@ export default function BuilderNewbornList({ newborns, remove }) {
   };
 
   const returnNewbornChips = () =>
-    newborns.map((data, index) => {
-      let icon;
+    newborns.map(data => {
       return (
         <DefaultChip
-          key={index}
-          icon={icon}
+          key={`builder_newborn_${data.id}_key`}
+          data-testid={`builder_newborn_${data.id}_id`}
           label={data.name}
           onDelete={handleDelete(data)}
         />
@@ -24,11 +23,7 @@ export default function BuilderNewbornList({ newborns, remove }) {
   return <NewbornListWrapper>{returnNewbornChips()}</NewbornListWrapper>;
 }
 
-BuilderNewbornList.defaultProps = {
-  newborns: []
-};
-
 BuilderNewbornList.propTypes = {
-  newborns: PropTypes.array,
+  newborns: PropTypes.array.isRequired,
   remove: PropTypes.func.isRequired
 };

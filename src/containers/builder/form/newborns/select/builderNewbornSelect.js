@@ -25,10 +25,15 @@ export default function BuilderNewbornSelect({ newborns, add }) {
 
   const returnNewbornOption = () =>
     newborns.map((option, index) => {
-      if (!newborns.includes(option.id)) {
+      const { id, name } = option;
+      if (!newborns.includes(id)) {
         return (
-          <option key={`newborn_select_${option.id}`} value={index}>
-            {option.name}
+          <option
+            key={`newborn_select_${id}_key`}
+            data-testid={`newborn_select_${id}_id`}
+            value={index}
+          >
+            {name}
           </option>
         );
       }
