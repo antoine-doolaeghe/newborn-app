@@ -4,7 +4,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import PropTypes from "prop-types";
-import NewbornSelect from "../../../newbornSelect/newbornSelect";
+import NewbornSelect from "../../newborns/builderNewborns";
 import Checkbox from "../../../../../components/atoms/checkboxes";
 import Slider from "../../../../../components/atoms/slider";
 import { Text } from "../../../../../components/atoms/text";
