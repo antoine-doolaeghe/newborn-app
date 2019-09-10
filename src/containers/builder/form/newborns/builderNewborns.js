@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import { updateNewborn } from "../../../../graphql/mutations";
-import BuilderNewbornSelect from "./select/newbornSelect";
+import BuilderNewbornSelect from "./select/builderNewbornSelect";
 import BuilderNewbornList from "./list/newbornList";
-import { Wrapper } from "./style/newbornSelect.style";
+import { Wrapper } from "./style/builderNewborns.style";
 
 export default function BuilderNewborns({
   trainerNewborns,
@@ -54,11 +54,9 @@ export default function BuilderNewborns({
   );
 }
 
-BuilderNewborns.defaultProps = {
-  userNewborns: []
-};
-
 BuilderNewborns.propTypes = {
-  // newborns: PropTypes.array,
-  userNewborns: PropTypes.array
+  trainerNewborns: PropTypes.array.isRequired,
+  userNewborns: PropTypes.array.isRequired,
+  trainerId: PropTypes.string.isRequired,
+  refetch: PropTypes.func.isRequired
 };

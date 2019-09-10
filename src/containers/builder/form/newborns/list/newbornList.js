@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { NewbornListWrapper, Wrapper } from "../style/newbornSelect.style";
+import { NewbornListWrapper } from "./style/newbornList.style";
 import DefaultChip from "../../../../../components/atoms/chips/chip";
 
 export default function BuilderNewbornList({ newborns, remove }) {
@@ -21,11 +21,7 @@ export default function BuilderNewbornList({ newborns, remove }) {
       );
     });
 
-  return (
-    <Wrapper>
-      <NewbornListWrapper>{returnNewbornChips()}</NewbornListWrapper>
-    </Wrapper>
-  );
+  return <NewbornListWrapper>{returnNewbornChips()}</NewbornListWrapper>;
 }
 
 BuilderNewbornList.defaultProps = {

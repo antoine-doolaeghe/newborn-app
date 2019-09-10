@@ -26,7 +26,11 @@ export default function BuilderNewbornSelect({ newborns, add }) {
   const returnNewbornOption = () =>
     newborns.map((option, index) => {
       if (!newborns.includes(option.id)) {
-        return <option value={index}>{option.name}</option>;
+        return (
+          <option key={`newborn_select_${option.id}`} value={index}>
+            {option.name}
+          </option>
+        );
       }
       return null;
     });
@@ -36,7 +40,11 @@ export default function BuilderNewbornSelect({ newborns, add }) {
       <NativeSelect style={{ width: "100%" }} onChange={handleChange}>
         {returnNewbornOption()}
       </NativeSelect>
-      <Button color="primary" onClick={handleAddSelectedNewborn}>
+      <Button
+        data-testid="builder_newborn_select_button"
+        color="primary"
+        onClick={handleAddSelectedNewborn}
+      >
         add
       </Button>
     </Fragment>
