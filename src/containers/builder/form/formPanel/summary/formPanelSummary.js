@@ -26,7 +26,7 @@ export const FormPanelSummary = ({
   const hasCancelButton = index !== 0 && index !== 1;
   return (
     <StyledExpansionPanelSummary
-      expandIcon={<ExpandMoreIcon />}
+      expandIcon={hasCancelButton && <ExpandMoreIcon />}
       onClick={handlePanelOnclick}
     >
       <div

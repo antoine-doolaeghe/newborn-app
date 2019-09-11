@@ -1,7 +1,7 @@
 import React from "react";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { IconButton } from "../../../../components/molecules/buttons";
-import { Badge } from "../../../../components/atoms/badges";
+import { Badge } from "../../../../components/atoms/badges/index.ts";
 import { Wrapper, NewbornInfoTitle } from "./newbornListHeader.style";
 
 function NewbornListHeader({

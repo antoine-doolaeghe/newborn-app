@@ -34,7 +34,7 @@ export const BuilderForm = ({
   return (
     <Wrapper>
       {steps.map((step, index) => {
-        const isActive = index === activeStep || index === 0 || index === 0;
+        const isActive = index === activeStep || index === 0 || index === 1;
         return (
           <StyledExpansionPanel expanded={isActive}>
             <FormPanelSummary

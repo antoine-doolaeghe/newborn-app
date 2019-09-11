@@ -69,7 +69,7 @@ type Summary @model {
   valueLoss: Float
 }
 
-# TODO YOU NEED TO LEARN ABOUT THE SCHEMA STITCHING
+#TODO YOU NEED TO LEARN ABOUT THE SCHEMA STITCHING
 type Trainer @model {
   title: String
   createdAt: String
@@ -83,6 +83,7 @@ type Trainer @model {
 type TrainingStage @model {
   target: Boolean
   position: String
+  bytes: String
   trainer: Trainer @connection(name: "TrainerStages")
 }
 

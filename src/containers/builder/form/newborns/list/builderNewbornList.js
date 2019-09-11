@@ -7,7 +7,7 @@ export default function BuilderNewbornList({ newborns, remove }) {
   const handleDelete = chip => () => {
     remove(chip);
   };
-
+  // TODO empty list placeholder
   const returnNewbornChips = () =>
     newborns.map(data => {
       return (

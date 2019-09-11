@@ -255,6 +255,9 @@ export const getTrainer = `query getTrainer($id: ID!) {
         items {
           name
           id
+          trainer {
+            id
+          }
         }
       }
     }

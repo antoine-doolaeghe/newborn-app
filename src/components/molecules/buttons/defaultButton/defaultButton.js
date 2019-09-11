@@ -24,6 +24,10 @@ const DefaultButton = styled.button`
     cursor: pointer;
     background: ${props => Theme.palette[props.color].dark};
   }
+  &:disabled {
+    cursor: not-allowed;
+    background: ${props => Theme.palette[props.color].light};
+  }
 `;
 
 export default DefaultButton;

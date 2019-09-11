@@ -1,3 +1,5 @@
+import FormControl from "@material-ui/core/FormControl";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import React, { useState, useEffect } from "react";
 import { NativeSelect } from "@material-ui/core";
 import PropTypes from "prop-types";
@@ -5,15 +7,16 @@ import { Wrapper } from "./style/builderNewbornSelect.style";
 import { Button } from "../../../../../components/molecules/buttons";
 
 export default function BuilderNewbornSelect({ newborns, add, loading }) {
-  const [selectedNewborn, setSelectedNewborn] = useState(newborns[0].name);
+  const [selectedNewborn, setSelectedNewborn] = useState(null);
 
   useEffect(() => {
-    const filteredNewborns = newborns.filter(
-      newborn => !newborns.includes(newborn.name)
-    );
+    const filteredNewborns = newborns.filter(newborn => !newborn.trainer);
     if (filteredNewborns.length > 0) {
-      setSelectedNewborn(filteredNewborns[0].name);
+      setSelectedNewborn(filteredNewborns[0]);
+    } else {
+      setSelectedNewborn(null);
     }
+    // TODO SHOULD DISPLAY A PLACEHOLDER FOR NO NEWBORN AVAILABLE
   }, [newborns]);
 
   const handleChange = event => {
@@ -27,7 +30,7 @@ export default function BuilderNewbornSelect({ newborns, add, loading }) {
   const returnNewbornOption = () =>
     newborns.map((option, index) => {
       const { id, name } = option;
-      if (!newborns.includes(id)) {
+      if (!option.trainer) {
         return (
           <option
             key={`newborn_select_${id}_key`}
@@ -40,17 +43,26 @@ export default function BuilderNewbornSelect({ newborns, add, loading }) {
       }
       return null;
     });
-
+  // TODO Add the FORM HELPER TEXT AS PART OF THE INPUT
   return (
     <Wrapper>
-      <NativeSelect
-        data-testid="builder_newborn_select"
-        style={{ width: "100%" }}
-        onChange={handleChange}
-      >
-        {returnNewbornOption()}
-      </NativeSelect>
+      <FormControl style={{ width: "100%" }}>
+        <NativeSelect
+          data-testid="builder_newborn_select"
+          style={{ width: "100%" }}
+          disabled={!selectedNewborn}
+          onChange={handleChange}
+        >
+          {returnNewbornOption()}
+        </NativeSelect>
+        {!selectedNewborn && (
+          <FormHelperText style={{ position: "absolute" }}>
+            There are no newborns to add
+          </FormHelperText>
+        )}
+      </FormControl>
       <Button
+        disabled={!selectedNewborn}
         data-testid="builder_newborn_select_button"
         color="primary"
         onClick={handleAddSelectedNewborn}
