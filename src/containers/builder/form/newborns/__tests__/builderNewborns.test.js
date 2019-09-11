@@ -59,7 +59,6 @@ describe("Builder Newborn List Component", () => {
         <BuilderNewborn {...props} />
       </MockedProvider>
     );
-    debug();
     fireEvent.click(getByTestId("newborn_select_2_id"));
     fireEvent.click(getByTestId("builder_newborn_select_button"));
   });

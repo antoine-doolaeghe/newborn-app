@@ -1,12 +1,12 @@
 import FormControl from "@material-ui/core/FormControl";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import React, { useState, useEffect } from "react";
-import { NativeSelect } from "@material-ui/core";
 import PropTypes from "prop-types";
+import AddIcon from "@material-ui/icons/Add";
 import { Wrapper } from "./style/builderNewbornSelect.style";
-import { Button } from "../../../../../components/molecules/buttons";
+import { IconButton } from "../../../../../components/molecules/buttons";
+import { Select } from "../../../../../components/molecules/inputs/select";
 
-export default function BuilderNewbornSelect({ newborns, add, loading }) {
+export default function BuilderNewbornSelect({ newborns, add }) {
   const [selectedNewborn, setSelectedNewborn] = useState(null);
 
   useEffect(() => {
@@ -16,7 +16,6 @@ export default function BuilderNewbornSelect({ newborns, add, loading }) {
     } else {
       setSelectedNewborn(null);
     }
-    // TODO SHOULD DISPLAY A PLACEHOLDER FOR NO NEWBORN AVAILABLE
   }, [newborns]);
 
   const handleChange = event => {
@@ -43,32 +42,27 @@ export default function BuilderNewbornSelect({ newborns, add, loading }) {
       }
       return null;
     });
-  // TODO Add the FORM HELPER TEXT AS PART OF THE INPUT
+
   return (
     <Wrapper>
       <FormControl style={{ width: "100%" }}>
-        <NativeSelect
-          data-testid="builder_newborn_select"
-          style={{ width: "100%" }}
+        <Select
+          options={returnNewbornOption()}
           disabled={!selectedNewborn}
+          disabledLabel="There are no newborns to train"
           onChange={handleChange}
-        >
-          {returnNewbornOption()}
-        </NativeSelect>
-        {!selectedNewborn && (
-          <FormHelperText style={{ position: "absolute" }}>
-            There are no newborns to add
-          </FormHelperText>
-        )}
+        />
       </FormControl>
-      <Button
+      <IconButton
+        width="30px"
+        height="30px"
         disabled={!selectedNewborn}
-        data-testid="builder_newborn_select_button"
+        id="builder_newborn_select_button"
         color="primary"
         onClick={handleAddSelectedNewborn}
       >
-        {loading ? "loading" : "add"}
-      </Button>
+        <AddIcon />
+      </IconButton>
     </Wrapper>
   );
 }
@@ -78,7 +72,6 @@ BuilderNewbornSelect.defaultProps = {
 };
 
 BuilderNewbornSelect.propTypes = {
-  loading: PropTypes.bool.isRequired,
   newborns: PropTypes.array,
   add: PropTypes.func.isRequired
 };

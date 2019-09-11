@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import { updateNewborn } from "../../../../graphql/mutations";
 import BuilderNewbornSelect from "./select/builderNewbornSelect";
 import BuilderNewbornList from "./list/builderNewbornList";
@@ -40,10 +41,20 @@ export default function BuilderNewborns({
 
         return (
           <Wrapper>
+            {loading && (
+              <LinearProgress
+                style={{
+                  position: "absolute",
+                  height: 4,
+                  width: "100%",
+                  top: 0,
+                  left: 0
+                }}
+              />
+            )}
             <BuilderNewbornSelect
               newborns={userNewborns}
               add={handleAddNewborn}
-              loading={loading}
             />
             <BuilderNewbornList
               newborns={trainerNewborns}

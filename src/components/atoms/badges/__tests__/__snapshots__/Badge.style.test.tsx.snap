@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Badge Component Style matches the component style snapshots 1`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "attrs": Array [],
+  "componentStyle": ComponentStyle {
+    "componentId": "sc-bdVaJa",
+    "isStatic": false,
+    "rules": Array [
+      [Function],
+    ],
+  },
+  "displayName": "Styled(Component)",
+  "foldedComponentIds": Array [],
+  "render": [Function],
+  "styledComponentId": "sc-bdVaJa",
+  "target": [Function],
+  "toString": [Function],
+  "warnTooManyClasses": [Function],
+  "withComponent": [Function],
+}
+`;
