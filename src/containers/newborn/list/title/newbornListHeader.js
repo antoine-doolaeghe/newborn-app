@@ -24,7 +24,7 @@ function NewbornListHeader({
       <Badge
         height={IconBadgeSize}
         width={IconBadgeSize}
-        label={generationNumber}
+        label={generationNumber ? generationNumber.toString() : "--"}
       />
       <NewbornInfoTitle>
         <b>{newbornNumber}</b> Newborns
