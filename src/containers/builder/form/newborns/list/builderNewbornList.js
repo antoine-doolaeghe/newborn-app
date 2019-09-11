@@ -8,8 +8,8 @@ export default function BuilderNewbornList({ newborns, remove }) {
     remove(chip);
   };
   // TODO empty list placeholder
-  const returnNewbornChips = () =>
-    newborns.map(data => {
+  const returnListContent = () => {
+    const list = newborns.map(data => {
       return (
         <DefaultChip
           key={`builder_newborn_${data.id}_key`}
@@ -19,8 +19,10 @@ export default function BuilderNewbornList({ newborns, remove }) {
         />
       );
     });
+    return list.length > 0 ? list : "No newborn to train";
+  };
 
-  return <NewbornListWrapper>{returnNewbornChips()}</NewbornListWrapper>;
+  return <NewbornListWrapper>{returnListContent()}</NewbornListWrapper>;
 }
 
 BuilderNewbornList.propTypes = {

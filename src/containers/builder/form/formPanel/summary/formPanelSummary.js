@@ -37,7 +37,7 @@ export const FormPanelSummary = ({
         }}
       >
         <Heading>
-          <Text>{label}</Text>
+          <Text weight="bold">{label}</Text>
         </Heading>
         {hasCancelButton && (
           <DefaultButton

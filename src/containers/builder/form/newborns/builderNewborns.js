@@ -17,7 +17,8 @@ export default function BuilderNewborns({
 }) {
   return (
     <Mutation mutation={gql(updateNewborn)}>
-      {(updateNewborn, { loading, error }) => {
+      {(updateNewborn, { data, loading, error }) => {
+        console.log(data, loading);
         const handleAddNewborn = selectedNewborn => {
           updateNewborn({
             variables: {
@@ -71,6 +72,5 @@ export default function BuilderNewborns({
 BuilderNewborns.propTypes = {
   trainerNewborns: PropTypes.array.isRequired,
   userNewborns: PropTypes.array.isRequired,
-  trainerId: PropTypes.string.isRequired,
-  refetch: PropTypes.func.isRequired
+  trainerId: PropTypes.string.isRequired
 };

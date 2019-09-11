@@ -47,6 +47,7 @@ export default function BuilderNewbornSelect({ newborns, add }) {
     <Wrapper>
       <FormControl style={{ width: "100%" }}>
         <Select
+          label="Add a newborn to train"
           options={returnNewbornOption()}
           disabled={!selectedNewborn}
           disabledLabel="There are no newborns to train"
@@ -54,12 +55,12 @@ export default function BuilderNewbornSelect({ newborns, add }) {
         />
       </FormControl>
       <IconButton
-        width="30px"
-        height="30px"
-        disabled={!selectedNewborn}
-        id="builder_newborn_select_button"
         color="primary"
+        disabled={!selectedNewborn}
+        height="40px"
+        id="builder_newborn_select_button"
         onClick={handleAddSelectedNewborn}
+        width="40px"
       >
         <AddIcon />
       </IconButton>

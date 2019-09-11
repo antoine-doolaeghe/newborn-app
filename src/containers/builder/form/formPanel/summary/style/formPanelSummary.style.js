@@ -12,7 +12,7 @@ export const StyledExpansionPanelSummary = styled(ExpansionPanelSummary)`
 export const Heading = styled.div`
   display: flex;
   align-items: center;
-  flex-basis: 33.33%;
+  /* flex-basis: 33.33%; */
   flex-shrink: 0;
 `;
 

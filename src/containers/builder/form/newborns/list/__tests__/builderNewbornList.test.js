@@ -19,9 +19,15 @@ const props = {
 };
 
 describe("Builder Newborn List Component", () => {
-  it("should the list of newborns", () => {
+  it("should render the list of newborns chips", () => {
     const { getAllByTestId } = render(<BuilderNewbornList {...props} />);
     getAllByTestId("builder_newborn_1_id");
     getAllByTestId("builder_newborn_2_id");
+  });
+
+  it("should render a placeholder when there is no list content", () => {
+    props.newborns = [];
+    const { getByText } = render(<BuilderNewbornList {...props} />);
+    getByText("No newborn to train");
   });
 });

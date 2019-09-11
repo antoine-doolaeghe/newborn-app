@@ -12,12 +12,12 @@ const API_MOCKS = [
       variables: {
         newbornTrainerId: "test-id"
       }
+    },
+    result: {
+      data: {
+        dog: { id: "1", name: "Buck", breed: "bulldog" }
+      }
     }
-    // result: {
-    //   data: {
-    //     dog: { id: "1", name: "Buck", breed: "bulldog" }
-    //   }
-    // }
   }
 ];
 
@@ -59,7 +59,9 @@ describe("Builder Newborn List Component", () => {
         <BuilderNewborn {...props} />
       </MockedProvider>
     );
+    debug();
     fireEvent.click(getByTestId("newborn_select_2_id"));
     fireEvent.click(getByTestId("builder_newborn_select_button"));
+    debug();
   });
 });

@@ -1,34 +1,24 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useEffect } from "react";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1
-  }
-});
-
-export default function LinearBuffer() {
-  const classes = useStyles();
+export const BuilderProgress = (): React.ReactElement => {
   const [completed, setCompleted] = React.useState(0);
   const [buffer, setBuffer] = React.useState(10);
 
   const progress = React.useRef(() => {});
-  React.useEffect(() => {
+  useEffect(() => {
     progress.current = () => {
       if (completed > 100) {
         setCompleted(0);
         setBuffer(10);
       } else {
-        // const diff = Math.random() * 10;
-        // const diff2 = Math.random() * 10;
         setCompleted(0);
         setBuffer(0);
       }
     };
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     function tick() {
       progress.current();
     }
@@ -40,8 +30,10 @@ export default function LinearBuffer() {
   }, []);
 
   return (
-    <div className={classes.root}>
+    <div style={{ width: "100%" }}>
       <LinearProgress variant="buffer" value={completed} valueBuffer={buffer} />
     </div>
   );
-}
+};
+
+export default BuilderProgress;
