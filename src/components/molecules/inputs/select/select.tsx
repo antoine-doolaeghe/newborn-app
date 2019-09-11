@@ -21,7 +21,12 @@ const Select = ({
   return (
     <Fragment>
       <InputLabel shrink>{label}</InputLabel>
-      <StyledSelect data-testid={id} disabled={disabled} onChange={onChange}>
+      <StyledSelect
+        data-testid={id}
+        error={disabled}
+        disabled={disabled}
+        onChange={onChange}
+      >
         {options}
       </StyledSelect>
       {disabled && <StyledFormHelperText>{disabledLabel}</StyledFormHelperText>}

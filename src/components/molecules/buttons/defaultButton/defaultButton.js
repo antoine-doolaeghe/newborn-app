@@ -17,7 +17,7 @@ const DefaultButton = styled.button`
   padding: 3px 7px;
   will-change: background;
   &:hover {
-    cursor: pointer;
+    cursor: ${props => (props.loading ? "wait" : "pointer")};
     background: ${props => Theme.palette[props.color].dark};
   }
   &:active {

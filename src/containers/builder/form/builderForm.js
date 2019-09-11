@@ -41,7 +41,7 @@ export const BuilderForm = ({ trainerId }) => {
         id: trainerId
       }}
     >
-      {({ data, loading, refetch }) => {
+      {({ data, refetch }) => {
         const {
           getTrainer: { owner, newborns } = {
             owner: { newborns: {} },
@@ -65,13 +65,12 @@ export const BuilderForm = ({ trainerId }) => {
                     steps={steps}
                     label={step}
                   />
-                  {!loading &&
-                    returnFormPanelContent(
-                      index,
-                      trainerNewborns,
-                      userNewborns,
-                      refetch
-                    )}
+                  {returnFormPanelContent(
+                    index,
+                    trainerNewborns,
+                    userNewborns,
+                    refetch
+                  )}
                 </StyledExpansionPanel>
               );
             })}

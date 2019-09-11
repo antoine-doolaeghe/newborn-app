@@ -20,6 +20,7 @@ const IconButton = ({
   color,
   width,
   height,
+  loading,
   disabled,
   id
 }) => {
@@ -31,6 +32,7 @@ const IconButton = ({
       color={color}
       disabled={disabled}
       data-testid={id}
+      loading={loading}
     >
       {children}
     </StyledIconButton>

@@ -17,8 +17,7 @@ export default function BuilderNewborns({
 }) {
   return (
     <Mutation mutation={gql(updateNewborn)}>
-      {(updateNewborn, { data, loading, error }) => {
-        console.log(data, loading);
+      {(updateNewborn, { loading, error }) => {
         const handleAddNewborn = selectedNewborn => {
           updateNewborn({
             variables: {
@@ -27,8 +26,9 @@ export default function BuilderNewborns({
                 newbornTrainerId: trainerId
               }
             }
+          }).then(() => {
+            refetch();
           });
-          refetch();
         };
 
         const handleRemoveNewborn = selectedNewborn => {
@@ -36,8 +36,9 @@ export default function BuilderNewborns({
             variables: {
               input: { id: selectedNewborn.id, newbornTrainerId: null }
             }
+          }).then(() => {
+            refetch();
           });
-          refetch();
         };
 
         return (
@@ -54,6 +55,7 @@ export default function BuilderNewborns({
               />
             )}
             <BuilderNewbornSelect
+              loading={loading}
               newborns={userNewborns}
               add={handleAddNewborn}
             />

@@ -7,6 +7,7 @@ interface IStyledSelectProps {
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   children: Array<string>;
   disabledLabel?: string;
+  error: boolean;
 }
 
 interface IStyledFormHelperTextProps {
@@ -27,6 +28,5 @@ export const StyledFormHelperText = styled(
   )
 )((): string => {
   return `
-      position: absolute;
     `;
 });

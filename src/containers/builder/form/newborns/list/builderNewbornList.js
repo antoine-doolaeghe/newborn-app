@@ -25,7 +25,11 @@ export default function BuilderNewbornList({ newborns, remove }) {
   return <NewbornListWrapper>{returnListContent()}</NewbornListWrapper>;
 }
 
+BuilderNewbornList.defaultProps = {
+  newborns: []
+};
+
 BuilderNewbornList.propTypes = {
-  newborns: PropTypes.array.isRequired,
+  newborns: PropTypes.array,
   remove: PropTypes.func.isRequired
 };

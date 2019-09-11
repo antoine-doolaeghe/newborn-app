@@ -6,7 +6,7 @@ import { Wrapper } from "./style/builderNewbornSelect.style";
 import { IconButton } from "../../../../../components/molecules/buttons";
 import { Select } from "../../../../../components/molecules/inputs/select";
 
-export default function BuilderNewbornSelect({ newborns, add }) {
+export default function BuilderNewbornSelect({ newborns, add, loading }) {
   const [selectedNewborn, setSelectedNewborn] = useState(null);
 
   useEffect(() => {
@@ -57,6 +57,7 @@ export default function BuilderNewbornSelect({ newborns, add }) {
       <IconButton
         color="primary"
         disabled={!selectedNewborn}
+        loading={loading}
         height="40px"
         id="builder_newborn_select_button"
         onClick={handleAddSelectedNewborn}
