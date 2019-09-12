@@ -16,15 +16,16 @@ export const FormPanel = ({
   setActiveStep,
   setSteps
 }) => {
+  const isActive = index === activeStep || index === 0 || index === 1;
   return (
-    <StyledExpansionPanel expanded={index === activeStep}>
+    <StyledExpansionPanel expanded={isActive}>
       <FormaPanelSummary
         index={index}
         activeStep={activeStep}
         setActiveStep={setActiveStep}
         setSteps={setSteps}
         steps={steps}
-        step={step}
+        label={step}
       />
       <FormaPanelContent index={index} />
     </StyledExpansionPanel>

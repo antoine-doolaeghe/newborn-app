@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import { withApollo } from "react-apollo";
 import gql from "graphql-tag";
 import * as queries from "../../../../../graphql/queries";
+import DefaultButton from "../../../../../components/molecules/buttons/defaultButton/defaultButton";
+import { Text } from "../../../../../components/atoms/text";
 
 export const Heading = styled.div`
   font-size: 20px;
@@ -12,15 +13,10 @@ export const Heading = styled.div`
   height: 50px;
 `;
 
-export const NewStepButton = ({ client, step, trainerId }) => {
+export const NewStepButton = ({ client, trainerId }) => {
   return (
-    <ExpansionPanel
-      style={{
-        minHeight: 48,
-        display: "flex",
-        alignItems: "center",
-        cursor: "pointer"
-      }}
+    <DefaultButton
+      color="primary"
       onClick={async () => {
         await client.query({
           query: gql(queries.trainNewborn),
@@ -31,8 +27,8 @@ export const NewStepButton = ({ client, step, trainerId }) => {
         });
       }}
     >
-      <Heading>{step}</Heading>
-    </ExpansionPanel>
+      <Text>Train</Text>
+    </DefaultButton>
   );
 };
 

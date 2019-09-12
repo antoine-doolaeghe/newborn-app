@@ -4,7 +4,7 @@ import CakeIcon from "@material-ui/icons/Cake";
 import RecordInfoLoader from "./loader/recordInfoLoader";
 import { InfoWrapper, ValueWrapper } from "./style/recordInfo.style";
 import Info from "../../../molecules/infos/info";
-import { Badge } from "../../../atoms/badges";
+import { Badge } from "../../../atoms/badges/index.ts";
 import { Flex } from "../../../../theme/layout/grid.style";
 import { returnFormattedTime } from "../../../../utils/helpers/globalHelpers";
 

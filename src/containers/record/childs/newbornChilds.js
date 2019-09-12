@@ -1,7 +1,7 @@
 import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-
+import PropTypes from "prop-types";
 import * as queries from "../../../graphql/queries";
 import { ErrorDialog } from "../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 import NewbornChildsLoader from "./loader/newbornChildsLoader";
@@ -51,6 +51,12 @@ const NewbornParents = ({ setId, childs, loading }) => {
       }}
     </Query>
   );
+};
+
+NewbornParents.propTypes = {
+  setId: PropTypes.func.isRequired,
+  childs: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
 export default NewbornParents;

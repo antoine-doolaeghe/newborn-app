@@ -14,13 +14,25 @@ const StyledIconButton = styled(DefaultButton)`
   width: ${props => props.width};
 `;
 
-const IconButton = ({ children, onClick, color, width, height }) => {
+const IconButton = ({
+  children,
+  onClick,
+  color,
+  width,
+  height,
+  loading,
+  disabled,
+  id
+}) => {
   return (
     <StyledIconButton
       width={width}
       height={height}
       onClick={onClick}
       color={color}
+      disabled={disabled}
+      data-testid={id}
+      loading={loading}
     >
       {children}
     </StyledIconButton>

@@ -176,6 +176,9 @@ export const updateNewborn = `mutation UpdateNewborn($input: UpdateNewbornInput!
     owner {
       id
     }
+    trainer {
+      id
+    }
     models {
       items {
         id
@@ -594,6 +597,13 @@ export const deletePrediction = `mutation DeletePrediction($input: DeletePredict
         nextToken
       }
     }
+  }
+}
+`;
+export const updateTrainer = `mutation UpdateTrainer($input: UpdateTrainerInput!) {
+  updateTrainer(input: $input) {
+    id
+    title
   }
 }
 `;

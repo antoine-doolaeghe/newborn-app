@@ -4,16 +4,26 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import PropTypes from "prop-types";
-import NewbornSelect from "../../../newbornSelect/builderNewbornSelect";
+import NewbornSelect from "../../newborns/builderNewborns";
 import Checkbox from "../../../../../components/atoms/checkboxes";
 import Slider from "../../../../../components/atoms/slider";
 import { Text } from "../../../../../components/atoms/text";
 
-export const FormPanelContent = ({ index }) => {
+export const FormPanelContent = ({ index, trainerNewborns, userNewborns }) => {
   const [trainerType, setTrainerType] = useState("static");
   const [movingTowardTarget, setMovingTowardTarget] = useState(false);
   const [rewardSpeed, setRewardSpeed] = useState(false);
   const [rewardFacingTarget, setRewardFacingTarget] = useState(false);
+
+  if (index === 0) {
+    return (
+      <NewbornSelect
+        trainerNewborns={trainerNewborns}
+        userNewborns={userNewborns}
+      />
+    );
+  }
+
   if (index === 1) {
     return (
       <ExpansionPanelDetails>
@@ -22,10 +32,6 @@ export const FormPanelContent = ({ index }) => {
         <Text>If random </Text>
       </ExpansionPanelDetails>
     );
-  }
-
-  if (index === 0) {
-    return <NewbornSelect />;
   }
 
   return (
@@ -122,7 +128,9 @@ export const FormPanelContent = ({ index }) => {
 };
 
 FormPanelContent.propTypes = {
-  index: PropTypes.number.isRequired
+  index: PropTypes.number.isRequired,
+  trainerNewborns: PropTypes.array.isRequired,
+  userNewborns: PropTypes.array.isRequired
 };
 
 export default FormPanelContent;

@@ -7,41 +7,60 @@ import CardHeader from "./header";
 import {
   CardWrapper,
   CardButtonWrapper,
-  CardChartWrapper
+  CardChartWrapper,
+  EmptyDataPlaceHolder
 } from "./style/newbornCard.style";
 import CardButton from "./button";
 import lineChartOptions from "./lineChartOptions";
 import NewbornCardLoader from "./loader/newbornCardLoader";
+import { Text } from "../../../atoms/text";
 
 function NewbornCard(props) {
-  const {
-    onPartnerClick,
-    onChildClick,
-    isPlaceholderCard,
-    newbornInfo,
-    onClick,
-    loading
-  } = props;
+  const { onPartnerClick, onChildClick, info, onClick, size, loading } = props;
 
   const [hovered, setHovered] = useState(false);
 
   const returnCardButton = () => {
-    if (hovered) {
+    if (hovered && size === "large") {
       return (
         <CardButtonWrapper>
           <CardButton
             color="primary"
             onClick={onPartnerClick}
             iconLabel="p"
-            label={newbornInfo.partners}
+            label={info.partners}
           />
           <CardButton
             color="secondary"
             onClick={onChildClick}
             iconLabel="c"
-            label={newbornInfo.childs}
+            label={info.childs}
           />
         </CardButtonWrapper>
+      );
+    }
+  };
+  const hasSummary = info.summaries.datasets[0].data.length > 0;
+  const returnCardContent = () => {
+    if (size === "large") {
+      if (hasSummary) {
+        return (
+          <CardChartWrapper data-testid="newbornCardGraph">
+            <HighchartsReact
+              highcharts={Highcharts}
+              options={lineChartOptions(
+                info.summaries,
+                info.color.dark,
+                9309200000
+              )}
+            />
+          </CardChartWrapper>
+        );
+      }
+      return (
+        <EmptyDataPlaceHolder>
+          <Text>NO DATA PLACEHOLDER</Text>
+        </EmptyDataPlaceHolder>
       );
     }
   };
@@ -49,63 +68,51 @@ function NewbornCard(props) {
   if (loading) {
     return <NewbornCardLoader />;
   }
-  const hadSummaryData = newbornInfo.summaries.datasets[0].data.length > 0;
+
   return (
     <CardWrapper
-      color={newbornInfo.color}
-      data-newbornid={newbornInfo.id}
+      color={info.color}
+      data-newbornid={info.id}
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      isNewbornOwnedByCurrentUser={newbornInfo.isOwnedByCurrentUser}
-      isPlaceholderCard={isPlaceholderCard}
+      isNewbornOwnedByCurrentUser={info.isOwnedByCurrentUser}
+      size={size}
     >
-      {!isPlaceholderCard && (
-        <Fragment>
-          <CardHeader
-            title={newbornInfo.title}
-            subTitle={newbornInfo.dob}
-            displayBadge
-            data-testid="newbornHeader"
-          />
-          {hadSummaryData ? (
-            <CardChartWrapper data-testid="newbornCardGraph">
-              <HighchartsReact
-                highcharts={Highcharts}
-                options={lineChartOptions(
-                  newbornInfo.summaries,
-                  newbornInfo.color.dark,
-                  9309200000
-                )}
-              />
-            </CardChartWrapper>
-          ) : (
-            <div
-              style={{
-                width: "100%",
-                justifyContent: "center",
-                height: "calc(100% - 100px)",
-                alignItems: "center",
-                display: "flex"
-              }}
-            >
-              NO DATA PLACEHOLDER
-            </div>
-          )}
-          {returnCardButton()}
-        </Fragment>
-      )}
+      <Fragment>
+        <CardHeader
+          title={info.title}
+          subTitle={info.dob}
+          displayBadge
+          data-testid="cardHeader"
+        />
+        {returnCardContent()}
+        {returnCardButton()}
+      </Fragment>
     </CardWrapper>
   );
 }
 
+NewbornCard.defaultProps = {
+  size: "large",
+  info: {
+    summaries: {
+      datasets: [{ data: [] }]
+    }
+  }
+};
+
 NewbornCard.propTypes = {
-  isPlaceholderCard: PropTypes.bool.isRequired,
-  newbornInfo: PropTypes.object.isRequired,
+  info: PropTypes.shape({
+    summaries: PropTypes.shape({
+      datasets: PropTypes.array.isRequired
+    }).isRequired
+  }),
   onChildClick: PropTypes.func.isRequired,
   onPartnerClick: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
+  size: PropTypes.oneOf(["small, medium, large"])
 };
 
 export default NewbornCard;

@@ -243,6 +243,24 @@ export const getTrainer = `query getTrainer($id: ID!) {
     title
     createdAt
     data
+    newborns {
+      items {
+        id
+        name
+      }
+    }
+    id
+    owner {
+      newborns { 
+        items {
+          name
+          id
+          trainer {
+            id
+          }
+        }
+      }
+    }
   }
 }
 `;

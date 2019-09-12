@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["es6", "dom"],
+    "jsx": "react",
+    "declaration": true,
+    "declarationMap": false,
+    "noImplicitAny": false,
+    "sourceMap": false,
+    "outDir": "lib",
+    "rootDir": "src",
+    "strict": true,
+    "moduleResolution": "node",
+    "typeRoots": ["./types", "./node_modules/@types"],
+    "types": ["react", "jest", "node"],
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*", "./types/*"],
+  "exclude": ["config"]
+}

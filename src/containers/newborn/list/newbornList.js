@@ -55,7 +55,7 @@ function NewbornList({ newborns, index, loading, onRecordOpen }) {
             cardList.push(
               <NewbornCard
                 key={newbornInfo.id}
-                newbornInfo={newbornInfo}
+                info={newbornInfo}
                 onClick={onRecordOpen}
                 onPartnerClick={event =>
                   partnerClick(event, client, newbornInfo.id)

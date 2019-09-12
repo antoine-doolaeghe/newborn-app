@@ -22,6 +22,7 @@ import {
   NewbornPartners
 } from "./index";
 import { returnNewbornRecordInfo } from "./newbornRecordHelpers";
+import { Text } from "../../components/atoms/text";
 
 const NewbornRecordWrapper = styled.section`
   display: flex;
@@ -44,7 +45,7 @@ const NewBornRecord = ({ id, setId, open, onClose, newbornModelInfo }) => {
                 return <ErrorDialog open message={error.message} />;
               }
               if (loading) {
-                return "loadin";
+                return <Text>Loading</Text>;
               }
               const newbornRecordInfo = returnNewbornRecordInfo(
                 data.getNewborn

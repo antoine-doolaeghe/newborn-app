@@ -5,7 +5,7 @@ import {
   Title,
   SubTitle
 } from "./cardHeader.style";
-import { Badge } from "../../../../atoms/badges";
+import { Badge } from "../../../../atoms/badges/index.ts";
 
 function CardHeader({ title, subTitle, displayBadge }) {
   return (

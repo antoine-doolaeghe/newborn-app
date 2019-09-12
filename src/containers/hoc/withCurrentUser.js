@@ -25,10 +25,11 @@ export default function withCurrentUser(Component) {
               });
             }
           });
+          const { currentUserName, currentUserId } = data;
           return (
             <Component
-              currentUserName={data.currentUserName}
-              currentUserId={data.currentUserId}
+              currentUserName={currentUserName}
+              currentUserId={currentUserId}
             />
           );
         }}

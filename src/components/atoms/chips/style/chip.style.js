@@ -5,5 +5,5 @@ import { Theme } from "../../../../theme/theme";
 const { spacing } = Theme;
 
 export const StyledChip = styled(Chip)`
-  margin: ${spacing.small} 0px;
+  margin: ${spacing.small};
 `;

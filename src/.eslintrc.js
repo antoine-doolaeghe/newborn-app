@@ -63,7 +63,7 @@ module.exports = {
   settings: {
     "import/resolver": {
       alias: {
-        extensions: [".js", ".jsx", ".json"]
+        extensions: [".js", ".jsx", ".ts", ".tsx"]
       }
     }
   }
