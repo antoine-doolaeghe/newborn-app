@@ -4,34 +4,18 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import NewStepButton from "./formPanel/newStepButton/newStepButton";
 import TrainButton from "./formPanel/trainButton/trainButton";
-import { Wrapper, StyledExpansionPanel } from "./style/builder.style";
-import FormPanelSummary from "./formPanel/summary/formPanelSummary";
-import FormPanelContent from "./formPanel/content/formPanelContent";
+import { Wrapper } from "./style/builder.style";
 import BuilderNewborns from "./newborns/builderNewborns";
 import * as queries from "../../../graphql/queries";
+import TargetForm from "./formPanel/target/targetForm";
 
 export const BuilderForm = ({ trainerId }) => {
-  const [steps, setSteps] = useState(["Selected Newborn", "Spawning Agent"]);
-  const [activeStep, setActiveStep] = useState(0);
-  const returnFormPanelContent = (
-    index,
-    trainerNewborns,
-    userNewborns,
-    refetch
-  ) => {
-    switch (index) {
-      case 0:
-        return (
-          <BuilderNewborns
-            trainerId={trainerId}
-            refetch={refetch}
-            trainerNewborns={trainerNewborns}
-            userNewborns={userNewborns}
-          />
-        );
-      default:
-        return <FormPanelContent index={index} />;
-    }
+  const [steps, setSteps] = useState(["Selected Newborn"]);
+  // const [activeStep, setActiveStep] = useState(0);
+  const returnFormPanelContent = levels => {
+    return levels.map(level => {
+      return <TargetForm index={level} />;
+    });
   };
 
   return (
@@ -43,37 +27,25 @@ export const BuilderForm = ({ trainerId }) => {
     >
       {({ data, refetch }) => {
         const {
-          getTrainer: { owner, newborns } = {
+          getTrainer: { owner, newborns, levels } = {
             owner: { newborns: {} },
-            newborns: {}
+            newborns: {},
+            levels: {}
           }
         } = data;
+        const trainerLevels = levels.items || [];
         const trainerNewborns = newborns.items;
         const userNewborns = owner.newborns.items;
+        console.log(trainerLevels);
         return (
           <Wrapper>
-            {steps.map((step, index) => {
-              const isActive =
-                index === activeStep || index === 0 || index === 1;
-              return (
-                <StyledExpansionPanel expanded={isActive}>
-                  <FormPanelSummary
-                    index={index}
-                    activeStep={activeStep}
-                    setActiveStep={setActiveStep}
-                    setSteps={setSteps}
-                    steps={steps}
-                    label={step}
-                  />
-                  {returnFormPanelContent(
-                    index,
-                    trainerNewborns,
-                    userNewborns,
-                    refetch
-                  )}
-                </StyledExpansionPanel>
-              );
-            })}
+            <BuilderNewborns
+              trainerId={trainerId}
+              refetch={refetch}
+              trainerNewborns={trainerNewborns}
+              userNewborns={userNewborns}
+            />
+            {returnFormPanelContent(trainerLevels)}
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <NewStepButton steps={steps} setSteps={setSteps} />
               <TrainButton

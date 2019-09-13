@@ -7,6 +7,8 @@ import { updateNewborn } from "../../../../graphql/mutations";
 import BuilderNewbornSelect from "./select/builderNewbornSelect";
 import BuilderNewbornList from "./list/builderNewbornList";
 import { Wrapper } from "./style/builderNewborns.style";
+import { StyledExpansionPanel } from "../style/builder.style";
+import FormPanelSummary from "../formPanel/summary/formPanelSummary";
 import { ErrorDialog } from "../../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 
 export default function BuilderNewborns({
@@ -42,29 +44,32 @@ export default function BuilderNewborns({
         };
 
         return (
-          <Wrapper>
-            {loading && (
-              <LinearProgress
-                style={{
-                  position: "absolute",
-                  height: 4,
-                  width: "100%",
-                  top: 0,
-                  left: 0
-                }}
+          <StyledExpansionPanel expanded>
+            <FormPanelSummary index={0} label="step" />
+            <Wrapper>
+              {loading && (
+                <LinearProgress
+                  style={{
+                    position: "absolute",
+                    height: 4,
+                    width: "100%",
+                    top: 0,
+                    left: 0
+                  }}
+                />
+              )}
+              <BuilderNewbornSelect
+                loading={loading}
+                newborns={userNewborns}
+                add={handleAddNewborn}
               />
-            )}
-            <BuilderNewbornSelect
-              loading={loading}
-              newborns={userNewborns}
-              add={handleAddNewborn}
-            />
-            <BuilderNewbornList
-              newborns={trainerNewborns}
-              remove={handleRemoveNewborn}
-            />
-            {error && <ErrorDialog open message={error.message} />}
-          </Wrapper>
+              <BuilderNewbornList
+                newborns={trainerNewborns}
+                remove={handleRemoveNewborn}
+              />
+              {error && <ErrorDialog open message={error.message} />}
+            </Wrapper>
+          </StyledExpansionPanel>
         );
       }}
     </Mutation>

@@ -9,7 +9,6 @@ import {
   TrainerActionWrapper,
   CreateTrainerButton
 } from "./style/createTrainerCard.style";
-import TrainerTemplate from "./template/trainerTemplate";
 import { Text } from "../../../atoms/text";
 import TrainerNameInput from "./input/trainerNameInput";
 
@@ -29,11 +28,10 @@ function CreateTrainerCard({ history, currentUserId }) {
     <CardWrapper
       style={{
         border: "2px solid lightgrey",
-        borderRadius: "10px 10px 0px 0px"
+        borderRadius: "20px 20px 0px 0px"
       }}
     >
       <CardContent>
-        <TrainerTemplate />
         <TrainerNameInput setTitle={setTitle} error={error} />
         <TrainerActionWrapper>
           <Mutation mutation={CREATE_TRAINER}>

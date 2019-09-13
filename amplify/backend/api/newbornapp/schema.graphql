@@ -76,15 +76,18 @@ type Trainer @model {
   id: String!
   owner: User @connection(name: "TrainerOwner")
   newborns: [Newborn] @connection(name: "NewbornTrainer")
-  trainingStage: [TrainingStage] @connection(name: "TrainerStages")
+  levels: [TrainingLevel] @connection(name: "TrainerLevels")
   data: String
 }
 
-type TrainingStage @model {
+type TrainingLevel @model {
+  id: String!
+  index: Int
   target: Boolean
   position: String
-  bytes: String
-  trainer: Trainer @connection(name: "TrainerStages")
+  agentNumber: Int
+  static: Boolean
+  trainer: Trainer @connection(name: "TrainerLevels")
 }
 
 type Subscription {

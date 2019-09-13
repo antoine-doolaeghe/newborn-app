@@ -250,6 +250,11 @@ export const getTrainer = `query getTrainer($id: ID!) {
       }
     }
     id
+    levels {
+      items {
+        target
+      }
+    }
     owner {
       newborns { 
         items {

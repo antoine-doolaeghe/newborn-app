@@ -55,11 +55,15 @@ export const FormPanelSummary = ({
   );
 };
 
+FormPanelSummary.defaultProps = {
+  setActiveStep: () => {}
+};
+
 FormPanelSummary.propTypes = {
   index: PropTypes.number.isRequired,
   steps: PropTypes.array.isRequired,
   activeStep: PropTypes.number.isRequired,
-  setActiveStep: PropTypes.func.isRequired,
+  setActiveStep: PropTypes.func,
   setSteps: PropTypes.func.isRequired
 };
 
