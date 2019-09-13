@@ -16,7 +16,7 @@ export const TargetForm = () => {
 
   return (
     <StyledExpansionPanel expanded>
-      <FormPanelSummary index={0} label="step" />
+      <FormPanelSummary index={4} label="step" />
       <ExpansionPanelDetails
         style={{ display: "flex", flex: 1, flexDirection: "column" }}
       >

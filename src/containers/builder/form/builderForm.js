@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import NewStepButton from "./formPanel/newStepButton/newStepButton";
+import NewStepButton from "./formPanel/newStepButton/createLevelButton";
 import TrainButton from "./formPanel/trainButton/trainButton";
 import { Wrapper } from "./style/builder.style";
 import BuilderNewborns from "./newborns/builderNewborns";
@@ -36,7 +36,7 @@ export const BuilderForm = ({ trainerId }) => {
         const trainerLevels = levels.items || [];
         const trainerNewborns = newborns.items;
         const userNewborns = owner.newborns.items;
-        console.log(trainerLevels);
+
         return (
           <Wrapper>
             <BuilderNewborns
@@ -47,7 +47,12 @@ export const BuilderForm = ({ trainerId }) => {
             />
             {returnFormPanelContent(trainerLevels)}
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <NewStepButton steps={steps} setSteps={setSteps} />
+              <NewStepButton
+                steps={steps}
+                setSteps={setSteps}
+                trainerId={trainerId}
+                refetch={refetch}
+              />
               <TrainButton
                 trainerId={trainerId}
                 steps={steps}
