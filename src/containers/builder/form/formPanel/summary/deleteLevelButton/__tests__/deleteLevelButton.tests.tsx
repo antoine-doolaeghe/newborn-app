@@ -2,7 +2,10 @@ import React from "react";
 import { render } from "react-testing-library";
 import { DeleteLevelButton } from "../index";
 import { MockedProvider } from "react-apollo/test-utils";
-import { IDeleteLevelProps, DELETE_TRAINING_LEVEL } from "../deleteLevelButton";
+import {
+  IDeleteLevelButtonProps,
+  DELETE_TRAINING_LEVEL
+} from "../deleteLevelButton";
 
 const API_MOCKS = [
   {
@@ -20,8 +23,8 @@ const API_MOCKS = [
   }
 ];
 
-const props: IDeleteLevelProps = {
-  trainerId: "testId",
+const props: IDeleteLevelButtonProps = {
+  id: "testId",
   refetch: jest.fn()
 };
 
