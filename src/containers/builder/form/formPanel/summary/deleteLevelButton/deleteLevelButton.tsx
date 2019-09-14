@@ -5,22 +5,22 @@ import { Text } from "../../../../../../components/atoms/text";
 import { Button } from "../../../../../../components/molecules/buttons";
 import { ErrorDialog } from "../../../../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 
-const CREATE_TRAINING_LEVEL = gql`
-  mutation CreateTrainingLevel($id: ID!) {
+export const DELETE_TRAINING_LEVEL = gql`
+  mutation DeleteTrainingLevel($id: ID!) {
     deleteLevel(input: { id: $id }) {
       id
     }
   }
 `;
 
-interface IDeleteLevelButtonProps {
+export interface IDeleteLevelButtonProps {
   id: string;
   refetch: Function;
 }
 
 export const DeleteLevelButton = ({ id, refetch }: IDeleteLevelButtonProps) => {
   return (
-    <Mutation mutation={CREATE_TRAINING_LEVEL}>
+    <Mutation mutation={DELETE_TRAINING_LEVEL}>
       {(deleteNewborn, { loading, error }) => {
         if (error) {
           return <ErrorDialog open message={error.message} />;

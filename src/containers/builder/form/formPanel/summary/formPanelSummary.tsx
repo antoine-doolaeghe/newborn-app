@@ -7,7 +7,7 @@ import {
 import { Text } from "../../../../../components/atoms/text";
 import DeleteLevelButton from "./deleteLevelButton/deleteLevelButton";
 
-interface IFormPanelSummaryProps {
+export interface IFormPanelSummaryProps {
   index: number;
   label: string;
   id: string;

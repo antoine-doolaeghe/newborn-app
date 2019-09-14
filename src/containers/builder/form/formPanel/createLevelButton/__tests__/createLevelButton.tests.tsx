@@ -26,7 +26,7 @@ const props: ICreateLevelProps = {
 };
 
 describe("Create level Button Component", (): void => {
-  it("should render the label", () => {
+  it("should render the button label", () => {
     const { getByText } = render(
       <MockedProvider mocks={API_MOCKS}>
         <CreateLevelButton {...props} />

@@ -8,7 +8,7 @@ import { Text } from "../../../../../components/atoms/text";
 import { StyledExpansionPanel } from "../../style/builderForm.style";
 import FormPanelSummary from "../summary/formPanelSummary";
 
-interface ILevelFormProps {
+export interface ILevelFormProps {
   id: string;
   refetch: Function;
 }
