@@ -13,7 +13,12 @@ const CREATE_TRAINING_LEVEL = gql`
   }
 `;
 
-export const DeleteLevelButton = ({ id, refetch }) => {
+interface IDeleteLevelButtonProps {
+  id: string;
+  refetch: Function;
+}
+
+export const DeleteLevelButton = ({ id, refetch }: IDeleteLevelButtonProps) => {
   return (
     <Mutation mutation={CREATE_TRAINING_LEVEL}>
       {(deleteNewborn, { loading, error }) => {

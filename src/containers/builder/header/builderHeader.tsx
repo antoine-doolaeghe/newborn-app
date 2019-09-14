@@ -3,12 +3,16 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
-import BuilderProgress from "./progress/builderProgress.tsx";
+import BuilderProgress from "./progress/builderProgress";
 import DefaultButton from "../../../components/molecules/buttons/defaultButton/defaultButton";
 import * as queries from "../../../graphql/queries";
-import { BuilderTitle } from "./title/builderTitle.tsx";
+import { BuilderTitle } from "./title/builderTitle";
 
-export const BuilderHeader = ({ trainerId }) => {
+interface IBuilderHeaderProps {
+  trainerId: string;
+}
+
+export const BuilderHeader = ({ trainerId }: IBuilderHeaderProps) => {
   const [steps, setSteps] = useState(["Spawning Agent"]);
 
   return (

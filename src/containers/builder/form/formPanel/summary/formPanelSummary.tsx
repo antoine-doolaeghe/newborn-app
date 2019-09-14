@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import {
   Heading,
@@ -8,26 +7,23 @@ import {
 import { Text } from "../../../../../components/atoms/text";
 import DeleteLevelButton from "./deleteLevelButton/deleteLevelButton";
 
+interface IFormPanelSummaryProps {
+  index: number;
+  label: string;
+  id: string;
+  refetch: Function;
+}
+
 export const FormPanelSummary = ({
   index,
   label,
   id,
-  refetch,
-  activeStep,
-  setActiveStep
-}) => {
-  const handlePanelOnclick = () => {
-    if (activeStep === index) {
-      setActiveStep(null);
-    } else {
-      setActiveStep(index);
-    }
-  };
+  refetch
+}: IFormPanelSummaryProps) => {
   const hasCancelButton = index !== 0 && index !== 1;
   return (
     <StyledExpansionPanelSummary
       expandIcon={hasCancelButton && <ExpandMoreIcon />}
-      onClick={handlePanelOnclick}
     >
       <div
         style={{
@@ -43,16 +39,6 @@ export const FormPanelSummary = ({
       </div>
     </StyledExpansionPanelSummary>
   );
-};
-
-FormPanelSummary.defaultProps = {
-  setActiveStep: () => {}
-};
-
-FormPanelSummary.propTypes = {
-  index: PropTypes.number.isRequired,
-  activeStep: PropTypes.number.isRequired,
-  setActiveStep: PropTypes.func
 };
 
 export default FormPanelSummary;

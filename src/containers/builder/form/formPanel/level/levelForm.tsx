@@ -8,7 +8,12 @@ import { Text } from "../../../../../components/atoms/text";
 import { StyledExpansionPanel } from "../../style/builderForm.style";
 import FormPanelSummary from "../summary/formPanelSummary";
 
-export const TargetForm = ({ id, refetch }) => {
+interface ILevelFormProps {
+  id: string;
+  refetch: Function;
+}
+
+export const LevelForm = ({ id, refetch }: ILevelFormProps) => {
   const [trainerType, setTrainerType] = useState("static");
   const [movingTowardTarget, setMovingTowardTarget] = useState(false);
   const [rewardSpeed, setRewardSpeed] = useState(false);
@@ -21,18 +26,14 @@ export const TargetForm = ({ id, refetch }) => {
         style={{ display: "flex", flex: 1, flexDirection: "column" }}
       >
         <Select
+          id="target_type_select"
           label="Target type"
-          value={trainerType}
           options={[
             <option value="static">Static Target</option>,
             <option value="dynamic">Dynamic Target</option>
           ]}
           onChange={event => {
             setTrainerType(event.target.value);
-          }}
-          inputProps={{
-            name: "age",
-            id: "age-native-simple"
           }}
         />
         {trainerType === "dynamic" && (
@@ -111,8 +112,4 @@ export const TargetForm = ({ id, refetch }) => {
   );
 };
 
-// FormPanelContent.propTypes = {
-//   index: PropTypes.number.isRequired
-// };
-
-export default TargetForm;
+export default LevelForm;

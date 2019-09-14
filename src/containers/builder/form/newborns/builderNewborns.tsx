@@ -60,7 +60,12 @@ export default function BuilderNewborns({
 
         return (
           <StyledExpansionPanel expanded>
-            <FormPanelSummary index={0} label={title} />
+            <FormPanelSummary
+              id="builder_newborns_select_summary"
+              index={0}
+              label={title}
+              refetch={refetch}
+            />
             <Wrapper>
               {loading && <StyledLinearProgress />}
               <BuilderNewbornSelect

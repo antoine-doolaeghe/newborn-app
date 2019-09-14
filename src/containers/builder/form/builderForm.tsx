@@ -14,8 +14,8 @@ interface IBuilderFormProps {
 
 export const BuilderForm = ({ trainerId }: IBuilderFormProps) => {
   const returnBuilderLevel = (levels, refetch) => {
-    return levels.map((level, index) => {
-      return <LevelForm id={level.id} index={index} refetch={refetch} />;
+    return levels.map(level => {
+      return <LevelForm id={level.id} refetch={refetch} />;
     });
   };
 
@@ -49,7 +49,7 @@ export const BuilderForm = ({ trainerId }: IBuilderFormProps) => {
             {returnBuilderLevel(trainerLevels, refetch)}
             <ButtonWrapper>
               <NewStepButton trainerId={trainerId} refetch={refetch} />
-              <TrainButton trainerId={trainerId} />
+              <TrainButton />
             </ButtonWrapper>
           </Wrapper>
         );

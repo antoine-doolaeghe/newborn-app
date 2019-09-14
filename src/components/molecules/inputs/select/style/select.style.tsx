@@ -3,15 +3,15 @@ import styled from "styled-components";
 import { NativeSelect, FormHelperText } from "@material-ui/core";
 
 interface IStyledSelectProps {
-  disabled: boolean;
+  disabled: boolean | undefined;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   children: (JSX.Element | null)[];
   disabledLabel?: string;
-  error: boolean;
+  error: boolean | undefined;
 }
 
 interface IStyledFormHelperTextProps {
-  children: string;
+  children: string | undefined;
 }
 
 export const StyledSelect = styled(
