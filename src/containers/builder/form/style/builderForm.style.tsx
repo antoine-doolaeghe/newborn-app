@@ -8,6 +8,11 @@ export const Wrapper = styled.section`
   width: 35%;
 `;
 
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const StyledExpansionPanel = styled(ExpansionPanel)`
   margin: 10;
 `;

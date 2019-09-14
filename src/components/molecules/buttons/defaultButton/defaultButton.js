@@ -4,7 +4,7 @@ import { StyledDefaultButton } from "./style/defaultButton.style";
 
 const DefaultButton = ({ children, onClick, color, loading }) => {
   return (
-    <StyledDefaultButton disabled={loading} onClick={onClick} color={color}>
+    <StyledDefaultButton loading={loading} onClick={onClick} color={color}>
       {children}
     </StyledDefaultButton>
   );

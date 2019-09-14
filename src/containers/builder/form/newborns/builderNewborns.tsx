@@ -1,22 +1,34 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
-import LinearProgress from "@material-ui/core/LinearProgress";
 import { updateNewborn } from "../../../../graphql/mutations";
 import BuilderNewbornSelect from "./select/builderNewbornSelect";
 import BuilderNewbornList from "./list/builderNewbornList";
-import { Wrapper } from "./style/builderNewborns.style";
+import { Wrapper, StyledLinearProgress } from "./style/builderNewborns.style";
 import { StyledExpansionPanel } from "../style/builderForm.style";
 import FormPanelSummary from "../formPanel/summary/formPanelSummary";
 import { ErrorDialog } from "../../../../components/molecules/snackbars/errorSnackBar/style/error.style";
+
+interface INewbornProps {
+  trainer: string;
+  id: string;
+  name: string;
+}
+
+interface IBuilderNewbornsProps {
+  trainerNewborns: Array<INewbornProps>;
+  userNewborns: Array<INewbornProps>;
+  trainerId: string;
+  refetch: Function;
+}
 
 export default function BuilderNewborns({
   trainerNewborns,
   userNewborns,
   trainerId,
   refetch
-}) {
+}: IBuilderNewbornsProps) {
+  const title = "Add Newborn";
   return (
     <Mutation mutation={gql(updateNewborn)}>
       {(updateNewborn, { loading, error }) => {
@@ -36,7 +48,10 @@ export default function BuilderNewborns({
         const handleRemoveNewborn = selectedNewborn => {
           updateNewborn({
             variables: {
-              input: { id: selectedNewborn.id, newbornTrainerId: null }
+              input: {
+                id: selectedNewborn.id,
+                newbornTrainerId: null
+              }
             }
           }).then(() => {
             refetch();
@@ -45,19 +60,9 @@ export default function BuilderNewborns({
 
         return (
           <StyledExpansionPanel expanded>
-            <FormPanelSummary index={0} label="step" />
+            <FormPanelSummary index={0} label={title} />
             <Wrapper>
-              {loading && (
-                <LinearProgress
-                  style={{
-                    position: "absolute",
-                    height: 4,
-                    width: "100%",
-                    top: 0,
-                    left: 0
-                  }}
-                />
-              )}
+              {loading && <StyledLinearProgress />}
               <BuilderNewbornSelect
                 loading={loading}
                 newborns={userNewborns}
@@ -75,9 +80,3 @@ export default function BuilderNewborns({
     </Mutation>
   );
 }
-
-BuilderNewborns.propTypes = {
-  trainerNewborns: PropTypes.array.isRequired,
-  userNewborns: PropTypes.array.isRequired,
-  trainerId: PropTypes.string.isRequired
-};

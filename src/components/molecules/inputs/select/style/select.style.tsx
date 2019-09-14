@@ -5,7 +5,7 @@ import { NativeSelect, FormHelperText } from "@material-ui/core";
 interface IStyledSelectProps {
   disabled: boolean;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  children: Array<string>;
+  children: (JSX.Element | null)[];
   disabledLabel?: string;
   error: boolean;
 }

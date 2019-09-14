@@ -6,7 +6,7 @@ export interface ISelectProps {
   id: string;
   disabled: boolean;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  options: Array<string>;
+  options: (JSX.Element | null)[];
   label: string;
   disabledLabel: string;
 }
