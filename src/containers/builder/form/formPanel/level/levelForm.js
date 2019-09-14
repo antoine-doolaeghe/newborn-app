@@ -8,7 +8,7 @@ import { Text } from "../../../../../components/atoms/text";
 import { StyledExpansionPanel } from "../../style/builder.style";
 import FormPanelSummary from "../summary/formPanelSummary";
 
-export const TargetForm = () => {
+export const TargetForm = ({ id }) => {
   const [trainerType, setTrainerType] = useState("static");
   const [movingTowardTarget, setMovingTowardTarget] = useState(false);
   const [rewardSpeed, setRewardSpeed] = useState(false);
@@ -16,7 +16,7 @@ export const TargetForm = () => {
 
   return (
     <StyledExpansionPanel expanded>
-      <FormPanelSummary index={4} label="step" />
+      <FormPanelSummary id={id} index={4} label="step" />
       <ExpansionPanelDetails
         style={{ display: "flex", flex: 1, flexDirection: "column" }}
       >

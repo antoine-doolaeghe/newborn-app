@@ -253,6 +253,7 @@ export const getTrainer = `query getTrainer($id: ID!) {
     levels {
       items {
         target
+        id
       }
     }
     owner {

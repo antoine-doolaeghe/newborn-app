@@ -7,14 +7,15 @@ import TrainButton from "./formPanel/trainButton/trainButton";
 import { Wrapper } from "./style/builder.style";
 import BuilderNewborns from "./newborns/builderNewborns";
 import * as queries from "../../../graphql/queries";
-import TargetForm from "./formPanel/target/targetForm";
+import LevelForm from "./formPanel/level/levelForm";
 
 export const BuilderForm = ({ trainerId }) => {
   const [steps, setSteps] = useState(["Selected Newborn"]);
   // const [activeStep, setActiveStep] = useState(0);
   const returnFormPanelContent = levels => {
     return levels.map(level => {
-      return <TargetForm index={level} />;
+      console.log(level);
+      return <LevelForm id={level.id} index={level} />;
     });
   };
 

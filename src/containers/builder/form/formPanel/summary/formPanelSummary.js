@@ -5,15 +5,14 @@ import {
   Heading,
   StyledExpansionPanelSummary
 } from "./style/formPanelSummary.style";
-import DefaultButton from "../../../../../components/molecules/buttons/defaultButton/defaultButton";
 import { Text } from "../../../../../components/atoms/text";
+import DeleteLevelButton from "./deleteLevelButton/deleteLevelButton";
 
 export const FormPanelSummary = ({
   index,
   label,
-  steps,
+  id,
   activeStep,
-  setSteps,
   setActiveStep
 }) => {
   const handlePanelOnclick = () => {
@@ -39,17 +38,7 @@ export const FormPanelSummary = ({
         <Heading>
           <Text weight="bold">{label}</Text>
         </Heading>
-        {hasCancelButton && (
-          <DefaultButton
-            color="primary"
-            onClick={() => {
-              const array = steps.filter((_, i) => index !== i);
-              setSteps(array);
-            }}
-          >
-            <Text>Delete</Text>
-          </DefaultButton>
-        )}
+        {hasCancelButton && <DeleteLevelButton id={id} />}
       </div>
     </StyledExpansionPanelSummary>
   );
@@ -61,10 +50,8 @@ FormPanelSummary.defaultProps = {
 
 FormPanelSummary.propTypes = {
   index: PropTypes.number.isRequired,
-  steps: PropTypes.array.isRequired,
   activeStep: PropTypes.number.isRequired,
-  setActiveStep: PropTypes.func,
-  setSteps: PropTypes.func.isRequired
+  setActiveStep: PropTypes.func
 };
 
 export default FormPanelSummary;
