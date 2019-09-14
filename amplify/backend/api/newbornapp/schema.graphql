@@ -71,20 +71,23 @@ type Summary @model {
 
 #TODO YOU NEED TO LEARN ABOUT THE SCHEMA STITCHING
 type Trainer @model {
-  title: String
   createdAt: String
-  id: String!
-  owner: User @connection(name: "TrainerOwner")
-  newborns: [Newborn] @connection(name: "NewbornTrainer")
-  trainingStage: [TrainingStage] @connection(name: "TrainerStages")
   data: String
+  id: ID!
+  levels: [Level] @connection(name: "TrainerLevels")
+  newborns: [Newborn] @connection(name: "NewbornTrainer")
+  owner: User @connection(name: "TrainerOwner")
+  title: String
 }
 
-type TrainingStage @model {
+type Level @model {
+  id: ID!
+  index: Int
   target: Boolean
   position: String
-  bytes: String
-  trainer: Trainer @connection(name: "TrainerStages")
+  agentNumber: Int
+  static: Boolean
+  trainer: Trainer @connection(name: "TrainerLevels")
 }
 
 type Subscription {

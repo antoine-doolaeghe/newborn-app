@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import DefaultButton from "../defaultButton/defaultButton";
+import { StyledDefaultButton } from "../defaultButton/style/defaultButton.style";
 import { Theme } from "../../../../theme/theme";
 
-const StyledRoundButton = styled(DefaultButton)`
+const StyledRoundButton = styled(StyledDefaultButton)`
   height: ${props => props.size};
   border-radius: ${props => props.size};
   width: ${props => props.size};

@@ -1,13 +1,30 @@
 import FormControl from "@material-ui/core/FormControl";
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import AddIcon from "@material-ui/icons/Add";
 import { Wrapper } from "./style/builderNewbornSelect.style";
 import { IconButton } from "../../../../../components/molecules/buttons";
 import { Select } from "../../../../../components/molecules/inputs/select";
 
-export default function BuilderNewbornSelect({ newborns, add, loading }) {
-  const [selectedNewborn, setSelectedNewborn] = useState(null);
+interface INewbornProps {
+  trainer: string;
+  id: string;
+  name: string;
+}
+
+interface IBuilderNewbornSelectProps {
+  newborns: Array<INewbornProps>;
+  add: Function;
+  loading: Boolean;
+}
+
+export default function BuilderNewbornSelect({
+  newborns,
+  add,
+  loading
+}: IBuilderNewbornSelectProps) {
+  const [selectedNewborn, setSelectedNewborn] = useState<INewbornProps | null>(
+    null
+  );
 
   useEffect(() => {
     const filteredNewborns = newborns.filter(newborn => !newborn.trainer);
@@ -19,7 +36,8 @@ export default function BuilderNewbornSelect({ newborns, add, loading }) {
   }, [newborns]);
 
   const handleChange = event => {
-    setSelectedNewborn(newborns[event.target.value]);
+    const { value } = event.target;
+    setSelectedNewborn(newborns[value]);
   };
 
   const handleAddSelectedNewborn = () => {
@@ -47,19 +65,20 @@ export default function BuilderNewbornSelect({ newborns, add, loading }) {
     <Wrapper>
       <FormControl style={{ width: "100%" }}>
         <Select
-          label="Add a newborn to train"
-          options={returnNewbornOption()}
           disabled={!selectedNewborn}
           disabledLabel="There are no newborns to train"
+          id="builder_newborn_select"
+          label="Add a newborn to train"
           onChange={handleChange}
+          options={returnNewbornOption()}
         />
       </FormControl>
       <IconButton
         color="primary"
         disabled={!selectedNewborn}
-        loading={loading}
         height="40px"
         id="builder_newborn_select_button"
+        loading={loading}
         onClick={handleAddSelectedNewborn}
         width="40px"
       >
@@ -68,12 +87,3 @@ export default function BuilderNewbornSelect({ newborns, add, loading }) {
     </Wrapper>
   );
 }
-
-BuilderNewbornSelect.defaultProps = {
-  newborns: []
-};
-
-BuilderNewbornSelect.propTypes = {
-  newborns: PropTypes.array,
-  add: PropTypes.func.isRequired
-};

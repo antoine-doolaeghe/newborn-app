@@ -4,11 +4,11 @@ import { StyledSelect, StyledFormHelperText } from "./style/select.style";
 
 export interface ISelectProps {
   id: string;
-  disabled: boolean;
+  disabled?: boolean;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  options: Array<string>;
-  label: string;
-  disabledLabel: string;
+  options: (JSX.Element | null)[];
+  label?: string;
+  disabledLabel?: string;
 }
 const Select = ({
   disabled,

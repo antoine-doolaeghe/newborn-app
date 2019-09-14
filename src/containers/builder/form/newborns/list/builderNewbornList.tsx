@@ -1,13 +1,28 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { NewbornListWrapper } from "./style/newbornList.style";
 import DefaultChip from "../../../../../components/atoms/chips/chip";
 
-export default function BuilderNewbornList({ newborns, remove }) {
+interface INewbornProps {
+  trainer: string;
+  id: string;
+  name: string;
+}
+
+interface IBuilderNewbornListProps {
+  newborns: Array<INewbornProps>;
+  remove: Function;
+}
+
+export default function BuilderNewbornList({
+  newborns,
+  remove
+}: IBuilderNewbornListProps) {
+  const placeholderList = "No newborn to train";
+
   const handleDelete = chip => () => {
     remove(chip);
   };
-  // TODO empty list placeholder
+
   const returnListContent = () => {
     const list = newborns.map(data => {
       return (
@@ -19,17 +34,8 @@ export default function BuilderNewbornList({ newborns, remove }) {
         />
       );
     });
-    return list.length > 0 ? list : "No newborn to train";
+    return list.length > 0 ? list : placeholderList;
   };
 
   return <NewbornListWrapper>{returnListContent()}</NewbornListWrapper>;
 }
-
-BuilderNewbornList.defaultProps = {
-  newborns: []
-};
-
-BuilderNewbornList.propTypes = {
-  newborns: PropTypes.array,
-  remove: PropTypes.func.isRequired
-};

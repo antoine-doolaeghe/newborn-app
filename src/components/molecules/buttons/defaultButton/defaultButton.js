@@ -1,33 +1,30 @@
-import styled from "styled-components";
-import { Theme } from "../../../../theme/theme";
+import React from "react";
+import PropTypes from "prop-types";
+import { StyledDefaultButton } from "./style/defaultButton.style";
 
-const DefaultButton = styled.button`
-  align-items: center;
-  background: ${props => Theme.palette[props.color].main};
-  border-radius: ${Theme.radius.small};
-  border: none;
-  color: ${props => Theme.palette[props.color].contrastText};
-  display: flex;
-  font-family: ${Theme.fontFamily};
-  font-size: ${Theme.fontSize.small};
-  font-weight: ${Theme.weight.normal};
-  justify-content: space-around;
-  margin: ${Theme.spacing.small};
-  outline: none;
-  padding: 3px 7px;
-  will-change: background;
-  &:hover {
-    cursor: ${props => (props.loading ? "wait" : "pointer")};
-    background: ${props => Theme.palette[props.color].dark};
-  }
-  &:active {
-    cursor: pointer;
-    background: ${props => Theme.palette[props.color].dark};
-  }
-  &:disabled {
-    cursor: not-allowed;
-    background: ${props => Theme.palette[props.color].light};
-  }
-`;
+const DefaultButton = ({ children, onClick, color, loading }) => {
+  return (
+    <StyledDefaultButton loading={loading} onClick={onClick} color={color}>
+      {children}
+    </StyledDefaultButton>
+  );
+};
+
+DefaultButton.defaultProps = {
+  children: ""
+};
+
+DefaultButton.propTypes = {
+  children: PropTypes.node,
+  color: PropTypes.oneOf([
+    "light",
+    "dark",
+    "primary",
+    "secondary",
+    "success",
+    "danger"
+  ]).isRequired,
+  onClick: PropTypes.func.isRequired
+};
 
 export default DefaultButton;
