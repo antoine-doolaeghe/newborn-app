@@ -6,7 +6,7 @@ import { Text } from "../../../../../components/atoms/text";
 import { Button } from "../../../../../components/molecules/buttons";
 import { ErrorDialog } from "../../../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 
-const CREATE_TRAINING_LEVEL = gql`
+export const CREATE_TRAINING_LEVEL = gql`
   mutation CreateTrainingLevel($id: ID!, $levelTrainerId: ID!) {
     createLevel(input: { id: $id, levelTrainerId: $levelTrainerId }) {
       id
@@ -14,7 +14,7 @@ const CREATE_TRAINING_LEVEL = gql`
   }
 `;
 
-interface ICreateLevelProps {
+export interface ICreateLevelProps {
   trainerId: string;
   refetch: Function;
 }
