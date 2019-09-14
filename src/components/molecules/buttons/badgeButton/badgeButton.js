@@ -1,25 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
-import { Theme } from "../../../../theme/theme";
-import DefaultButton from "../defaultButton/defaultButton";
-
-export const StyledBadgeButton = styled(DefaultButton)`
-  align-items: center;
-  background: ${props => Theme.palette[props.color].main};
-  border-radius: ${Theme.radius.small};
-  border: none;
-  color: ${Theme.font.light};
-  display: flex;
-  font-family: ${Theme.fontFamily};
-  font-size: ${Theme.fontSize.xsmall};
-  font-weight: ${Theme.weight.normal};
-  justify-content: space-around;
-  margin: ${Theme.spacing.small};
-  outline: none;
-  padding: 3px 7px;
-  width: fit-content;
-`;
+import { StyledBadgeButton } from "./style/badgeButton.style";
 
 const BadgeButton = ({ children, onClick, color }) => {
   return (

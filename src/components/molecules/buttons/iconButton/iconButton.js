@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import DefaultButton from "../defaultButton/defaultButton";
+import { StyledDefaultButton } from "../defaultButton/style/defaultButton.style";
 import { Theme } from "../../../../theme/theme";
 
-const StyledIconButton = styled(DefaultButton)`
+const StyledIconButton = styled(StyledDefaultButton)`
   display: flex;
   font-size: ${Theme.fontSize.medium};
   height: ${props => props.height};

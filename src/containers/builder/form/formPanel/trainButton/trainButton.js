@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { withApollo } from "react-apollo";
-import gql from "graphql-tag";
-import * as queries from "../../../../../graphql/queries";
-import DefaultButton from "../../../../../components/molecules/buttons/defaultButton/defaultButton";
+// import gql from "graphql-tag";
+// import * as queries from "../../../../../graphql/queries";
+import { Button } from "../../../../../components/molecules/buttons";
 import { Text } from "../../../../../components/atoms/text";
 
 export const Heading = styled.div`
@@ -13,22 +13,23 @@ export const Heading = styled.div`
   height: 50px;
 `;
 
-export const NewStepButton = ({ client, trainerId }) => {
+export const NewStepButton = () => {
   return (
-    <DefaultButton
+    <Button
       color="primary"
       onClick={async () => {
-        await client.query({
-          query: gql(queries.trainNewborn),
-          variables: {
-            newbornId: "132449966688712208",
-            trainerId: { trainerId }
-          }
-        });
+        // LEFT COMMENTED TO AVOID UNINTED LAUNCH OF EC2
+        // await client.query({
+        // query: gql(queries.trainNewborn),
+        // variables: {
+        // newbornId: "132449966688712208",
+        // trainerId: { trainerId }
+        // }
+        // });
       }}
     >
       <Text>Train</Text>
-    </DefaultButton>
+    </Button>
   );
 };
 

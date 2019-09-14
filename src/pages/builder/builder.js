@@ -11,10 +11,8 @@ export const Builder = ({ match }) => {
   return (
     <Fragment>
       <BuilderHeader trainerId={match.params.id} />
-      <div style={{ display: "flex" }}>
-        <BuilderForm trainerId={match.params.id} />
-        <BuilderGame />
-      </div>
+      <BuilderForm trainerId={match.params.id} />
+      <BuilderGame />
     </Fragment>
   );
 };

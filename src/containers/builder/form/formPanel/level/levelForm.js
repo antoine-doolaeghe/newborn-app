@@ -5,10 +5,10 @@ import { Select } from "../../../../../components/molecules/inputs/select";
 import Checkbox from "../../../../../components/atoms/checkboxes";
 import Slider from "../../../../../components/atoms/slider";
 import { Text } from "../../../../../components/atoms/text";
-import { StyledExpansionPanel } from "../../style/builder.style";
+import { StyledExpansionPanel } from "../../style/builderForm.style";
 import FormPanelSummary from "../summary/formPanelSummary";
 
-export const TargetForm = ({ id }) => {
+export const TargetForm = ({ id, refetch }) => {
   const [trainerType, setTrainerType] = useState("static");
   const [movingTowardTarget, setMovingTowardTarget] = useState(false);
   const [rewardSpeed, setRewardSpeed] = useState(false);
@@ -16,7 +16,7 @@ export const TargetForm = ({ id }) => {
 
   return (
     <StyledExpansionPanel expanded>
-      <FormPanelSummary id={id} index={4} label="step" />
+      <FormPanelSummary id={id} index={4} label="step" refetch={refetch} />
       <ExpansionPanelDetails
         style={{ display: "flex", flex: 1, flexDirection: "column" }}
       >

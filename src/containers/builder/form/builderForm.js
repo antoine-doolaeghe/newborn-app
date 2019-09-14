@@ -1,21 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import NewStepButton from "./formPanel/newStepButton/createLevelButton";
+import NewStepButton from "./formPanel/createLevelButton/createLevelButton";
 import TrainButton from "./formPanel/trainButton/trainButton";
-import { Wrapper } from "./style/builder.style";
+import { Wrapper } from "./style/builderForm.style";
 import BuilderNewborns from "./newborns/builderNewborns";
 import * as queries from "../../../graphql/queries";
 import LevelForm from "./formPanel/level/levelForm";
 
 export const BuilderForm = ({ trainerId }) => {
-  const [steps, setSteps] = useState(["Selected Newborn"]);
-  // const [activeStep, setActiveStep] = useState(0);
-  const returnFormPanelContent = levels => {
+  const returnFormPanelContent = (levels, refetch) => {
     return levels.map(level => {
-      console.log(level);
-      return <LevelForm id={level.id} index={level} />;
+      return <LevelForm id={level.id} index={level} refetch={refetch} />;
     });
   };
 
@@ -46,19 +43,10 @@ export const BuilderForm = ({ trainerId }) => {
               trainerNewborns={trainerNewborns}
               userNewborns={userNewborns}
             />
-            {returnFormPanelContent(trainerLevels)}
+            {returnFormPanelContent(trainerLevels, refetch)}
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <NewStepButton
-                steps={steps}
-                setSteps={setSteps}
-                trainerId={trainerId}
-                refetch={refetch}
-              />
-              <TrainButton
-                trainerId={trainerId}
-                steps={steps}
-                setSteps={setSteps}
-              />
+              <NewStepButton trainerId={trainerId} refetch={refetch} />
+              <TrainButton trainerId={trainerId} />
             </div>
           </Wrapper>
         );

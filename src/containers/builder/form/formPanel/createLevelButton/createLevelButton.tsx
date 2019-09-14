@@ -1,10 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import uuidv3 from "uuid/v4";
 import { Text } from "../../../../../components/atoms/text";
-import DefaultButton from "../../../../../components/molecules/buttons/defaultButton/defaultButton";
+import { Button } from "../../../../../components/molecules/buttons";
+import { ErrorDialog } from "../../../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 
 const CREATE_TRAINING_LEVEL = gql`
   mutation CreateTrainingLevel($id: ID!, $levelTrainerId: ID!) {
@@ -14,38 +14,39 @@ const CREATE_TRAINING_LEVEL = gql`
   }
 `;
 
-export const CreateLevelButton = ({ steps, setSteps, trainerId, refetch }) => {
+interface ICreateLevelProps {
+  trainerId: string;
+  refetch: Function;
+}
+
+export const CreateLevelButton = ({
+  trainerId,
+  refetch
+}: ICreateLevelProps) => {
   return (
     <Mutation mutation={CREATE_TRAINING_LEVEL}>
       {(updateNewborn, { loading, error }) => {
-        console.log(loading);
-        console.log(error);
-        console.log(trainerId);
+        if (error) {
+          return <ErrorDialog open message={error.message} />;
+        }
         return (
-          <DefaultButton
+          <Button
+            loading={loading}
             color="secondary"
-            onClick={() => {
+            onClick={(): void => {
               updateNewborn({
                 variables: { id: uuidv3(), levelTrainerId: trainerId }
+              }).then((): void => {
+                refetch();
               });
-              setSteps([
-                ...steps.slice(0, steps.length),
-                `Target ${steps.length}`
-              ]);
-              refetch();
             }}
           >
             <Text>Create Level button</Text>
-          </DefaultButton>
+          </Button>
         );
       }}
     </Mutation>
   );
-};
-
-CreateLevelButton.propTypes = {
-  steps: PropTypes.array.isRequired,
-  setSteps: PropTypes.func.isRequired
 };
 
 export default CreateLevelButton;

@@ -7,7 +7,7 @@ import { updateNewborn } from "../../../../graphql/mutations";
 import BuilderNewbornSelect from "./select/builderNewbornSelect";
 import BuilderNewbornList from "./list/builderNewbornList";
 import { Wrapper } from "./style/builderNewborns.style";
-import { StyledExpansionPanel } from "../style/builder.style";
+import { StyledExpansionPanel } from "../style/builderForm.style";
 import FormPanelSummary from "../formPanel/summary/formPanelSummary";
 import { ErrorDialog } from "../../../../components/molecules/snackbars/errorSnackBar/style/error.style";
 

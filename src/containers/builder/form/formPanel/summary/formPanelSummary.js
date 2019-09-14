@@ -12,6 +12,7 @@ export const FormPanelSummary = ({
   index,
   label,
   id,
+  refetch,
   activeStep,
   setActiveStep
 }) => {
@@ -38,7 +39,7 @@ export const FormPanelSummary = ({
         <Heading>
           <Text weight="bold">{label}</Text>
         </Heading>
-        {hasCancelButton && <DeleteLevelButton id={id} />}
+        {hasCancelButton && <DeleteLevelButton id={id} refetch={refetch} />}
       </div>
     </StyledExpansionPanelSummary>
   );

@@ -24,7 +24,14 @@ export const BuilderGame = () => {
 
   return (
     <div
-      style={{ height: "calc(100vh - 150px)", background: "black", flex: 1 }}
+      style={{
+        height: "100%",
+        background: "black",
+        width: "100%",
+        position: "fixed",
+        zIndex: -1,
+        flex: 1
+      }}
       id="gameContainer"
     />
   );

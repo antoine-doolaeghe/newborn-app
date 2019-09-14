@@ -20,7 +20,7 @@ export const BuilderHeader = ({ trainerId }) => {
     >
       {({ data, loading }) => {
         return (
-          <AppBar position="static" color="default">
+          <AppBar style={{ top: 80 }} position="fixed" color="default">
             <Toolbar>
               {!loading && (
                 <Fragment>
