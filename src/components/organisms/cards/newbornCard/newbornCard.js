@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import CardHeader from "./header";
+import CardHeader from "../header";
 
 import {
   CardWrapper,

@@ -3,7 +3,7 @@ import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { CardWrapper } from "../newbornCard/style/newbornCard.style";
-import CardHeader from "../newbornCard/header/cardHeader";
+import CardHeader from "../header/cardHeader";
 import NewbornCardLoader from "./loader/trainerCardLoader";
 import { TrainerCardImage } from "./style/trainerCard.style";
 
@@ -12,7 +12,7 @@ const StyledLink = styled(Link)`
   color: white;
 `;
 
-function TrainerCard({ loading, title, id }) {
+function TrainerCard({ loading, title, subTitle, id }) {
   if (loading) {
     return <NewbornCardLoader />;
   }
@@ -20,7 +20,12 @@ function TrainerCard({ loading, title, id }) {
   return (
     <StyledLink to={path}>
       <CardWrapper>
-        <CardHeader title={title} />
+        <CardHeader
+          title={title}
+          subTitle={subTitle}
+          displayBadge
+          data-testid="cardHeader"
+        />
         <TrainerCardImage />
       </CardWrapper>
     </StyledLink>

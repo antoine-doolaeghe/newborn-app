@@ -14,7 +14,15 @@ function TrainerList({ trainers, title, loading, currentUserId }) {
     }
   } else {
     const trainerList = trainers.map(trainer => {
-      return <TrainerCard title={trainer.title} id={trainer.id} />;
+      const newborns = trainer.newborns.items || [];
+      const subTitle = `${newborns.length} newborns`;
+      return (
+        <TrainerCard
+          title={trainer.title}
+          subTitle={subTitle}
+          id={trainer.id}
+        />
+      );
     });
     newbornCardList = [...newbornCardList, ...trainerList];
   }

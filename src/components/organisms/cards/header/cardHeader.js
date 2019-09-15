@@ -4,8 +4,8 @@ import {
   NewbornCardHeaderContainer,
   Title,
   SubTitle
-} from "./cardHeader.style";
-import { Badge } from "../../../../atoms/badges/index.ts";
+} from "./style/cardHeader.style";
+import { Badge } from "../../../atoms/badges/index.ts";
 
 function CardHeader({ title, subTitle, displayBadge }) {
   return (

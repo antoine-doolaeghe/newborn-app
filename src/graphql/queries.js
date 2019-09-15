@@ -60,6 +60,11 @@ export const getUserTrainers = `query GetUser($id: ID!) {
       items {
         id
         title
+        newborns { 
+          items {
+            id
+          }
+        }
       }
     }
   }
